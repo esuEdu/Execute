@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class HomeViewModel: Coordinating {
+    
+    var coordinator: Coordinator?
+    
+    var homeView: HomeView?
+    
+}

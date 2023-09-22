@@ -32,11 +32,11 @@ class MainCoordinator: Coordinator {
     
     // Implement the start() method from the Coordinator protocol
     func start() {
-        let vc: ViewController = ViewController()
-        let vm: ViewModel & Coordinating = ViewModel()
-        vm.coordinator = self
-        vc.viewModel = vm
-        vm.view = vc
-        navigationController?.setViewControllers([vc], animated: false)
+        let homeView: HomeView = HomeView()
+        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+        homeViewModel.coordinator = self
+        homeView.homeViewModel = homeViewModel
+        homeViewModel.homeView = homeView
+        navigationController?.setViewControllers([homeView], animated: false)
     }
 }
