@@ -4,6 +4,7 @@
         <attribute name="descript" optional="YES" attributeType="String"/>
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isDone" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="methodology" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -13,6 +14,7 @@
     <entity name="SubTask" representedClassName="SubTask" syncable="YES" codeGenerationType="class">
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isDone" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="subtasks" inverseEntity="Task"/>
@@ -40,6 +42,7 @@
         <attribute name="green" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isDone" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="priority" optional="YES" attributeType="String"/>
         <attribute name="red" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
