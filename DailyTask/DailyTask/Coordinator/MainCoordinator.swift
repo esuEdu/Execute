@@ -20,8 +20,11 @@ class MainCoordinator: Coordinator {
             
             // Handle the case when a button is tapped
         case .buttonTapped:
-            var vc:  UIViewController & Coordinating = TableViewCellViewController()
+            let vc: TableViewCellViewController & Coordinating = TableViewCellViewController()
             vc.coordinator = self
+            let vm = TaskViewModel()
+            vc.taskViewModel = vm
+            vm.taskView = vc
             navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -29,9 +32,9 @@ class MainCoordinator: Coordinator {
     
     // Implement the start() method from the Coordinator protocol
     func start() {
-        let vc: ViewController & Coordinating = ViewController()
-        vc.coordinator = self
-        let vm = ViewModel()
+        let vc: ViewController = ViewController()
+        let vm: ViewModel & Coordinating = ViewModel()
+        vm.coordinator = self
         vc.viewModel = vm
         vm.view = vc
         navigationController?.setViewControllers([vc], animated: false)
