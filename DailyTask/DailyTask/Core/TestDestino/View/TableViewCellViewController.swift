@@ -9,13 +9,14 @@ import UIKit
 
 class TableViewCellViewController: UIViewController, Coordinating {
     var coordinator: Coordinator?
-    
+    var taskViewModel: TaskViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "SecondViewController"
+        title = taskViewModel?.title
         view.backgroundColor = .systemGreen
+        
     }
     
 

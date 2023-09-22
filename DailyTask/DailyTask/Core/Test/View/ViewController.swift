@@ -7,9 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, Coordinating {
-    
-    var coordinator: Coordinator?
+class ViewController: UIViewController {
     var viewModel : ViewModel?
     
 
@@ -26,9 +24,8 @@ class ViewController: UIViewController, Coordinating {
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         button.setTitle("Tap Me!", for: .normal)
     }
-    
     @objc func didTapButton() {
-        coordinator?.eventOccurred(with: .buttonTapped)
+        viewModel?.path()
     }
 }
 
