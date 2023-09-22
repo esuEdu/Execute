@@ -29,8 +29,11 @@ class MainCoordinator: Coordinator {
     
     // Implement the start() method from the Coordinator protocol
     func start() {
-        var vc: UIViewController & Coordinating = ViewController()
+        let vc: ViewController & Coordinating = ViewController()
         vc.coordinator = self
+        let vm = ViewModel()
+        vc.viewModel = vm
+        vm.view = vc
         navigationController?.setViewControllers([vc], animated: false)
     }
 }

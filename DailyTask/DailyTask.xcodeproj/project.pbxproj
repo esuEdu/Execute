@@ -18,6 +18,7 @@
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
 		28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */; };
 		28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BFA2ABAF586001CEFED /* TableViewCellViewController.swift */; };
+		28F352042ABDDB590077B905 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F352032ABDDB590077B905 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		28C45BFA2ABAF586001CEFED /* TableViewCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewController.swift; sourceTree = "<group>"; };
+		28F352032ABDDB590077B905 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 		28C45C092ABAFAB0001CEFED /* ModelView */ = {
 			isa = PBXGroup;
 			children = (
+				28F352032ABDDB590077B905 /* ViewModel.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
+				28F352042ABDDB590077B905 /* ViewModel.swift in Sources */,
 				2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */,
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
