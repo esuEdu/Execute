@@ -26,17 +26,30 @@ class MainCoordinator: Coordinator {
             vc.taskViewModel = vm
             vm.taskView = vc
             navigationController?.pushViewController(vc, animated: true)
+            
         }
         
     }
     
     // Implement the start() method from the Coordinator protocol
+//    func start() {
+//        let homeView: HomeView = HomeView()
+//        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+//        homeViewModel.coordinator = self
+//        homeView.homeViewModel = homeViewModel
+//        homeViewModel.homeView = homeView
+//        navigationController?.setViewControllers([homeView], animated: false)
+//    }
+    
+    //Temporário
     func start() {
-        let homeView: HomeView = HomeView()
-        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-        homeViewModel.coordinator = self
-        homeView.homeViewModel = homeViewModel
-        homeViewModel.homeView = homeView
-        navigationController?.setViewControllers([homeView], animated: false)
+        let projectListView: ProjectListView = ProjectListView()
+        let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
+        projectListViewModel.coordinator = self
+        projectListView.projectListViewModel = projectListViewModel
+        projectListViewModel.projectView = projectListView
+        navigationController?.setViewControllers([projectListView], animated: false)
     }
+    
+    
 }
