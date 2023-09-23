@@ -10,7 +10,6 @@ import Foundation
 class HomeViewModel: Coordinating {
     
     var coordinator: Coordinator?
-    var text: String = "bla"
     var homeView: HomeView?
     
 }
