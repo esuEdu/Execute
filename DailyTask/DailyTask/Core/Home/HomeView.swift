@@ -31,11 +31,28 @@ class HomeView: UIViewController {
             print("Selected Time: \(selectedDate)")
         }
         view.addSubview(datePickerController)
+      
+      let taskButton = UIButton()
+      view.addSubview(taskButton)
+      taskButton.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        taskButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
+        taskButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+        taskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
+      ])
+      taskButton.backgroundColor = UIColor(.customRed)
+      taskButton.setTitleColor(.white, for: .normal)
+      taskButton.setTitle("Go to tasks", for: .normal)
+      taskButton.addTarget(self, action: #selector(goToTasks), for: .touchUpInside)
     }
     
     @objc func didTapButton() {
         homeViewModel?.coordinator?.eventOccurred(with: .goToSubTaskList)
     }
+  
+  @objc func goToTasks() {
+    homeViewModel?.goToTasksView()
+  }
 
     /*
     // MARK: - Navigation
@@ -47,4 +64,8 @@ class HomeView: UIViewController {
     }
     */
 
+}
+
+#Preview {
+  HomeView()
 }

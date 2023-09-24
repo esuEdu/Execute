@@ -7,8 +7,8 @@
 
 import Foundation
 
-class TaskViewModel {
-    var taskView: TableViewCellViewController?
+class TestViewModel {
+    var testView: TableViewCellViewController?
     var subTaskManager = SubTaskManager()
     lazy var subTasks: [SubTask] = {
         
