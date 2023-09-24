@@ -30,6 +30,9 @@
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
 		E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C52ABF3C69000AA58B /* Methodologies.swift */; };
+		E84018C82ABFAE0C000AA58B /* ProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C72ABFAE0C000AA58B /* ProjectListTableViewCell.swift */; };
+		E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */; };
+		E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		E84018C52ABF3C69000AA58B /* Methodologies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methodologies.swift; sourceTree = "<group>"; };
+		E84018C72ABFAE0C000AA58B /* ProjectListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListTableViewCell.swift; sourceTree = "<group>"; };
+		E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationView.swift; sourceTree = "<group>"; };
+		E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,9 +280,9 @@
 		E84018B92ABF3532000AA58B /* ProjectList */ = {
 			isa = PBXGroup;
 			children = (
+				E84018CA2ABFAFD3000AA58B /* View */,
+				E84018C92ABFAFCA000AA58B /* ViewModel */,
 				E84018BB2ABF3549000AA58B /* Components */,
-				E84018BD2ABF3579000AA58B /* ProjectListView.swift */,
-				E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */,
 			);
 			path = ProjectList;
 			sourceTree = "<group>";
@@ -284,8 +290,27 @@
 		E84018BB2ABF3549000AA58B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E84018C72ABFAE0C000AA58B /* ProjectListTableViewCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E84018C92ABFAFCA000AA58B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */,
+				E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E84018CA2ABFAFD3000AA58B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E84018BD2ABF3579000AA58B /* ProjectListView.swift */,
+				E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,15 +394,18 @@
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
+				E84018C82ABFAE0C000AA58B /* ProjectListTableViewCell.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
 				2836A8C52ABA1BA800778B43 /* ViewController.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
+				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				288B59CC2ABE33A60058531D /* TaskViewModel.swift in Sources */,
+				E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */,
 				288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

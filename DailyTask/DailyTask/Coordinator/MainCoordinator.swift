@@ -26,6 +26,11 @@ class MainCoordinator: Coordinator {
             vc.taskViewModel = vm
             vm.taskView = vc
             navigationController?.pushViewController(vc, animated: true)
+        case .goToProjectCreation:
+            let vc: TableViewCellViewController & Coordinating = TableViewCellViewController()
+            vc.coordinator = self
+            let vm = ProjectCreationViewModel()
+            navigationController?.pushViewController(vc, animated: true)
             
         }
         

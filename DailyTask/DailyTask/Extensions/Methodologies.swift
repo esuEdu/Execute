@@ -5,11 +5,9 @@
 //  Created by Leonardo Mesquita Alves on 23/09/23.
 //
 
-extension String{
-    enum Methodologies: String {
-        case CBL = "CBL"
-        case Scrum = "Scrum"
-        case Personalizada = "Personalizada"
-    }
+/// Adding the methodologies of the project. You will create a enum case that support the especific methodology wanted. You have CBL, Scrum and Person
+enum Methodologies: String {
+    case CBL = "CBL"
+    case Scrum = "Scrum"
+    case Persom = "Personm"
 }
-

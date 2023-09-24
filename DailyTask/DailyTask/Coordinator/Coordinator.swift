@@ -10,6 +10,7 @@ import UIKit
 
 enum Event {
     case buttonTapped
+    case goToProjectCreation
 }
 
 protocol Coordinator {

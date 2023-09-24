@@ -11,6 +11,7 @@ class ProjectListView: UIViewController {
 
     var projectListViewModel: ProjectListViewModel?
     
+    // MARK: - Creating UIElements
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,24 +24,27 @@ class ProjectListView: UIViewController {
         return button
     }()
     
-    
+    // MARK: - Setting up the UIElements and constraint
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        
-        // Do any additional setup after loading the view.
+        addAllConstraints()
     }
     
+    // MARK: - Creating the UIElements setups
     func setUpUI(){
         view.backgroundColor = .systemBackground
+        view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        self.title = "ProjectList"
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.title = "Meus Projetos"
         buttonToCreateANewProject.target = self
         buttonToCreateANewProject.action = #selector(createNewProject)
         self.navigationItem.leftBarButtonItem = buttonToCreateANewProject
     }
     
+    // MARK: - Adding constraint
     func addAllConstraints(){
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -52,7 +56,7 @@ class ProjectListView: UIViewController {
     
     @objc func createNewProject(){
         projectListViewModel?.createAProject()
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
 
 }
@@ -74,9 +78,17 @@ extension ProjectListView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "Deletar") {(action , view , completionHandler) in
+            
+            let projectToDelete = self.projectListViewModel?.project![indexPath.row]
+            self.projectListViewModel?.deleteAProject(project: projectToDelete!)
+            tableView.reloadData()
+        }
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
     
 }
 
-#Preview {
-    ProjectListView()
-}
