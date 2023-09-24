@@ -84,8 +84,10 @@ class ProjectListView: UIViewController {
     
     // MARK: - Button functions
     @objc func createNewProject(){
-        projectListViewModel?.createAProject()
-        self.tableView.reloadData()
+        projectListViewModel?.coordinator?.eventOccurred(with: .goToProjectCreation)
+        
+//        projectListViewModel?.createAProject()
+//        self.tableView.reloadData()
     }
     
     @objc func goToNextView(){
