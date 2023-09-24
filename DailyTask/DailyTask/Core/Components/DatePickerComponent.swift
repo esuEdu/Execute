@@ -62,7 +62,6 @@ class DatePickerView<T>: UIDatePicker {
     
     
     private var dateFormat = "yyyy-MM-dd" // Default to date format
-    
     // A property to store the selected value
     var selectedValue: T? {
         didSet {
