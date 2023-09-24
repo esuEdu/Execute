@@ -12,6 +12,7 @@ enum Event {
     case buttonTapped
     case goToProjectCreation
     case goToProjectList
+    case goToSubTaskList
 }
 
 protocol Coordinator {
