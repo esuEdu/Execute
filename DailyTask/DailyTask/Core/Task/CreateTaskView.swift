@@ -11,7 +11,12 @@ import UIKit
 class CreateTaskView: UIViewController {
   var viewModel: TaskViewModel?
   
-  private let field: UITextField = UITextField()
+  let nameTextField: UITextField = {
+      let textField = UITextField()
+      textField.placeholder = "Type the name of the task"
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      return textField
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -19,25 +24,37 @@ class CreateTaskView: UIViewController {
     title = "Create Task"
     view.backgroundColor = .systemGray
     
-    field.returnKeyType = .done
-    field.autocapitalizationType = .words
-    field.autocorrectionType = .no
+    nameTextField.returnKeyType = .done
+    nameTextField.autocapitalizationType = .words
+    nameTextField.autocorrectionType = .no
+    nameTextField.delegate = self
     
-    field.translatesAutoresizingMaskIntoConstraints = false
-    
-    view.addSubview(field)
+    view.addSubview(nameTextField)
   
-    
+    setConstraints()
   }
   
   func setConstraints() {
+  
     NSLayoutConstraint.activate([
-      field.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      field.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      field.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-      field.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      
+    
+      nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+      nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+
     ])
+  }
+  
+}
+
+extension CreateTaskView: UITextFieldDelegate {
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    if let text = textField.text {
+      viewModel?.createTask(name: text, startDate: Date.now, endDate: Date.now, priority: "alta", descript: "testando o crud ao criar uma tarefa")
+    }
+    return true
   }
   
 }

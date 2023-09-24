@@ -29,6 +29,10 @@ class TaskView: UIViewController {
     tableView.dataSource = self
     title = "All Tasks"
     
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
+    
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
   
   }
@@ -41,13 +45,20 @@ extension TaskView: UITableViewDelegate, UITableViewDataSource {
     viewModel?.goToCreateTasks()
   }
   
+  // MARK: BASIC SETTING FOR TABLEVIEW
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+      return viewModel?.task.count ?? 0
   }
   
+  // MARK: BASIC SETTING FOR TABLEVIEW
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-    return cell
+      let task = viewModel?.task[indexPath.row]
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+      cell.textLabel?.text = task?.name
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
+      return cell
   }
  
 }
