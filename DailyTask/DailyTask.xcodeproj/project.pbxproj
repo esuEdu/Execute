@@ -225,6 +225,7 @@
 		28C45C032ABAF920001CEFED /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				E84018CF2ABFE3D3000AA58B /* ProjectCreation */,
 				E84018B92ABF3532000AA58B /* ProjectList */,
 				2829C5022ABB6B8900A75CEB /* Components */,
 				288B59CD2ABE4C2D0058531D /* Home */,
@@ -280,8 +281,8 @@
 		E84018B92ABF3532000AA58B /* ProjectList */ = {
 			isa = PBXGroup;
 			children = (
-				E84018CA2ABFAFD3000AA58B /* View */,
-				E84018C92ABFAFCA000AA58B /* ViewModel */,
+				E84018BD2ABF3579000AA58B /* ProjectListView.swift */,
+				E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */,
 				E84018BB2ABF3549000AA58B /* Components */,
 			);
 			path = ProjectList;
@@ -295,22 +296,21 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		E84018C92ABFAFCA000AA58B /* ViewModel */ = {
+		E84018CF2ABFE3D3000AA58B /* ProjectCreation */ = {
 			isa = PBXGroup;
 			children = (
-				E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */,
+				E84018D02ABFE409000AA58B /* Components */,
+				E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */,
 				E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ProjectCreation;
 			sourceTree = "<group>";
 		};
-		E84018CA2ABFAFD3000AA58B /* View */ = {
+		E84018D02ABFE409000AA58B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E84018BD2ABF3579000AA58B /* ProjectListView.swift */,
-				E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */,
 			);
-			path = View;
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,7 +551,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = PCTRQS8Z4G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -583,7 +583,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = PCTRQS8Z4G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -90,9 +90,11 @@ class ProjectListView: UIViewController {
 //        self.tableView.reloadData()
     }
     
-    @objc func goToNextView(){
-        
+    override func viewDidAppear(_ animated: Bool) {
+        projectListViewModel?.fetchProjectViewModel()
     }
+    
+    
 
 }
 

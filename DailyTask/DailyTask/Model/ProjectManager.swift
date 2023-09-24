@@ -32,15 +32,15 @@ class ProjectManager {
     }
     
     #warning("Change it when the project creation will be finished")
-    func createAProject(){
+    func createAProject(icon: String, name: String, description: String, methodology: Methodologies, start: Date, end: Date){
         let project: Project = Project(context: context)
         project.id = UUID()
-        project.icon = "😱"
-        project.name = "Nome genérico"
-        project.descript = "Descrição genérica"
-        project.methodology = Methodologies.CBL.rawValue
-        project.start = Date()
-        project.end = Calendar.current.date(byAdding: .day, value: 2, to: Date())
+        project.icon = icon
+        project.name = name
+        project.descript = description
+        project.methodology = methodology.rawValue
+        project.start = start
+        project.end = end
         salvarDados()
     }
     
