@@ -10,4 +10,5 @@ enum Methodologies: String {
     case CBL = "CBL"
     case Scrum = "Scrum"
     case Persom = "Personm"
+    // Add more cases if nedeed
 }

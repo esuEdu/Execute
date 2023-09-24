@@ -18,21 +18,12 @@ class ProjectListViewModel: Coordinating {
     }
     
     func createAProject(){
-        let project: Project = Project(context: projectManager.context)
-        project.id = UUID()
-        project.icon = "😱"
-        project.name = "Nome genérico"
-        project.descript = "Descrição genérica"
-        project.methodology = Methodologies.CBL.rawValue
-        project.start = Date()
-        project.end = Calendar.current.date(byAdding: .day, value: 2, to: Date())
-        projectManager.salvarDados()
+        projectManager.createAProject()
         fetchProjectViewModel()
     }
     
     func deleteAProject(project: Project){
-        projectManager.context.delete(project)
-        projectManager.salvarDados()
+        projectManager.deleteAProject(project: project)
         fetchProjectViewModel()
     }
     

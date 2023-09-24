@@ -9,5 +9,6 @@ import Foundation
 
 class ProjectCreationViewModel: Coordinating {
     var coordinator: Coordinator?
+    var projectCreationView: ProjectCreationView?
     
 }

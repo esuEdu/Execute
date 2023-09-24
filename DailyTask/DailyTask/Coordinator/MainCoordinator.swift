@@ -27,34 +27,45 @@ class MainCoordinator: Coordinator {
             vm.taskView = vc
             navigationController?.pushViewController(vc, animated: true)
         case .goToProjectCreation:
-            let vc: TableViewCellViewController & Coordinating = TableViewCellViewController()
-            vc.coordinator = self
-            let vm = ProjectCreationViewModel()
-            navigationController?.pushViewController(vc, animated: true)
+            let view: ProjectCreationView  = ProjectCreationView()
+            let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
+            viewModel.coordinator = self
+            viewModel.projectCreationView = view
+            view.projectCreationViewModel = viewModel
+            
+            navigationController?.pushViewController(view, animated: true)
+        case .goToProjectList:
+            let projectListView: ProjectListView = ProjectListView()
+            let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
+            projectListViewModel.coordinator = self
+            projectListView.projectListViewModel = projectListViewModel
+            projectListViewModel.projectView = projectListView
+            
+            navigationController?.pushViewController(projectListView, animated: true)
             
         }
         
     }
     
     // Implement the start() method from the Coordinator protocol
-//    func start() {
-//        let homeView: HomeView = HomeView()
-//        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-//        homeViewModel.coordinator = self
-//        homeView.homeViewModel = homeViewModel
-//        homeViewModel.homeView = homeView
-//        navigationController?.setViewControllers([homeView], animated: false)
-//    }
+    func start() {
+        let homeView: HomeView = HomeView()
+        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+        homeViewModel.coordinator = self
+        homeView.homeViewModel = homeViewModel
+        homeViewModel.homeView = homeView
+        navigationController?.setViewControllers([homeView], animated: false)
+    }
     
     //Temporário
-    func start() {
-        let projectListView: ProjectListView = ProjectListView()
-        let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
-        projectListViewModel.coordinator = self
-        projectListView.projectListViewModel = projectListViewModel
-        projectListViewModel.projectView = projectListView
-        navigationController?.setViewControllers([projectListView], animated: false)
-    }
+//    func start() {
+//        let projectListView: ProjectListView = ProjectListView()
+//        let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
+//        projectListViewModel.coordinator = self
+//        projectListView.projectListViewModel = projectListViewModel
+//        projectListViewModel.projectView = projectListView
+//        navigationController?.setViewControllers([projectListView], animated: false)
+//    }
     
     
 }

@@ -11,21 +11,36 @@ class HomeView: UIViewController {
 
     var homeViewModel: HomeViewModel?
     
+    let button = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        title = "Home"
+        view.backgroundColor = .systemBackground
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Clique", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        view.addSubview(button)
+        constraintsGo()
+        
+        button.addTarget(self, action: #selector(goToNextView), for: .touchUpInside)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func goToNextView(){
+        homeViewModel?.coordinator?.eventOccurred(with: .goToProjectList)
     }
-    */
+    
+    func constraintsGo(){
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
 
+
+}
+
+#Preview {
+    HomeView()
 }

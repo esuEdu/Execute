@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navVC = UINavigationController()
         
         let coordinnator = MainCoordinator()
+//        navVC.navigationBar.prefersLargeTitles = true
         coordinnator.navigationController = navVC
     
         
