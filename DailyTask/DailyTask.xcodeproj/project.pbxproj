@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280DD78D2ABE8F0500C2ADA9 /* SubTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280DD78C2ABE8F0500C2ADA9 /* SubTaskListView.swift */; };
+		280DD78F2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280DD78E2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift */; };
+		280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */; };
 		2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2829C5002ABB6A1F00A75CEB /* Colors.swift */; };
 		2829C5052ABB6D6200A75CEB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2829C5042ABB6D6200A75CEB /* Localizable.xcstrings */; };
 		2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2836A8C02ABA1BA800778B43 /* AppDelegate.swift */; };
@@ -30,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		280DD78C2ABE8F0500C2ADA9 /* SubTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskListView.swift; sourceTree = "<group>"; };
+		280DD78E2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskListViewModel.swift; sourceTree = "<group>"; };
+		280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerComponent.swift; sourceTree = "<group>"; };
 		2829C5002ABB6A1F00A75CEB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		2829C5042ABB6D6200A75CEB /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2836A8BD2ABA1BA800778B43 /* DailyTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +72,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280DD78B2ABE8E7400C2ADA9 /* SubTaskList */ = {
+			isa = PBXGroup;
+			children = (
+				280DD7902ABE993900C2ADA9 /* Components */,
+				280DD78C2ABE8F0500C2ADA9 /* SubTaskListView.swift */,
+				280DD78E2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift */,
+			);
+			path = SubTaskList;
+			sourceTree = "<group>";
+		};
+		280DD7902ABE993900C2ADA9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2829C4FF2ABB69F600A75CEB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +100,7 @@
 		2829C5022ABB6B8900A75CEB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -213,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				2829C5022ABB6B8900A75CEB /* Components */,
+				280DD78B2ABE8E7400C2ADA9 /* SubTaskList */,
 				288B59CD2ABE4C2D0058531D /* Home */,
 				28C45C072ABAF96E001CEFED /* TestDestino */,
 				28C45C042ABAF931001CEFED /* Test */,
@@ -338,11 +363,14 @@
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
 				288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */,
 				28F352042ABDDB590077B905 /* ViewModel.swift in Sources */,
+				280DD78D2ABE8F0500C2ADA9 /* SubTaskListView.swift in Sources */,
 				2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */,
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
+				280DD78F2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift in Sources */,
+				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
 				2836A8C52ABA1BA800778B43 /* ViewController.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,

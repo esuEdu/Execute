@@ -26,6 +26,14 @@ class MainCoordinator: Coordinator {
             vc.taskViewModel = vm
             vm.taskView = vc
             navigationController?.pushViewController(vc, animated: true)
+        
+        case .goToSubTaskList:
+            let view: SubTaskTableView = SubTaskTableView()
+            let viewModel: SubTaskListViewModel & Coordinating = SubTaskListViewModel()
+            view.viewModel = viewModel
+            viewModel.coordinator = self
+            viewModel.view = view
+            navigationController?.pushViewController(view, animated: true)
         }
         
     }

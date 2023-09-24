@@ -9,5 +9,22 @@ import Foundation
 
 class TaskViewModel {
     var taskView: TableViewCellViewController?
-    var title: String = "cala a boca leo"
+    var subTaskManager = SubTaskManager()
+    lazy var subTasks: [SubTask] = {
+        
+        return self.subTaskManager.fetchSubTask()
+    }()
+    
+     var title: String {
+        return subTasks.first?.name ?? "nao funciona tenta novamente"
+    }
+    
+    func edit() {
+        if let id = subTasks.first?.id {
+            subTaskManager.editSubTask(id: id, name: "blafoi", startDate: Date(), endDate: Date())
+        }else {
+            return
+        }
+    }
+    
 }
