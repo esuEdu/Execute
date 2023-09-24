@@ -17,7 +17,7 @@ class SubTaskTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -26,9 +26,7 @@ class SubTaskTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.dataSource = self
         title = "Tasks"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
-        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped)), UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))]
         
     }
     

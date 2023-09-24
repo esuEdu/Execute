@@ -11,6 +11,7 @@ enum DatePickerMode {
     case date
     case time
     case dateAndTime
+    case countDownTimer
 }
 
 /// A custom date picker view for selecting date and time values.
@@ -43,31 +44,30 @@ class DatePickerView<T>: UIDatePicker {
     
     /// variable of datePicker timer
     var valueChangedHandler: ((T) -> Void)?
-    
     private var selectedMode: DatePickerMode = .date {
         didSet {
             switch selectedMode {
             case .date:
                 datePickerMode = .date
-                dateFormat = "yyyy-MM-dd"
+                preferredDatePickerStyle = .compact
             case .time:
                 datePickerMode = .time
-                dateFormat = "HH:mm"
+                preferredDatePickerStyle = .compact
             case .dateAndTime:
                 datePickerMode = .dateAndTime
-                dateFormat = "yyyy-MM-dd HH:mm"
+                preferredDatePickerStyle = .compact
+            case .countDownTimer:
+                datePickerMode = .countDownTimer
+                preferredDatePickerStyle = .automatic
             }
         }
     }
     
-    
-    private var dateFormat = "yyyy-MM-dd" // Default to date format
     // A property to store the selected value
     var selectedValue: T? {
         didSet {
             if let selectedValue = selectedValue {
                 valueChangedHandler?(selectedValue)
-                minuteInterval = 5
             }
         }
     }
@@ -75,7 +75,8 @@ class DatePickerView<T>: UIDatePicker {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
-        preferredDatePickerStyle = .compact
+        minuteInterval = 5
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -89,12 +90,14 @@ class DatePickerView<T>: UIDatePicker {
         }
     }
 }
-#Preview("DatePicker",traits: .sizeThatFitsLayout, body: {
+
+#Preview("DatePicker", body: {
     
     let datePickerController = DatePickerView <Date>()
     datePickerController.datePickerMode = .time
     datePickerController.valueChangedHandler = { selectedDate in
         print("Selected Time: \(selectedDate)")
     }
+    
     return datePickerController
 })

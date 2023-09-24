@@ -25,7 +25,7 @@ class HomeView: UIViewController {
         button.setTitle("Tap Me!", for: .normal)
 
         let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 500, width: 0, height: 0))
-        datePickerController.datePickerMode = .dateAndTime
+        datePickerController.datePickerMode = .date
         datePickerController.backgroundColor = .green
         datePickerController.valueChangedHandler = { selectedDate in
             print("Selected Time: \(selectedDate)")
