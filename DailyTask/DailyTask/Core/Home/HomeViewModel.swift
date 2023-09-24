@@ -12,4 +12,8 @@ class HomeViewModel: Coordinating {
     var coordinator: Coordinator?
     var homeView: HomeView?
     
+    func goToProjectList(){
+        coordinator?.eventOccurred(with: .goToProjectList)
+    }
+    
 }

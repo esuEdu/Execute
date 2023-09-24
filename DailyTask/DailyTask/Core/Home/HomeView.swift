@@ -28,7 +28,7 @@ class HomeView: UIViewController {
     }
     
     @objc func goToNextView(){
-        homeViewModel?.coordinator?.eventOccurred(with: .goToProjectList)
+        homeViewModel?.goToProjectList()
     }
     
     func constraintsGo(){

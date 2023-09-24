@@ -57,15 +57,5 @@ class MainCoordinator: Coordinator {
         navigationController?.setViewControllers([homeView], animated: false)
     }
     
-    //Temporário
-//    func start() {
-//        let projectListView: ProjectListView = ProjectListView()
-//        let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
-//        projectListViewModel.coordinator = self
-//        projectListView.projectListViewModel = projectListViewModel
-//        projectListViewModel.projectView = projectListView
-//        navigationController?.setViewControllers([projectListView], animated: false)
-//    }
-    
     
 }
