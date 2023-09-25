@@ -11,6 +11,7 @@ import UIKit
 enum Event {
     case buttonTapped
     case goToSubTaskList
+    case createModalView
 }
 
 protocol Coordinator {

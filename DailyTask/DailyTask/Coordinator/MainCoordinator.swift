@@ -62,6 +62,10 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.view = view
             navigationController?.pushViewController(view, animated: true)
+            
+        case .createModalView:
+            let view: CreateModalView = CreateModalView()
+            navigationController?.present(view, animated: true)
         }
         
     }

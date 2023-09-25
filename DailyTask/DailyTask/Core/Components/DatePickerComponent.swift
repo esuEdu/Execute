@@ -44,6 +44,7 @@ class DatePickerView<T>: UIDatePicker {
     
     /// variable of datePicker timer
     var valueChangedHandler: ((T) -> Void)?
+    
     private var selectedMode: DatePickerMode = .date {
         didSet {
             switch selectedMode {
@@ -90,14 +91,3 @@ class DatePickerView<T>: UIDatePicker {
         }
     }
 }
-
-#Preview("DatePicker", body: {
-    
-    let datePickerController = DatePickerView <Date>()
-    datePickerController.datePickerMode = .time
-    datePickerController.valueChangedHandler = { selectedDate in
-        print("Selected Time: \(selectedDate)")
-    }
-    
-    return datePickerController
-})

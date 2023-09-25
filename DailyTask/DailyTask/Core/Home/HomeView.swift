@@ -24,7 +24,7 @@ class HomeView: UIViewController {
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         button.setTitle("Tap Me!", for: .normal)
 
-        let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 500, width: 0, height: 0))
+        let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 200, width: 0, height: 0))
         datePickerController.datePickerMode = .date
         datePickerController.backgroundColor = .green
         datePickerController.valueChangedHandler = { selectedDate in
@@ -34,7 +34,7 @@ class HomeView: UIViewController {
     }
     
     @objc func didTapButton() {
-        homeViewModel?.coordinator?.eventOccurred(with: .goToSubTaskList)
+        homeViewModel?.coordinator?.eventOccurred(with: .createModalView)
     }
 
     /*
