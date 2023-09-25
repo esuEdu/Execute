@@ -61,7 +61,6 @@ class ProjectListView: UIViewController {
         self.navigationItem.rightBarButtonItems = [buttonToConfiguration, buttonToSupport]
         title = "Meus projetos"
         
-        
         buttonToCreateANewProject.addTarget(self, action: #selector(createNewProject), for: .touchUpInside)
     }
     
@@ -90,11 +89,10 @@ class ProjectListView: UIViewController {
 //        self.tableView.reloadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewIsAppearing(_ animated: Bool) {
         projectListViewModel?.fetchProjectViewModel()
+        tableView.reloadData()
     }
-    
-    
 
 }
 

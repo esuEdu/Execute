@@ -33,9 +33,10 @@
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
 		E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C52ABF3C69000AA58B /* Methodologies.swift */; };
-		E84018C82ABFAE0C000AA58B /* ProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C72ABFAE0C000AA58B /* ProjectListTableViewCell.swift */; };
+		E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C72ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift */; };
 		E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */; };
 		E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */; };
+		E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018F32AC13C5A000AA58B /* TaskTableForProjectList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,9 +69,10 @@
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		E84018C52ABF3C69000AA58B /* Methodologies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methodologies.swift; sourceTree = "<group>"; };
-		E84018C72ABFAE0C000AA58B /* ProjectListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListTableViewCell.swift; sourceTree = "<group>"; };
+		E84018C72ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListCollectionViewCell.swift; sourceTree = "<group>"; };
 		E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationView.swift; sourceTree = "<group>"; };
 		E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationViewModel.swift; sourceTree = "<group>"; };
+		E84018F32AC13C5A000AA58B /* TaskTableForProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableForProjectList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,7 +318,8 @@
 		E84018BB2ABF3549000AA58B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E84018C72ABFAE0C000AA58B /* ProjectListTableViewCell.swift */,
+				E84018C72ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift */,
+				E84018F32AC13C5A000AA58B /* TaskTableForProjectList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -419,8 +422,9 @@
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
+				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
-				E84018C82ABFAE0C000AA58B /* ProjectListTableViewCell.swift in Sources */,
+				E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
 				280DD78F2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift in Sources */,
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,

@@ -79,7 +79,11 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.view = view
             navigationController?.pushViewController(view, animated: true)
+        case .removeTopView:
+            navigationController?.popViewController(animated: true)
         }
+        
+    
         
     }
     

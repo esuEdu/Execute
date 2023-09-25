@@ -31,7 +31,6 @@ class ProjectManager {
         }
     }
     
-    #warning("Change it when the project creation will be finished")
     func createAProject(icon: String, name: String, description: String, methodology: Methodologies, start: Date, end: Date){
         let project: Project = Project(context: context)
         project.id = UUID()
