@@ -34,7 +34,7 @@ class HomeView: UIViewController {
     }
     
     @objc func didTapButton() {
-        homeViewModel?.coordinator?.eventOccurred(with: .createModalView)
+        homeViewModel?.coordinator?.eventOccurred(with: .goToSubTaskList)
     }
 
     /*

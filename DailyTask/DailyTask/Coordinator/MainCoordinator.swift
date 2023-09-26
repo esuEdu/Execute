@@ -33,6 +33,9 @@ import UIKit
 /// ```
 class MainCoordinator: Coordinator {
     
+    var tabBarController: UITabBarController?
+    
+    
     /// The navigation controller managed by the coordinator.
     var navigationController: UINavigationController?
     
@@ -64,7 +67,11 @@ class MainCoordinator: Coordinator {
             navigationController?.pushViewController(view, animated: true)
             
         case .createModalView:
-            let view: CreateModalView = CreateModalView()
+            let view: CreateSubTaskView = CreateSubTaskView()
+            let viewModel = CreateSubTaskViewModel()
+            view.viewModel = viewModel
+            viewModel.coordinator = self
+            viewModel.view = view
             navigationController?.present(view, animated: true)
         }
         
@@ -75,11 +82,50 @@ class MainCoordinator: Coordinator {
     /// Call this method to start the coordinator and configure the initial state of the
     /// navigation controller. This method sets up the initial view and state of the app.
     func start() {
+        // Create instances of your view controllers
         let homeView: HomeView = HomeView()
         let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
         homeViewModel.coordinator = self
         homeView.homeViewModel = homeViewModel
         homeViewModel.homeView = homeView
-        navigationController?.setViewControllers([homeView], animated: false)
-    }
-}
+
+        let tableViewCellView: TableViewCellViewController & Coordinating = TableViewCellViewController()
+        tableViewCellView.coordinator = self
+        let taskViewModel = TaskViewModel()
+        tableViewCellView.taskViewModel = taskViewModel
+        taskViewModel.taskView = tableViewCellView
+
+        let subTaskTableView: SubTaskTableView = SubTaskTableView()
+        let subTaskListViewModel: SubTaskListViewModel & Coordinating = SubTaskListViewModel()
+        subTaskListViewModel.coordinator = self
+        subTaskTableView.viewModel = subTaskListViewModel
+        subTaskListViewModel.view = subTaskTableView
+
+        let createSubTaskView: CreateSubTaskView = CreateSubTaskView()
+        let createSubTaskViewModel = CreateSubTaskViewModel()
+        createSubTaskView.viewModel = createSubTaskViewModel
+        createSubTaskViewModel.coordinator = self
+        createSubTaskViewModel.view = createSubTaskView
+
+        // Create instances of UITabBarItem for each view controller
+        let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home_icon"), selectedImage: nil)
+        let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(named: "table_icon"), selectedImage: nil)
+        let subTaskListTabBarItem = UITabBarItem(title: "Sub Tasks", image: UIImage(named: "subtasks_icon"), selectedImage: nil)
+        let createSubTaskTabBarItem = UITabBarItem(title: "Create Sub Task", image: UIImage(named: "create_icon"), selectedImage: nil)
+
+        // Assign tab bar items to the view controllers
+        homeView.tabBarItem = homeTabBarItem
+        tableViewCellView.tabBarItem = tableViewCellTabBarItem
+        subTaskTableView.tabBarItem = subTaskListTabBarItem
+        createSubTaskView.tabBarItem = createSubTaskTabBarItem
+
+        // Set up the view controllers in the tab bar controller
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [homeView, tableViewCellView, subTaskTableView, createSubTaskView]
+
+        // Store a reference to the tab bar controller for future reference
+        self.tabBarController = tabBarController
+
+        // Set the tab bar controller as the root view controller of the navigation controller
+        navigationController?.setViewControllers([tabBarController], animated: false)
+    }}

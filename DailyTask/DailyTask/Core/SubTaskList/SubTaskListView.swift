@@ -26,30 +26,15 @@ class SubTaskTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.dataSource = self
         title = "Tasks"
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped)), UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))]
         
     }
     
     // MARK: ADD
     @objc func addTapped() {
-        let alert = UIAlertController(title: "Add Task", message: nil, preferredStyle: .alert)
-
-        alert.addTextField()
-        let ok = UIAlertAction(title: "OK", style: .default) { [self] (action) in
-            
-            _ = alert.textFields![0]
-            viewModel?.createSubTask(name: "bla", startDate: Date(), endDate: Date())
-            self.tableView.reloadData()
-        }
-
-        let cancel = UIAlertAction(title: "cancel", style: .cancel) { (cancel) in
-
-             //do nothing
-
-        }
-        alert.addAction(cancel)
-        alert.addAction(ok)
-        self.present(alert, animated: true, completion: nil)
+        viewModel?.goToModal()
+        viewModel?.fetchSubTasks()
+        tableView.reloadData()
     }
 
     // MARK: EDIT
