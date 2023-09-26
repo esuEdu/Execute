@@ -11,6 +11,10 @@ class SubTaskListViewModel: Coordinating {
     var view: SubTaskTableView?
     var coordinator: Coordinator?
     
+    func goToModal() {
+        coordinator?.eventOccurred(with: .createModalView)
+    }
+    
     private let subTaskManager = SubTaskManager()
     
     var subTask: [SubTask] = []
@@ -18,11 +22,6 @@ class SubTaskListViewModel: Coordinating {
     func fetchSubTasks() {
         let subTasks = subTaskManager.fetchSubTask()
         subTask = subTasks
-    }
-    
-    func createSubTask(name: String, startDate: Date, endDate: Date) {
-        subTaskManager.createSubTask(name: name, startDate: startDate, endDate: endDate)
-        fetchSubTasks()
     }
     
     func editSubTask(id: UUID, name: String, startDate: Date, endDate: Date) {

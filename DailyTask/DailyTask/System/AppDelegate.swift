@@ -19,13 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
         
         let navVC = UINavigationController()
+        let tabVC = UITabBarController()
         
         let coordinnator = MainCoordinator()
         coordinnator.navigationController = navVC
-    
+        coordinnator.tabBarController = tabVC
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navVC
+        window.rootViewController = tabVC
         window.makeKeyAndVisible()
         self.window = window
         

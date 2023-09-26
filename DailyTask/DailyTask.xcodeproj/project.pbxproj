@@ -26,6 +26,9 @@
 		288B59CC2ABE33A60058531D /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CB2ABE33A60058531D /* TaskViewModel.swift */; };
 		288B59D02ABE4C580058531D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CF2ABE4C580058531D /* HomeView.swift */; };
 		288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59D12ABE4C660058531D /* HomeViewModel.swift */; };
+		28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A55A862AC2EB5200EF588F /* TextFieldView.swift */; };
+		28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */; };
+		28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */; };
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
 		28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */; };
 		28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BFA2ABAF586001CEFED /* TableViewCellViewController.swift */; };
@@ -65,6 +68,9 @@
 		288B59CB2ABE33A60058531D /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		288B59CF2ABE4C580058531D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		288B59D12ABE4C660058531D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		28A55A862AC2EB5200EF588F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskView.swift; sourceTree = "<group>"; };
+		28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskViewModel.swift; sourceTree = "<group>"; };
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		28C45BFA2ABAF586001CEFED /* TableViewCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */,
+				28A55A862AC2EB5200EF588F /* TextFieldView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -205,6 +212,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		28B63D052AC1CA9E00DE1D1A /* CreateSubTask */ = {
+			isa = PBXGroup;
+			children = (
+				28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */,
+				28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */,
+			);
+			path = CreateSubTask;
+			sourceTree = "<group>";
+		};
 		28C45BFC2ABAF883001CEFED /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +276,7 @@
 				E84018CF2ABFE3D3000AA58B /* ProjectCreation */,
 				E84018B92ABF3532000AA58B /* ProjectList */,
 				2829C5022ABB6B8900A75CEB /* Components */,
+				28B63D052AC1CA9E00DE1D1A /* CreateSubTask */,
 				280DD78B2ABE8E7400C2ADA9 /* SubTaskList */,
 				288B59CD2ABE4C2D0058531D /* Home */,
 				28C45C072ABAF96E001CEFED /* TestDestino */,
@@ -392,6 +409,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
+				fr,
 			);
 			mainGroup = 2836A8B42ABA1BA800778B43;
 			productRefGroup = 2836A8BE2ABA1BA800778B43 /* Products */;
@@ -421,7 +440,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */,
 				288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */,
+				28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */,
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
 				288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */,
 				28F352042ABDDB590077B905 /* ViewModel.swift in Sources */,
@@ -432,6 +453,7 @@
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
 				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
+				28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
 				E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */,
 				E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */,

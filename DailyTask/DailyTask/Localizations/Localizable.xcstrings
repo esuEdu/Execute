@@ -1,5 +1,47 @@
 {
   "sourceLanguage" : "en",
-  "strings" : {},
+  "strings" : {
+    "Date:" : {
+
+    },
+    "Done" : {
+
+    },
+    "Sub-Task" : {
+
+    },
+    "Sub-Task Title" : {
+      "comment" : "Accessibility Label for Sub-Task Title"
+    },
+    "SubTask" : {
+      "comment" : "Create SubTask Modal",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SubTask"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sub Tarefa"
+          }
+        }
+      }
+    },
+    "Tap me!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bla"
+          }
+        }
+      }
+    }
+  },
   "version" : "1.0"
 }

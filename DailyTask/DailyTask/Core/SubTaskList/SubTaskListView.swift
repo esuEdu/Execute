@@ -17,7 +17,7 @@ class SubTaskTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -26,32 +26,15 @@ class SubTaskTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.dataSource = self
         title = "Tasks"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
-        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))]
         
     }
     
     // MARK: ADD
     @objc func addTapped() {
-        let alert = UIAlertController(title: "Add Task", message: nil, preferredStyle: .alert)
-
-        alert.addTextField()
-        let ok = UIAlertAction(title: "OK", style: .default) { [self] (action) in
-            
-            _ = alert.textFields![0]
-            viewModel?.createSubTask(name: "bla", startDate: Date(), endDate: Date())
-            self.tableView.reloadData()
-        }
-
-        let cancel = UIAlertAction(title: "cancel", style: .cancel) { (cancel) in
-
-             //do nothing
-
-        }
-        alert.addAction(cancel)
-        alert.addAction(ok)
-        self.present(alert, animated: true, completion: nil)
+        viewModel?.goToModal()
+        viewModel?.fetchSubTasks()
+        tableView.reloadData()
     }
 
     // MARK: EDIT

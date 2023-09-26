@@ -14,9 +14,11 @@ enum Event {
     case goToProjectList
     case goToSubTaskList
     case removeTopView
+    case createModalView
 }
 
 protocol Coordinator {
+    var tabBarController: UITabBarController? { get set }
     var navigationController: UINavigationController? { get set }
     
     func eventOccurred(with type: Event)
