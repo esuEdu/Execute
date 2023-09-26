@@ -56,15 +56,14 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.projectCreationView = view
             view.projectCreationViewModel = viewModel
-            
             navigationController?.pushViewController(view, animated: true)
+          
         case .goToProjectList:
             let projectListView: ProjectListView = ProjectListView()
             let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
             projectListViewModel.coordinator = self
             projectListView.projectListViewModel = projectListViewModel
             projectListViewModel.projectView = projectListView
-            
             navigationController?.pushViewController(projectListView, animated: true)
             
         case .goToSubTaskList:
@@ -74,6 +73,7 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.view = view
             navigationController?.pushViewController(view, animated: true)
+          
         case .removeTopView:
             navigationController?.popViewController(animated: true)
             
