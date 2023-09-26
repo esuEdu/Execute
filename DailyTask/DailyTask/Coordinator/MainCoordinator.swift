@@ -50,13 +50,6 @@ class MainCoordinator: Coordinator {
         switch type {
             
             // Handle the case when a button is tapped
-        case .buttonTapped:
-            let vc: TableViewCellViewController & Coordinating = TableViewCellViewController()
-            vc.coordinator = self
-            let vm = TestViewModel()
-            vc.testViewModel = vm
-            vm.testView = vc
-            navigationController?.pushViewController(vc, animated: true)
         case .goToProjectCreation:
             let view: ProjectCreationView  = ProjectCreationView()
             let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
@@ -125,17 +118,17 @@ class MainCoordinator: Coordinator {
         homeView.homeViewModel = homeViewModel
         homeViewModel.homeView = homeView
 
-        let tableViewCellView: TableViewCellViewController & Coordinating = TableViewCellViewController()
-        tableViewCellView.coordinator = self
-        let taskViewModel = TaskViewModel()
-        tableViewCellView.taskViewModel = taskViewModel
-        taskViewModel.taskView = tableViewCellView
-
-        let subTaskTableView: SubTaskTableView = SubTaskTableView()
-        let subTaskListViewModel: SubTaskListViewModel & Coordinating = SubTaskListViewModel()
-        subTaskListViewModel.coordinator = self
-        subTaskTableView.viewModel = subTaskListViewModel
-        subTaskListViewModel.view = subTaskTableView
+        let projectView: ProjectListView = ProjectListView()
+        let projectViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
+        projectView.projectListViewModel = projectViewModel
+        projectViewModel.coordinator = self
+        projectViewModel.projectView = projectView
+        
+        let taskView: TaskView = TaskView()
+        let taskViewModel: TaskViewModel & Coordinating = TaskViewModel()
+        taskViewModel.coordinator = self
+        taskView.viewModel = taskViewModel
+        taskViewModel.view = taskView
 
         let createSubTaskView: CreateSubTaskView = CreateSubTaskView()
         let createSubTaskViewModel = CreateSubTaskViewModel()
@@ -144,20 +137,20 @@ class MainCoordinator: Coordinator {
         createSubTaskViewModel.view = createSubTaskView
 
         // Create instances of UITabBarItem for each view controller
-        let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home_icon"), selectedImage: nil)
+        let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: nil)
         let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(named: "table_icon"), selectedImage: nil)
         let subTaskListTabBarItem = UITabBarItem(title: "Sub Tasks", image: UIImage(named: "subtasks_icon"), selectedImage: nil)
         let createSubTaskTabBarItem = UITabBarItem(title: "Create Sub Task", image: UIImage(named: "create_icon"), selectedImage: nil)
 
         // Assign tab bar items to the view controllers
         homeView.tabBarItem = homeTabBarItem
-        tableViewCellView.tabBarItem = tableViewCellTabBarItem
-        subTaskTableView.tabBarItem = subTaskListTabBarItem
+        projectView.tabBarItem = tableViewCellTabBarItem
+        taskView.tabBarItem = subTaskListTabBarItem
         createSubTaskView.tabBarItem = createSubTaskTabBarItem
 
         // Set up the view controllers in the tab bar controller
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeView, tableViewCellView, subTaskTableView, createSubTaskView]
+        tabBarController.viewControllers = [homeView, projectView, taskView, createSubTaskView]
 
         // Store a reference to the tab bar controller for future reference
         self.tabBarController = tabBarController

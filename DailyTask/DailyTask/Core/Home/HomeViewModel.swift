@@ -24,7 +24,7 @@ class HomeViewModel: Coordinating {
   }
     
     func goToProjectList(){
-        coordinator?.eventOccurred(with: .goToProjectList)
+        coordinator?.eventOccurred(with: .goToSubTaskList)
     }
     
 }

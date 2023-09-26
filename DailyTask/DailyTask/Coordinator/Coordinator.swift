@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 
 enum Event {
-    case buttonTapped
     case goToProjectCreation
     case goToProjectList
     case goToSubTaskList
     case createModalView
-  case goToTaskView
-  case goToCreateTaskView
-  case removeTopView
+    case goToTaskView
+    case goToCreateTaskView
+    case removeTopView
 }
 
 protocol Coordinator {

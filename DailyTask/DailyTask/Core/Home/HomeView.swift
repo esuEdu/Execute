@@ -21,15 +21,11 @@ class HomeView: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Clique", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(goToNextView), for: .touchUpInside)
         view.addSubview(button)
         constraintsGo()
         
-        button.addTarget(self, action: #selector(goToNextView), for: .touchUpInside)
-        button.center = view.center
-        button.backgroundColor = UIColor(.customBlue)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        button.setTitle("Tap Me!", for: .normal)
+
 
         let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 500, width: 0, height: 0))
         datePickerController.datePickerMode = .dateAndTime
@@ -41,6 +37,7 @@ class HomeView: UIViewController {
       
       let taskButton = UIButton()
       view.addSubview(taskButton)
+        
       taskButton.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
         taskButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
@@ -64,6 +61,9 @@ class HomeView: UIViewController {
         ])
     }
   
+    @objc func goToSubTask() {
+        
+    }
   @objc func goToTasks() {
     homeViewModel?.goToTasksView()
   }
