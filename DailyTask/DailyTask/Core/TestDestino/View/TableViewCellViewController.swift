@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewCellViewController: UIViewController, Coordinating {
     var coordinator: Coordinator?
-    var taskViewModel: TaskViewModel?
+    var testViewModel: TestViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class TableViewCellViewController: UIViewController, Coordinating {
     }
     
     @objc func didTapButton() {
-        taskViewModel?.edit()
+        testViewModel?.edit()
     }
     
     /*

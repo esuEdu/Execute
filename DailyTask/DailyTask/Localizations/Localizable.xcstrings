@@ -1,43 +1,92 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Date:" : {
-
-    },
-    "Done" : {
-
-    },
-    "Sub-Task" : {
-
-    },
-    "Sub-Task Title" : {
-      "comment" : "Accessibility Label for Sub-Task Title"
-    },
-    "SubTask" : {
-      "comment" : "Create SubTask Modal",
-      "extractionState" : "stale",
+    "CancelTaskButton" : {
+      "comment" : "Button in the navigation bar that cancel the task creation",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SubTask"
+            "value" : "Cancel"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sub Tarefa"
+            "value" : "Cancelar"
           }
         }
       }
     },
-    "Tap me!" : {
+    "CreateTaskButton" : {
+      "comment" : "Button in the navigation bar that create the task",
       "extractionState" : "manual",
       "localizations" : {
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "bla"
+            "value" : "Done"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concluido"
+          }
+        }
+      }
+    },
+    "EndDateLabel" : {
+      "comment" : "text of end date",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fim"
+          }
+        }
+      }
+    },
+    "PlaceholderNameTask" : {
+      "comment" : "Placeholder text name task",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type the name of the task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escreva o nome da tarefa"
+          }
+        }
+      }
+    },
+    "StartDateLabel" : {
+      "comment" : "text of start date of the task creation",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Início"
           }
         }
       }

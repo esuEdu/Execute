@@ -53,9 +53,9 @@ class MainCoordinator: Coordinator {
         case .buttonTapped:
             let vc: TableViewCellViewController & Coordinating = TableViewCellViewController()
             vc.coordinator = self
-            let vm = TaskViewModel()
-            vc.taskViewModel = vm
-            vm.taskView = vc
+            let vm = TestViewModel()
+            vc.testViewModel = vm
+            vm.testView = vc
             navigationController?.pushViewController(vc, animated: true)
         case .goToProjectCreation:
             let view: ProjectCreationView  = ProjectCreationView()
@@ -91,6 +91,24 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.view = view
             navigationController?.present(view, animated: true)
+          
+        case .goToTaskView:
+          let view: TaskView = TaskView()
+          let viewModel: TaskViewModel & Coordinating = TaskViewModel()
+          view.viewModel = viewModel
+          viewModel.view = view
+          viewModel.coordinator = self
+          navigationController?.pushViewController(view, animated: true)
+          
+        case .goToCreateTaskView:
+          let view: CreateTaskView = CreateTaskView()
+          let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
+          view.viewModel = viewModel
+          viewModel.viewCreate = view
+          viewModel.coordinator = self
+          navigationController?.pushViewController(view, animated: true)
+        
+          
         }
         
     }

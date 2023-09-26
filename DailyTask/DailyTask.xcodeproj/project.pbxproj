@@ -23,7 +23,7 @@
 		288B59C32ABE30B20058531D /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C22ABE30B20058531D /* TaskManager.swift */; };
 		288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C42ABE30DE0058531D /* TaskTagManager.swift */; };
 		288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C62ABE30F90058531D /* SubTaskManager.swift */; };
-		288B59CC2ABE33A60058531D /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CB2ABE33A60058531D /* TaskViewModel.swift */; };
+		288B59CC2ABE33A60058531D /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CB2ABE33A60058531D /* TestViewModel.swift */; };
 		288B59D02ABE4C580058531D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CF2ABE4C580058531D /* HomeView.swift */; };
 		288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59D12ABE4C660058531D /* HomeViewModel.swift */; };
 		28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A55A862AC2EB5200EF588F /* TextFieldView.swift */; };
@@ -43,6 +43,11 @@
 		E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */; };
 		E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */; };
 		E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */; };
+		9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4172AC07B07008D08B6 /* TaskView.swift */; };
+		9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */; };
+		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
+		9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */; };
+		9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4232AC1FCED008D08B6 /* Priority.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +70,7 @@
 		288B59C22ABE30B20058531D /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		288B59C42ABE30DE0058531D /* TaskTagManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTagManager.swift; sourceTree = "<group>"; };
 		288B59C62ABE30F90058531D /* SubTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskManager.swift; sourceTree = "<group>"; };
-		288B59CB2ABE33A60058531D /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		288B59CB2ABE33A60058531D /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
 		288B59CF2ABE4C580058531D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		288B59D12ABE4C660058531D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		28A55A862AC2EB5200EF588F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
@@ -85,6 +90,11 @@
 		E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleBarComponent.swift; sourceTree = "<group>"; };
 		E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseIconComponent.swift; sourceTree = "<group>"; };
 		E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldToNameComponent.swift; sourceTree = "<group>"; };
+		9B0AA4172AC07B07008D08B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
+		9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
+		9B0AA4232AC1FCED008D08B6 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +185,7 @@
 		288B59C82ABE31F80058531D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				288B59CB2ABE33A60058531D /* TaskViewModel.swift */,
+				288B59CB2ABE33A60058531D /* TestViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -275,6 +285,7 @@
 			children = (
 				E84018CF2ABFE3D3000AA58B /* ProjectCreation */,
 				E84018B92ABF3532000AA58B /* ProjectList */,
+				9B0AA4152AC07AF2008D08B6 /* Task */,
 				2829C5022ABB6B8900A75CEB /* Components */,
 				28B63D052AC1CA9E00DE1D1A /* CreateSubTask */,
 				280DD78B2ABE8E7400C2ADA9 /* SubTaskList */,
@@ -367,7 +378,30 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		9B0AA4152AC07AF2008D08B6 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				9B0AA4162AC07AF9008D08B6 /* Components */,
+				9B0AA4172AC07B07008D08B6 /* TaskView.swift */,
+				9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */,
+				9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */,
+				9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		9B0AA4162AC07AF9008D08B6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9B0AA4232AC1FCED008D08B6 /* Priority.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+
+
 
 /* Begin PBXNativeTarget section */
 		2836A8BC2ABA1BA800778B43 /* DailyTask */ = {
@@ -445,6 +479,7 @@
 				28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */,
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
 				288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */,
+				9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */,
 				28F352042ABDDB590077B905 /* ViewModel.swift in Sources */,
 				280DD78D2ABE8F0500C2ADA9 /* SubTaskListView.swift in Sources */,
 				2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */,
@@ -458,7 +493,9 @@
 				E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */,
 				E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
+				9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */,
 				280DD78F2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift in Sources */,
+				9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */,
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
 				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
 				2836A8C52ABA1BA800778B43 /* ViewController.swift in Sources */,
@@ -466,12 +503,15 @@
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
+				9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
 				E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				288B59CC2ABE33A60058531D /* TaskViewModel.swift in Sources */,
 				E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */,
+				9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */,
+				288B59CC2ABE33A60058531D /* TestViewModel.swift in Sources */,
 				288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

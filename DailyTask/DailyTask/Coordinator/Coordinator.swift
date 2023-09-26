@@ -13,8 +13,10 @@ enum Event {
     case goToProjectCreation
     case goToProjectList
     case goToSubTaskList
-    case removeTopView
     case createModalView
+  case goToTaskView
+  case goToCreateTaskView
+  case removeTopView
 }
 
 protocol Coordinator {
