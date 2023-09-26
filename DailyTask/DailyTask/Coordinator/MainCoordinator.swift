@@ -71,7 +71,6 @@ class MainCoordinator: Coordinator {
             
             navigationController?.pushViewController(projectListView, animated: true)
             
-            
         case .goToSubTaskList:
             let view: SubTaskTableView = SubTaskTableView()
             let viewModel: SubTaskListViewModel & Coordinating = SubTaskListViewModel()
@@ -82,8 +81,6 @@ class MainCoordinator: Coordinator {
         case .removeTopView:
             navigationController?.popViewController(animated: true)
         }
-        
-    
         
     }
     

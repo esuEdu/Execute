@@ -77,7 +77,6 @@ class ProjectListView: UIViewController {
             buttonToCreateANewProject.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             buttonToCreateANewProject.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             
-
         ])
     }
     

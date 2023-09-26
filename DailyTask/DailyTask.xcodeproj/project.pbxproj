@@ -37,6 +37,9 @@
 		E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */; };
 		E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */; };
 		E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018F32AC13C5A000AA58B /* TaskTableForProjectList.swift */; };
+		E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */; };
+		E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */; };
+		E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +76,9 @@
 		E84018CB2ABFAFF5000AA58B /* ProjectCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationView.swift; sourceTree = "<group>"; };
 		E84018CD2ABFB01F000AA58B /* ProjectCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationViewModel.swift; sourceTree = "<group>"; };
 		E84018F32AC13C5A000AA58B /* TaskTableForProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableForProjectList.swift; sourceTree = "<group>"; };
+		E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleBarComponent.swift; sourceTree = "<group>"; };
+		E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseIconComponent.swift; sourceTree = "<group>"; };
+		E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldToNameComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +326,7 @@
 			children = (
 				E84018C72ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift */,
 				E84018F32AC13C5A000AA58B /* TaskTableForProjectList.swift */,
+				E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -337,6 +344,8 @@
 		E84018D02ABFE409000AA58B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */,
+				E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -424,10 +433,12 @@
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
 				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
+				E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */,
 				E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
 				280DD78F2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift in Sources */,
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
+				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
 				2836A8C52ABA1BA800778B43 /* ViewController.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
@@ -435,6 +446,7 @@
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
+				E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				288B59CC2ABE33A60058531D /* TaskViewModel.swift in Sources */,
 				E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */,
@@ -596,7 +608,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Leonardo.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -628,7 +640,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Leonardo.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

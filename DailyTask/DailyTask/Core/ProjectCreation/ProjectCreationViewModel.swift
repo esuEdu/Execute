@@ -39,4 +39,9 @@ class ProjectCreationViewModel: Coordinating {
     func removeTopView(){
         coordinator?.eventOccurred(with: .removeTopView)
     }
+    
+    func compareDates() -> ComparisonResult{
+        let buuu = (start?.compare((end)!))!
+        return buuu
+    }
 }

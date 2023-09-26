@@ -20,6 +20,71 @@ class ProjectListCollectionViewCell: UICollectionViewCell {
     var end: Date?
     var progress: Int = 50
     
+    let lableForTitleDescription: UILabel = {
+        let hdLabel = UILabel()
+        hdLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        hdLabel.translatesAutoresizingMaskIntoConstraints = false
+        return hdLabel
+    }()
+    
+    let labelForDescription: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        label.text = "lorem kdhfjdfoj dd jdijfioejdio fjdoihf dohfoidjpfojpo jpoj oeijh oiheiofheoi hiohfoi ehiofh oeihfioh eoihfio ehihoif heoih ioehiohfioeh iohfeiohfioehioh eihf ioehihfioeh ioeh ioehfoih feiohfioejj ifeji jfeijfioje jfoej oejfie"
+        label.numberOfLines = 5
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let stackViewForDates: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let labelForHeadline: UILabel = {
+        let hdLabel = UILabel()
+        hdLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        hdLabel.text = "Prazo: "
+        hdLabel.translatesAutoresizingMaskIntoConstraints = false
+        return hdLabel
+    }()
+    
+    let labelForDate1: UILabel = {
+        let dataLabel = UILabel()
+        dataLabel.text = "15 de Outubro"
+        dataLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        dataLabel.translatesAutoresizingMaskIntoConstraints = false
+        return dataLabel
+    }()
+    
+    let labelForDate2: UILabel = {
+        let dataLabel = UILabel()
+        dataLabel.text = "às"
+        dataLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        dataLabel.textColor = .systemGray2
+        dataLabel.translatesAutoresizingMaskIntoConstraints = false
+        return dataLabel
+    }()
+    
+    let labelForDate3: UILabel = {
+        let dataLabel = UILabel()
+        dataLabel.text = "14h05"
+        dataLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        dataLabel.translatesAutoresizingMaskIntoConstraints = false
+        return dataLabel
+    }()
+    
+    let viewsForDates: UIView = {
+        let dataView = UIView()
+        dataView.backgroundColor = .systemGray5
+        dataView.layer.cornerRadius = 6
+        dataView.translatesAutoresizingMaskIntoConstraints = false
+        return dataView
+    }()
+    
     let stackViewForButtons: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -96,6 +161,13 @@ class ProjectListCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(viewForTasks)
         contentView.addSubview(viewForTags)
         viewForTasks.addSubview(labelForShowingTasks)
+        contentView.addSubview(viewsForDates)
+        
+        viewsForDates.addSubview(stackViewForDates)
+        
+        stackViewForDates.addArrangedSubview(labelForDate1)
+        stackViewForDates.addArrangedSubview(labelForDate2)
+        stackViewForDates.addArrangedSubview(labelForDate3)
     }
     
 //    UIImage(systemName: "control") Lembrar de usar isso!
@@ -119,6 +191,22 @@ class ProjectListCollectionViewCell: UICollectionViewCell {
             viewForTags.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             viewForTags.heightAnchor.constraint(equalToConstant: 30),
             
+            viewsForDates.bottomAnchor.constraint(equalTo: viewForTags.topAnchor, constant: -12),
+            viewsForDates.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            viewsForDates.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            viewsForDates.topAnchor.constraint(equalTo: viewsForDates.bottomAnchor, constant: -25),
+            
+            
+            stackViewForDates.trailingAnchor.constraint(equalTo: viewsForDates.trailingAnchor, constant: -6),
+            stackViewForDates.centerYAnchor.constraint(equalTo: viewsForDates.centerYAnchor),
+            
+            
+            
+            
+//            labelForDates.bottomAnchor.constraint(equalTo: viewsForDates.bottomAnchor),
+//            labelForDates.topAnchor.constraint(equalTo: viewsForDates.topAnchor),
+//            labelForDates.leadingAnchor.constraint(equalTo: viewsForDates.leadingAnchor),
+//            labelForDates.trailingAnchor.constraint(equalTo: viewsForDates.trailingAnchor),
         ])
     }
     
