@@ -11,9 +11,12 @@ import UIKit
 class CreateTaskView: UIViewController {
   var viewModel: CreateTaskViewModel?
   
+  var dateStart: Date?
+  var dateEnd: Date?
+  
   let nameTextField: UITextField = {
       let textField = UITextField()
-      textField.placeholder = "Type the name of the task"
+      textField.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
       textField.translatesAutoresizingMaskIntoConstraints = false
       return textField
   }()
@@ -24,8 +27,15 @@ class CreateTaskView: UIViewController {
     description.translatesAutoresizingMaskIntoConstraints = false
       return description
   }()
- 
+  
   let startDate: DatePickerView<Date> = {
+    let date = DatePickerView<Date>()
+    date.datePickerMode = .dateAndTime
+    date.translatesAutoresizingMaskIntoConstraints = false
+    return date
+  }()
+  
+  let endDate: DatePickerView<Date> = {
     let date = DatePickerView<Date>()
     date.datePickerMode = .dateAndTime
     date.translatesAutoresizingMaskIntoConstraints = false
@@ -34,24 +44,40 @@ class CreateTaskView: UIViewController {
   
   let buttonDone: UIBarButtonItem = {
     let button = UIBarButtonItem()
-    button.title = "Concluido" // Localizable
+    button.title = String(localized: "CreateTaskButton", comment: "Button in the navigation bar that create the task")
     return button
   }()
   
   let buttonCancel: UIBarButtonItem = {
     let button = UIBarButtonItem()
-    button.title = "Cancelar" // Localizable
+    button.title = String(localized: "CancelTaskButton", comment: "Button in the navigation bar that cancel the task creation")
     button.tintColor = .red
     return button
   }()
   
-  var data: Date?
+  let labelDateStart: UILabel = {
+    let label = UILabel()
+    label.text = String(localized: "StartDateLabel", comment: "text of start date of the task creation")
+    label.numberOfLines = 1
+    label.textColor = .black
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
   
+  let labelDateEnd: UILabel = {
+    let label = UILabel()
+    label.text = String(localized: "EndDateLabel", comment: "text of end date")
+    label.numberOfLines = 1
+    label.textColor = .black
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
     title = "Create Task"
-    view.backgroundColor = .systemGray
+    view.backgroundColor = .systemBackground
     
     nameTextField.returnKeyType = .done
     nameTextField.autocapitalizationType = .none
@@ -66,32 +92,36 @@ class CreateTaskView: UIViewController {
 //    desc.keyboardAppearance = .default
     
     desc.isEditable = true
-    desc.backgroundColor = .white
+    desc.backgroundColor = .systemGray3
     desc.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
     desc.delegate = self
     
 //    let gesture = UIGestureRecognizer(target: self, action: #selector(tappedAwayFunction))
 //    self.view.addGestureRecognizer(gesture)
     
-    buttonDone.target = self
-    buttonDone.action = #selector(createTask)
-    
     navigationItem.rightBarButtonItem = buttonDone
     navigationItem.leftBarButtonItem = buttonCancel
     
+    buttonDone.target = self
+    buttonDone.action = #selector(createTask)
+    
+    buttonCancel.target = self
+    buttonCancel.action = #selector(cancelTask)
+    
     startDate.valueChangedHandler = { selectedDate in
-      let dateFormatter = DateFormatter()
-      dateFormatter.locale = .current
-      dateFormatter.dateStyle = .long
-      dateFormatter.timeStyle = .short
-      let data = dateFormatter.string(from: selectedDate)
-      print(data)
-      self.data = selectedDate
+      self.dateStart = selectedDate
+    }
+    
+    endDate.valueChangedHandler = { selectedDate in
+      self.dateEnd = selectedDate
     }
     
     view.addSubview(nameTextField)
     view.addSubview(desc)
     view.addSubview(startDate)
+    view.addSubview(endDate)
+    view.addSubview(labelDateStart)
+    view.addSubview(labelDateEnd)
 
     setConstraints()
   }
@@ -110,7 +140,18 @@ class CreateTaskView: UIViewController {
       desc.heightAnchor.constraint(equalTo: nameTextField.heightAnchor, multiplier: 10),
       
       startDate.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 30),
-      startDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+      startDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      
+      endDate.topAnchor.constraint(equalTo: startDate.bottomAnchor, constant: 20),
+      endDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      
+      labelDateStart.topAnchor.constraint(equalTo: startDate.topAnchor),
+      labelDateStart.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+      labelDateStart.bottomAnchor.constraint(equalTo: startDate.bottomAnchor),
+      
+      labelDateEnd.topAnchor.constraint(equalTo: endDate.topAnchor),
+      labelDateEnd.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+      labelDateEnd.bottomAnchor.constraint(equalTo: endDate.bottomAnchor),
       
     ])
   }
@@ -118,21 +159,23 @@ class CreateTaskView: UIViewController {
 }
 
 extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
-  
 
 //  @objc func tappedAwayFunction(){
 //    desc.resignFirstResponder()
 //  }
   
   @objc func createTask() {
-    self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.data ?? Date.now, endDate: Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
+    self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
     
+    viewModel?.removeLastView()
+  }
+  
+  @objc func cancelTask(){
     viewModel?.removeLastView()
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
-    
     return true
   }
   
@@ -145,3 +188,8 @@ extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
   }
 
 }
+
+//
+//#Preview {
+//  CreateTaskView()
+//}

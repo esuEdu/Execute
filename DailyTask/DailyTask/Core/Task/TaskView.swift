@@ -80,11 +80,11 @@ extension TaskView: UITableViewDelegate, UITableViewDataSource {
     let task = viewModel?.task[indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: "cellTask")!
     
-    let data = self.formatter.string(from: task?.start ?? Date.now)
+    let data = self.formatter.string(from: task?.end ?? Date.now)
     
     var configure = UIListContentConfiguration.cell()
     configure.text = task?.name
-    configure.secondaryText = NSLocalizedString(data, comment: "")
+    configure.secondaryText = data
     
     cell.contentConfiguration = configure
     
