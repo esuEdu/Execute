@@ -118,7 +118,7 @@ class ProjectCreationView: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
             iconButton.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
-            iconButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            iconButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             iconButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             iconButton.heightAnchor.constraint(equalToConstant: 93),
             iconButton.widthAnchor.constraint(equalToConstant: 93),
@@ -257,7 +257,7 @@ extension ProjectCreationView {
 
 
 #Preview{
-    ColorPickerComponent()
+    ProjectCreationView()
 }
 
 class ColorPickerComponent: UIView{
@@ -307,14 +307,53 @@ class ColorPickerComponent: UIView{
 
 class CustomColorButton: UIButton {
     
+    private let radius: CGFloat = 150
     
+    private let circlePath = CAShapeLayer()
+    var defaultColor: CGColor = CGColor(red: 0.4, green: 0.2, blue: 1, alpha: 1) {
+        didSet{
+            self.circlePath.fillColor = self.defaultColor
+        }
+        
+    }
+    
+    private let selectedCircle = CAShapeLayer()
+    
+    var path: UIBezierPath?
+    var circularPath: UIBezierPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.circularPath = UIBezierPath(arcCenter: CGPoint(x: 190, y: 850 / 2.0), radius: (radius * 2) / 3, startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
+        self.path = UIBezierPath(arcCenter: CGPoint(x: 190, y: 850 / 2.0), radius: radius * 0.9, startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
+        
+        addCircleConfig()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func addCircleConfig(){
+        circlePath.path = path!.cgPath
+        circlePath.fillColor = UIColor.clear.cgColor
+        circlePath.lineWidth = radius / 5
+        circlePath.lineCap = . square
+        circlePath.strokeColor = UIColor.systemIndigo.cgColor
+        
+        selectedCircle.path = circularPath!.cgPath
+        selectedCircle.fillColor = UIColor.systemIndigo.cgColor
+        layer.addSublayer(selectedCircle)
+        layer.addSublayer(circlePath)
+    }
+    
+    func changeToSelectedButton(){
+        
+    }
+    
+}
+
+#Preview {
+    CustomColorButton()
 }
