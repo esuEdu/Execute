@@ -26,22 +26,19 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
     
     override func loadView() {
         super.loadView()
+        view.backgroundColor = .systemBackground
+        sheetPresentationController?.delegate = self
+        sheetPresentationController?.prefersGrabberVisible = true
+        sheetPresentationController?.preferredCornerRadius = 10
+        sheetPresentationController?.detents = [.custom(resolver: { context in
+            return self.sheetDetents
+        })]
         
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 16
-        
-        view.backgroundColor = .systemBackground
-        sheetPresentationController?.delegate = self
-        sheetPresentationController?.prefersGrabberVisible = true
-        sheetPresentationController?.preferredCornerRadius = 10
-        sheetPresentationController?.detents = [.custom(resolver: { context in
-            return stackView.frame.height
-        })]
-        
-    
         
         let titleAndCloseButtonStackView = UIStackView()
         titleAndCloseButtonStackView.axis = .horizontal
