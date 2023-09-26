@@ -1,5 +1,17 @@
 {
   "sourceLanguage" : "en",
-  "strings" : {},
+  "strings" : {
+    "Key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "chave"
+          }
+        }
+      }
+    }
+  },
   "version" : "1.0"
 }

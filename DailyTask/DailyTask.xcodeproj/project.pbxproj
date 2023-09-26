@@ -33,6 +33,8 @@
 		9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4172AC07B07008D08B6 /* TaskView.swift */; };
 		9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */; };
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
+		9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */; };
+		9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4232AC1FCED008D08B6 /* Priority.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		9B0AA4172AC07B07008D08B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
+		9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
+		9B0AA4232AC1FCED008D08B6 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +306,7 @@
 				9B0AA4172AC07B07008D08B6 /* TaskView.swift */,
 				9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */,
 				9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */,
+				9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 		9B0AA4162AC07AF9008D08B6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9B0AA4232AC1FCED008D08B6 /* Priority.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -355,6 +361,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 2836A8B42ABA1BA800778B43;
 			productRefGroup = 2836A8BE2ABA1BA800778B43 /* Products */;
@@ -395,6 +402,7 @@
 				28C45BFB2ABAF586001CEFED /* TableViewCellViewController.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
+				9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */,
 				280DD78F2ABE8F4B00C2ADA9 /* SubTaskListViewModel.swift in Sources */,
 				9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */,
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
@@ -405,6 +413,7 @@
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
+				9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */,
 				288B59CC2ABE33A60058531D /* TestViewModel.swift in Sources */,
 				288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */,
 			);
@@ -564,7 +573,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Victor.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -596,7 +605,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Victor.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

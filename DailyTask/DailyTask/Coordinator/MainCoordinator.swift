@@ -73,11 +73,13 @@ class MainCoordinator: Coordinator {
           
         case .goToCreateTaskView:
           let view: CreateTaskView = CreateTaskView()
-          let viewModel: TaskViewModel & Coordinating = TaskViewModel()
+          let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
           view.viewModel = viewModel
           viewModel.viewCreate = view
           viewModel.coordinator = self
-          navigationController?.present(view, animated: true)
+          navigationController?.pushViewController(view, animated: true)
+        case .removeTopView:
+          navigationController?.popViewController(animated: true)
           
         }
         
