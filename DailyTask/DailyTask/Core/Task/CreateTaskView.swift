@@ -14,6 +14,10 @@ class CreateTaskView: UIViewController {
   var dateStart: Date?
   var dateEnd: Date?
   
+  var dateIsChanged: Bool?
+  
+  let segmentedControl = SegmentedControl(items: ["indefinido", "5 min", "15 min", "30 min", "1h"])
+  
   let nameTextField: UITextField = {
       let textField = UITextField()
       textField.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
@@ -113,8 +117,14 @@ class CreateTaskView: UIViewController {
     }
     
     endDate.valueChangedHandler = { selectedDate in
+      self.segmentedControl.dateIsSelected = false
+      self.dateIsChanged = true
       self.dateEnd = selectedDate
     }
+  
+    segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+    
+    view.addSubview(segmentedControl)
     
     view.addSubview(nameTextField)
     view.addSubview(desc)
@@ -153,6 +163,10 @@ class CreateTaskView: UIViewController {
       labelDateEnd.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
       labelDateEnd.bottomAnchor.constraint(equalTo: endDate.bottomAnchor),
       
+      segmentedControl.topAnchor.constraint(equalTo: endDate.bottomAnchor, constant: 20),
+      segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+      segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      
     ])
   }
   
@@ -165,8 +179,21 @@ extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
 //  }
   
   @objc func createTask() {
-    self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
     
+    if dateIsChanged == true && segmentedControl.dateIsSelected == false {
+      self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
+    } else {
+      
+      let date = self.dateStart?.addingTimeInterval(segmentedControl.dates[0])
+      
+      endDate.selectedValue = date
+      
+      self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: endDate.selectedValue ?? Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
+      
+//      print(date)
+      
+    }
+
     viewModel?.removeLastView()
   }
   
@@ -189,7 +216,7 @@ extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
 
 }
 
-//
-//#Preview {
-//  CreateTaskView()
-//}
+
+#Preview {
+  CreateTaskView()
+}

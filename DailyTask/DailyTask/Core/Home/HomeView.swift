@@ -12,6 +12,8 @@ class HomeView: UIViewController {
     var homeViewModel: HomeViewModel?
     
     let button = UIButton()
+  
+  let segmentedControl = SegmentedControl(items: ["5 min", "15 min"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +25,12 @@ class HomeView: UIViewController {
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(self, action: #selector(goToNextView), for: .touchUpInside)
         view.addSubview(button)
-        constraintsGo()
+        
         
 
+      view.addSubview(segmentedControl)
+      segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+      
 
         let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 500, width: 0, height: 0))
         datePickerController.datePickerMode = .dateAndTime
@@ -48,6 +53,9 @@ class HomeView: UIViewController {
       taskButton.setTitleColor(.white, for: .normal)
       taskButton.setTitle("Go to tasks", for: .normal)
       taskButton.addTarget(self, action: #selector(goToTasks), for: .touchUpInside)
+      
+      constraintsGo()
+      
     }
     
     @objc func goToNextView(){
@@ -58,12 +66,19 @@ class HomeView: UIViewController {
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            segmentedControl.topAnchor.constraint(equalTo: button.bottomAnchor),
+            
+            
         ])
     }
   
     @objc func goToSubTask() {
         
     }
+  
   @objc func goToTasks() {
     homeViewModel?.goToTasksView()
   }

@@ -34,6 +34,7 @@
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
 		9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */; };
 		9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4232AC1FCED008D08B6 /* Priority.swift */; };
+		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
 		E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C52ABF3C69000AA58B /* Methodologies.swift */; };
@@ -77,6 +78,7 @@
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
 		9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA4232AC1FCED008D08B6 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
+		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		E84018C52ABF3C69000AA58B /* Methodologies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methodologies.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */,
 				28A55A862AC2EB5200EF588F /* TextFieldView.swift */,
+				9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
 				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
+				9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,

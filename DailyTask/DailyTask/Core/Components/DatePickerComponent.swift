@@ -91,3 +91,12 @@ class DatePickerView<T>: UIDatePicker {
         }
     }
 }
+
+#Preview {
+  let datePickerController = DatePickerView<Date>()
+ datePickerController.datePickerMode = .time
+ datePickerController.valueChangedHandler = { selectedDate in
+      print("Selected Time: \(selectedDate)")
+ }
+  return datePickerController
+}
