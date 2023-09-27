@@ -10,7 +10,7 @@ import Foundation
 class ProjectCreationViewModel: Coordinating {
     var coordinator: Coordinator?
     var projectCreationView: ProjectCreationView?
-    var projectManager = ProjectManager()
+    private var projectManager = ProjectManager()
     
     var icon: String?
     var name: String?
@@ -18,6 +18,7 @@ class ProjectCreationViewModel: Coordinating {
     var methodology: Methodologies?
     var start: Date?
     var end: Date?
+    var colors: [CGFloat]?
     
     init(){
         icon = "trophy"
@@ -29,7 +30,7 @@ class ProjectCreationViewModel: Coordinating {
     }
     
     func createAProject(){
-        projectManager.createAProject(icon: icon!, name: name!, description: description!, methodology: methodology!, start: start!, end: end!)
+        projectManager.createAProject(icon: icon!, name: name!, description: description!, methodology: methodology!, start: start!, end: end!, red: Double(colors?[0] ?? 0), green: Double(colors?[1] ?? 0) , blue: Double(colors?[2] ?? 0))
     }
     
     func goToProjectList(){

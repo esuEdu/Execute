@@ -31,7 +31,7 @@ class ProjectManager {
         }
     }
     
-    func createAProject(icon: String, name: String, description: String, methodology: Methodologies, start: Date, end: Date){
+    func createAProject(icon: String, name: String, description: String, methodology: Methodologies, start: Date, end: Date, red: Double, green: Double, blue: Double){
         let project: Project = Project(context: context)
         project.id = UUID()
         project.icon = icon
@@ -40,6 +40,9 @@ class ProjectManager {
         project.methodology = methodology.rawValue
         project.start = start
         project.end = end
+        project.red = red
+        project.green = green
+        project.blue = blue
         salvarDados()
     }
     

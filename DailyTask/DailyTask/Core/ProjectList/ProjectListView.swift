@@ -107,8 +107,8 @@ extension ProjectListView: UITableViewDelegate, UITableViewDataSource {
         
         var configure = UIListContentConfiguration.cell()
         configure.text = projectListViewModel?.project?[indexPath.row].name
-        configure.secondaryText = projectListViewModel?.project?[indexPath.row].descript
-        
+        configure.secondaryText =
+        "\(String(describing: projectListViewModel?.project?[indexPath.row].blue as? Double))"
         cell.contentConfiguration = configure
         
         return cell
