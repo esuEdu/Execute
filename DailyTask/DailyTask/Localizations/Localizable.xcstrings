@@ -61,6 +61,12 @@
         }
       }
     },
+    "Go to tasks" : {
+
+    },
+    "Go to tasks para fazer uma tarefa nova" : {
+
+    },
     "PlaceholderNameTask" : {
       "comment" : "Placeholder text name task",
       "extractionState" : "manual",

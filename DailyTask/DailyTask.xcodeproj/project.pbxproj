@@ -17,6 +17,7 @@
 		2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2836A8C92ABA1BA800778B43 /* DailyTask.xcdatamodeld */; };
 		2836A8CD2ABA1BA900778B43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2836A8CC2ABA1BA900778B43 /* Assets.xcassets */; };
 		2836A8D02ABA1BA900778B43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2836A8CE2ABA1BA900778B43 /* LaunchScreen.storyboard */; };
+		286CAE712AC455EE00200E82 /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CAE702AC455EE00200E82 /* LabelComponent.swift */; };
 		288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59BE2ABE303F0058531D /* ProjectManager.swift */; };
 		288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C02ABE30750058531D /* ProjectTagManager.swift */; };
 		288B59C32ABE30B20058531D /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C22ABE30B20058531D /* TaskManager.swift */; };
@@ -60,6 +61,7 @@
 		2836A8CF2ABA1BA900778B43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2836A8D12ABA1BA900778B43 /* DailyTask.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyTask.entitlements; sourceTree = "<group>"; };
 		2836A8D22ABA1BA900778B43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		286CAE702AC455EE00200E82 /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
 		288B59BE2ABE303F0058531D /* ProjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
 		288B59C02ABE30750058531D /* ProjectTagManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagManager.swift; sourceTree = "<group>"; };
 		288B59C22ABE30B20058531D /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */,
 				28A55A862AC2EB5200EF588F /* TextFieldView.swift */,
+				286CAE702AC455EE00200E82 /* LabelComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -252,10 +255,10 @@
 		28C45C032ABAF920001CEFED /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2829C5022ABB6B8900A75CEB /* Components */,
 				E84018CF2ABFE3D3000AA58B /* ProjectCreation */,
 				E84018B92ABF3532000AA58B /* ProjectList */,
 				9B0AA4152AC07AF2008D08B6 /* Task */,
-				2829C5022ABB6B8900A75CEB /* Components */,
 				28B63D052AC1CA9E00DE1D1A /* CreateSubTask */,
 				280DD78B2ABE8E7400C2ADA9 /* SubTaskList */,
 				288B59CD2ABE4C2D0058531D /* Home */,
@@ -404,6 +407,7 @@
 				280DD78D2ABE8F0500C2ADA9 /* SubTaskListView.swift in Sources */,
 				2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */,
 				E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */,
+				286CAE712AC455EE00200E82 /* LabelComponent.swift in Sources */,
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
