@@ -24,7 +24,6 @@
 		288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C62ABE30F90058531D /* SubTaskManager.swift */; };
 		288B59D02ABE4C580058531D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CF2ABE4C580058531D /* HomeView.swift */; };
 		288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59D12ABE4C660058531D /* HomeViewModel.swift */; };
-		28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A55A862AC2EB5200EF588F /* TextFieldView.swift */; };
 		28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */; };
 		28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */; };
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
@@ -44,6 +43,7 @@
 		E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */; };
 		E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */; };
 		E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */; };
+		E88A24272AC4C37900D77229 /* TextDescriptionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A24262AC4C37900D77229 /* TextDescriptionComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +67,6 @@
 		288B59C62ABE30F90058531D /* SubTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskManager.swift; sourceTree = "<group>"; };
 		288B59CF2ABE4C580058531D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		288B59D12ABE4C660058531D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		28A55A862AC2EB5200EF588F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskView.swift; sourceTree = "<group>"; };
 		28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskViewModel.swift; sourceTree = "<group>"; };
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleBarComponent.swift; sourceTree = "<group>"; };
 		E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseIconComponent.swift; sourceTree = "<group>"; };
 		E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldToNameComponent.swift; sourceTree = "<group>"; };
+		E88A24262AC4C37900D77229 /* TextDescriptionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDescriptionComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */,
-				28A55A862AC2EB5200EF588F /* TextFieldView.swift */,
+				E88A24262AC4C37900D77229 /* TextDescriptionComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -407,7 +407,6 @@
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
-				28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
 				E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */,
 				E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */,
@@ -421,6 +420,7 @@
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
+				E88A24272AC4C37900D77229 /* TextDescriptionComponent.swift in Sources */,
 				9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
