@@ -52,6 +52,7 @@ class TaskManager {
     
   }
   
+  #warning("Verificar se no editar precisa de isDone")
   func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: String, descript: String) {
     
     do {

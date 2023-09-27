@@ -24,7 +24,7 @@
 		288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C62ABE30F90058531D /* SubTaskManager.swift */; };
 		288B59D02ABE4C580058531D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CF2ABE4C580058531D /* HomeView.swift */; };
 		288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59D12ABE4C660058531D /* HomeViewModel.swift */; };
-		28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A55A862AC2EB5200EF588F /* TextFieldView.swift */; };
+		28A55A872AC2EB5200EF588F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A55A862AC2EB5200EF588F /* TextView.swift */; };
 		28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */; };
 		28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */; };
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
@@ -34,6 +34,8 @@
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
 		9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */; };
 		9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4232AC1FCED008D08B6 /* Priority.swift */; };
+		9BC048B72AC4674400A1E9BB /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B62AC4674400A1E9BB /* Checkbox.swift */; };
+		9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */; };
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
 		E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C52ABF3C69000AA58B /* Methodologies.swift */; };
@@ -67,7 +69,7 @@
 		288B59C62ABE30F90058531D /* SubTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskManager.swift; sourceTree = "<group>"; };
 		288B59CF2ABE4C580058531D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		288B59D12ABE4C660058531D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		28A55A862AC2EB5200EF588F /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		28A55A862AC2EB5200EF588F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskView.swift; sourceTree = "<group>"; };
 		28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskViewModel.swift; sourceTree = "<group>"; };
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
 		9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA4232AC1FCED008D08B6 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
+		9BC048B62AC4674400A1E9BB /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxViewCell.swift; sourceTree = "<group>"; };
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		E84018C52ABF3C69000AA58B /* Methodologies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methodologies.swift; sourceTree = "<group>"; };
@@ -129,8 +133,9 @@
 		2829C5022ABB6B8900A75CEB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9BC048B52AC4673100A1E9BB /* Checkbox */,
 				280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */,
-				28A55A862AC2EB5200EF588F /* TextFieldView.swift */,
+				28A55A862AC2EB5200EF588F /* TextView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -266,11 +271,9 @@
 		9B0AA4152AC07AF2008D08B6 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				9BC048B42AC45E3100A1E9BB /* CreateTask */,
+				9BC048B32AC45E2500A1E9BB /* TaskList */,
 				9B0AA4162AC07AF9008D08B6 /* Components */,
-				9B0AA4172AC07B07008D08B6 /* TaskView.swift */,
-				9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */,
-				9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */,
-				9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -281,6 +284,33 @@
 				9B0AA4232AC1FCED008D08B6 /* Priority.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		9BC048B32AC45E2500A1E9BB /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				9B0AA4172AC07B07008D08B6 /* TaskView.swift */,
+				9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
+		9BC048B42AC45E3100A1E9BB /* CreateTask */ = {
+			isa = PBXGroup;
+			children = (
+				9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */,
+				9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */,
+			);
+			path = CreateTask;
+			sourceTree = "<group>";
+		};
+		9BC048B52AC4673100A1E9BB /* Checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				9BC048B62AC4674400A1E9BB /* Checkbox.swift */,
+				9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */,
+			);
+			path = Checkbox;
 			sourceTree = "<group>";
 		};
 		E84018B92ABF3532000AA58B /* ProjectList */ = {
@@ -398,7 +428,9 @@
 				28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */,
 				288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */,
 				28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */,
+				9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */,
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
+				9BC048B72AC4674400A1E9BB /* Checkbox.swift in Sources */,
 				288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */,
 				9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */,
 				280DD78D2ABE8F0500C2ADA9 /* SubTaskListView.swift in Sources */,
@@ -407,7 +439,7 @@
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
-				28A55A872AC2EB5200EF588F /* TextFieldView.swift in Sources */,
+				28A55A872AC2EB5200EF588F /* TextView.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
 				E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */,
 				E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */,

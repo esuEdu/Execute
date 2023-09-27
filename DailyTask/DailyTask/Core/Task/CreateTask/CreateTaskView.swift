@@ -86,18 +86,10 @@ class CreateTaskView: UIViewController {
     nameTextField.becomeFirstResponder()
     nameTextField.delegate = self
     
-//    desc.returnKeyType = .done
-//    desc.autocapitalizationType = .none
-//    desc.autocorrectionType = .no
-//    desc.keyboardAppearance = .default
-    
     desc.isEditable = true
     desc.backgroundColor = .systemGray3
     desc.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
     desc.delegate = self
-    
-//    let gesture = UIGestureRecognizer(target: self, action: #selector(tappedAwayFunction))
-//    self.view.addGestureRecognizer(gesture)
     
     navigationItem.rightBarButtonItem = buttonDone
     navigationItem.leftBarButtonItem = buttonCancel
@@ -152,7 +144,7 @@ class CreateTaskView: UIViewController {
       labelDateEnd.topAnchor.constraint(equalTo: endDate.topAnchor),
       labelDateEnd.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
       labelDateEnd.bottomAnchor.constraint(equalTo: endDate.bottomAnchor),
-      
+
     ])
   }
   
@@ -189,7 +181,7 @@ extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
 
 }
 
-//
-//#Preview {
-//  CreateTaskView()
-//}
+
+#Preview {
+  CreateTaskView()
+}
