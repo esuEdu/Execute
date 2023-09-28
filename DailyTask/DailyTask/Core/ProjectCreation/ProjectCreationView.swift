@@ -31,7 +31,7 @@ class ProjectCreationView: UIViewController {
     let colorChooser = ColorChooseComponent()
     
     let createButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(primaryAction: nil)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
@@ -40,6 +40,16 @@ class ProjectCreationView: UIViewController {
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Metodologia", textColor: .white)
+    
+    let descriptionTextField: TextDescriptionComponent = {
+        let textField = TextDescriptionComponent()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.horizontalPadding = 10
+        textField.verticalPadding = 10
+        return textField
     }()
     
     // MARK: - Não oficial
@@ -53,12 +63,7 @@ class ProjectCreationView: UIViewController {
         return stackView
     }()
     
-    let descriptionTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Digite a descrição aqui"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    
     
     let startDatePicker: DatePickerView <Date> = {
         let datePicker = DatePickerView <Date>()
@@ -73,16 +78,7 @@ class ProjectCreationView: UIViewController {
         return datePicker
     }()
     
-    #warning("Temporary")
-    let methodologyButton: UIButton = {
-        let methodologyButton = UIButton()
-        methodologyButton.setTitleColor(.white, for: .normal)
-        methodologyButton.backgroundColor = .systemCyan
-        methodologyButton.layer.cornerRadius = 10
-        methodologyButton.setTitle("Escolha sua metodologia", for: .normal)
-        return methodologyButton
-    }()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +91,7 @@ class ProjectCreationView: UIViewController {
     
     
     func setUpUI(){
+        methodologyButton.delegate = self
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
@@ -106,10 +103,10 @@ class ProjectCreationView: UIViewController {
         stackView.addArrangedSubview(methodologyButton)
         stackView.addArrangedSubview(startDatePicker)
         stackView.addArrangedSubview(endDatePicker)
-        stackView.addArrangedSubview(descriptionTextField)
+        view.addSubview(descriptionTextField)
         
         view.addSubview(createButton)
-        methodologyButton.menu = setMethodologyButton()
+        
         iconButton.menu = setIcon()
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
         
@@ -143,6 +140,11 @@ class ProjectCreationView: UIViewController {
             createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             createButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
             
+            descriptionTextField.heightAnchor.constraint(equalToConstant: 132),
+            descriptionTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            descriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            descriptionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
         ])
     }
     
@@ -152,7 +154,7 @@ class ProjectCreationView: UIViewController {
         
         if (projectCreationViewModel?.compareDates() == .orderedAscending){
             self.projectCreationViewModel?.name = textFieldToGetTheName.textFieldToGetTheName.text == "" ? self.projectCreationViewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
-            self.projectCreationViewModel?.description = descriptionTextField.text == "" ? self.projectCreationViewModel?.description : descriptionTextField.text
+            self.projectCreationViewModel?.description = descriptionTextField.getText() == "" ? self.projectCreationViewModel?.description : descriptionTextField.getText()
             
             self.projectCreationViewModel?.createAProject()
             self.projectCreationViewModel?.removeTopView()
@@ -235,32 +237,16 @@ extension ProjectCreationView {
         
         return menuItems
     }
-    
-    func setMethodologyButton() -> UIMenu{
-        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
-        
-        UIAction(title: "CBL", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
-            self.projectCreationViewModel?.methodology = .CBL
-            self.methodologyButton.setTitle("Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))", for: .normal)
-        }),
-        
-        UIAction(title: "Scrum", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-            self.projectCreationViewModel?.methodology = .Scrum
-            self.methodologyButton.setTitle("Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))", for: .normal)
-        }),
-        
-        UIAction(title: "Custom", image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
-            self.projectCreationViewModel?.methodology = .Custom
-            self.methodologyButton.setTitle("Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))", for: .normal)
-        }),
-        
-        
-        ])
-        
-        return menuItems
-    }
 
 }
-#Preview{
-    ProjectCreationView()
+
+extension ProjectCreationView: ChooseMethodologyComponentDelegate {
+    
+    func setUpMenuFunction(type: Methodologies) {
+        self.projectCreationViewModel?.methodology = type
+        self.methodologyButton.methodology.text = "Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
+        self.methodologyButton.layoutIfNeeded()
+        print("OI")
+    }
 }
+

@@ -9,8 +9,16 @@ import UIKit
 
 class TextDescriptionComponent: UIView {
 
-    var horizontalPadding: CGFloat?
-    var verticalPadding: CGFloat?
+    var horizontalPadding: CGFloat?{
+        didSet{
+            addAllConstraints()
+        }
+    }
+    var verticalPadding: CGFloat?{
+        didSet{
+            addAllConstraints()
+        }
+    }
     
     private let descriptionBox: UITextView = {
         let description = UITextView()
@@ -34,12 +42,16 @@ class TextDescriptionComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addAllConstraints(){
+    func getText() -> String{
+        return descriptionBox.text == placeholder ? "" : descriptionBox.text
+    }
+    
+    private func addAllConstraints(){
         NSLayoutConstraint.activate([
-            descriptionBox.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -(verticalPadding ?? 0)),
-            descriptionBox.bottomAnchor.constraint(equalTo: bottomAnchor, constant: verticalPadding ?? 0),
-            descriptionBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalPadding ?? 0),
-            descriptionBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(horizontalPadding ?? 0)),
+            descriptionBox.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            descriptionBox.bottomAnchor.constraint(equalTo: bottomAnchor),
+            descriptionBox.leadingAnchor.constraint(equalTo: leadingAnchor),
+            descriptionBox.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
     
@@ -62,6 +74,11 @@ extension TextDescriptionComponent: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
+        let maxCharactor = 350
+        let currentString: NSString = textView.text as NSString
+        let newString: NSString = currentString.replacingCharacters (in: range, with: text) as NSString
+        
+        
         if range.location == 0 && text == " " {
             return false
         }
@@ -70,8 +87,10 @@ extension TextDescriptionComponent: UITextViewDelegate {
             textView.resignFirstResponder() // Oculta o teclado quando o usuário pressiona "Return"
             return false
         }
-        return true
+        
+        return newString.length <= maxCharactor
     }
+    
 }
 
 #Preview(){

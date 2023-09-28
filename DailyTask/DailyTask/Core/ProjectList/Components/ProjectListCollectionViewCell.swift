@@ -225,5 +225,123 @@ class ProjectListCollectionViewCell: UICollectionViewCell {
 
 
 #Preview {
-    ProjectListCollectionViewCell()
+    DownProjectColapsedView()
+}
+
+class ColapsedView: UIView {
+    
+    init(){
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class TopProjectColapsedAndExpandedView: UIView {
+    let icon: UIImageView = UIImageView()
+    let title: UILabel = {
+        let label = UILabel()
+        label.text = "Mini 02 - Bem Social"
+        return label
+    }()
+    let buttonToOpen: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.contentMode = .scaleAspectFit
+        return button
+    }()
+    let stackViewForTop: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 16)
+        return stackView
+    }()
+    let stackViewForIconAndTitle: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 10
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+    
+    init(font: UIFont = UIFont.systemFont(ofSize: 15), text: String = "Blank", textColor: UIColor = .white, backgroundColor: UIColor = .systemGray2){
+        super.init(frame: .zero)
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = 10
+        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        icon.image = UIImage(systemName: "pencil.and.outline")
+        setUpUI()
+        addAllConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUpUI(){
+        addSubview(stackViewForTop)
+        stackViewForTop.addArrangedSubview(stackViewForIconAndTitle)
+        stackViewForTop.addArrangedSubview(buttonToOpen)
+        stackViewForIconAndTitle.addArrangedSubview(icon)
+        stackViewForIconAndTitle.addArrangedSubview(title)
+    }
+    
+    func addAllConstraints(){
+        NSLayoutConstraint.activate([
+            stackViewForTop.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackViewForTop.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackViewForTop.topAnchor.constraint(equalTo: topAnchor),
+            stackViewForTop.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+    }
+    
+}
+
+class DownProjectColapsedView: UIView {
+    
+    let stackViewForTop: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 16.5)
+        return stackView
+    }()
+    
+    let percentLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    init(font: UIFont = UIFont.systemFont(ofSize: 15), text: String = "Blank", textColor: UIColor = .white, backgroundColor: UIColor = .systemGray2){
+        super.init(frame: .zero)
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = 10
+        self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        setUpUI()
+        addAllConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUpUI(){
+        addSubview(stackViewForTop)
+    }
+    
+    func addAllConstraints(){
+        NSLayoutConstraint.activate([
+            stackViewForTop.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackViewForTop.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackViewForTop.topAnchor.constraint(equalTo: topAnchor),
+            stackViewForTop.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+    }
 }
