@@ -89,7 +89,6 @@ class ProjectCreationView: UIViewController {
 
     }
     
-    
     func setUpUI(){
         methodologyButton.delegate = self
         self.view.backgroundColor = .systemBackground
