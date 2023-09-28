@@ -28,8 +28,10 @@ class ProjectCreationView: UIViewController {
         return textField
     }()
     
+    let colorChooser = ColorChooseComponent()
+    
     let createButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(primaryAction: nil)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
@@ -38,6 +40,16 @@ class ProjectCreationView: UIViewController {
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Metodologia", textColor: .white)
+    
+    let descriptionTextField: TextDescriptionComponent = {
+        let textField = TextDescriptionComponent()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.horizontalPadding = 10
+        textField.verticalPadding = 10
+        return textField
     }()
     
     // MARK: - Não oficial
@@ -51,12 +63,7 @@ class ProjectCreationView: UIViewController {
         return stackView
     }()
     
-    let descriptionTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Digite a descrição aqui"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    
     
     let startDatePicker: DatePickerView <Date> = {
         let datePicker = DatePickerView <Date>()
@@ -71,16 +78,7 @@ class ProjectCreationView: UIViewController {
         return datePicker
     }()
     
-    #warning("Temporary")
-    let methodologyButton: UIButton = {
-        let methodologyButton = UIButton()
-        methodologyButton.setTitleColor(.white, for: .normal)
-        methodologyButton.backgroundColor = .systemCyan
-        methodologyButton.layer.cornerRadius = 10
-        methodologyButton.setTitle("Escolha sua metodologia", for: .normal)
-        return methodologyButton
-    }()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +86,11 @@ class ProjectCreationView: UIViewController {
         setUpUI()
         addAllConstraints()
         sendDateToViewModel()
+
     }
     
     func setUpUI(){
+        methodologyButton.delegate = self
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
@@ -98,15 +98,17 @@ class ProjectCreationView: UIViewController {
         self.view.addSubview(stackView)
         self.view.addSubview(iconButton)
         self.view.addSubview(textFieldToGetTheName)
+        self.view.addSubview(colorChooser)
         stackView.addArrangedSubview(methodologyButton)
         stackView.addArrangedSubview(startDatePicker)
         stackView.addArrangedSubview(endDatePicker)
-        stackView.addArrangedSubview(descriptionTextField)
+        view.addSubview(descriptionTextField)
         
         view.addSubview(createButton)
-        methodologyButton.menu = setMethodologyButton()
+        
         iconButton.menu = setIcon()
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+        
     }
 
     
@@ -126,20 +128,32 @@ class ProjectCreationView: UIViewController {
             textFieldToGetTheName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textFieldToGetTheName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             
+            
+            colorChooser.topAnchor.constraint(equalTo: textFieldToGetTheName.bottomAnchor, constant: 12),
+            colorChooser.leadingAnchor.constraint(equalTo: textFieldToGetTheName.leadingAnchor),
+            colorChooser.trailingAnchor.constraint(equalTo: textFieldToGetTheName.trailingAnchor),
+            colorChooser.bottomAnchor.constraint(equalTo: iconButton.bottomAnchor),
+            
             createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
             createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
             createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             createButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
+            
+            descriptionTextField.heightAnchor.constraint(equalToConstant: 132),
+            descriptionTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            descriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            descriptionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
         ])
     }
     
     #warning("REFATORAR")
     @objc func defineProjectData(){
+        projectCreationViewModel?.colors = colorChooser.returnColorCGFloat()
         
         if (projectCreationViewModel?.compareDates() == .orderedAscending){
             self.projectCreationViewModel?.name = textFieldToGetTheName.textFieldToGetTheName.text == "" ? self.projectCreationViewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
-            self.projectCreationViewModel?.description = descriptionTextField.text == "" ? self.projectCreationViewModel?.description : descriptionTextField.text
+            self.projectCreationViewModel?.description = descriptionTextField.getText() == "" ? self.projectCreationViewModel?.description : descriptionTextField.getText()
             
             self.projectCreationViewModel?.createAProject()
             self.projectCreationViewModel?.removeTopView()
@@ -222,137 +236,16 @@ extension ProjectCreationView {
         
         return menuItems
     }
-    
-    func setMethodologyButton() -> UIMenu{
-        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
-        
-        UIAction(title: "CBL", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
-            self.projectCreationViewModel?.methodology = .CBL
-            self.methodologyButton.setTitle("Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))", for: .normal)
-        }),
-        
-        UIAction(title: "Scrum", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-            self.projectCreationViewModel?.methodology = .Scrum
-            self.methodologyButton.setTitle("Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))", for: .normal)
-        }),
-        
-        UIAction(title: "Custom", image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
-            self.projectCreationViewModel?.methodology = .Custom
-            self.methodologyButton.setTitle("Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))", for: .normal)
-        }),
-        
-        
-        ])
-        
-        return menuItems
-    }
-    
 
 }
 
-#Preview{
-    ChooseIconComponent()
-}
-
-
-#Preview{
-    ProjectCreationView()
-}
-
-class ColorPickerComponent: UIView{
+extension ProjectCreationView: ChooseMethodologyComponentDelegate {
     
-    let stackViewForColors: UIStackView = {
-        let stackview = UIStackView()
-        stackview.axis = .horizontal
-        stackview.distribution = .equalSpacing
-        return stackview
-    }()
-    
-    let colorWell: UIColorWell = {
-        let colorWell = UIColorWell()
-        colorWell.selectedColor = .black
-        colorWell.supportsAlpha = false
-        #warning("NSlocalizable")
-        colorWell.title = "Cor do projeto"
-        colorWell.translatesAutoresizingMaskIntoConstraints = false
-        return colorWell
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUpUI()
-        addAllConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setUpUI(){
-        backgroundColor = .systemIndigo
-        layer.cornerRadius = 10
-        addSubview(colorWell)
-    }
-    
-    func addAllConstraints(){
-        NSLayoutConstraint.activate([
-            colorWell.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            colorWell.leadingAnchor.constraint(equalTo: leadingAnchor),
-            colorWell.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            colorWell.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-        ])
+    func setUpMenuFunction(type: Methodologies) {
+        self.projectCreationViewModel?.methodology = type
+        self.methodologyButton.methodology.text = "Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
+        self.methodologyButton.layoutIfNeeded()
+        print("OI")
     }
 }
 
-class CustomColorButton: UIButton {
-    
-    private let radius: CGFloat = 150
-    
-    private let circlePath = CAShapeLayer()
-    var defaultColor: CGColor = CGColor(red: 0.4, green: 0.2, blue: 1, alpha: 1) {
-        didSet{
-            self.circlePath.fillColor = self.defaultColor
-        }
-        
-    }
-    
-    private let selectedCircle = CAShapeLayer()
-    
-    var path: UIBezierPath?
-    var circularPath: UIBezierPath?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.circularPath = UIBezierPath(arcCenter: CGPoint(x: 190, y: 850 / 2.0), radius: (radius * 2) / 3, startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
-        self.path = UIBezierPath(arcCenter: CGPoint(x: 190, y: 850 / 2.0), radius: radius * 0.9, startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
-        
-        addCircleConfig()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addCircleConfig(){
-        circlePath.path = path!.cgPath
-        circlePath.fillColor = UIColor.clear.cgColor
-        circlePath.lineWidth = radius / 5
-        circlePath.lineCap = . square
-        circlePath.strokeColor = UIColor.systemIndigo.cgColor
-        
-        selectedCircle.path = circularPath!.cgPath
-        selectedCircle.fillColor = UIColor.systemIndigo.cgColor
-        layer.addSublayer(selectedCircle)
-        layer.addSublayer(circlePath)
-    }
-    
-    func changeToSelectedButton(){
-        
-    }
-    
-}
-
-#Preview {
-    CustomColorButton()
-}

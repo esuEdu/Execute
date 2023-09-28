@@ -28,7 +28,6 @@ import UIKit
 /// }()
 /// ```
 ///
-///
 class ChooseIconComponent: UIButton {
     
     var verticalPadding: CGFloat = 16

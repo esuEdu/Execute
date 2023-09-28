@@ -7,11 +7,15 @@
 
 import UIKit
 
-///
-///
-///
-///
+protocol TextFieldToNameDelegate {
+    func textFieldDidEndEditing()
+    func textFieldDidBeginEditing()
+}
+
 class TextFieldToName: UIView {
+    
+    var delegate: TextFieldToNameDelegate?
+    
     #warning("Colocar o nslocalized")
     let textFieldToGetTheName: UITextField = {
         let textField = UITextField()
@@ -62,5 +66,18 @@ extension TextFieldToName: UITextFieldDelegate {
         let newString: NSString = currentString.replacingCharacters (in: range, with: string) as NSString
         
         return newString.length <= maxCharactor
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.textFieldDidEndEditing()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.textFieldDidBeginEditing()
     }
 }
