@@ -100,6 +100,26 @@ class MainCoordinator: Coordinator {
           viewModel.viewCreate = view
           viewModel.coordinator = self
           navigationController?.pushViewController(view, animated: true)
+            
+        case .goToTaskTagView:
+          let view: TaskTagView = TaskTagView()
+          let viewModel: TaskTagViewModel & Coordinating = TaskTagViewModel()
+          view.viewModel = viewModel
+          viewModel.view = view
+          viewModel.coordinator = self
+          navigationController?.pushViewController(view, animated: true)
+            
+        case .goToProjectTagView:
+            let view: ProjectTagView = ProjectTagView()
+            let viewModel: ProjectTagViewModel & Coordinating = ProjectTagViewModel()
+            view.viewModel = viewModel
+            viewModel.view = view
+            viewModel.coordinator = self
+            navigationController?.pushViewController(view, animated: true)
+            
+//        case .goToEditTaskTagView:
+//            
+//        case .goToEditProjectTagView:
         
           
         }

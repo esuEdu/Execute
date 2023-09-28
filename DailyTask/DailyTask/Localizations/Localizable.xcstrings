@@ -43,6 +43,9 @@
     "Done" : {
 
     },
+    "Edit Tag" : {
+
+    },
     "EndDateLabel" : {
       "comment" : "text of end date",
       "extractionState" : "manual",
@@ -102,6 +105,9 @@
     },
     "Sub-Task Title" : {
       "comment" : "Accessibility Label for Sub-Task Title"
+    },
+    "Task Tag Title" : {
+      "comment" : "Accessibility Label for Task Tag Title"
     }
   },
   "version" : "1.0"
