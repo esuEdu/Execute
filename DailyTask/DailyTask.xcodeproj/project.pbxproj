@@ -33,7 +33,7 @@
 		9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */; };
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
 		9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */; };
-		9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4232AC1FCED008D08B6 /* Priority.swift */; };
+		9B6EB2D92AC5FE7100DA1430 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EB2D82AC5FE7100DA1430 /* Priority.swift */; };
 		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
@@ -77,7 +77,7 @@
 		9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
 		9B0AA4212AC1E8D7008D08B6 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
-		9B0AA4232AC1FCED008D08B6 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
+		9B6EB2D82AC5FE7100DA1430 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 		9B0AA4162AC07AF9008D08B6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				9B0AA4232AC1FCED008D08B6 /* Priority.swift */,
+				9B6EB2D82AC5FE7100DA1430 /* Priority.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -421,6 +421,7 @@
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
 				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
+				9B6EB2D92AC5FE7100DA1430 /* Priority.swift in Sources */,
 				9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
@@ -431,7 +432,6 @@
 				E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */,
-				9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */,
 				288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,7 +577,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = K559Z2V9Q2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -590,7 +590,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Victor.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -609,7 +609,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = K559Z2V9Q2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -622,7 +622,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Victor.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

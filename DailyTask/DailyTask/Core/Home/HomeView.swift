@@ -13,7 +13,7 @@ class HomeView: UIViewController {
     
     let button = UIButton()
   
-  let segmentedControl = SegmentedControl(items: ["5 min", "15 min"])
+  let segmentedControl = SegmentedControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()

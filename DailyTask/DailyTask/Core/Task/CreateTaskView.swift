@@ -14,9 +14,7 @@ class CreateTaskView: UIViewController {
   var dateStart: Date?
   var dateEnd: Date?
   
-  var dateIsChanged: Bool?
-  
-  let segmentedControl = SegmentedControl(items: ["indefinido", "5 min", "15 min", "30 min", "1h"])
+  let segmentedControl = SegmentedControl()
   
   let nameTextField: UITextField = {
       let textField = UITextField()
@@ -80,7 +78,7 @@ class CreateTaskView: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Create Task"
+    title = String(localized: "CreateTaskTitleKey")
     view.backgroundColor = .systemBackground
     
     nameTextField.returnKeyType = .done
@@ -117,14 +115,10 @@ class CreateTaskView: UIViewController {
     }
     
     endDate.valueChangedHandler = { selectedDate in
-      self.segmentedControl.dateIsSelected = false
-      self.dateIsChanged = true
       self.dateEnd = selectedDate
     }
   
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-    
-    view.addSubview(segmentedControl)
     
     view.addSubview(nameTextField)
     view.addSubview(desc)
@@ -132,6 +126,7 @@ class CreateTaskView: UIViewController {
     view.addSubview(endDate)
     view.addSubview(labelDateStart)
     view.addSubview(labelDateEnd)
+    view.addSubview(segmentedControl)
 
     setConstraints()
   }
@@ -180,20 +175,8 @@ extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
   
   @objc func createTask() {
     
-    if dateIsChanged == true && segmentedControl.dateIsSelected == false {
-      self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
-    } else {
-      
-      let date = self.dateStart?.addingTimeInterval(segmentedControl.dates[0])
-      
-      endDate.selectedValue = date
-      
-      self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: endDate.selectedValue ?? Date.now, priority: Priority.low.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
-      
-//      print(date)
-      
-    }
-
+    self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
+  
     viewModel?.removeLastView()
   }
   
