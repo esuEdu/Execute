@@ -10,6 +10,7 @@ import UIKit
 protocol ChooseMethodologyComponentDelegate: AnyObject{
     func setUpMenuFunction(type: Methodologies)
 }
+
 #warning("LocalizedString")
 class ChooseMethodologyComponent: UIView{
     
@@ -87,8 +88,4 @@ class ChooseMethodologyComponent: UIView{
             chooseMethodolyBox.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
-}
-
-#Preview{
-    ProjectCreationView()
 }

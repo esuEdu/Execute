@@ -15,10 +15,10 @@ class CreateTaskView: UIViewController {
   var dateEnd: Date?
   
   let segmentedControl = SegmentedControl()
-  
-  let nameTextField: UITextField = {
-      let textField = UITextField()
-      textField.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
+
+  let nameTextField: TextFieldToName = {
+      let textField = TextFieldToName()
+    textField.textFieldToGetTheName.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
       textField.translatesAutoresizingMaskIntoConstraints = false
       return textField
   }()
@@ -74,6 +74,19 @@ class CreateTaskView: UIViewController {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
+  
+  let icon: ChooseIconComponent = {
+    let icon = ChooseIconComponent()
+    icon.iconName = "pencil.tip"
+    icon.bgColor = .gray
+    icon.translatesAutoresizingMaskIntoConstraints = false
+    return icon
+  }()
+  
+  let colorPicker: ColorChooseComponent = {
+    let colorPicker = ColorChooseComponent()
+    return colorPicker
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,11 +94,11 @@ class CreateTaskView: UIViewController {
     title = String(localized: "CreateTaskTitleKey")
     view.backgroundColor = .systemBackground
     
-    nameTextField.returnKeyType = .done
-    nameTextField.autocapitalizationType = .none
-    nameTextField.autocorrectionType = .no
-    nameTextField.keyboardAppearance = .default
-    nameTextField.becomeFirstResponder()
+    nameTextField.textFieldToGetTheName.returnKeyType = .done
+    nameTextField.textFieldToGetTheName.autocapitalizationType = .none
+    nameTextField.textFieldToGetTheName.autocorrectionType = .no
+    nameTextField.textFieldToGetTheName.keyboardAppearance = .default
+    nameTextField.textFieldToGetTheName.becomeFirstResponder()
     nameTextField.delegate = self
     
     desc.isEditable = true
@@ -119,6 +132,8 @@ class CreateTaskView: UIViewController {
     view.addSubview(labelDateStart)
     view.addSubview(labelDateEnd)
     view.addSubview(segmentedControl)
+    view.addSubview(icon)
+    view.addSubview(colorPicker)
 
     setConstraints()
   }
@@ -126,10 +141,13 @@ class CreateTaskView: UIViewController {
   func setConstraints() {
   
     NSLayoutConstraint.activate([
-    
-      nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-      nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+      
+      icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      icon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      icon.trailingAnchor.constraint(equalTo: nameTextField.leadingAnchor, constant: -20),
+
+      nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
       
      desc.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 30),
      desc.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
@@ -159,7 +177,14 @@ class CreateTaskView: UIViewController {
   
 }
 
-extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
+extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
+  func textFieldDidEndEditing() {
+    
+  }
+  
+  func textFieldDidBeginEditing() {
+    
+  }
 
 //  @objc func tappedAwayFunction(){
 //    desc.resignFirstResponder()
@@ -167,18 +192,13 @@ extension CreateTaskView: UITextFieldDelegate, UITextViewDelegate {
   
   @objc func createTask() {
     
-    self.viewModel?.createTask(name: self.nameTextField.text != "" ? self.nameTextField.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
+    self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
   
     viewModel?.removeLastView()
   }
   
   @objc func cancelTask(){
     viewModel?.removeLastView()
-  }
-  
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
   }
   
   func textViewDidBeginEditing(_ textView: UITextView) {
