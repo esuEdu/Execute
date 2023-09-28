@@ -14,17 +14,19 @@ class TextView: UITextView, UITextViewDelegate {
     var placeholderColor: UIColor = .lightGray
     
     init(placeholder: String, placeholderColor: UIColor = .lightGray) {
-        super.init(frame: .zero, textContainer: nil)
-        
+      super.init(frame: .zero, textContainer: .none)
+      
         self.placeholder = placeholder
         self.placeholderColor = placeholderColor
         
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 10
         backgroundColor = .white
+      textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+      delegate = self
         
         setupPlaceholder()
-        delegate = self
+        
     }
     
     required init?(coder: NSCoder) {

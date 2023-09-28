@@ -81,10 +81,10 @@ class HomeView: UIViewController {
   @objc func goToTasks() {
     homeViewModel?.goToTasksView()
   }
-
-
+  
+  
 }
 
 #Preview {
-    HomeView()
+  HomeView()
 }
