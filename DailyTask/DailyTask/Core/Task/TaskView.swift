@@ -84,7 +84,7 @@ extension TaskView: UITableViewDelegate, UITableViewDataSource {
     
     var configure = UIListContentConfiguration.cell()
     configure.text = task?.name
-    configure.secondaryText = data
+    configure.secondaryText = task?.priority
     
     cell.contentConfiguration = configure
     

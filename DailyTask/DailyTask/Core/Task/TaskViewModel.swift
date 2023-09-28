@@ -25,7 +25,7 @@ class TaskViewModel: Coordinating {
     self.task = tasks
   }
   
-  func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: Priority.RawValue, descript: String){
+  func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: String, descript: String){
     taskManager.editTask(id: id, name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript)
     fetchTasks()
   }
