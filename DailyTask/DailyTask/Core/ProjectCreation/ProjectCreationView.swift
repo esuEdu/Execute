@@ -90,7 +90,6 @@ class ProjectCreationView: UIViewController {
         sendDateToViewModel()
     }
     
-    
     func setUpUI(){
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()

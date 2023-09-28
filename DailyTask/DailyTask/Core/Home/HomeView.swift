@@ -8,65 +8,56 @@
 import UIKit
 
 class HomeView: UIViewController {
-
+    
     var homeViewModel: HomeViewModel?
     
-    let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "Home"
         view.backgroundColor = .systemBackground
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Clique", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        button.addTarget(self, action: #selector(goToNextView), for: .touchUpInside)
-        view.addSubview(button)
-        constraintsGo()
         
-
-
-        let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 500, width: 0, height: 0))
-        datePickerController.datePickerMode = .dateAndTime
-        datePickerController.backgroundColor = .green
-        datePickerController.valueChangedHandler = { selectedDate in
-            print("Selected Time: \(selectedDate)")
-        }
-        view.addSubview(datePickerController)
-      
-      let taskButton = UIButton()
-      view.addSubview(taskButton)
+        let textField: TextFieldToName = {
+            let textField = TextFieldToName()
+            return textField
+        }()
         
-      taskButton.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-        taskButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
-        taskButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-        taskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-      ])
-      taskButton.backgroundColor = UIColor(.customRed)
-      taskButton.setTitleColor(.white, for: .normal)
-      taskButton.setTitle("Go to tasks", for: .normal)
-      taskButton.addTarget(self, action: #selector(goToTasks), for: .touchUpInside)
-    }
-    
-    @objc func goToNextView(){
-        homeViewModel?.goToProjectList()
-    }
-    
-    func constraintsGo(){
+        let textField2: TextFieldToName = {
+            let textField = TextFieldToName()
+            return textField
+        }()
+        
+        let button: UIButton = {
+            let button = UIButton()
+            button.setImage(UIImage(systemName: "plus"), for: .normal)
+            button.addTarget(self, action: #selector(goToSubTask), for: .touchUpInside)
+            return button
+        }()
+        
+        let container: ContainerComponent = {
+            let container = ContainerComponent(text: "test",textColor: .label,button: button, components: [textField, textField2], spacing: 0)
+            return container
+        }()
+        
+        let datePicker: DatePickerComponent = {
+            let datePicker = DatePickerComponent(datePickerStyle: .automatic, datePickerMode: .dateAndTime)
+            return datePicker
+        }()
+                
+        view.addSubview(container)
+        
+        container.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            container.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
     }
   
     @objc func goToSubTask() {
-        
+        print("test")
     }
-  @objc func goToTasks() {
-    homeViewModel?.goToTasksView()
-  }
 
 
 }

@@ -61,12 +61,6 @@
         }
       }
     },
-    "Go to tasks" : {
-
-    },
-    "Go to tasks para fazer uma tarefa nova" : {
-
-    },
     "PlaceholderNameTask" : {
       "comment" : "Placeholder text name task",
       "extractionState" : "manual",
@@ -84,6 +78,9 @@
           }
         }
       }
+    },
+    "Start" : {
+
     },
     "StartDateLabel" : {
       "comment" : "text of start date of the task creation",

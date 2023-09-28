@@ -31,7 +31,7 @@ class LabelComponent: UIView {
     /// The UIStackView that contains the UILabel.
     let stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.alignment = .center
+        stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
@@ -56,8 +56,8 @@ class LabelComponent: UIView {
        ///   - accessibilityLabel: The accessibility label for screen readers.
        ///   - textColor: The text color of the label.
        ///   - stackSpacing: The spacing between the label and the stack view.
-    init(frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0), text : String, backgroundColor: UIColor = .systemIndigo, accessibilityLabel: String, textColor: UIColor = . secondarySystemBackground, font: UIFont.TextStyle = .body) {
-        super.init(frame: frame)
+    init(text : String, backgroundColor: UIColor = .clear, accessibilityLabel: String, textColor: UIColor = .label, font: UIFont.TextStyle = .body) {
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
         // configure textLabel
         textLabel.text = text
