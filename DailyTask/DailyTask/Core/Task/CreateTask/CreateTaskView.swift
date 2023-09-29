@@ -88,6 +88,8 @@ class CreateTaskView: UIViewController {
     return colorPicker
   }()
 
+  var timeTaskContainer: ContainerComponent?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -125,15 +127,22 @@ class CreateTaskView: UIViewController {
   
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     
+    timeTaskContainer = ContainerComponent(text: "Prazo", components: [startDate])
+    
+    timeTaskContainer?.translatesAutoresizingMaskIntoConstraints = false
+    
+    timeTaskContainer?.backgroundColor = .systemBackground
+    
     view.addSubview(nameTextField)
-    view.addSubview(desc)
-    view.addSubview(startDate)
-    view.addSubview(endDate)
-    view.addSubview(labelDateStart)
-    view.addSubview(labelDateEnd)
-    view.addSubview(segmentedControl)
+//    view.addSubview(desc)
+//    view.addSubview(startDate)
+//    view.addSubview(endDate)
+//    view.addSubview(labelDateStart)
+//    view.addSubview(labelDateEnd)
+//    view.addSubview(segmentedControl)
     view.addSubview(icon)
     view.addSubview(colorPicker)
+    view.addSubview(timeTaskContainer!)
 
     setConstraints()
   }
@@ -149,38 +158,47 @@ class CreateTaskView: UIViewController {
       icon.heightAnchor.constraint(equalToConstant: 93),
       icon.widthAnchor.constraint(equalToConstant: 93),
       
-      colorPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
-      colorPicker.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
-      colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
-      colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
-      
       nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
       nameTextField.leadingAnchor.constraint(equalTo: icon.trailingAnchor),
       nameTextField.bottomAnchor.constraint(equalTo: colorPicker.topAnchor, constant: -14),
       
-     desc.topAnchor.constraint(equalTo: colorPicker.bottomAnchor, constant: 30),
-     desc.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-     desc.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-      desc.heightAnchor.constraint(equalTo: nameTextField.heightAnchor, multiplier: 10),
+      colorPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
+      colorPicker.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
+      colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
+      colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
       
-      startDate.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 30),
-      startDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      timeTaskContainer!.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 20),
+      timeTaskContainer!.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+      timeTaskContainer!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      timeTaskContainer!.heightAnchor.constraint(equalToConstant: 158),
+      timeTaskContainer!.widthAnchor.constraint(equalToConstant: 380),
+//      timeTaskContainer!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 200),
       
-      endDate.topAnchor.constraint(equalTo: startDate.bottomAnchor, constant: 20),
-      endDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-      
-      labelDateStart.topAnchor.constraint(equalTo: startDate.topAnchor),
-      labelDateStart.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      labelDateStart.bottomAnchor.constraint(equalTo: startDate.bottomAnchor),
-      
-      labelDateEnd.topAnchor.constraint(equalTo: endDate.topAnchor),
-      labelDateEnd.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      labelDateEnd.bottomAnchor.constraint(equalTo: endDate.bottomAnchor),
-      
-      segmentedControl.topAnchor.constraint(equalTo: endDate.bottomAnchor, constant: 20),
-      segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-      segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+    
+        
+//     desc.topAnchor.constraint(equalTo: colorPicker.bottomAnchor, constant: 30),
+//     desc.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+//     desc.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+//      desc.heightAnchor.constraint(equalTo: nameTextField.heightAnchor, multiplier: 10),
+//      
+//      startDate.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 30),
+//      startDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//      
+//      endDate.topAnchor.constraint(equalTo: startDate.bottomAnchor, constant: 20),
+//      endDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//      
+//      labelDateStart.topAnchor.constraint(equalTo: startDate.topAnchor),
+//      labelDateStart.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+//      labelDateStart.bottomAnchor.constraint(equalTo: startDate.bottomAnchor),
+//      
+//      labelDateEnd.topAnchor.constraint(equalTo: endDate.topAnchor),
+//      labelDateEnd.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+//      labelDateEnd.bottomAnchor.constraint(equalTo: endDate.bottomAnchor),
+//      
+//      segmentedControl.topAnchor.constraint(equalTo: endDate.bottomAnchor, constant: 20),
+//      segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+//      segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
       
     ])
   }
