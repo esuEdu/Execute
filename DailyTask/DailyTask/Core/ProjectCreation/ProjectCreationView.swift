@@ -13,6 +13,8 @@ class ProjectCreationView: UIViewController {
 
     // MARK: - OFICIAL
     
+    let viewScrollView = UIScrollView()
+    
     let iconButton: ChooseIconComponent = {
         let iconPicker = ChooseIconComponent()
         iconPicker.horizontalPadding = 10
@@ -44,6 +46,11 @@ class ProjectCreationView: UIViewController {
     
     
     var dateContainer: ContainerComponent?
+    let deadLine: DeadlineComponent = {
+        let deadLine = DeadlineComponent()
+        return deadLine
+    }()
+    
     var tagsContainer: ContainerComponent?
     let addTagButton: UIButton = {
         let button = UIButton()
@@ -81,7 +88,7 @@ class ProjectCreationView: UIViewController {
     
     func setUpUI(){
         #warning("Localized")
-        dateContainer = ContainerComponent(text: "Prazo", textColor: .black, components: [])
+        dateContainer = ContainerComponent(text: "Prazo", textColor: .black, components: [deadLine])
         tagsContainer = ContainerComponent(text: "Etiquetas", textColor: .black, button: addTagButton, components: [])
         
         descriptionContainer = ContainerComponent(text: "Descrição", textColor: .black, components: [descriptionTextField])
