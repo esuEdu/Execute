@@ -23,16 +23,16 @@ class ChooseMethodologyComponent: UIView{
     let selectMethodology: UIButton = {
         let selectedMethodology = UIButton(primaryAction: nil)
         selectedMethodology.setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
+        selectedMethodology.contentMode = .scaleAspectFit
         return selectedMethodology
     }()
     
     let chooseMethodolyBox: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .systemIndigo
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -89,6 +89,20 @@ class ChooseMethodologyComponent: UIView{
     }
 }
 
-#Preview{
-    ProjectCreationView()
+class selectMethodologyButton: UIButton {
+    init(){
+        super.init(frame: .zero)
+        setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addAllConstraints(){
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: super.topAnchor, constant: 10)
+        ])
+    }
 }

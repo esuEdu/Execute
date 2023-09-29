@@ -15,10 +15,10 @@ class ContainerComponent: UIView {
         stackViewContainerTitle.axis = .horizontal
         stackViewContainerTitle.alignment = .center
         stackViewContainerTitle.distribution = .fill
-        stackViewContainerTitle.backgroundColor = .green
+        stackViewContainerTitle.backgroundColor = .systemIndigo
         stackViewContainerTitle.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainerTitle.isLayoutMarginsRelativeArrangement = true
-        stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15)
         return stackViewContainerTitle
     }()
     
@@ -32,10 +32,10 @@ class ContainerComponent: UIView {
         stackViewContainer.axis = .vertical
         stackViewContainer.alignment = .fill
         stackViewContainer.distribution = .fill
-        stackViewContainer.backgroundColor = .lightGray
+        stackViewContainer.backgroundColor = .systemPurple
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.isLayoutMarginsRelativeArrangement = true
-        stackViewContainer.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        stackViewContainer.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15)
         return stackViewContainer
     }()
     
