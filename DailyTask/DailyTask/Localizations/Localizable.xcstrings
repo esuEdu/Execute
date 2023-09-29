@@ -60,6 +60,9 @@
     "Done" : {
 
     },
+    "end" : {
+
+    },
     "EndDateLabel" : {
       "comment" : "text of end date",
       "extractionState" : "manual",

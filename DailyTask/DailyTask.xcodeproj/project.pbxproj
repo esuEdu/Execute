@@ -32,6 +32,8 @@
 		28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */; };
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
 		28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */; };
+		28FF78C72AC669CB00F2CB59 /* TagComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF78C62AC669CB00F2CB59 /* TagComponent.swift */; };
+		28FF78C92AC67B9300F2CB59 /* TagsColectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF78C82AC67B9300F2CB59 /* TagsColectionComponent.swift */; };
 		9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4172AC07B07008D08B6 /* TaskView.swift */; };
 		9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */; };
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
@@ -84,6 +86,8 @@
 		28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskViewModel.swift; sourceTree = "<group>"; };
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		28FF78C62AC669CB00F2CB59 /* TagComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagComponent.swift; sourceTree = "<group>"; };
+		28FF78C82AC67B9300F2CB59 /* TagsColectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsColectionComponent.swift; sourceTree = "<group>"; };
 		9B0AA4172AC07B07008D08B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				9BC048B52AC4673100A1E9BB /* Checkbox */,
+				28FF78C82AC67B9300F2CB59 /* TagsColectionComponent.swift */,
 				E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */,
 				E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */,
 				E88A24222AC3DB9500D77229 /* ColorChooseComponent.swift */,
@@ -159,6 +164,7 @@
 				286CAE942AC59AED00200E82 /* DeadlineComponent.swift */,
 				286CAE962AC5B49300200E82 /* DatePickerView.swift */,
 				9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */,
+				28FF78C62AC669CB00F2CB59 /* TagComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -454,6 +460,7 @@
 				9BC048B72AC4674400A1E9BB /* Checkbox.swift in Sources */,
 				E87A9C102AC5EBF1009E6744 /* ChooseMethodologyComponent.swift in Sources */,
 				288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */,
+				28FF78C72AC669CB00F2CB59 /* TagComponent.swift in Sources */,
 				9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */,
 				280DD78D2ABE8F0500C2ADA9 /* SubTaskListView.swift in Sources */,
 				2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */,
@@ -477,6 +484,7 @@
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
 				9B6EB2D92AC5FE7100DA1430 /* Priority.swift in Sources */,
 				9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */,
+				28FF78C92AC67B9300F2CB59 /* TagsColectionComponent.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,

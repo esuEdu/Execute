@@ -12,79 +12,72 @@ class HomeView: UIViewController {
     var homeViewModel: HomeViewModel?
     
     let button = UIButton()
-  
-  let segmentedControl = SegmentedControl()
+    
+    let segmentedControl = SegmentedControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
         view.backgroundColor = .systemBackground
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Clique", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        button.addTarget(self, action: #selector(goToNextView), for: .touchUpInside)
-        view.addSubview(button)
         
         
-
-      view.addSubview(segmentedControl)
-      segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-      
-
-        let datePickerController = DatePickerView<Date>(frame: CGRect(x: 90, y: 500, width: 0, height: 0))
-        datePickerController.datePickerMode = .dateAndTime
-        datePickerController.backgroundColor = .green
-        datePickerController.valueChangedHandler = { selectedDate in
-            print("Selected Time: \(selectedDate)")
-        }
-        view.addSubview(datePickerController)
-      
-      let taskButton = UIButton()
-      view.addSubview(taskButton)
+        let tagComponent: TagComponent = {
+            let tagComponent = TagComponent()
+            tagComponent.button.setTitle("A", for: .normal)
+            return tagComponent
+        }()
         
-      taskButton.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-        taskButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
-        taskButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-        taskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-      ])
-      taskButton.backgroundColor = UIColor(.customRed)
-      taskButton.setTitleColor(.white, for: .normal)
-      taskButton.setTitle("Go to tasks", for: .normal)
-      taskButton.addTarget(self, action: #selector(goToTasks), for: .touchUpInside)
-      
-      constraintsGo()
-      
-    }
-    
-    @objc func goToNextView(){
-        homeViewModel?.goToProjectList()
-    }
-    
-    func constraintsGo(){
+        let tagComponent2: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent3: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent4: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent5: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent6: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent7: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagsComponent: TagsColectionComponent = {
+            let tagComponent = TagsColectionComponent(tags: [tagComponent, tagComponent2, tagComponent3, tagComponent4])
+            return tagComponent
+        }()
+        
+        view.addSubview(tagsComponent)
+        
+        tagsComponent.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            segmentedControl.topAnchor.constraint(equalTo: button.bottomAnchor),
-            
+            tagsComponent.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tagsComponent.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            tagsComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            tagsComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+
             
         ])
     }
-  
-    @objc func goToSubTask() {
-        print("test")
+    
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+        let selectedDate = sender.date
+        print("Selected date: \(selectedDate)")
+        // You can perform any action with the selected date here
     }
-  
-  @objc func goToTasks() {
-    homeViewModel?.goToTasksView()
-  }
-  
-  
-}
-
-#Preview {
-  HomeView()
 }

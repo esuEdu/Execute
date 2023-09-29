@@ -10,30 +10,85 @@ import UIKit
 
 class DeadlineComponent: UIView {
     
-    let stackView: UIStackView = {
-       let stackView = UIStackView()
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.layer.cornerRadius = 10
+        stackView.clipsToBounds = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let startStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    let label: LabelComponent = {
-       let label = LabelComponent(text: String(localized: "Start"), accessibilityLabel: "Start")
+    private let endStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let startlabel: LabelComponent = {
+        let label = LabelComponent(text: String(localized: "Start"), accessibilityLabel: "Start")
         return label
     }()
     
-    let startDatePicker: DatePickerView<Date> = {
-        let datePicker = DatePickerView<Date>()
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.valueChangedHandler = { selectedDate in
-            
-        }
+    private let endlabel: LabelComponent = {
+        let label = LabelComponent(text: String(localized: "end"), accessibilityLabel: "end")
+        return label
+    }()
+    
+    let startDatePicker: DatePickerComponent = {
+        let datePicker = DatePickerComponent(datePickerStyle: .automatic, datePickerMode: .dateAndTime)
+        datePicker.tintColor = .lightGray
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        return datePicker
+    }()
+    
+    let endDatePicker: DatePickerComponent = {
+        let datePicker = DatePickerComponent(datePickerStyle: .automatic, datePickerMode: .dateAndTime)
+        datePicker.tintColor = .lightGray
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
     
     init() {
         super.init(frame: .zero)
+        
+        
+        startStackView.addArrangedSubview(startlabel)
+        startStackView.addArrangedSubview(startDatePicker)
+        
+        stackView.addArrangedSubview(startStackView)
+        
+        endStackView.addArrangedSubview(endlabel)
+        endStackView.addArrangedSubview(endDatePicker)
+        
+        stackView.addArrangedSubview(endStackView)
+        
+        self.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            endDatePicker.widthAnchor.constraint(equalToConstant: endDatePicker.frame.width * 0.75),
+            startDatePicker.widthAnchor.constraint(equalToConstant: startDatePicker.frame.width * 0.75),
+            startStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            startStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            endStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            endStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
     }
     
     required init?(coder: NSCoder) {
