@@ -13,20 +13,6 @@ class ProjectCreationView: UIViewController {
 
     // MARK: - OFICIAL
     
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .systemBlue
-        return scrollView
-    }()
-    
-    let contentView: UIView = {
-        let contentView = UIView()
-        return contentView
-    }()
-    
     let stackViewForTitleAndColor = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -72,7 +58,7 @@ class ProjectCreationView: UIViewController {
     }()
     
     var methodologyContainer: ContainerComponent?
-    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "CBL", textColor: .black)
+    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .black)
     
     
     var dateContainer: ContainerComponent?
@@ -81,13 +67,6 @@ class ProjectCreationView: UIViewController {
         return deadLine
     }()
     
-    var tagsContainer: ContainerComponent?
-    let addTagButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .black
-        return button
-    }()
     
     var descriptionContainer: ContainerComponent?
     let descriptionTextField: TextDescriptionComponent = {
@@ -103,8 +82,7 @@ class ProjectCreationView: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
-        #warning("NSLocalized")
-        button.setTitle("Criar no projeto", for: .normal)
+        button.setTitle(String(localized: "Create a new project"), for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -114,32 +92,30 @@ class ProjectCreationView: UIViewController {
         super.viewDidLoad()
         setUpUI()
         addAllConstraints()
+        deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
+        deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
     }
     
     func setUpUI(){
-        #warning("Localized")
-        dateContainer = ContainerComponent(text: "Prazo", textColor: .black, components: [deadLine])
-        tagsContainer = ContainerComponent(text: "Etiquetas", textColor: .black, button: addTagButton, components: [])
+        dateContainer = ContainerComponent(text: String(localized: "Deadline"), textColor: .black, components: [deadLine])
         
-        descriptionContainer = ContainerComponent(text: "Descrição", textColor: .black, components: [descriptionTextField])
+        descriptionContainer = ContainerComponent(text: String(localized: "Description"), textColor: .black, components: [descriptionTextField])
         
-        methodologyContainer = ContainerComponent(text: "Metodologia", textColor: .black, components: [methodologyButton])
+        methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         methodologyButton.delegate = self
+        colorChooser.delegate = self
         
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
-        self.title = "Criar projeto"
-        
-        self.view.addSubview(scrollView)
-        
-        self.scrollView.addSubview(stackViewForTheContainer)
+        self.title = String(localized: "Create a project")
+        self.view.addSubview(stackViewForTheContainer)
+
         
         stackViewForTheContainer.addArrangedSubview(stackViewForIcon)
         stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
         stackViewForTheContainer.addArrangedSubview(dateContainer!)
-        stackViewForTheContainer.addArrangedSubview(tagsContainer!)
         stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
         
         stackViewForIcon.addArrangedSubview(iconButton)
@@ -153,17 +129,11 @@ class ProjectCreationView: UIViewController {
         
         iconButton.menu = setIcon()
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
-        addTagButton.addTarget(self, action: #selector(goToTagCreation), for: .touchUpInside)
     }
 
     
     func addAllConstraints(){
         NSLayoutConstraint.activate([
-            
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             stackViewForTheContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
@@ -206,8 +176,16 @@ class ProjectCreationView: UIViewController {
         projectCreationViewModel?.removeTopView()
     }
     
-    @objc func goToTagCreation(){
-        projectCreationViewModel?.goToTagCreation()
+    @objc func getStartDate(_ sender: UIDatePicker){
+        let selectedDate = sender.date
+        print("\(selectedDate)")
+        projectCreationViewModel?.start = selectedDate
+    }
+    
+    @objc func getEndDate(_ sender: UIDatePicker){
+        let selectedDate = sender.date
+        print("\(selectedDate)")
+        projectCreationViewModel?.end = selectedDate
     }
 
 }
@@ -218,7 +196,7 @@ extension ProjectCreationView {
     func createRightButtom() -> UIBarButtonItem{
         let buttonToContinue: UIBarButtonItem = {
             let button = UIBarButtonItem()
-            button.title = "Concluido"
+            button.title = String(localized: "Done")
             button.target = self
             button.action = #selector(defineProjectData)
             return button
@@ -230,7 +208,7 @@ extension ProjectCreationView {
     func createLeftButtom() -> UIBarButtonItem{
         let buttonToContinue: UIBarButtonItem = {
             let button = UIBarButtonItem()
-            button.title = "Cancelar"
+            button.title = String(localized: "Cancel")
             button.tintColor = .systemRed
             button.target = self
             button.action = #selector(removeTheView)
@@ -273,6 +251,13 @@ extension ProjectCreationView: ChooseMethodologyComponentDelegate {
         self.methodologyButton.methodology.text = "\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
         self.methodologyButton.layoutIfNeeded()
     }
+}
+
+extension ProjectCreationView: ColorChooseComponentDelegate {
+    func updateColor() {
+        iconButton.changeColor(bgColor: colorChooser.returnColorUIColor())
+    }
+
 }
 
 #Preview{

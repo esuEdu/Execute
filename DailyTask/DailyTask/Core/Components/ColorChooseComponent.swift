@@ -27,8 +27,21 @@ import UIKit
 /// //r,    g,    b
 ///  [1.0, 0.4, 0.8]
 /// ```
+///
+
+protocol ColorChooseComponentDelegate: AnyObject {
+    func updateColor()
+}
+
 class ColorChooseComponent: UIView{
-    var theChoosenOne: ColorSelection?
+    
+    var delegate: ColorChooseComponentDelegate?
+    
+    var theChoosenOne: ColorSelection?{
+        didSet{
+            delegate?.updateColor()
+        }
+    }
     
     private let stackViewForColors: UIStackView = {
         let stackview = UIStackView()

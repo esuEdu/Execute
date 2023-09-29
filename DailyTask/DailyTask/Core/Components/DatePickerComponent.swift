@@ -9,7 +9,6 @@ import UIKit
 
 class DatePickerComponent: UIDatePicker  {
     
-    
     init(datePickerStyle: UIDatePickerStyle = .automatic, datePickerMode: UIDatePicker.Mode = .dateAndTime, maxDate: Date? = nil) {
         super.init(frame: .zero)
         self.datePickerMode = datePickerMode

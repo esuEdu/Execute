@@ -16,10 +16,10 @@ class TextFieldToName: UIView {
     
     var delegate: TextFieldToNameDelegate?
     
-    #warning("Colocar o nslocalized")
+
     let textFieldToGetTheName: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Dê um nome ao projeto"
+        textField.placeholder = String(localized: "Give a name to the project")
         textField.font = .systemFont(ofSize: 16)
         textField.textColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false

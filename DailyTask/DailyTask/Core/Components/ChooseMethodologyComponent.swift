@@ -11,7 +11,6 @@ protocol ChooseMethodologyComponentDelegate: AnyObject{
     func setUpMenuFunction(type: Methodologies)
 }
 
-#warning("LocalizedString")
 class ChooseMethodologyComponent: UIView{
     
     weak var delegate: ChooseMethodologyComponentDelegate?
@@ -65,15 +64,15 @@ class ChooseMethodologyComponent: UIView{
     func returnMenu() -> UIMenu{
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
         
-        UIAction(title: "Metodologia CBL", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
+            UIAction(title: "Challenge Based Learning (CBL)", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .CBL)
         }),
         
-        UIAction(title: "Metdologia Scrum", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
+            UIAction(title: String(localized: "Scrum"), image: UIImage(systemName: "paperplane.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Scrum)
         }),
         
-        UIAction(title: "Custom", image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
+            UIAction(title: String(localized: "Custom"), image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Custom)
         }),
         

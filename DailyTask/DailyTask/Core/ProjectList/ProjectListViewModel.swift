@@ -28,5 +28,9 @@ class ProjectListViewModel: Coordinating {
         print("Cheguei aqui 2")
     }
     
+    func goToTaskList(){
+        coordinator?.eventOccurred(with: .goToTaskView)
+    }
+    
     
 }

@@ -56,7 +56,13 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.projectCreationView = view
             view.projectCreationViewModel = viewModel
-            navigationController?.pushViewController(view, animated: true)
+            
+            if UIDevice.current.userInterfaceIdiom == .pad{
+                navigationController?.present(view, animated: true)
+            }else{
+                navigationController?.pushViewController(view, animated: true)
+            }
+            
           
         case .goToProjectList:
             let projectListView: ProjectListView = ProjectListView()

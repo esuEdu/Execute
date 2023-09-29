@@ -28,8 +28,8 @@ class TextDescriptionComponent: UIView {
     
     let color: UIColor = .lightGray
     
-    #warning("NSLocalized and change the color")
-    let placeholder: String = "Digite a descrição aqui..."
+    #warning("Change the color")
+    let placeholder: String = String(localized: "Enter the description here...")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
