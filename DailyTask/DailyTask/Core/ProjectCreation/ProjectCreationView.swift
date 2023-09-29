@@ -42,7 +42,7 @@ class ProjectCreationView: UIViewController {
         return button
     }()
     
-    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Metodologia", textColor: .white)
+    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "CBL", textColor: .white)
     
     let descriptionTextField: TextDescriptionComponent = {
         let textField = TextDescriptionComponent()
@@ -52,57 +52,53 @@ class ProjectCreationView: UIViewController {
         return textField
     }()
     
-    // MARK: - Não oficial
-    
-    let stackView: UIStackView = {
+    let stackViewForTheContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
-        
+        stackView.alignment = .fill
+        stackView.spacing = 25
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    
-    
-    let startDatePicker: DatePickerView <Date> = {
-        let datePicker = DatePickerView <Date>()
-        datePicker.datePickerMode = .dateAndTime
-        return datePicker
-    }()
-    
-    let endDatePicker: DatePickerView = {
-        let datePicker = DatePickerView <Date>()
-        datePicker.datePickerMode = .dateAndTime
-        
-        return datePicker
-    }()
-    
+    var methodologyContainer: ContainerComponent?
+    var descriptionContainer: ContainerComponent?
+    var dateContainer: ContainerComponent?
+    var tagsContainer: ContainerComponent?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpUI()
         addAllConstraints()
-        sendDateToViewModel()
-
     }
     
     func setUpUI(){
+        #warning("Localized")
+        dateContainer = ContainerComponent(text: "Prazo", textColor: .white, components: [])
+        tagsContainer = ContainerComponent(text: "Etiquetas", textColor: .white, components: [])
+        
+        descriptionContainer = ContainerComponent(text: "Descrição", textColor: .white, components: [descriptionTextField])
+        
+        methodologyContainer = ContainerComponent(text: "Metodologia", textColor: .white, components: [methodologyButton])
+        methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         methodologyButton.delegate = self
+        
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
         self.title = "Criar projeto"
-        self.view.addSubview(stackView)
         self.view.addSubview(iconButton)
         self.view.addSubview(textFieldToGetTheName)
         self.view.addSubview(colorChooser)
-        stackView.addArrangedSubview(methodologyButton)
-        stackView.addArrangedSubview(startDatePicker)
-        stackView.addArrangedSubview(endDatePicker)
-        view.addSubview(descriptionTextField)
+        self.view.addSubview(stackViewForTheContainer)
+        
+        stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
+        stackViewForTheContainer.addArrangedSubview(dateContainer!)
+        stackViewForTheContainer.addArrangedSubview(tagsContainer!)
+        stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
+        
+        
         
         view.addSubview(createButton)
         
@@ -114,11 +110,11 @@ class ProjectCreationView: UIViewController {
     
     func addAllConstraints(){
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            iconButton.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
+            stackViewForTheContainer.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: 25),
+            stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            stackViewForTheContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            
             iconButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             iconButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             iconButton.heightAnchor.constraint(equalToConstant: 93),
@@ -127,7 +123,6 @@ class ProjectCreationView: UIViewController {
             textFieldToGetTheName.leadingAnchor.constraint(equalTo: iconButton.trailingAnchor, constant: 20),
             textFieldToGetTheName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textFieldToGetTheName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            
             
             colorChooser.topAnchor.constraint(equalTo: textFieldToGetTheName.bottomAnchor, constant: 12),
             colorChooser.leadingAnchor.constraint(equalTo: textFieldToGetTheName.leadingAnchor),
@@ -139,10 +134,7 @@ class ProjectCreationView: UIViewController {
             createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             createButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
             
-            descriptionTextField.heightAnchor.constraint(equalToConstant: 132),
-            descriptionTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            descriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            descriptionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
             
         ])
     }
@@ -175,18 +167,6 @@ class ProjectCreationView: UIViewController {
 
 #warning("REFATORAR")
 extension ProjectCreationView {
-
-    func sendDateToViewModel(){
-        startDatePicker.valueChangedHandler = { selectedDate in
-            self.projectCreationViewModel?.start = selectedDate
-            print(selectedDate)
-        }
-        
-        endDatePicker.valueChangedHandler = { selectedDate in
-            self.projectCreationViewModel?.end = selectedDate
-            print(selectedDate)
-        }
-    }
     
     func createRightButtom() -> UIBarButtonItem{
         let buttonToContinue: UIBarButtonItem = {
@@ -243,9 +223,12 @@ extension ProjectCreationView: ChooseMethodologyComponentDelegate {
     
     func setUpMenuFunction(type: Methodologies) {
         self.projectCreationViewModel?.methodology = type
-        self.methodologyButton.methodology.text = "Methodology \(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
+        self.methodologyButton.methodology.text = "\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
         self.methodologyButton.layoutIfNeeded()
         print("OI")
     }
 }
 
+#Preview{
+    ProjectCreationView()
+}
