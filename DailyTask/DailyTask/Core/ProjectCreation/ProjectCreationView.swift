@@ -98,8 +98,6 @@ class ProjectCreationView: UIViewController {
         stackViewForTheContainer.addArrangedSubview(tagsContainer!)
         stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
         
-        
-        
         view.addSubview(createButton)
         
         iconButton.menu = setIcon()

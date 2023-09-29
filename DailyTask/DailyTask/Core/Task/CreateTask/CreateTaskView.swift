@@ -90,6 +90,15 @@ class CreateTaskView: UIViewController {
 
   var timeTaskContainer: ContainerComponent?
   
+  let stackViewForTheContainer: UIStackView = {
+      let stackView = UIStackView()
+      stackView.axis = .vertical
+      stackView.alignment = .fill
+      stackView.spacing = 25
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      return stackView
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -127,11 +136,9 @@ class CreateTaskView: UIViewController {
   
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     
-    timeTaskContainer = ContainerComponent(text: "Prazo", components: [startDate])
-    
+    timeTaskContainer = ContainerComponent(text: "Prazo", textColor: .black, components: [startDate, endDate])
     timeTaskContainer?.translatesAutoresizingMaskIntoConstraints = false
-    
-    timeTaskContainer?.backgroundColor = .systemBackground
+    timeTaskContainer?.backgroundColor = .white
     
     view.addSubview(nameTextField)
 //    view.addSubview(desc)
@@ -142,7 +149,10 @@ class CreateTaskView: UIViewController {
 //    view.addSubview(segmentedControl)
     view.addSubview(icon)
     view.addSubview(colorPicker)
-    view.addSubview(timeTaskContainer!)
+    
+    view.addSubview(stackViewForTheContainer)
+    
+    stackViewForTheContainer.addArrangedSubview(timeTaskContainer!)
 
     setConstraints()
   }
@@ -168,11 +178,9 @@ class CreateTaskView: UIViewController {
       colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
       colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
       
-      timeTaskContainer!.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 20),
-      timeTaskContainer!.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-      timeTaskContainer!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-      timeTaskContainer!.heightAnchor.constraint(equalToConstant: 158),
-      timeTaskContainer!.widthAnchor.constraint(equalToConstant: 380),
+      stackViewForTheContainer.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 25),
+      stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      stackViewForTheContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
 //      timeTaskContainer!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 200),
       
     
