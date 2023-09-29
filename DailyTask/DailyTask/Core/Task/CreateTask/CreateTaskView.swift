@@ -15,34 +15,11 @@ class CreateTaskView: UIViewController {
   var dateEnd: Date?
   
   let segmentedControl = SegmentedControl()
-
-  let nameTextField: TextFieldToName = {
-      let textField = TextFieldToName()
-    textField.textFieldToGetTheName.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
-      textField.translatesAutoresizingMaskIntoConstraints = false
-      return textField
-  }()
   
-  let desc: UITextView = {
-      let description = UITextView()
-    description.layer.cornerRadius = 10
-    description.translatesAutoresizingMaskIntoConstraints = false
-      return description
-  }()
+  var priorityContainer: ContainerComponent?
   
-  let startDate: DatePickerView<Date> = {
-    let date = DatePickerView<Date>()
-    date.datePickerMode = .dateAndTime
-    date.translatesAutoresizingMaskIntoConstraints = false
-    return date
-  }()
-  
-  let endDate: DatePickerView<Date> = {
-    let date = DatePickerView<Date>()
-    date.datePickerMode = .dateAndTime
-    date.translatesAutoresizingMaskIntoConstraints = false
-    return date
-  }()
+  var dateContainer: ContainerComponent?
+  let deadLine = DeadlineComponent()
   
   let buttonDone: UIBarButtonItem = {
     let button = UIBarButtonItem()
@@ -56,28 +33,28 @@ class CreateTaskView: UIViewController {
     button.tintColor = .red
     return button
   }()
-  
-  let labelDateStart: UILabel = {
-    let label = UILabel()
-    label.text = String(localized: "StartDateLabel", comment: "text of start date of the task creation")
-    label.numberOfLines = 1
-    label.textColor = .black
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
+
+  let nameTextField: TextFieldToName = {
+      let textField = TextFieldToName()
+    textField.textFieldToGetTheName.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      return textField
   }()
   
-  let labelDateEnd: UILabel = {
-    let label = UILabel()
-    label.text = String(localized: "EndDateLabel", comment: "text of end date")
-    label.numberOfLines = 1
-    label.textColor = .black
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
+  var descriptionContainer: ContainerComponent?
+  let descriptionTextField: TextDescriptionComponent = {
+      let textField = TextDescriptionComponent()
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      textField.horizontalPadding = 10
+      textField.verticalPadding = 10
+      return textField
   }()
-  
+
   let icon: ChooseIconComponent = {
     let icon = ChooseIconComponent()
     icon.iconName = "pencil.tip"
+    icon.horizontalPadding = 10
+    icon.verticalPadding = 15
     icon.translatesAutoresizingMaskIntoConstraints = false
     return icon
   }()
@@ -88,23 +65,29 @@ class CreateTaskView: UIViewController {
     return colorPicker
   }()
 
-  var priorityContainer: ContainerComponent?
-  var testeContainer: ContainerComponent?
-  
-  let stackViewContainerHorizontal: UIStackView = {
+  let stackViewContainers: UIStackView = {
       let stackView = UIStackView()
-      stackView.axis = .horizontal
+      stackView.axis = .vertical
       stackView.alignment = .fill
       stackView.spacing = 25
       stackView.translatesAutoresizingMaskIntoConstraints = false
       return stackView
   }()
   
-  let stackViewContainerVertical: UIStackView = {
+  let stackViewForTitleAndColor = {
       let stackView = UIStackView()
       stackView.axis = .vertical
-      stackView.alignment = .fill
-      stackView.spacing = 25
+    stackView.distribution = .fillEqually
+      stackView.spacing = 14
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      return stackView
+  }()
+  
+  let stackViewForIcon = {
+      let stackView = UIStackView()
+      stackView.axis = .horizontal
+    stackView.distribution = .fillProportionally
+      stackView.spacing = 14
       stackView.translatesAutoresizingMaskIntoConstraints = false
       return stackView
   }()
@@ -115,17 +98,15 @@ class CreateTaskView: UIViewController {
     title = String(localized: "CreateTaskTitleKey")
     view.backgroundColor = .systemBackground
     
+    deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
+    
+    deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
+    
     nameTextField.textFieldToGetTheName.returnKeyType = .done
     nameTextField.textFieldToGetTheName.autocapitalizationType = .none
     nameTextField.textFieldToGetTheName.autocorrectionType = .no
     nameTextField.textFieldToGetTheName.keyboardAppearance = .default
-    nameTextField.textFieldToGetTheName.becomeFirstResponder()
     nameTextField.delegate = self
-    
-    desc.isEditable = true
-    desc.backgroundColor = .systemGray3
-    desc.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
-    desc.delegate = self
     
     navigationItem.rightBarButtonItem = buttonDone
     navigationItem.leftBarButtonItem = buttonCancel
@@ -135,109 +116,53 @@ class CreateTaskView: UIViewController {
     
     buttonCancel.target = self
     buttonCancel.action = #selector(cancelTask)
-    
-    startDate.valueChangedHandler = { selectedDate in
-      self.dateStart = selectedDate
-    }
-    
-    endDate.valueChangedHandler = { selectedDate in
-      self.dateEnd = selectedDate
-    }
-  
+
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     
     priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, components: [segmentedControl])
     priorityContainer?.translatesAutoresizingMaskIntoConstraints = false
     
-    testeContainer = ContainerComponent(text: "teste", components: [startDate])
-    testeContainer?.translatesAutoresizingMaskIntoConstraints = false
+    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
+    dateContainer?.translatesAutoresizingMaskIntoConstraints = false
     
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, components: [descriptionTextField])
+    descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     
+    view.addSubview(stackViewContainers)
     
-    view.addSubview(nameTextField)
-//    view.addSubview(desc)
-//    view.addSubview(startDate)
-//    view.addSubview(endDate)
-//    view.addSubview(labelDateStart)
-//    view.addSubview(labelDateEnd)
-//    view.addSubview(segmentedControl)
-    view.addSubview(icon)
-    view.addSubview(colorPicker)
+    stackViewContainers.addArrangedSubview(stackViewForIcon)
     
-    view.addSubview(stackViewContainerHorizontal)
-    view.addSubview(stackViewContainerVertical)
+    stackViewForIcon.addArrangedSubview(icon)
+    stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
     
-    stackViewContainerHorizontal.addArrangedSubview(icon)
-    stackViewContainerHorizontal.addArrangedSubview(nameTextField)
-    stackViewContainerHorizontal.addArrangedSubview(colorPicker)
+    stackViewForTitleAndColor.addArrangedSubview(nameTextField)
+    stackViewForTitleAndColor.addArrangedSubview(colorPicker)
     
-    stackViewContainerVertical.addArrangedSubview(priorityContainer!)
-    stackViewContainerVertical.addArrangedSubview(testeContainer!)
-
+    stackViewContainers.addArrangedSubview(dateContainer!)
+    stackViewContainers.addArrangedSubview(priorityContainer!)
+    stackViewContainers.addArrangedSubview(descriptionContainer!)
+    
     setConstraints()
   }
   
   func setConstraints() {
   
     NSLayoutConstraint.activate([
+      stackViewContainers.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      stackViewContainers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      stackViewContainers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
       
-//      icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//      icon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-//      icon.trailingAnchor.constraint(equalTo: nameTextField.leadingAnchor, constant: -20),
-//      icon.bottomAnchor.constraint(equalTo: colorPicker.bottomAnchor),
-//      icon.heightAnchor.constraint(equalToConstant: 93),
-//      icon.widthAnchor.constraint(equalToConstant: 93),
-//
-//      nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-//      nameTextField.leadingAnchor.constraint(equalTo: icon.trailingAnchor),
-//      nameTextField.bottomAnchor.constraint(equalTo: colorPicker.topAnchor, constant: -14),
-//      
-//      colorPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
-//      colorPicker.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
-//      colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
-//      colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
+      icon.widthAnchor.constraint(equalToConstant: 93),
+      icon.heightAnchor.constraint(equalToConstant: 93),
       
-      stackViewContainerHorizontal.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
-      stackViewContainerHorizontal.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-      stackViewContainerHorizontal.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-      
-      stackViewContainerVertical.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 25),
-      stackViewContainerVertical.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-      stackViewContainerVertical.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-//      timeTaskContainer!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 200),
-      
-    
-        
-//     desc.topAnchor.constraint(equalTo: colorPicker.bottomAnchor, constant: 30),
-//     desc.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-//     desc.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-//      desc.heightAnchor.constraint(equalTo: nameTextField.heightAnchor, multiplier: 10),
-//      
-//      startDate.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 30),
-//      startDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-//      
-//      endDate.topAnchor.constraint(equalTo: startDate.bottomAnchor, constant: 20),
-//      endDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-//      
-//      labelDateStart.topAnchor.constraint(equalTo: startDate.topAnchor),
-//      labelDateStart.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-//      labelDateStart.bottomAnchor.constraint(equalTo: startDate.bottomAnchor),
-//      
-//      labelDateEnd.topAnchor.constraint(equalTo: endDate.topAnchor),
-//      labelDateEnd.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-//      labelDateEnd.bottomAnchor.constraint(equalTo: endDate.bottomAnchor),
-//      
-//      segmentedControl.topAnchor.constraint(equalTo: endDate.bottomAnchor, constant: 20),
-//      segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-//      segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-      
+      descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
     ])
   }
   
 }
 
 extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
+  
   func textFieldDidEndEditing() {
     
   }
@@ -245,20 +170,26 @@ extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
   func textFieldDidBeginEditing() {
     
   }
-
-//  @objc func tappedAwayFunction(){
-//    desc.resignFirstResponder()
-//  }
-  
+ 
   @objc func createTask() {
     
-    self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.desc.text != "" ? self.desc.text! : "Sem descrição")
+    self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição")
   
     viewModel?.removeLastView()
   }
   
   @objc func cancelTask(){
     viewModel?.removeLastView()
+  }
+  
+  @objc func getStartDate(_ sender: UIDatePicker){
+    let selectDate = sender.date
+    self.dateStart = selectDate
+  }
+  
+  @objc func getEndDate(_ sender: UIDatePicker){
+    let selectDate = sender.date
+    self.dateEnd = selectDate
   }
   
   func textViewDidBeginEditing(_ textView: UITextView) {

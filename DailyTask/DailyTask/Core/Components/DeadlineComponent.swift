@@ -39,12 +39,12 @@ class DeadlineComponent: UIView {
     }()
     
     private let startlabel: LabelComponent = {
-        let label = LabelComponent(text: String(localized: "Start"), accessibilityLabel: "Start")
+        let label = LabelComponent(text: String(localized: "StartDateLabel"), accessibilityLabel: "Start")
         return label
     }()
     
     private let endlabel: LabelComponent = {
-        let label = LabelComponent(text: String(localized: "End"), accessibilityLabel: "end")
+        let label = LabelComponent(text: String(localized: "EndDateLabel"), accessibilityLabel: "End")
         return label
     }()
     

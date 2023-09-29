@@ -11,15 +11,20 @@ class HomeView: UIViewController {
     
     var homeViewModel: HomeViewModel?
     
-    let button = UIButton()
-    
     let segmentedControl = SegmentedControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
         view.backgroundColor = .systemBackground
-        
+      
+      let button: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("go to tasks view", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        return button
+      }()
         
         let tagComponent: TagComponent = {
             let tagComponent = TagComponent()
@@ -62,16 +67,27 @@ class HomeView: UIViewController {
             return tagComponent
         }()
         
-        view.addSubview(tagsComponent)
+        //view.addSubview(tagsComponent)
+     
         
-        tagsComponent.translatesAutoresizingMaskIntoConstraints = false
+        //tagsComponent.translatesAutoresizingMaskIntoConstraints = false
+      
+      view.addSubview(button)
+      
+      button.addTarget(self, action: #selector(goToTasks), for: .touchUpInside)
+      
         NSLayoutConstraint.activate([
-            tagsComponent.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tagsComponent.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            tagsComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            tagsComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+//            tagsComponent.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            tagsComponent.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            tagsComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+//            tagsComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
 
             
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
         ])
     }
     
@@ -80,4 +96,9 @@ class HomeView: UIViewController {
         print("Selected date: \(selectedDate)")
         // You can perform any action with the selected date here
     }
+  
+  @objc func goToTasks() {
+    homeViewModel?.goToTasksView()
+  }
+  
 }

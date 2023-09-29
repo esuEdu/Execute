@@ -57,10 +57,43 @@
     "Date:" : {
 
     },
-    "Done" : {
-
+    "DeadLineKey" : {
+      "comment" : "Deadline string of the container of deadline",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deadline"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prazo"
+          }
+        }
+      }
     },
-    "End" : {
+    "DescriptionKey" : {
+      "comment" : "String of the contêiner description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrição"
+          }
+        }
+      }
+    },
+    "Done" : {
 
     },
     "EndDateLabel" : {
@@ -186,9 +219,6 @@
           }
         }
       }
-    },
-    "Start" : {
-
     },
     "StartDateLabel" : {
       "comment" : "text of start date of the task creation",
