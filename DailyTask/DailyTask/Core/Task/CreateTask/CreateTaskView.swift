@@ -95,6 +95,7 @@ class CreateTaskView: UIViewController {
       stackView.axis = .vertical
       stackView.alignment = .fill
       stackView.spacing = 25
+    stackView.distribution = .fillProportionally
       stackView.translatesAutoresizingMaskIntoConstraints = false
       return stackView
   }()
@@ -138,7 +139,7 @@ class CreateTaskView: UIViewController {
     
     timeTaskContainer = ContainerComponent(text: "Prazo", textColor: .black, components: [startDate, endDate])
     timeTaskContainer?.translatesAutoresizingMaskIntoConstraints = false
-    timeTaskContainer?.backgroundColor = .white
+    timeTaskContainer?.stackViewContainer.spacing = 25
     
     view.addSubview(nameTextField)
 //    view.addSubview(desc)
