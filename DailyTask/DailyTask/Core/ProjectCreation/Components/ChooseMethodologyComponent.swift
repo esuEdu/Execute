@@ -20,6 +20,8 @@ class ChooseMethodologyComponent: UIView{
         return methodology
     }()
     
+    let viewToResizeTheButton: UIView = UIView()
+    
     let selectMethodology: UIButton = {
         let selectedMethodology = UIButton(primaryAction: nil)
         selectedMethodology.setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
@@ -85,24 +87,6 @@ class ChooseMethodologyComponent: UIView{
             chooseMethodolyBox.trailingAnchor.constraint(equalTo: trailingAnchor),
             chooseMethodolyBox.topAnchor.constraint(equalTo: topAnchor),
             chooseMethodolyBox.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
-    }
-}
-
-class selectMethodologyButton: UIButton {
-    init(){
-        super.init(frame: .zero)
-        setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addAllConstraints(){
-        NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: super.topAnchor, constant: 10)
         ])
     }
 }
