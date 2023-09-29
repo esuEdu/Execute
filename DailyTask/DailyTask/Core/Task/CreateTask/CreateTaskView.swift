@@ -88,14 +88,23 @@ class CreateTaskView: UIViewController {
     return colorPicker
   }()
 
-  var timeTaskContainer: ContainerComponent?
+  var priorityContainer: ContainerComponent?
+  var testeContainer: ContainerComponent?
   
-  let stackViewForTheContainer: UIStackView = {
+  let stackViewContainerHorizontal: UIStackView = {
+      let stackView = UIStackView()
+      stackView.axis = .horizontal
+      stackView.alignment = .fill
+      stackView.spacing = 25
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      return stackView
+  }()
+  
+  let stackViewContainerVertical: UIStackView = {
       let stackView = UIStackView()
       stackView.axis = .vertical
       stackView.alignment = .fill
       stackView.spacing = 25
-    stackView.distribution = .fillProportionally
       stackView.translatesAutoresizingMaskIntoConstraints = false
       return stackView
   }()
@@ -137,9 +146,13 @@ class CreateTaskView: UIViewController {
   
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     
-    timeTaskContainer = ContainerComponent(text: "Prazo", textColor: .black, components: [startDate, endDate])
-    timeTaskContainer?.translatesAutoresizingMaskIntoConstraints = false
-    timeTaskContainer?.stackViewContainer.spacing = 25
+    priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, components: [segmentedControl])
+    priorityContainer?.translatesAutoresizingMaskIntoConstraints = false
+    
+    testeContainer = ContainerComponent(text: "teste", components: [startDate])
+    testeContainer?.translatesAutoresizingMaskIntoConstraints = false
+    
+    
     
     view.addSubview(nameTextField)
 //    view.addSubview(desc)
@@ -151,9 +164,15 @@ class CreateTaskView: UIViewController {
     view.addSubview(icon)
     view.addSubview(colorPicker)
     
-    view.addSubview(stackViewForTheContainer)
+    view.addSubview(stackViewContainerHorizontal)
+    view.addSubview(stackViewContainerVertical)
     
-    stackViewForTheContainer.addArrangedSubview(timeTaskContainer!)
+    stackViewContainerHorizontal.addArrangedSubview(icon)
+    stackViewContainerHorizontal.addArrangedSubview(nameTextField)
+    stackViewContainerHorizontal.addArrangedSubview(colorPicker)
+    
+    stackViewContainerVertical.addArrangedSubview(priorityContainer!)
+    stackViewContainerVertical.addArrangedSubview(testeContainer!)
 
     setConstraints()
   }
@@ -162,26 +181,30 @@ class CreateTaskView: UIViewController {
   
     NSLayoutConstraint.activate([
       
-      icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      icon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-      icon.trailingAnchor.constraint(equalTo: nameTextField.leadingAnchor, constant: -20),
-      icon.bottomAnchor.constraint(equalTo: colorPicker.bottomAnchor),
-      icon.heightAnchor.constraint(equalToConstant: 93),
-      icon.widthAnchor.constraint(equalToConstant: 93),
+//      icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//      icon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+//      icon.trailingAnchor.constraint(equalTo: nameTextField.leadingAnchor, constant: -20),
+//      icon.bottomAnchor.constraint(equalTo: colorPicker.bottomAnchor),
+//      icon.heightAnchor.constraint(equalToConstant: 93),
+//      icon.widthAnchor.constraint(equalToConstant: 93),
+//
+//      nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+//      nameTextField.leadingAnchor.constraint(equalTo: icon.trailingAnchor),
+//      nameTextField.bottomAnchor.constraint(equalTo: colorPicker.topAnchor, constant: -14),
+//      
+//      colorPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
+//      colorPicker.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
+//      colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
+//      colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
       
-      nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-      nameTextField.leadingAnchor.constraint(equalTo: icon.trailingAnchor),
-      nameTextField.bottomAnchor.constraint(equalTo: colorPicker.topAnchor, constant: -14),
+      stackViewContainerHorizontal.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+      stackViewContainerHorizontal.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      stackViewContainerHorizontal.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
       
-      colorPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
-      colorPicker.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
-      colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
-      colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
-      
-      stackViewForTheContainer.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 25),
-      stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-      stackViewForTheContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+      stackViewContainerVertical.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 25),
+      stackViewContainerVertical.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      stackViewContainerVertical.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
 //      timeTaskContainer!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 200),
       
     
