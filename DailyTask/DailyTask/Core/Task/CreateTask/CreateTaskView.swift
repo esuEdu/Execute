@@ -78,13 +78,13 @@ class CreateTaskView: UIViewController {
   let icon: ChooseIconComponent = {
     let icon = ChooseIconComponent()
     icon.iconName = "pencil.tip"
-    icon.bgColor = .gray
     icon.translatesAutoresizingMaskIntoConstraints = false
     return icon
   }()
   
   let colorPicker: ColorChooseComponent = {
     let colorPicker = ColorChooseComponent()
+    colorPicker.translatesAutoresizingMaskIntoConstraints = false
     return colorPicker
   }()
 
@@ -145,11 +145,21 @@ class CreateTaskView: UIViewController {
       icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       icon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
       icon.trailingAnchor.constraint(equalTo: nameTextField.leadingAnchor, constant: -20),
-
+      icon.bottomAnchor.constraint(equalTo: colorPicker.bottomAnchor),
+      icon.heightAnchor.constraint(equalToConstant: 93),
+      icon.widthAnchor.constraint(equalToConstant: 93),
+      
+      colorPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
+      colorPicker.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
+      colorPicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
+      colorPicker.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
+      
       nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+      nameTextField.leadingAnchor.constraint(equalTo: icon.trailingAnchor),
+      nameTextField.bottomAnchor.constraint(equalTo: colorPicker.topAnchor, constant: -14),
       
-     desc.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 30),
+     desc.topAnchor.constraint(equalTo: colorPicker.bottomAnchor, constant: 30),
      desc.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
      desc.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
       desc.heightAnchor.constraint(equalTo: nameTextField.heightAnchor, multiplier: 10),
