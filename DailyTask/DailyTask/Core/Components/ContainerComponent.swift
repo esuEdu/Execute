@@ -15,7 +15,7 @@ class ContainerComponent: UIView {
         stackViewContainerTitle.axis = .horizontal
         stackViewContainerTitle.alignment = .center
         stackViewContainerTitle.distribution = .fill
-        stackViewContainerTitle.backgroundColor = .systemIndigo
+        stackViewContainerTitle.backgroundColor = .systemGray2
         stackViewContainerTitle.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainerTitle.isLayoutMarginsRelativeArrangement = true
         stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15)
@@ -23,7 +23,7 @@ class ContainerComponent: UIView {
     }()
     
     let containetTitle: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .label)
+        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .label, font: .headline)
         return label
     }()
     
@@ -32,7 +32,7 @@ class ContainerComponent: UIView {
         stackViewContainer.axis = .vertical
         stackViewContainer.alignment = .fill
         stackViewContainer.distribution = .fill
-        stackViewContainer.backgroundColor = .systemPurple
+        stackViewContainer.backgroundColor = .systemGray5
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.isLayoutMarginsRelativeArrangement = true
         stackViewContainer.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15)

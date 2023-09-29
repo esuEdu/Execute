@@ -39,7 +39,7 @@ class TextFieldToName: UIView {
     
     func setUpUI(){
         self.textFieldToGetTheName.delegate = self
-        backgroundColor = .systemIndigo
+        backgroundColor = .systemGray2
         layer.cornerRadius = 10
         addSubview(textFieldToGetTheName)
     }
