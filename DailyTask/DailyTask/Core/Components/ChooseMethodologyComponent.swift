@@ -10,6 +10,7 @@ import UIKit
 protocol ChooseMethodologyComponentDelegate: AnyObject{
     func setUpMenuFunction(type: Methodologies)
 }
+
 #warning("LocalizedString")
 class ChooseMethodologyComponent: UIView{
     

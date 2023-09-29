@@ -11,21 +11,73 @@ class HomeView: UIViewController {
     
     var homeViewModel: HomeViewModel?
     
+    let button = UIButton()
+    
+    let segmentedControl = SegmentedControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let teste = TopProjectColapsedAndExpandedView()
-        teste.translatesAutoresizingMaskIntoConstraints = false
+        title = "Home"
+        view.backgroundColor = .systemBackground
         
-        view.addSubview(teste)
-        teste.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        teste.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        teste.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
-        teste.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
+        
+        let tagComponent: TagComponent = {
+            let tagComponent = TagComponent()
+            tagComponent.button.setTitle("A", for: .normal)
+            return tagComponent
+        }()
+        
+        let tagComponent2: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent3: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent4: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent5: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent6: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagComponent7: TagComponent = {
+            let tagComponent = TagComponent()
+            return tagComponent
+        }()
+        
+        let tagsComponent: TagsColectionComponent = {
+            let tagComponent = TagsColectionComponent(tags: [tagComponent, tagComponent2, tagComponent3, tagComponent4])
+            return tagComponent
+        }()
+        
+        view.addSubview(tagsComponent)
+        
+        tagsComponent.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tagsComponent.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tagsComponent.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            tagsComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            tagsComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+
+            
+        ])
     }
-
-
-}
-
-#Preview {
-    HomeView()
+    
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+        let selectedDate = sender.date
+        print("Selected date: \(selectedDate)")
+        // You can perform any action with the selected date here
+    }
 }
