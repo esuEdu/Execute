@@ -13,7 +13,37 @@ class ProjectCreationView: UIViewController {
 
     // MARK: - OFICIAL
     
-    let viewScrollView = UIScrollView()
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .systemBlue
+        return scrollView
+    }()
+    
+    let contentView: UIView = {
+        let contentView = UIView()
+        return contentView
+    }()
+    
+    let stackViewForTitleAndColor = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let stackViewForIcon = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     let iconButton: ChooseIconComponent = {
         let iconPicker = ChooseIconComponent()
@@ -101,17 +131,23 @@ class ProjectCreationView: UIViewController {
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
         self.title = "Criar projeto"
-        self.view.addSubview(iconButton)
-        self.view.addSubview(textFieldToGetTheName)
-        self.view.addSubview(colorChooser)
-        self.view.addSubview(stackViewForTheContainer)
         
+        self.view.addSubview(scrollView)
+        
+        self.scrollView.addSubview(stackViewForTheContainer)
+        
+        stackViewForTheContainer.addArrangedSubview(stackViewForIcon)
         stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
         stackViewForTheContainer.addArrangedSubview(dateContainer!)
         stackViewForTheContainer.addArrangedSubview(tagsContainer!)
         stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
         
+        stackViewForIcon.addArrangedSubview(iconButton)
         
+        stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
+        
+        stackViewForTitleAndColor.addArrangedSubview(textFieldToGetTheName)
+        stackViewForTitleAndColor.addArrangedSubview(colorChooser)
         
         view.addSubview(createButton)
         
@@ -124,23 +160,17 @@ class ProjectCreationView: UIViewController {
     func addAllConstraints(){
         NSLayoutConstraint.activate([
             
-            stackViewForTheContainer.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: 25),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            stackViewForTheContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             stackViewForTheContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             
-            iconButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            iconButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            iconButton.heightAnchor.constraint(equalToConstant: 93),
             iconButton.widthAnchor.constraint(equalToConstant: 93),
-            
-            textFieldToGetTheName.leadingAnchor.constraint(equalTo: iconButton.trailingAnchor, constant: 20),
-            textFieldToGetTheName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            textFieldToGetTheName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            
-            colorChooser.topAnchor.constraint(equalTo: textFieldToGetTheName.bottomAnchor, constant: 12),
-            colorChooser.leadingAnchor.constraint(equalTo: textFieldToGetTheName.leadingAnchor),
-            colorChooser.trailingAnchor.constraint(equalTo: textFieldToGetTheName.trailingAnchor),
-            colorChooser.bottomAnchor.constraint(equalTo: iconButton.bottomAnchor),
+            iconButton.heightAnchor.constraint(equalToConstant: 93),
             
             createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
             createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
