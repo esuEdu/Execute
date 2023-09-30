@@ -122,10 +122,11 @@
         }
       }
     },
-    "Date:" : {
+    "Deadline" : {
 
     },
-    "Deadline" : {
+    "DeadLineKey" : {
+      "comment" : "Deadline string of the container of deadline",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -143,6 +144,10 @@
       }
     },
     "Description" : {
+
+    },
+    "DescriptionKey" : {
+      "comment" : "String of the contêiner description",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -175,7 +180,7 @@
         }
       }
     },
-    "End" : {
+    "Edit Tag" : {
 
     },
     "EndDateLabel" : {
@@ -339,10 +344,24 @@
         }
       }
     },
-    "Scrum" : {
-
+    "PriorityName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priority"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prioridade"
+          }
+        }
+      }
     },
-    "Start" : {
+    "Scrum" : {
 
     },
     "StartDateLabel" : {
@@ -363,11 +382,11 @@
         }
       }
     },
-    "Sub-Task" : {
+    "SubtasksKey" : {
 
     },
-    "Sub-Task Title" : {
-      "comment" : "Accessibility Label for Sub-Task Title"
+    "Task Tag Title" : {
+      "comment" : "Accessibility Label for Task Tag Title"
     }
   },
   "version" : "1.0"

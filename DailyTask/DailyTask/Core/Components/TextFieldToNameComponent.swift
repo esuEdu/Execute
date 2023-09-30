@@ -37,7 +37,7 @@ class TextFieldToName: UIView {
     }
     
     func getText() -> String{
-        return textFieldToGetTheName.text
+        return textFieldToGetTheName.text ?? ""
     }
     
     func setUpUI(){
