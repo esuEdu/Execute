@@ -49,6 +49,9 @@ class CreateTaskView: UIViewController {
       textField.verticalPadding = 10
       return textField
   }()
+  
+  var subTasksContainer: ContainerComponent?
+  let subTasksComponent = SubtasksInTasksComponent(name: "teste", date: Date.now)
 
   let icon: ChooseIconComponent = {
     let icon = ChooseIconComponent()
@@ -128,6 +131,9 @@ class CreateTaskView: UIViewController {
     descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     
+    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), components: [subTasksComponent])
+    subTasksContainer?.translatesAutoresizingMaskIntoConstraints = false
+    
     view.addSubview(stackViewContainers)
     
     stackViewContainers.addArrangedSubview(stackViewForIcon)
@@ -140,7 +146,8 @@ class CreateTaskView: UIViewController {
     
     stackViewContainers.addArrangedSubview(dateContainer!)
     stackViewContainers.addArrangedSubview(priorityContainer!)
-    stackViewContainers.addArrangedSubview(descriptionContainer!)
+    //stackViewContainers.addArrangedSubview(descriptionContainer!)
+    stackViewContainers.addArrangedSubview(subTasksContainer!)
     
     setConstraints()
   }

@@ -42,6 +42,7 @@
 		9BC048B72AC4674400A1E9BB /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B62AC4674400A1E9BB /* Checkbox.swift */; };
 		9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */; };
 		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
+		9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */; };
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
 		E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C52ABF3C69000AA58B /* Methodologies.swift */; };
@@ -96,6 +97,7 @@
 		9BC048B62AC4674400A1E9BB /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxViewCell.swift; sourceTree = "<group>"; };
 		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksInTasksComponent.swift; sourceTree = "<group>"; };
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		E84018C52ABF3C69000AA58B /* Methodologies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methodologies.swift; sourceTree = "<group>"; };
@@ -151,7 +153,6 @@
 		2829C5022ABB6B8900A75CEB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				9BC048B52AC4673100A1E9BB /* Checkbox */,
 				28FF78C82AC67B9300F2CB59 /* TagsColectionComponent.swift */,
 				E87C6EF42AC24A62001B794C /* ChooseIconComponent.swift */,
 				E87C6F162AC27441001B794C /* TextFieldToNameComponent.swift */,
@@ -310,6 +311,8 @@
 		9B0AA4162AC07AF9008D08B6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9BC048B52AC4673100A1E9BB /* Checkbox */,
+				9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */,
 				9B6EB2D82AC5FE7100DA1430 /* Priority.swift */,
 			);
 			path = Components;
@@ -455,6 +458,7 @@
 				28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */,
 				288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */,
 				28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */,
+				9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */,
 				9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */,
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
 				9BC048B72AC4674400A1E9BB /* Checkbox.swift in Sources */,
