@@ -157,7 +157,7 @@ class ProjectCreationView: UIViewController {
         projectCreationViewModel?.colors = colorChooser.returnColorCGFloat()
         
         if (projectCreationViewModel?.compareDates() == .orderedAscending){
-            self.projectCreationViewModel?.name = textFieldToGetTheName.textFieldToGetTheName.text == "" ? self.projectCreationViewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
+            self.projectCreationViewModel?.name = textFieldToGetTheName.getText() == "" ? self.projectCreationViewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
             self.projectCreationViewModel?.description = descriptionTextField.getText() == "" ? self.projectCreationViewModel?.description : descriptionTextField.getText()
             
             self.projectCreationViewModel?.createAProject()

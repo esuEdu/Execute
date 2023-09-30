@@ -14,11 +14,14 @@ class TaskManager {
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
   
-  func fetchTask() -> [Task] {
+    func fetchTask(_ project: Project) -> [Task] {
     do {
       
       let request: NSFetchRequest<Task> = Task.fetchRequest()
-      
+        
+      request.predicate = NSPredicate(format: "project == %@", project)
+        
+        
       let tasks = try context.fetch(request)
       
 #warning("Delete this print after finish")
@@ -39,7 +42,7 @@ class TaskManager {
     }
   }
   
-  func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String) {
+    func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, project: Project) {
     let task = Task(context: context)
     task.id = UUID()
     task.name = name
@@ -47,6 +50,7 @@ class TaskManager {
     task.end = endDate
     task.descript = descript
     task.priority = priority
+    task.project = project
     
     saveData()
     

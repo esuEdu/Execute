@@ -16,7 +16,6 @@ class TextFieldToName: UIView {
     
     var delegate: TextFieldToNameDelegate?
     
-
     let textFieldToGetTheName: UITextField = {
         let textField = UITextField()
         textField.placeholder = String(localized: "Give a name to the project")
@@ -35,6 +34,10 @@ class TextFieldToName: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getText() -> String{
+        return textFieldToGetTheName.text
     }
     
     func setUpUI(){

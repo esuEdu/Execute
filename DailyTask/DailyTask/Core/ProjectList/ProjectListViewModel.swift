@@ -28,8 +28,8 @@ class ProjectListViewModel: Coordinating {
         print("Cheguei aqui 2")
     }
     
-    func goToTaskList(){
-        coordinator?.eventOccurred(with: .goToTaskView)
+    func goToTaskList(_ project: Project){
+        coordinator?.goToTaskView(project)
     }
     
     
