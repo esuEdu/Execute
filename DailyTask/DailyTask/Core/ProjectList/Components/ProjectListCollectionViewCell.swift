@@ -240,10 +240,13 @@ class ColapsedView: UIView {
 }
 
 class TopProjectColapsedAndExpandedView: UIView {
-    let icon: UIImageView = UIImageView()
-    let title: UILabel = {
-        let label = UILabel()
-        label.text = "Mini 02 - Bem Social"
+    let icon: UIImageView = {
+        let icon = UIImageView()
+        icon.contentMode = .scaleAspectFit
+        return icon
+    }()
+    let title: LabelComponent = {
+        let label = LabelComponent(text: "Mini 02 - Bem Social", accessibilityLabel: "Mini 02 - Bem Social")
         return label
     }()
     let buttonToOpen: UIButton = {
@@ -274,7 +277,7 @@ class TopProjectColapsedAndExpandedView: UIView {
         self.backgroundColor = backgroundColor
         self.layer.cornerRadius = 10
         self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        icon.image = UIImage(systemName: "pencil.and.outline")
+        icon.image = UIImage(systemName: "star.fill")
         setUpUI()
         addAllConstraints()
     }
@@ -304,7 +307,7 @@ class TopProjectColapsedAndExpandedView: UIView {
 
 class DownProjectColapsedView: UIView {
     
-    let stackViewForTop: UIStackView = {
+    let stackViewForDown: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -314,8 +317,22 @@ class DownProjectColapsedView: UIView {
         return stackView
     }()
     
-    let percentLabel: UILabel = {
-        let label = UILabel()
+    let stackViewForPercent: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = -13
+        return stackView
+    }()
+    
+    let percentLabel: LabelComponent = {
+        let label = LabelComponent(text: "50%", accessibilityLabel: "Porcentagem do projeto", font: UIFont.TextStyle.extraLargeTitle)
+        return label
+    }()
+    
+    let percentLabel2: LabelComponent = {
+        let label = LabelComponent(text: "de progresso", accessibilityLabel: "Porcentagem do projeto", font: .caption1)
         return label
     }()
     
@@ -333,15 +350,48 @@ class DownProjectColapsedView: UIView {
     }
     
     func setUpUI(){
-        addSubview(stackViewForTop)
+        addSubview(stackViewForDown)
+        stackViewForDown.addArrangedSubview(stackViewForPercent)
+        stackViewForPercent.addArrangedSubview(percentLabel)
+        stackViewForPercent.addArrangedSubview(percentLabel2)
     }
     
     func addAllConstraints(){
         NSLayoutConstraint.activate([
-            stackViewForTop.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackViewForTop.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackViewForTop.topAnchor.constraint(equalTo: topAnchor),
-            stackViewForTop.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackViewForDown.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackViewForDown.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackViewForDown.topAnchor.constraint(equalTo: topAnchor),
+            stackViewForDown.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+}
+
+class CustomProgressBarView: UIView {
+    
+    var progress: CGFloat = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let progressView = UIView()
+        progressView.backgroundColor = UIColor.blue
+        addSubview(progressView)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            progressView.topAnchor.constraint(equalTo: topAnchor),
+            progressView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            progressView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: progress)
+        ])
+        
+    }
+}
+
+#Preview{
+    CustomProgressBarView()
 }

@@ -79,7 +79,7 @@ class ChooseIconComponent: UIButton {
     }
     
     func setUpUI(){
-        self.backgroundColor = .systemIndigo
+        self.backgroundColor = .systemRed
         self.layer.cornerRadius = 10
         addSubview(iconBox)
         iconBox.addSubview(icon)

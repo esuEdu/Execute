@@ -163,7 +163,7 @@ class ColorChooseComponent: UIView{
     }
     
     private func setUpUI(){
-        backgroundColor = .systemIndigo
+        backgroundColor = .systemGray3
         layer.cornerRadius = 10
         addSubview(stackViewForColors)
         stackViewForColors.addArrangedSubview(color1)
