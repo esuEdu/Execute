@@ -16,41 +16,34 @@ class TagsColectionComponent: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 6
+        stackView.distribution = .equalSpacing
         stackView.alignment = .leading
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    var cont: Int = 0
-    
-    init(tags: [TagComponent]) {
+    init(tags: [TagComponent], view: UIView) {
         super.init(frame: .zero)
         
-        let maxWidth = self.frame.width // Largura máxima do componente
-   
+        let maxWidth = view.frame.width - 70
         
+        print(view.frame.size)
         var currentLineStackView: UIStackView?
         
         var currentLineStackViewWidth: CGFloat = 0.0
         
         for tag in tags {
             let tagWidth = tag.frame.width
-    
-            // Verifique se há espaço suficiente na linha atual para a próxima tag
             
-            if currentLineStackView == nil || (currentLineStackViewWidth + tagWidth) > maxWidth {
+            
+            if currentLineStackView == nil || (currentLineStackViewWidth + tagWidth) >=  maxWidth {
                 currentLineStackView = createNewLineStackView()
-                print(tagWidth)
                 currentLineStackViewWidth = 0.0
             }
-            
             currentLineStackView?.addArrangedSubview(tag)
-            currentLineStackViewWidth += tagWidth
-            
-            
+            currentLineStackViewWidth += tagWidth + 6
         }
-        
-        outerStackView.addArrangedSubview(innerStackView)
+
         
         addSubview(outerStackView)
         
@@ -73,13 +66,10 @@ class TagsColectionComponent: UIView {
         stackView.spacing = 6
         stackView.alignment = .leading
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        if innerStackView == nil {
-            innerStackView = stackView
-        } else {
-            outerStackView.addArrangedSubview(stackView)
-        }
+        outerStackView.addArrangedSubview(stackView)
         
         return stackView
     }
 }
+
+

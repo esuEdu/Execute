@@ -125,7 +125,8 @@
     "Date:" : {
 
     },
-    "Deadline" : {
+    "DeadLineKey" : {
+      "comment" : "Deadline string of the container of deadline",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -142,7 +143,8 @@
         }
       }
     },
-    "Description" : {
+    "DescriptionKey" : {
+      "comment" : "String of the contêiner description",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -175,7 +177,7 @@
         }
       }
     },
-    "End" : {
+    "Edit Tag" : {
 
     },
     "EndDateLabel" : {
@@ -339,11 +341,22 @@
         }
       }
     },
-    "Scrum" : {
-
-    },
-    "Start" : {
-
+    "PriorityName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priority"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prioridade"
+          }
+        }
+      }
     },
     "StartDateLabel" : {
       "comment" : "text of start date of the task creation",
@@ -368,6 +381,9 @@
     },
     "Sub-Task Title" : {
       "comment" : "Accessibility Label for Sub-Task Title"
+    },
+    "SubtasksKey" : {
+
     }
   },
   "version" : "1.0"

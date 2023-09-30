@@ -11,11 +11,14 @@ import UIKit
 enum Event {
     case goToProjectCreation
     case goToProjectList
-    case goToSubTaskList
     case createModalView
     case goToTaskView
     case goToCreateTaskView
     case removeTopView
+    case goToTaskTagView
+    case goToProjectTagView
+//    case goToEditTaskTagView
+//    case goToEditProjectTagView
 }
 
 protocol Coordinator {

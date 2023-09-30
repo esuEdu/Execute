@@ -78,6 +78,7 @@ class MainCoordinator: Coordinator {
             viewModel.view = view
             navigationController?.pushViewController(view, animated: true)
             
+              
         case .removeTopView:
             navigationController?.popViewController(animated: true)
             
@@ -98,12 +99,34 @@ class MainCoordinator: Coordinator {
             navigationController?.pushViewController(view, animated: true)
             
         case .goToCreateTaskView:
-            let view: CreateTaskView = CreateTaskView()
-            let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
+          let view: CreateTaskView = CreateTaskView()
+          let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
+          view.viewModel = viewModel
+          viewModel.viewCreate = view
+          viewModel.coordinator = self
+          navigationController?.pushViewController(view, animated: true)
+            
+        case .goToTaskTagView:
+          let view: TaskTagView = TaskTagView()
+          let viewModel: TaskTagViewModel & Coordinating = TaskTagViewModel()
+          view.viewModel = viewModel
+          viewModel.view = view
+          viewModel.coordinator = self
+          navigationController?.pushViewController(view, animated: true)
+            
+        case .goToProjectTagView:
+            let view: ProjectTagView = ProjectTagView()
+            let viewModel: ProjectTagViewModel & Coordinating = ProjectTagViewModel()
             view.viewModel = viewModel
-            viewModel.viewCreate = view
+            viewModel.view = view
             viewModel.coordinator = self
             navigationController?.pushViewController(view, animated: true)
+            
+//        case .goToEditTaskTagView:
+//            
+//        case .goToEditProjectTagView:
+        
+          
         }
         
     }
