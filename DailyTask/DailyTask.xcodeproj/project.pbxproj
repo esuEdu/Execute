@@ -34,6 +34,14 @@
 		28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */; };
 		28FF78C72AC669CB00F2CB59 /* TagComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF78C62AC669CB00F2CB59 /* TagComponent.swift */; };
 		28FF78C92AC67B9300F2CB59 /* TagsColectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF78C82AC67B9300F2CB59 /* TagsColectionComponent.swift */; };
+		818075F52AC4C28800E4AE26 /* TaskTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075F42AC4C28800E4AE26 /* TaskTagView.swift */; };
+		818075F72AC4C2A000E4AE26 /* EditTaskTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075F62AC4C2A000E4AE26 /* EditTaskTagView.swift */; };
+		818075F92AC4C2D800E4AE26 /* TaskTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075F82AC4C2D800E4AE26 /* TaskTagViewModel.swift */; };
+		818075FB2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075FA2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift */; };
+		818075FE2AC4D7E100E4AE26 /* ProjectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075FD2AC4D7E100E4AE26 /* ProjectTagView.swift */; };
+		818076002AC4D7ED00E4AE26 /* ProjectTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075FF2AC4D7ED00E4AE26 /* ProjectTagViewModel.swift */; };
+		818076022AC4D7FE00E4AE26 /* EditProjectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818076012AC4D7FE00E4AE26 /* EditProjectTagView.swift */; };
+		818076042AC4D81000E4AE26 /* EditProjectTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818076032AC4D81000E4AE26 /* EditProjectTagViewModel.swift */; };
 		9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4172AC07B07008D08B6 /* TaskView.swift */; };
 		9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */; };
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
@@ -89,6 +97,14 @@
 		28C45BF82ABAF0E8001CEFED /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		28FF78C62AC669CB00F2CB59 /* TagComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagComponent.swift; sourceTree = "<group>"; };
 		28FF78C82AC67B9300F2CB59 /* TagsColectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsColectionComponent.swift; sourceTree = "<group>"; };
+		818075F42AC4C28800E4AE26 /* TaskTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTagView.swift; sourceTree = "<group>"; };
+		818075F62AC4C2A000E4AE26 /* EditTaskTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskTagView.swift; sourceTree = "<group>"; };
+		818075F82AC4C2D800E4AE26 /* TaskTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTagViewModel.swift; sourceTree = "<group>"; };
+		818075FA2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskTagViewModel.swift; sourceTree = "<group>"; };
+		818075FD2AC4D7E100E4AE26 /* ProjectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagView.swift; sourceTree = "<group>"; };
+		818075FF2AC4D7ED00E4AE26 /* ProjectTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagViewModel.swift; sourceTree = "<group>"; };
+		818076012AC4D7FE00E4AE26 /* EditProjectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectTagView.swift; sourceTree = "<group>"; };
+		818076032AC4D81000E4AE26 /* EditProjectTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectTagViewModel.swift; sourceTree = "<group>"; };
 		9B0AA4172AC07B07008D08B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
@@ -241,8 +257,8 @@
 				2836A8C92ABA1BA800778B43 /* DailyTask.xcdatamodeld */,
 				288B59BE2ABE303F0058531D /* ProjectManager.swift */,
 				288B59C02ABE30750058531D /* ProjectTagManager.swift */,
-				288B59C22ABE30B20058531D /* TaskManager.swift */,
 				288B59C42ABE30DE0058531D /* TaskTagManager.swift */,
+				288B59C22ABE30B20058531D /* TaskManager.swift */,
 				288B59C62ABE30F90058531D /* SubTaskManager.swift */,
 			);
 			path = Model;
@@ -288,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				2829C5022ABB6B8900A75CEB /* Components */,
+				818075FC2AC4C66300E4AE26 /* Tag */,
 				E84018CF2ABFE3D3000AA58B /* ProjectCreation */,
 				E84018B92ABF3532000AA58B /* ProjectList */,
 				9B0AA4152AC07AF2008D08B6 /* Task */,
@@ -296,6 +313,37 @@
 				288B59CD2ABE4C2D0058531D /* Home */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		818075F22AC4C16700E4AE26 /* ProjectTag */ = {
+			isa = PBXGroup;
+			children = (
+				818075FD2AC4D7E100E4AE26 /* ProjectTagView.swift */,
+				818075FF2AC4D7ED00E4AE26 /* ProjectTagViewModel.swift */,
+				818076012AC4D7FE00E4AE26 /* EditProjectTagView.swift */,
+				818076032AC4D81000E4AE26 /* EditProjectTagViewModel.swift */,
+			);
+			path = ProjectTag;
+			sourceTree = "<group>";
+		};
+		818075F32AC4C16F00E4AE26 /* TaskTag */ = {
+			isa = PBXGroup;
+			children = (
+				818075F42AC4C28800E4AE26 /* TaskTagView.swift */,
+				818075F82AC4C2D800E4AE26 /* TaskTagViewModel.swift */,
+				818075F62AC4C2A000E4AE26 /* EditTaskTagView.swift */,
+				818075FA2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift */,
+			);
+			path = TaskTag;
+			sourceTree = "<group>";
+		};
+		818075FC2AC4C66300E4AE26 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				818075F22AC4C16700E4AE26 /* ProjectTag */,
+				818075F32AC4C16F00E4AE26 /* TaskTag */,
+			);
+			path = Tag;
 			sourceTree = "<group>";
 		};
 		9B0AA4152AC07AF2008D08B6 /* Task */ = {
@@ -456,10 +504,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */,
+				818076042AC4D81000E4AE26 /* EditProjectTagViewModel.swift in Sources */,
 				288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */,
 				28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */,
 				9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */,
 				9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */,
+				818076002AC4D7ED00E4AE26 /* ProjectTagViewModel.swift in Sources */,
 				2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */,
 				9BC048B72AC4674400A1E9BB /* Checkbox.swift in Sources */,
 				E87A9C102AC5EBF1009E6744 /* ChooseMethodologyComponent.swift in Sources */,
@@ -471,6 +521,8 @@
 				286CAE972AC5B49300200E82 /* DatePickerView.swift in Sources */,
 				E84018C62ABF3C69000AA58B /* Methodologies.swift in Sources */,
 				286CAE712AC455EE00200E82 /* LabelComponent.swift in Sources */,
+				818075F72AC4C2A000E4AE26 /* EditTaskTagView.swift in Sources */,
+				818075FB2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift in Sources */,
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E84018F42AC13C5A000AA58B /* TaskTableForProjectList.swift in Sources */,
@@ -485,21 +537,26 @@
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
 				286CAE732AC4BD3C00200E82 /* ContainerComponent.swift in Sources */,
 				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
+				818075F52AC4C28800E4AE26 /* TaskTagView.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
 				9B6EB2D92AC5FE7100DA1430 /* Priority.swift in Sources */,
 				9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */,
 				28FF78C92AC67B9300F2CB59 /* TagsColectionComponent.swift in Sources */,
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
+				818075F92AC4C2D800E4AE26 /* TaskTagViewModel.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
 				E88A24272AC4C37900D77229 /* TextDescriptionComponent.swift in Sources */,
 				286CAE952AC59AED00200E82 /* DeadlineComponent.swift in Sources */,
+				818075FE2AC4D7E100E4AE26 /* ProjectTagView.swift in Sources */,
 				9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
 				E87C6F172AC27441001B794C /* TextFieldToNameComponent.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */,
+				9B0AA4242AC1FCED008D08B6 /* Priority.swift in Sources */,
+				818076022AC4D7FE00E4AE26 /* EditProjectTagView.swift in Sources */,
 				288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
