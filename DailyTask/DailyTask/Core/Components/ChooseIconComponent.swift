@@ -49,12 +49,6 @@ class ChooseIconComponent: UIButton {
         return UIIMageView
     }()
     
-    private let iconBox: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -78,25 +72,22 @@ class ChooseIconComponent: UIButton {
         self.icon.image = UIImage(systemName: iconName!)!
     }
     
+    func changeColor(bgColor: UIColor){
+        self.backgroundColor = bgColor
+    }
+    
     func setUpUI(){
-        self.backgroundColor = .systemIndigo
+        self.backgroundColor = .systemRed
         self.layer.cornerRadius = 10
-        addSubview(iconBox)
-        iconBox.addSubview(icon)
+        addSubview(icon)
     }
     
     func addAllConstraints(){
         NSLayoutConstraint.activate([
-            iconBox.centerYAnchor.constraint(equalTo: centerYAnchor),
-            iconBox.topAnchor.constraint(equalTo: topAnchor, constant: verticalPadding),
-            iconBox.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalPadding ),
-            iconBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalPadding),
-            iconBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalPadding ),
-            
-            icon.topAnchor.constraint(equalTo: iconBox.topAnchor),
-            icon.bottomAnchor.constraint(equalTo: iconBox.bottomAnchor),
-            icon.leadingAnchor.constraint(equalTo: iconBox.leadingAnchor),
-            icon.trailingAnchor.constraint(equalTo: iconBox.trailingAnchor),
+            icon.topAnchor.constraint(equalTo: topAnchor, constant: -verticalPadding),
+            icon.bottomAnchor.constraint(equalTo: bottomAnchor, constant: verticalPadding),
+            icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalPadding),
+            icon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalPadding),
         ])
     }
     

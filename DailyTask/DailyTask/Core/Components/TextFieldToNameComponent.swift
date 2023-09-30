@@ -16,10 +16,9 @@ class TextFieldToName: UIView {
     
     var delegate: TextFieldToNameDelegate?
     
-    #warning("Colocar o nslocalized")
     let textFieldToGetTheName: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Dê um nome ao projeto"
+        textField.placeholder = String(localized: "Give a name to the project")
         textField.font = .systemFont(ofSize: 16)
         textField.textColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -37,9 +36,13 @@ class TextFieldToName: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func getText() -> String{
+        return textFieldToGetTheName.text
+    }
+    
     func setUpUI(){
         self.textFieldToGetTheName.delegate = self
-        backgroundColor = .systemIndigo
+        backgroundColor = .systemGray2
         layer.cornerRadius = 10
         addSubview(textFieldToGetTheName)
     }

@@ -35,7 +35,6 @@ class MainCoordinator: Coordinator {
     
     var tabBarController: UITabBarController?
     
-    
     /// The navigation controller managed by the coordinator.
     var navigationController: UINavigationController?
     
@@ -51,13 +50,18 @@ class MainCoordinator: Coordinator {
             
             // Handle the case when a button is tapped
         case .goToProjectCreation:
-            let view: ProjectCreationView  = ProjectCreationView()
+            let view: ProjectCreationView = ProjectCreationView()
             let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
             viewModel.coordinator = self
             viewModel.projectCreationView = view
             view.projectCreationViewModel = viewModel
-            navigationController?.pushViewController(view, animated: true)
-          
+            
+            if UIDevice.current.userInterfaceIdiom == .pad{
+                navigationController?.present(view, animated: true)
+            }else{
+                navigationController?.pushViewController(view, animated: true)
+            }
+            
         case .goToProjectList:
             let projectListView: ProjectListView = ProjectListView()
             let projectListViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
@@ -65,7 +69,15 @@ class MainCoordinator: Coordinator {
             projectListView.projectListViewModel = projectListViewModel
             projectListViewModel.projectView = projectListView
             navigationController?.pushViewController(projectListView, animated: true)
-              
+            
+        case .goToSubTaskList:
+            let view: SubTaskTableView = SubTaskTableView()
+            let viewModel: SubTaskListViewModel & Coordinating = SubTaskListViewModel()
+            view.viewModel = viewModel
+            viewModel.coordinator = self
+            viewModel.view = view
+            navigationController?.pushViewController(view, animated: true)
+            
         case .removeTopView:
             navigationController?.popViewController(animated: true)
             
@@ -76,26 +88,43 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.view = view
             navigationController?.present(view, animated: true)
-          
+            
         case .goToTaskView:
-          let view: TaskView = TaskView()
-          let viewModel: TaskViewModel & Coordinating = TaskViewModel()
-          view.viewModel = viewModel
-          viewModel.view = view
-          viewModel.coordinator = self
-          navigationController?.pushViewController(view, animated: true)
-          
+            let view: TaskView = TaskView()
+            let viewModel: TaskViewModel & Coordinating = TaskViewModel(project: Project())
+            view.viewModel = viewModel
+            viewModel.view = view
+            viewModel.coordinator = self
+            navigationController?.pushViewController(view, animated: true)
+            
         case .goToCreateTaskView:
-          let view: CreateTaskView = CreateTaskView()
-          let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
-          view.viewModel = viewModel
-          viewModel.viewCreate = view
-          viewModel.coordinator = self
-          navigationController?.pushViewController(view, animated: true)
-        
-          
+            let view: CreateTaskView = CreateTaskView()
+            let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
+            view.viewModel = viewModel
+            viewModel.viewCreate = view
+            viewModel.coordinator = self
+            navigationController?.pushViewController(view, animated: true)
         }
         
+    }
+    
+    func goToTaskView(_ project: Project){
+        let view: TaskView = TaskView()
+        let viewModel: TaskViewModel & Coordinating = TaskViewModel(project: project)
+        view.viewModel = viewModel
+        viewModel.view = view
+        viewModel.coordinator = self
+        navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func goToTaskCreation(_ project: Project){
+        let view: CreateTaskView = CreateTaskView()
+        let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
+        viewModel.project = project
+        view.viewModel = viewModel
+        viewModel.viewCreate = view
+        viewModel.coordinator = self
+        navigationController?.pushViewController(view, animated: true)
     }
     
     /// Initializes the coordinator and sets up the initial view and state.
@@ -115,38 +144,24 @@ class MainCoordinator: Coordinator {
         projectView.projectListViewModel = projectViewModel
         projectViewModel.coordinator = self
         projectViewModel.projectView = projectView
-        
-        let taskView: TaskView = TaskView()
-        let taskViewModel: TaskViewModel & Coordinating = TaskViewModel()
-        taskViewModel.coordinator = self
-        taskView.viewModel = taskViewModel
-        taskViewModel.view = taskView
-
-        let createSubTaskView: CreateSubTaskView = CreateSubTaskView()
-        let createSubTaskViewModel = CreateSubTaskViewModel()
-        createSubTaskView.viewModel = createSubTaskViewModel
-        createSubTaskViewModel.coordinator = self
-        createSubTaskViewModel.view = createSubTaskView
 
         // Create instances of UITabBarItem for each view controller
         let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: nil)
-        let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(named: "table_icon"), selectedImage: nil)
-        let subTaskListTabBarItem = UITabBarItem(title: "Sub Tasks", image: UIImage(named: "subtasks_icon"), selectedImage: nil)
-        let createSubTaskTabBarItem = UITabBarItem(title: "Create Sub Task", image: UIImage(named: "create_icon"), selectedImage: nil)
+        let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
 
         // Assign tab bar items to the view controllers
         homeView.tabBarItem = homeTabBarItem
         projectView.tabBarItem = tableViewCellTabBarItem
-        taskView.tabBarItem = subTaskListTabBarItem
-        createSubTaskView.tabBarItem = createSubTaskTabBarItem
 
         // Set up the view controllers in the tab bar controller
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeView, projectView, taskView, createSubTaskView]
+        tabBarController.viewControllers = [homeView, projectView]
 
         // Store a reference to the tab bar controller for future reference
         self.tabBarController = tabBarController
 
         // Set the tab bar controller as the root view controller of the navigation controller
         navigationController?.setViewControllers([tabBarController], animated: false)
-    }}
+    }
+}
+

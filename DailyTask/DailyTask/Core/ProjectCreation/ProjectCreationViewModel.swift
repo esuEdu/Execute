@@ -25,8 +25,8 @@ class ProjectCreationViewModel: Coordinating {
         name = "Sem nome"
         description = "Sem descrição"
         methodology = .CBL
-        start = Date()
-        end = Date()
+        start = Date.now
+        end = Date.now.addingTimeInterval(30)
     }
     
     func createAProject(){
@@ -35,6 +35,10 @@ class ProjectCreationViewModel: Coordinating {
     
     func goToProjectList(){
         coordinator?.eventOccurred(with: .goToProjectList)
+    }
+    
+    func goToTagCreation(){
+//        coordinator?.eventOccurred(with: )
     }
     
     func removeTopView(){

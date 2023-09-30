@@ -26,5 +26,9 @@ class ProjectListViewModel: Coordinating {
         self.project = projectManager.fetchProjects()
     }
     
+    func goToTaskList(_ project: Project){
+        coordinator?.goToTaskView(project)
+    }
+    
     
 }

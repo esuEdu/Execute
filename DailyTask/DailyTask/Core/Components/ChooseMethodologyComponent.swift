@@ -11,7 +11,6 @@ protocol ChooseMethodologyComponentDelegate: AnyObject{
     func setUpMenuFunction(type: Methodologies)
 }
 
-#warning("LocalizedString")
 class ChooseMethodologyComponent: UIView{
     
     weak var delegate: ChooseMethodologyComponentDelegate?
@@ -21,19 +20,21 @@ class ChooseMethodologyComponent: UIView{
         return methodology
     }()
     
+    let viewToResizeTheButton: UIView = UIView()
+    
     let selectMethodology: UIButton = {
         let selectedMethodology = UIButton(primaryAction: nil)
         selectedMethodology.setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
+        selectedMethodology.contentMode = .scaleAspectFit
         return selectedMethodology
     }()
     
     let chooseMethodolyBox: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .systemIndigo
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -63,15 +64,15 @@ class ChooseMethodologyComponent: UIView{
     func returnMenu() -> UIMenu{
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
         
-        UIAction(title: "Metodologia CBL", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
+            UIAction(title: "Challenge Based Learning (CBL)", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .CBL)
         }),
         
-        UIAction(title: "Metdologia Scrum", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
+            UIAction(title: String(localized: "Scrum"), image: UIImage(systemName: "paperplane.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Scrum)
         }),
         
-        UIAction(title: "Custom", image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
+            UIAction(title: String(localized: "Custom"), image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Custom)
         }),
         

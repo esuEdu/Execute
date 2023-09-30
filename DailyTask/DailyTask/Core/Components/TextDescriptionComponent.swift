@@ -26,14 +26,18 @@ class TextDescriptionComponent: UIView {
         return description
     }()
     
-    #warning("NSLocalized and change the color")
-    let placeholder: String = "Digite a descrição aqui..."
+    let color: UIColor = .lightGray
+    
+    #warning("Change the color")
+    let placeholder: String = String(localized: "Enter the description here...")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(descriptionBox)
+        descriptionBox.backgroundColor = UIColor.clear
         descriptionBox.text = placeholder
-        descriptionBox.textColor = .lightGray
+        descriptionBox.font = UIFont.preferredFont(forTextStyle: .body)
+        descriptionBox.textColor = color
         descriptionBox.delegate = self
         addAllConstraints()
     }
@@ -59,9 +63,9 @@ class TextDescriptionComponent: UIView {
 
 extension TextDescriptionComponent: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .lightGray {
+        if textView.textColor == color {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = .white
         }
     }
 
@@ -74,7 +78,7 @@ extension TextDescriptionComponent: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
-        let maxCharactor = 350
+        let maxCharactor = 200
         let currentString: NSString = textView.text as NSString
         let newString: NSString = currentString.replacingCharacters (in: range, with: text) as NSString
         
@@ -84,7 +88,7 @@ extension TextDescriptionComponent: UITextViewDelegate {
         }
         
         if text == "\n" {
-            textView.resignFirstResponder() // Oculta o teclado quando o usuário pressiona "Return"
+            textView.resignFirstResponder()
             return false
         }
         
