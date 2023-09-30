@@ -14,8 +14,11 @@ class CreateSubTaskViewModel: Coordinating {
     
     let subTaskManager = SubTaskManager()
     
-    func createSubTask(name: String, startDate: Date, endDate: Date) {
-        subTaskManager.createSubTask(name: name, startDate: startDate, endDate: endDate)
+    var name: String?
+    var startDate: Date?
+    
+    func createSubTask() {
+        subTaskManager.createSubTask(name: self.name ?? "Sub-Task", startDate: self.startDate ?? Date.now)
     }
     
 }

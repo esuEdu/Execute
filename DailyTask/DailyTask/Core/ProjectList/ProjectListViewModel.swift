@@ -15,7 +15,6 @@ class ProjectListViewModel: Coordinating {
     
     init() {
         self.project = projectManager.fetchProjects()
-        print("Cheguei aqui")
     }
     
     func deleteAProject(project: Project){
@@ -25,7 +24,6 @@ class ProjectListViewModel: Coordinating {
     
     func fetchProjectViewModel(){
         self.project = projectManager.fetchProjects()
-        print("Cheguei aqui 2")
     }
     
     

@@ -54,12 +54,6 @@
         }
       }
     },
-    "Date:" : {
-
-    },
-    "Done" : {
-
-    },
     "end" : {
 
     },
@@ -190,12 +184,6 @@
           }
         }
       }
-    },
-    "Sub-Task" : {
-
-    },
-    "Sub-Task Title" : {
-      "comment" : "Accessibility Label for Sub-Task Title"
     }
   },
   "version" : "1.0"

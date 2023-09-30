@@ -13,12 +13,12 @@ class SubTaskManager {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func createSubTask(name: String,startDate: Date, endDate: Date) {
+    func createSubTask(name: String,startDate: Date) {
         let subTask = SubTask(context: context)
         subTask.id = UUID()
         subTask.name = name
         subTask.start = startDate
-        subTask.end = endDate
+        
         do {
             try context.save()
             print("SubTask created with succesfully")
@@ -54,7 +54,6 @@ class SubTaskManager {
             // Update the properties of the fetched subtask
             subTaskToEdit.name = name
             subTaskToEdit.start = startDate
-            subTaskToEdit.end = endDate
 
             // Save the context to persist the changes
             try context.save()

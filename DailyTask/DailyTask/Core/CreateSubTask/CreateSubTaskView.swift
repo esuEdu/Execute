@@ -11,19 +11,85 @@ import UIKit
 class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     var viewModel: CreateSubTaskViewModel?
-    
     override var sheetPresentationController: UISheetPresentationController? {
         presentationController as? UISheetPresentationController
     }
     
     private var sheetDetents: Double = 276
     
-    var textField: UITextField!
-    var startDate: Date?
-    var endDate: Date?
     
     
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalCentering
+        
+        return stackView
+    }()
     
+    let titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.layer.cornerRadius = 10
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 16.5, left: 0, bottom: 0, right: 0)
+        return stackView
+    }()
+    
+    let label = LabelComponent(text: "SubTask", accessibilityLabel: "SubTask",font: .title3)
+
+    let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xbox.logo"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    let textFieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.layer.cornerRadius = 10
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
+        return stackView
+    }()
+    
+    let textField: TextFieldToName = {
+        let textField = TextFieldToName()
+        return textField
+    }()
+    
+    let dateStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.backgroundColor = .systemGray5
+        stackView.layer.cornerRadius = 10
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 20)
+        return stackView
+    }()
+    
+    let dateLabel: LabelComponent = LabelComponent(text: "Date", accessibilityLabel: "Date")
+    
+    let datePicker: DatePickerComponent = {
+        let datePicker = DatePickerComponent(datePickerMode: .time)
+        
+        return datePicker
+    }()
+    
+    let button: UIButton = {
+        let button = UIButton()
+        button.setTitle("done", for: .normal)
+        button.configuration = .bordered()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func loadView() {
         super.loadView()
         view.backgroundColor = .systemBackground
@@ -34,97 +100,37 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
             return self.sheetDetents
         })]
         
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 16
+        titleStackView.addArrangedSubview(label)
         
-        let titleAndCloseButtonStackView = UIStackView()
-        titleAndCloseButtonStackView.axis = .horizontal
-        titleAndCloseButtonStackView.alignment = .center
-        titleAndCloseButtonStackView.distribution = .equalSpacing
+        stackView.addArrangedSubview(titleStackView)
         
-        let titleAndTimeStackView = UIStackView()
-        titleAndTimeStackView.axis = .horizontal
-        titleAndTimeStackView.alignment = .center
-        titleAndTimeStackView.distribution = .equalSpacing
+        textFieldStackView.addArrangedSubview(textField)
+        stackView.addArrangedSubview(textFieldStackView)
         
+        dateStackView.addArrangedSubview(dateLabel)
         
-        let titleLabel: UILabel = {
-            let label = UILabel()
-            label.text = NSLocalizedString("Sub-Task", comment: "")
-            label.font = .preferredFont(forTextStyle: .title3)
-            label.isAccessibilityElement = true
-            label.accessibilityLabel = NSLocalizedString("Sub-Task Title", comment: "Accessibility Label for Sub-Task Title")
-            return label
-        }()
+        datePicker.addTarget(self, action: #selector(dataChange), for: .valueChanged)
+        dateStackView.addArrangedSubview(datePicker)
+        stackView.addArrangedSubview(dateStackView)
         
-        titleAndCloseButtonStackView.addArrangedSubview(titleLabel)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        titleStackView.addArrangedSubview(closeButton)
         
-        // Create a UIButton for closing the modal
-        let closeButton: UIButton = {
-            let button = UIButton(type: .system)
-            button.setImage(UIImage(systemName: "logo.xbox"), for: .normal)
-            button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-            return button
-        }()
-        
-        titleAndCloseButtonStackView.addArrangedSubview(closeButton)
-        
-        stackView.addArrangedSubview(titleAndCloseButtonStackView)
-        
-        
-        
-        textField = UITextField()
-        textField.placeholder = "Enter text"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.delegate = self // Set the delegate to capture events
-        
-        // Add the UITextField to the view
-        view.addSubview(textField)
-        stackView.addArrangedSubview(textField)
-        
-        
-        let titleDate: UILabel = {
-            let label = UILabel()
-            label.text = NSLocalizedString("Date:", comment: "")
-            label.font = .preferredFont(forTextStyle: .title3)
-            label.isAccessibilityElement = true
-            label.accessibilityLabel = NSLocalizedString("Sub-Task Title", comment: "Accessibility Label for Sub-Task Title")
-            return label
-        }()
-        
-        titleAndTimeStackView.addArrangedSubview(titleDate)
-        
-        let datePicker: DatePickerView<Date> = {
-            let datePicker = DatePickerView<Date>()
-            datePicker.datePickerMode = .time
-            datePicker.valueChangedHandler = { selectedDate in
-                self.endDate = selectedDate
-            }
-            return datePicker
-        }()
-        titleAndTimeStackView.addArrangedSubview(datePicker)
-        
-        stackView.addArrangedSubview(titleAndTimeStackView)
-        
-        let saveButton: UIButton = {
-            let saveButton = UIButton(type: .roundedRect)
-            saveButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
-            saveButton.addTarget(self, action: #selector(saveAndClose), for: .touchUpInside)
-            return saveButton
-        }()
-        
-        stackView.addArrangedSubview(saveButton)
+        button.addTarget(self, action: #selector(saveAndClose), for: .touchUpInside)
+        view.addSubview(button)
         
         view.addSubview(stackView)
         
+        viewModel?.name = textField.textFieldToGetTheName.text
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16),
+            button.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
+            button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
@@ -133,18 +139,13 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
     }
     
     @objc func saveAndClose() {
-        viewModel?.createSubTask(name: textField.text ?? "", startDate: Date.now, endDate: endDate ?? Date.now)
+        viewModel?.createSubTask()
         self.dismiss(animated: true, completion: nil)
-        
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            // Use the 'text' variable to access the typed data
-            print("Typed Text: \(text)")
-            
-            // You can perform further actions with the retrieved text here
-        }
+    @objc func dataChange(_ sender: UIDatePicker) {
+        let date = sender.date
+        viewModel?.startDate = date 
     }
 }
 

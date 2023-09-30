@@ -11,7 +11,6 @@ import UIKit
 enum Event {
     case goToProjectCreation
     case goToProjectList
-    case goToSubTaskList
     case createModalView
     case goToTaskView
     case goToCreateTaskView
