@@ -36,12 +36,13 @@ class ProjectCreationView: UIViewController {
         iconPicker.horizontalPadding = 10
         iconPicker.verticalPadding = 15
         iconPicker.iconName = "pencil.tip"
+        iconPicker.isSelectable = true
         iconPicker.translatesAutoresizingMaskIntoConstraints = false
         return iconPicker
     }()
     
-    let textFieldToGetTheName: TextFieldToName = {
-        let textField = TextFieldToName()
+    let textFieldToGetTheName: TextFieldComponent = {
+        let textField = TextFieldComponent()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -90,10 +91,17 @@ class ProjectCreationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpDelegates()
         setUpUI()
         addAllConstraints()
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
+    }
+    
+    func setUpDelegates(){
+        methodologyButton.delegate = self
+        colorChooser.delegate = self
+        iconButton.delegate = self
     }
     
     func setUpUI(){
@@ -103,8 +111,7 @@ class ProjectCreationView: UIViewController {
         
         methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
-        methodologyButton.delegate = self
-        colorChooser.delegate = self
+        
         
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
@@ -126,9 +133,8 @@ class ProjectCreationView: UIViewController {
         stackViewForTitleAndColor.addArrangedSubview(colorChooser)
         
         view.addSubview(createButton)
-        
-        iconButton.menu = setIcon()
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+        iconButton.changeColor(bgColor: .systemRed , tintColor: selectTheBestColor(color: .systemRed, isBackground: true))
     }
 
     
@@ -214,32 +220,8 @@ extension ProjectCreationView {
             button.action = #selector(removeTheView)
             return button
         }()
-
-        return buttonToContinue
-    }
-
-    func setIcon() -> UIMenu{
-        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
-            
-            UIAction(title: "Globo", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
-                self.iconButton.iconName = "globe.americas.fill"
-                self.projectCreationViewModel?.icon = self.iconButton.iconName
-            }),
-            
-            UIAction(title: "PaperPlane", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-                self.iconButton.iconName = "paperplane.fill"
-                self.projectCreationViewModel?.icon = self.iconButton.iconName
-            }),
-            
-            UIAction(title: "Pencil", image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
-                self.iconButton.iconName = "pencil.tip.crop.circle.badge.plus"
-                self.projectCreationViewModel?.icon = self.iconButton.iconName
-            }),
-            
-            
-        ])
         
-        return menuItems
+        return buttonToContinue
     }
 
 }
@@ -247,15 +229,20 @@ extension ProjectCreationView {
 extension ProjectCreationView: ChooseMethodologyComponentDelegate {
     
     func setUpMenuFunction(type: Methodologies) {
-        self.projectCreationViewModel?.methodology = type
-        self.methodologyButton.methodology.text = "\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
-        self.methodologyButton.layoutIfNeeded()
+        self.projectCreationViewModel?.selectedMethodology(type)
+        self.methodologyButton.changeTheMethodologyText("\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))")
     }
 }
 
-extension ProjectCreationView: ColorChooseComponentDelegate {
+extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
+    func menuWasPressed(_ menuIcon: String) {
+        self.projectCreationViewModel?.selectedIcon(menuIcon)
+        iconButton.iconName = menuIcon
+    }
+    
     func updateColor() {
-        iconButton.changeColor(bgColor: colorChooser.returnColorUIColor())
+        let color = colorChooser.returnColorUIColor()
+        iconButton.changeColor(bgColor: color, tintColor: selectTheBestColor(color: color, isBackground: true))
     }
 
 }

@@ -13,27 +13,36 @@ class SubTaskManager {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func createSubTask(name: String,startDate: Date) {
-        let subTask = SubTask(context: context)
-        subTask.id = UUID()
-        subTask.name = name
-        subTask.start = startDate
-        
-        do {
-            try context.save()
-            print("SubTask created with succesfully")
-        }catch {
-            fatalError("erro in createSubTask \(error)")
-        }
-    }
-    
-    func fetchSubTask() -> [SubTask] {
+    func fetchSubTask(task: Task) -> [SubTask] {
         do{
-            let subTasks = try context.fetch(SubTask.fetchRequest())
+            let request: NSFetchRequest<SubTask> = SubTask.fetchRequest()
+            
+            request.predicate = NSPredicate(format: "task == %@", task)
+            
+            let subTasks = try context.fetch(request)
+            
             print("")
             return subTasks
         }catch {
             fatalError("erro in fetchSubTask \(error)")
+        }
+    }
+    
+    func createSubTask(name: String, startDate: Date) -> SubTask{
+        let subTask = SubTask(context: context)
+        subTask.id = UUID()
+        subTask.name = name
+        subTask.start = startDate
+        print("Cheguei porra", String(describing: subTask.name), String(describing: subTask.start))
+        
+        return subTask
+    }
+    
+    func save(){
+        do {
+            try context.save()
+        } catch {
+            fatalError("Error in editSubTask: \(error)")
         }
     }
     

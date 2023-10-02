@@ -7,6 +7,25 @@
 
 import UIKit
 
+/// The `ColorChooseComponentDelegate` enables you to update your current color in real time based on the selected color
+///
+///## How to use?
+///
+/// You can set the color inside the funcion in your View or ViewModel, it will change automatically
+///
+///```swift
+///extension ProjectCreationView: ColorChooseComponentDelegate {
+///    func updateColor() {
+///        let color = colorChooser.returnColorUIColor()
+///        iconButton.changeColor(bgColor: color, tintColor: selectTheBestColor(color: color))
+///    }
+///}
+///```
+///
+protocol ColorChooseComponentDelegate: AnyObject {
+    func updateColor()
+}
+
 /// A custom components to choose the color of the project, task or tag
 ///
 /// `ColorChooseComponent` is a subclass of `UIView` and have two diferrent components `ColorPicker` and the `CustomColorButton`
@@ -28,16 +47,12 @@ import UIKit
 ///  [1.0, 0.4, 0.8]
 /// ```
 ///
-
-protocol ColorChooseComponentDelegate: AnyObject {
-    func updateColor()
-}
-
 class ColorChooseComponent: UIView{
     
-    var delegate: ColorChooseComponentDelegate?
+    weak var delegate: ColorChooseComponentDelegate?
     
-    var theChoosenOne: ColorSelection?{
+    // Variable used to get easily what color was selected
+    private var theChoosenOne: ColorSelection?{
         didSet{
             delegate?.updateColor()
         }
@@ -53,33 +68,33 @@ class ColorChooseComponent: UIView{
         return stackview
     }()
     
-    let colorWell: ColorPicker = {
+    private let colorWell: ColorPicker = {
         let colorPicker = ColorPicker()
         return colorPicker
     }()
     
-    let color1: CustomColorButton = {
+    private let color1: CustomColorButton = {
         let color = CustomColorButton()
         color.colorName = .Red
         color.translatesAutoresizingMaskIntoConstraints = false
         return color
     }()
     
-    let color2: CustomColorButton = {
+    private let color2: CustomColorButton = {
         let color = CustomColorButton()
         color.colorName = .Blue
         color.translatesAutoresizingMaskIntoConstraints = false
         return color
     }()
     
-    let color3: CustomColorButton = {
+    private let color3: CustomColorButton = {
         let color = CustomColorButton()
         color.colorName = .Yellow
         color.translatesAutoresizingMaskIntoConstraints = false
         return color
     }()
     
-    let color4: CustomColorButton = {
+    private let color4: CustomColorButton = {
         let color = CustomColorButton()
         color.colorName = .Green
         color.translatesAutoresizingMaskIntoConstraints = false
@@ -106,12 +121,14 @@ class ColorChooseComponent: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Used when the color picker is the selected, it`s important in every changed deselect the other ones
     @objc private func chooseColorPicker(){
         print("OI")
         deselectAllButtons()
         theChoosenOne = ColorSelection.Custom
     }
     
+    // Used when the color picker is not the selected, it`s important in every changed deselect the other ones
     @objc private func chooseButton(button: CustomColorButton){
         deselectAllButtons()
         
@@ -121,6 +138,7 @@ class ColorChooseComponent: UIView{
         colorWell.selectedColor = .white
     }
     
+    // Used just to selected only one color button
     private func deselectAllButtons(){
         color1.isPressed = false
         color2.isPressed = false
@@ -128,11 +146,20 @@ class ColorChooseComponent: UIView{
         color4.isPressed = false
     }
     
+    /// Change the start color of the color picker
     func changeColorPickerColor(color: UIColor){
         colorWell.selectedColor = color
     }
     
     #warning("Colocar as cores oficiais quando elas existirem!")
+    /// Use this function to get the red, gree and blue of the user's selected color in CGFloat format
+    ///
+    ///## Return
+    ///
+    /// ```swift
+    /// //r,    g,    b
+    ///  [1.0, 0.4, 0.8]
+    /// ```
     func returnColorCGFloat() -> [CGFloat]{
         if let theChoosenOne = theChoosenOne{
             switch theChoosenOne {
@@ -157,6 +184,7 @@ class ColorChooseComponent: UIView{
     }
     
     #warning("Colocar as cores oficiais quando elas existirem!")
+    /// Use this function to get the `UIColor` of the user's selected color
     func returnColorUIColor() -> UIColor{
         if let theChoosenOne = theChoosenOne{
             switch theChoosenOne {
@@ -214,8 +242,10 @@ class ColorChooseComponent: UIView{
     
 }
 
+// Setting the colorWell configurations
 class ColorPicker: UIColorWell{
     
+    // It's import to not give the user permission to use the alpha scale
     override init(frame: CGRect) {
         super.init(frame: frame)
         selectedColor = .white
@@ -243,12 +273,14 @@ class ColorPicker: UIColorWell{
 /// ```
 ///
 class CustomColorButton: UIButton {
+    // If you change the color name it execute the hierarchy and configuration of this view
     var colorName: ColorSelection? {
         didSet{
             setUpUI()
         }
     }
     
+    // Variable used to know if the color button is pressed or not and change the image
     var isPressed: Bool = false{
         didSet{
             if isPressed{
@@ -260,6 +292,7 @@ class CustomColorButton: UIButton {
         }
     }
     
+    // This is what change when is pressed or not
     private let image: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -271,7 +304,7 @@ class CustomColorButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpUI(){
+    private func setUpUI(){
         image.image = UIImage(named: "\(colorName?.rawValue ?? "Red")Deselected")
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -279,7 +312,7 @@ class CustomColorButton: UIButton {
         addAllConstraints()
     }
     
-    func addAllConstraints(){
+    private func addAllConstraints(){
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: topAnchor),
             image.bottomAnchor.constraint(equalTo: bottomAnchor),

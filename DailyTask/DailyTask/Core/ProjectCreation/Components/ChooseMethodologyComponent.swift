@@ -7,29 +7,38 @@
 
 import UIKit
 
+/// This is the protocol of `ChooseMethodologyComponent` that give you the hability to choose what will happen when the user choose the specific methodolgy
+///
+/// ## How to use?
+///
+/// It has only one function, `setUpMenuFunction(type: Methodologies)`. With that you receive the correct methodology and save whenever you want.
+///
 protocol ChooseMethodologyComponentDelegate: AnyObject{
     func setUpMenuFunction(type: Methodologies)
 }
 
+/// Component created to give the user the possibility to choose the main methodology of the project
+///
+/// ## How to use?
+///
+/// This structure has a `UIMenu` that gives you some options of the methodologies, CBL, Scrum and Custom
+///
 class ChooseMethodologyComponent: UIView{
     
     weak var delegate: ChooseMethodologyComponentDelegate?
     
-    let methodology: UILabel = {
-        let methodology = UILabel()
-        return methodology
-    }()
+    private let methodology = UILabel()
     
-    let viewToResizeTheButton: UIView = UIView()
+    private let viewToResizeTheButton: UIView = UIView()
     
-    let selectMethodology: UIButton = {
+    private let selectMethodology: UIButton = {
         let selectedMethodology = UIButton(primaryAction: nil)
         selectedMethodology.setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
         selectedMethodology.contentMode = .scaleAspectFit
         return selectedMethodology
     }()
     
-    let chooseMethodolyBox: UIStackView = {
+    private let chooseMethodolyBox: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -54,14 +63,13 @@ class ChooseMethodologyComponent: UIView{
         
         selectMethodology.menu = returnMenu()
         selectMethodology.showsMenuAsPrimaryAction = true
-//        selectMethodology.changesSelectionAsPrimaryAction = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func returnMenu() -> UIMenu{
+    private func returnMenu() -> UIMenu{
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
         
             UIAction(title: "Challenge Based Learning (CBL)", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
@@ -81,7 +89,7 @@ class ChooseMethodologyComponent: UIView{
         return menuItems
     }
     
-    func addAllConstraints(){
+    private func addAllConstraints(){
         NSLayoutConstraint.activate([
             chooseMethodolyBox.leadingAnchor.constraint(equalTo: leadingAnchor),
             chooseMethodolyBox.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -89,4 +97,18 @@ class ChooseMethodologyComponent: UIView{
             chooseMethodolyBox.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+    
+    // This give permission to change the methodology container change the label
+    func changeTheMethodologyText(_ text: String){
+        methodology.text = text
+        methodology.layoutIfNeeded()
+    }
+}
+
+/// Adding the methodologies of the project. You will create a enum case that support the especific methodology wanted. You have CBL, Scrum and Custom
+enum Methodologies: String {
+    case CBL = "CBL"
+    case Scrum = "Scrum"
+    case Custom = "Custom"
+    // Add more cases if nedeed
 }

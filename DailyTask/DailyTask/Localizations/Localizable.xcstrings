@@ -143,6 +143,9 @@
         }
       }
     },
+    "Delete" : {
+
+    },
     "Description" : {
 
     },
@@ -179,6 +182,9 @@
           }
         }
       }
+    },
+    "Edit" : {
+
     },
     "Edit Tag" : {
 
@@ -383,7 +389,20 @@
       }
     },
     "SubtasksKey" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subtasks"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subtarefas"
+          }
+        }
+      }
     },
     "Task Tag Title" : {
       "comment" : "Accessibility Label for Task Tag Title"

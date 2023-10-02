@@ -11,6 +11,8 @@ class HomeView: UIViewController {
     
     var homeViewModel: HomeViewModel?
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
@@ -18,5 +20,7 @@ class HomeView: UIViewController {
         
         
     }
+    
+    
     
 }

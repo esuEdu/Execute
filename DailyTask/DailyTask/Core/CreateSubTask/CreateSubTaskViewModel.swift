@@ -7,18 +7,28 @@
 
 import Foundation
 
+protocol CreateSubTaskViewModelDelegate: AnyObject{
+    func createSubview(name: String, startDate: Date)
+}
+
 class CreateSubTaskViewModel: Coordinating {
     
+    weak var delegate: CreateSubTaskViewModelDelegate?
     var coordinator: Coordinator?
     var view: CreateSubTaskView?
-    
-    let subTaskManager = SubTaskManager()
     
     var name: String?
     var startDate: Date?
     
+    init(){
+        self.name = "Sem título"
+        self.startDate = Date.now
+    }
+    
     func createSubTask() {
-        subTaskManager.createSubTask(name: self.name ?? "Sub-Task", startDate: self.startDate ?? Date.now)
+        delegate?.createSubview(name: name!, startDate: startDate!)
     }
     
 }
+
+

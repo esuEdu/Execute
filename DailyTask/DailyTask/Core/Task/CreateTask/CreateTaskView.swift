@@ -34,8 +34,8 @@ class CreateTaskView: UIViewController {
     return button
   }()
 
-  let nameTextField: TextFieldToName = {
-      let textField = TextFieldToName()
+  let nameTextField: TextFieldComponent = {
+      let textField = TextFieldComponent()
     textField.textFieldToGetTheName.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
       textField.translatesAutoresizingMaskIntoConstraints = false
       return textField
@@ -52,12 +52,19 @@ class CreateTaskView: UIViewController {
   
   var subTasksContainer: ContainerComponent?
   let subTasksComponent = SubtasksInTasksComponent(name: "teste", date: Date.now)
+  let buttonCreateSubtask: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(systemName: "plus"), for: .normal)
+    button.tintColor = .black
+    return button
+  }()
 
   let icon: ChooseIconComponent = {
     let icon = ChooseIconComponent()
     icon.iconName = "pencil.tip"
     icon.horizontalPadding = 10
     icon.verticalPadding = 15
+      icon.isSelectable = true
     icon.translatesAutoresizingMaskIntoConstraints = false
     return icon
   }()
@@ -110,15 +117,19 @@ class CreateTaskView: UIViewController {
     nameTextField.textFieldToGetTheName.autocorrectionType = .no
     nameTextField.textFieldToGetTheName.keyboardAppearance = .default
     nameTextField.delegate = self
+      icon.delegate = self
+      colorPicker.delegate = self
     
     navigationItem.rightBarButtonItem = buttonDone
     navigationItem.leftBarButtonItem = buttonCancel
     
     buttonDone.target = self
     buttonDone.action = #selector(createTask)
-    
+      
     buttonCancel.target = self
     buttonCancel.action = #selector(cancelTask)
+      
+      buttonCreateSubtask.addTarget(self, action: #selector(goToCreateSubtask), for: .touchUpInside)
 
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     
@@ -131,7 +142,7 @@ class CreateTaskView: UIViewController {
     descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     
-    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), components: [subTasksComponent])
+    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [subTasksComponent])
     subTasksContainer?.translatesAutoresizingMaskIntoConstraints = false
     
     view.addSubview(stackViewContainers)
@@ -166,9 +177,10 @@ class CreateTaskView: UIViewController {
     ])
   }
   
+    
 }
 
-extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
+extension CreateTaskView: TextFieldComponentDelegate, UITextViewDelegate {
   
   func textFieldDidEndEditing() {
     
@@ -180,7 +192,12 @@ extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
  
   @objc func createTask() {
     
-    self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição")
+      let color = colorPicker.returnColorCGFloat()
+      let red = color[0]
+      let green = color[1]
+      let blue = color[2]
+      
+      self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue)
   
     viewModel?.removeLastView()
   }
@@ -193,6 +210,10 @@ extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
     let selectDate = sender.date
     self.dateStart = selectDate
   }
+    
+    @objc func goToCreateSubtask(){
+        viewModel?.goToCreateSubtask()
+    }
   
   @objc func getEndDate(_ sender: UIDatePicker){
     let selectDate = sender.date
@@ -207,6 +228,18 @@ extension CreateTaskView: TextFieldToNameDelegate, UITextViewDelegate {
     print("inside of textViewDidEndEditing")
   }
 
+}
+
+extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDelegate{
+    func updateColor() {
+        let color = colorPicker.returnColorUIColor()
+        
+        icon.changeColor(bgColor: selectTheBestColor(color: color, isBackground: false), tintColor: color)
+    }
+    
+    func menuWasPressed(_ menuIcon: String) {
+        icon.iconName = menuIcon
+    }
 }
 
 

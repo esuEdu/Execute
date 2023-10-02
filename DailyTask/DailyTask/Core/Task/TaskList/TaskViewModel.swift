@@ -45,5 +45,14 @@ class TaskViewModel: Coordinating {
     coordinator?.goToTaskCreation(project!)
   }
     
+    func getActualTask(index: Int) -> Task{
+        return task[index]
+    }
+    
+    func goToModalGetInfo(_ task: Task, delegate: ModalGetInfoTaskViewDelegate){
+        coordinator?.goToModalGetInfo(task, delegate)
+    }
+    
   
 }
+
