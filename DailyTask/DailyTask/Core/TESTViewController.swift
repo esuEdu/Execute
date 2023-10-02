@@ -8,35 +8,75 @@
 import UIKit
 import CoreData
 
+// How to scroll up side while keyboard appears in swift 5
+
 class TESTViewController: UIViewController {
     
-    let icon: ModalSquareComponent = {
-        let icon = ModalSquareComponent(text: "Bom dia", iconImage: UIImage(systemName: "pencil.tip" )!)
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        return icon
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.backgroundColor = .systemYellow
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    let contentView: UIStackView = {
+        let view = UIStackView()
+        view.backgroundColor = .systemCyan
+        view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let subview1: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        view.backgroundColor = .systemRed
+        return view
+    }()
+       
+    let subview2: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        view.backgroundColor = .systemMint
+        return view
+    }()
+       
+    let subview3: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        view.backgroundColor = .systemPurple
+        return view
     }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
-        view.addSubview(icon)
-        addAllContraints()
+        view.backgroundColor = .systemGroupedBackground
         
-        icon.addTarget(self, action: #selector(teste), for: .touchUpInside)
-    }
-    
-    @objc func teste(){
-        print("é deu ruim")
-    }
-    
-    func addAllContraints(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
         NSLayoutConstraint.activate([
-            icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            icon.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            icon.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            icon.heightAnchor.constraint(equalToConstant: 300),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
+        
+        contentView.addArrangedSubview(subview1)
+        contentView.addArrangedSubview(subview2)
+        contentView.addArrangedSubview(subview3)
+        
+        
     }
 
 }

@@ -135,6 +135,7 @@ class ColorChooseComponent: UIView{
         button.isPressed = true
         button.layoutIfNeeded()
         theChoosenOne = button.colorName
+        print("Escolhido \(theChoosenOne)")
         colorWell.selectedColor = .white
     }
     
@@ -170,10 +171,10 @@ class ColorChooseComponent: UIView{
                 let color = UIColor.systemRed
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Yellow:
-                let color = UIColor.systemRed
+                let color = UIColor.systemYellow
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Green:
-                let color = UIColor.systemRed
+                let color = UIColor.systemYellow
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Custom:
                 if let colors = colorWell.selectedColor?.cgColor.components{

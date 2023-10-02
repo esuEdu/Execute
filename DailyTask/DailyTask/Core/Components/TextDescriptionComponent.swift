@@ -7,6 +7,22 @@
 
 import UIKit
 
+/// This is the component to text description that have all the configurations like word limits, return dismiss and placeholder
+///
+///  ## How to use?
+///
+///  You can define the horizontal and vertical padding by change the variable `horizontalPadding` and `verticalPadding`. 
+///
+/// You can also change the text color by using the function `changeTextColor(textColor: UIColor)`.
+///
+/// After the use you can get the text by using the `getText()` function:
+///
+/// ```swift
+/// let description = TextDescriptionComponent()
+/// description.horizontalPadding = 10
+/// description.verticalPadding = 14
+/// let descriptionResult = description.getText() //This return a string
+///```
 class TextDescriptionComponent: UIView {
 
     var horizontalPadding: CGFloat?{
@@ -26,18 +42,22 @@ class TextDescriptionComponent: UIView {
         return description
     }()
     
-    let color: UIColor = .lightGray
+    private var placeholderColor: UIColor = .lightGray
+    
+    private var textColor: UIColor = .lightGray
     
     #warning("Change the color")
     let placeholder: String = String(localized: "Enter the description here...")
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(placeholderColor: UIColor, textColor: UIColor) {
+        super.init(frame: .zero)
+        self.textColor = textColor
+        self.placeholderColor = placeholderColor
         addSubview(descriptionBox)
         descriptionBox.backgroundColor = UIColor.clear
         descriptionBox.text = placeholder
         descriptionBox.font = UIFont.preferredFont(forTextStyle: .body)
-        descriptionBox.textColor = color
+        descriptionBox.textColor = self.placeholderColor
         descriptionBox.delegate = self
         addAllConstraints()
     }
@@ -46,8 +66,14 @@ class TextDescriptionComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Returns a string with the current text
     func getText() -> String{
         return descriptionBox.text == placeholder ? "" : descriptionBox.text
+    }
+    
+    // Change the text color of the text
+    func changeTextColor(textColor: UIColor){
+        descriptionBox.textColor = placeholderColor
     }
     
     private func addAllConstraints(){
@@ -63,16 +89,16 @@ class TextDescriptionComponent: UIView {
 
 extension TextDescriptionComponent: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == color {
+        if textView.textColor == placeholderColor {
             textView.text = ""
-            textView.textColor = .white
+            textView.textColor = textColor
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = placeholder
-            textView.textColor = .lightGray
+            textView.textColor = placeholderColor
         }
     }
     
@@ -98,5 +124,5 @@ extension TextDescriptionComponent: UITextViewDelegate {
 }
 
 #Preview(){
-    TextDescriptionComponent()
+    TextDescriptionComponent(placeholderColor: .brown, textColor: .black)
 }

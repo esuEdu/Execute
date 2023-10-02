@@ -43,7 +43,7 @@ class CreateTaskView: UIViewController {
   
   var descriptionContainer: ContainerComponent?
   let descriptionTextField: TextDescriptionComponent = {
-      let textField = TextDescriptionComponent()
+      let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.horizontalPadding = 10
       textField.verticalPadding = 10
@@ -233,7 +233,7 @@ extension CreateTaskView: TextFieldComponentDelegate, UITextViewDelegate {
 extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDelegate{
     func updateColor() {
         let color = colorPicker.returnColorUIColor()
-        
+        print(color)
         icon.changeColor(bgColor: selectTheBestColor(color: color, isBackground: false), tintColor: color)
     }
     
