@@ -43,6 +43,12 @@ class ModalGetInfoTaskViewModel: Coordinating {
         }
     }
     
+    func deleteTask(){
+        if let task = task {
+            taskManager.deleteTask(id: task.id!)
+        }
+    }
+    
     func getHour() -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm" // Define o formato da hora

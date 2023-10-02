@@ -94,8 +94,6 @@ class ProjectCreationView: UIViewController {
         setUpDelegates()
         setUpUI()
         addAllConstraints()
-        deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
-        deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
     }
     
     func setUpDelegates(){
@@ -135,12 +133,14 @@ class ProjectCreationView: UIViewController {
         view.addSubview(createButton)
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
         iconButton.changeColor(bgColor: .systemRed , tintColor: selectTheBestColor(color: .systemRed, isBackground: true))
+        
+        deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
+        deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
     }
 
     
     func addAllConstraints(){
         NSLayoutConstraint.activate([
-            
             stackViewForTheContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             stackViewForTheContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
@@ -154,7 +154,6 @@ class ProjectCreationView: UIViewController {
             createButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
             
             descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
-            
         ])
     }
     

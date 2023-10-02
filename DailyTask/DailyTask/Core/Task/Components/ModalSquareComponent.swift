@@ -52,6 +52,11 @@ class ModalSquareComponent: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func changeIconSymbol(image: UIImage){
+        icon.image = image
+        icon.layoutIfNeeded()
+    }
+    
     func addAllConstraints(){
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),

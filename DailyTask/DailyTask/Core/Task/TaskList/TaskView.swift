@@ -118,6 +118,7 @@ extension TaskView: ModalGetInfoTaskViewDelegate {
     func changeHappened() {
         viewModel?.fetchTasks()
         tableView.reloadData()
+        print("O Victor é gay")
     }
 }
 #Preview {

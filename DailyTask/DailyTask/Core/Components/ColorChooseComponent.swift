@@ -164,13 +164,17 @@ class ColorChooseComponent: UIView{
         if let theChoosenOne = theChoosenOne{
             switch theChoosenOne {
             case .Blue:
-                return [0.149, 0.5647, 0.5921]
+                let color = UIColor.systemBlue
+                return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Red:
-                return [0.898, 0.286, 0.1529]
+                let color = UIColor.systemRed
+                return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Yellow:
-                return [1, 0.58, 0]
+                let color = UIColor.systemRed
+                return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Green:
-                return [0.56, 0.7568, 0.2352]
+                let color = UIColor.systemRed
+                return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Custom:
                 if let colors = colorWell.selectedColor?.cgColor.components{
                     return [colors[0],colors[1],colors[2]]

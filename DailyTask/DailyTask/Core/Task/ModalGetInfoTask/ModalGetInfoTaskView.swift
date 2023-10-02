@@ -15,7 +15,7 @@ class ModalGetInfoTaskView: UIViewController{
 
     var viewModel: ModalGetInfoTaskViewModel?
     
-    var delegate: ModalGetInfoTaskViewDelegate?
+    weak var delegate: ModalGetInfoTaskViewDelegate?
     
     override var sheetPresentationController: UISheetPresentationController? {
         presentationController as? UISheetPresentationController
@@ -128,8 +128,19 @@ class ModalGetInfoTaskView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpModalConfiguration()
+        verifyIfIsDone()
         setUpUI()
         addAllContraints()
+    }
+    
+    func verifyIfIsDone(){
+        if viewModel!.task!.isDone{
+            buttonToFinish.changeIconSymbol(image: UIImage(systemName: "checkmark.circle.fill")!)
+            buttonToFinish.layoutIfNeeded()
+        } else{
+            buttonToFinish.changeIconSymbol(image: UIImage(systemName: "checkmark.circle")!)
+            buttonToFinish.layoutIfNeeded()
+        }
     }
     
     func setUpUI(){
@@ -166,6 +177,7 @@ class ModalGetInfoTaskView: UIViewController{
         icon.changeColor(bgColor: selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
         
         buttonToFinish.addTarget(self, action: #selector(completeTask), for: .touchUpInside)
+        buttonToDelete.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
     }
     
     func setUpModalConfiguration(){
@@ -204,7 +216,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     @objc func completeTask(){
         viewModel?.concludedTask()
-        if viewModel!.done{
+        if viewModel!.task!.isDone{
             buttonToFinish.icon.image = UIImage(systemName: "checkmark.circle.fill")!
             buttonToFinish.layoutIfNeeded()
             viewModel?.done.toggle()
@@ -213,8 +225,19 @@ class ModalGetInfoTaskView: UIViewController{
             buttonToFinish.layoutIfNeeded()
             viewModel?.done.toggle()
         }
-        print("Cheguei")
-        
+        delegate?.changeHappened()
+    }
+    
+    @objc func deleteTask(){
+        let alert = UIAlertController(title: "", message: "Você tem certeza que deseja deletar essa task?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Deletar", style: .destructive){_ in
+            self.viewModel?.deleteTask()
+            self.delegate?.changeHappened()
+            self.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel){_ in
+        })
+        self.present(alert, animated: true)
     }
 
 }

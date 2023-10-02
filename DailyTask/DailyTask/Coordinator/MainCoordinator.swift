@@ -134,6 +134,7 @@ class MainCoordinator: Coordinator {
     func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate) {
         let view: ModalGetInfoTaskView = ModalGetInfoTaskView()
         let viewModel: ModalGetInfoTaskViewModel & Coordinating = ModalGetInfoTaskViewModel()
+        view.delegate = delegate
         view.viewModel = viewModel
         viewModel.view = view
         viewModel.task = task
