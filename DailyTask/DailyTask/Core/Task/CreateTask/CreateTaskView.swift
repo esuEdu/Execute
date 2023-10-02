@@ -51,7 +51,7 @@ class CreateTaskView: UIViewController {
   }()
   
   var subTasksContainer: ContainerComponent?
-  let subTasksComponent = SubtasksInTasksComponent(name: "teste", date: Date.now)
+  let subTasksComponent = SubtasksInTasksComponent(name: "teste")
   let buttonCreateSubtask: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -157,9 +157,9 @@ class CreateTaskView: UIViewController {
     
     stackViewContainers.addArrangedSubview(dateContainer!)
     stackViewContainers.addArrangedSubview(priorityContainer!)
-    //stackViewContainers.addArrangedSubview(descriptionContainer!)
     stackViewContainers.addArrangedSubview(subTasksContainer!)
-    
+    stackViewContainers.addArrangedSubview(descriptionContainer!)
+
     setConstraints()
   }
   
@@ -172,6 +172,9 @@ class CreateTaskView: UIViewController {
       
       icon.widthAnchor.constraint(equalToConstant: 93),
       icon.heightAnchor.constraint(equalToConstant: 93),
+      
+      subTasksComponent.checkbox.heightAnchor.constraint(equalToConstant: 30),
+      subTasksComponent.checkbox.widthAnchor.constraint(equalToConstant: 29),
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
     ])

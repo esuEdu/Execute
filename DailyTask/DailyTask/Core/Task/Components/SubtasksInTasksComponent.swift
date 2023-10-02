@@ -18,39 +18,32 @@ class SubtasksInTasksComponent: UIView {
       stackView.alignment = .center
       stackView.distribution = .fill
       stackView.spacing = 5
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.layoutMargins = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 10)
       stackView.translatesAutoresizingMaskIntoConstraints = false
       return stackView
   }()
-  
-  private let formatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = .current
-    dateFormatter.dateStyle = .none
-    dateFormatter.timeStyle = .short
-    dateFormatter.timeZone = .current
-    return dateFormatter
-  }()
-  
+
   private let deleteButton: UIButton = {
     let button = UIButton()
-    button.setTitle("x", for: .normal)
+    button.setImage(UIImage(systemName: "xmark"), for: .normal)
+    button.tintColor = .black
+    button.contentMode = .scaleAspectFit
     return button
   }()
   
-  init(name: String, date: Date) {
+  init(name: String) {
     super.init(frame: .zero)
 
+    self.backgroundColor = .white
+    self.layer.cornerRadius = 10
     self.addSubview(stackView)
     
     let labelSubTasks = LabelComponent(text: name, accessibilityLabel: name)
-    
-    let dateFormatted = self.formatter.string(from: date)
-    
-    let labelDate = LabelComponent(text: dateFormatted, accessibilityLabel: dateFormatted)
-    
+    labelSubTasks.textLabel.font = .systemFont(ofSize: 16)
+       
     stackView.addArrangedSubview(checkbox)
     stackView.addArrangedSubview(labelSubTasks)
-    stackView.addArrangedSubview(labelDate)
     stackView.addArrangedSubview(deleteButton)
     
     NSLayoutConstraint.activate([

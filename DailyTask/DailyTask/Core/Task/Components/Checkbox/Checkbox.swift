@@ -78,6 +78,7 @@ class Checkbox: UIControl {
         self.imageView = imageView
         
         backgroundColor = UIColor.clear
+        self.tintColor = .black
         
         self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
     }
