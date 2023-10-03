@@ -378,8 +378,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "de progresso"
+            "state" : "translated",
+            "value" : "concluído"
           }
         }
       }

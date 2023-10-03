@@ -108,7 +108,7 @@ class ContainerProjectsList: UIView {
     var percentageLabel: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "")
         label.textLabel.text = "\(String(localized: "ProgressLabelKey"))"
-      label.textLabel.font = .systemFont(ofSize: 12)
+      label.textLabel.font = .systemFont(ofSize: 14)
         return label
     }()
     
