@@ -367,6 +367,23 @@
         }
       }
     },
+    "ProgressLabelKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in progress"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de progresso"
+          }
+        }
+      }
+    },
     "Scrum" : {
 
     },
