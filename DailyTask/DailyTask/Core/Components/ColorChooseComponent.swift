@@ -174,7 +174,7 @@ class ColorChooseComponent: UIView{
                 let color = UIColor.systemYellow
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Green:
-                let color = UIColor.systemYellow
+                let color = UIColor.systemGreen
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Custom:
                 if let colors = colorWell.selectedColor?.cgColor.components{

@@ -224,6 +224,23 @@
         }
       }
     },
+    "Enter the subtask here..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the subtask here..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Digite sua subtask aqui..."
+          }
+        }
+      }
+    },
     "Give a name to the project" : {
       "extractionState" : "manual",
       "localizations" : {

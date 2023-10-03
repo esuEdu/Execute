@@ -9,6 +9,8 @@ import UIKit
 
 
 class ContainerComponent: UIView {
+    
+    let subtasks: [String] = []
         
     let stackViewContainerTitle: UIStackView = {
         let stackViewContainerTitle = UIStackView()
@@ -38,7 +40,6 @@ class ContainerComponent: UIView {
         stackViewContainer.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15)
         return stackViewContainer
     }()
-    
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -94,4 +95,10 @@ class ContainerComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension ContainerComponent {
+    func getSubtasks() -> [String]{
+        return subtasks
+    }
 }

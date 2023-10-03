@@ -21,7 +21,6 @@ protocol Coordinator {
     var tabBarController: UITabBarController? { get set }
     var navigationController: UINavigationController? { get set }
     func goToTaskCreation(_ project: Project)
-    func goToSubtaskCreation(createTaskDelegate: CreateSubTaskViewModelDelegate)
     func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate)
     func eventOccurred(with type: Event)
     func goToTaskView(_ project: Project)
