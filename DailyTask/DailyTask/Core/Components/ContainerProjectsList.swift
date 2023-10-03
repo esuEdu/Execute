@@ -78,8 +78,8 @@ class ContainerProjectsList: UIView {
     let stackViewContainer: UIStackView = {
         let stackViewContainer = UIStackView()
         stackViewContainer.axis = .horizontal
-        stackViewContainer.alignment = .fill
-        stackViewContainer.distribution = .equalSpacing
+      stackViewContainer.alignment = .center
+      stackViewContainer.distribution = .fill
         stackViewContainer.backgroundColor = .systemGray3
         stackViewContainer.spacing = 20
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -108,6 +108,7 @@ class ContainerProjectsList: UIView {
     var percentageLabel: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "")
         label.textLabel.text = "\(String(localized: "ProgressLabelKey"))"
+      label.textLabel.font = .systemFont(ofSize: 12)
         return label
     }()
     
@@ -115,9 +116,8 @@ class ContainerProjectsList: UIView {
     let stackViewForPercentage: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.layer.cornerRadius = 10
+      stackView.alignment = .center
+      stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -126,7 +126,7 @@ class ContainerProjectsList: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .center
+      stackView.alignment = .center
         stackView.distribution = .fill
         stackView.layer.cornerRadius = 10
         stackView.clipsToBounds = true
