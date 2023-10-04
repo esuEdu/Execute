@@ -12,6 +12,16 @@ class ProjectListView: UIViewController {
     var projectListViewModel: ProjectListViewModel?
     
     // MARK: - Creating and setting the UIElements
+  
+  var filteredData: [String] = []
+  
+  let searchBar: UISearchBar = {
+    let search = UISearchBar()
+    search.placeholder = "teste"
+    search.translatesAutoresizingMaskIntoConstraints = false
+    return search
+  }()
+  
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,9 +60,22 @@ class ProjectListView: UIViewController {
     
     // Creating the UIElements setups
     func setUpUI(){
+      
+      if let projectListViewModel = projectListViewModel, let project = projectListViewModel.project {
+          for name in project {
+              if let projectName = name.name {
+                  filteredData.append(projectName)
+              }
+          }
+      }
+      
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(buttonToCreateANewProject)
+      view.addSubview(searchBar)
+    
+      searchBar.delegate = self
+      
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -67,15 +90,21 @@ class ProjectListView: UIViewController {
     // Adding constraint
     func addAllConstraints(){
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: buttonToCreateANewProject.bottomAnchor),
+          
+          buttonToCreateANewProject.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+          //buttonToCreateANewProject.bottomAnchor.constraint(equalTo: view.topAnchor),
+          buttonToCreateANewProject.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+          buttonToCreateANewProject.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+          
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+          searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+          searchBar.topAnchor.constraint(equalTo: buttonToCreateANewProject.bottomAnchor),
+          
+          tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+          tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),  tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            buttonToCreateANewProject.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 7),
-            buttonToCreateANewProject.bottomAnchor.constraint(equalTo: tableView.topAnchor),
-            buttonToCreateANewProject.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            buttonToCreateANewProject.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+          
             
         ])
     }
@@ -99,17 +128,17 @@ class ProjectListView: UIViewController {
 // MARK: - Extension para a tableView
 extension ProjectListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projectListViewModel?.project?.count ?? 0
+      return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         var configure = UIListContentConfiguration.cell()
-        configure.text = projectListViewModel?.project?[indexPath.row].name
-        configure.secondaryText = projectListViewModel?.project?[indexPath.row].descript
+        configure.text = filteredData[indexPath.row]
+//        configure.secondaryText = projectListViewModel?.project?[indexPath.row].descript
         cell.contentConfiguration = configure
-        
+     
         return cell
     }
     
@@ -135,3 +164,34 @@ extension ProjectListView: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension ProjectListView: UISearchBarDelegate {
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+    filteredData = []
+
+    if searchText == "" {
+        if let projectListViewModel = projectListViewModel, let project = projectListViewModel.project {
+            for name in project {
+                if let projectName = name.name {
+                    filteredData.append(projectName)
+                }
+            }
+        }
+    }
+
+    if let projectListViewModel = projectListViewModel, let project = projectListViewModel.project {
+        for name in project {
+            if let projectName = name.name {
+              if projectName.uppercased().contains(searchText.uppercased()){
+                filteredData.append(projectName)
+              }
+            }
+        }
+    }
+    
+    self.tableView.reloadData()
+    
+  }
+  
+}

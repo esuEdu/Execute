@@ -52,20 +52,10 @@ class ContainerProjectsList: UIView {
     }()
     
     /// The label component for the project title.
-    let projectTitle: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .headline)
-        label.textLabel.numberOfLines = 2
-        label.textLabel.lineBreakMode = .byTruncatingTail
-        label.textLabel.adjustsFontSizeToFitWidth = false
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+    let projectTitle = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .headline, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
+     
     /// The image view for the project icon.
-    let iconTitle: UIImageView = {
-        let image = UIImageView()
-        return image
-    }()
+    let iconTitle = UIImageView()
     
     /// The image view for the chevron icon.
     let chevron: UIImageView = {
@@ -89,21 +79,11 @@ class ContainerProjectsList: UIView {
     }()
     
     /// The label component for the project description.
-    let projectDesc: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .body)
-        label.textLabel.numberOfLines = 3
-        label.textLabel.lineBreakMode = .byTruncatingTail
-        label.textLabel.adjustsFontSizeToFitWidth = false
-        return label
-    }()
-    
+    let projectDesc = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .body, numberOfLines: 3, lineBreakMode: .byTruncatingTail)
+       
     /// The label component for displaying the completion percentage.
-    let projectPercentage: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .largeTitle)
-        label.textLabel.numberOfLines = 1
-        return label
-    }()
-    
+    let projectPercentage = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .largeTitle, numberOfLines: 1)
+       
     /// The label component for displaying the "Progress" label.
     var percentageLabel: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "")
@@ -201,5 +181,5 @@ class ContainerProjectsList: UIView {
 }
 
 #Preview {
-  ContainerProjectsList(title: "printmeinrnruirnierninrinfinfinfifnfinfnfnjnananajrjrjrjrjrjjrjrjrjjrjrjrvvvvvvvvvvvvvvvvvvj", description: "fjnejfcmndjnfejffnnnfnfjfjfjfkkkkkkkkkkkkkkkkkkkkkkkkkkjnernvfmdmmjcmdjnmfjnfjndjnfdnfjfnfjnfjfnjfnjdfndjfndjnfdjfndjfndjfnjdnfjdnfjdnfjdnfjdnfdjnfdjnfdnfjdnfjdndjfndjfnfndfndd", percentage: "10")
+  ContainerProjectsList(title: "printmeinrnruirnierninrinfinfinfifnfinfnfnjnananajrjrjrjrjrjjrjrjrjjrjrjrvvvvvvvvvvvvvfurnfunncndncdndincndcnncnefncndocneonewfnwencjndnvjnvvvvvj", description: "fjnejfcmndjnfejffnnnfnfjfjfjfkkkkkkkkkkkkkkkkkkkkkkkkkkjnernvfmdmmjcmdjnmfjnfjndjnfdnfjfnfjnfjfnjfnjdfndjfndjnfdjfndjfndjfnjdnfjdnfjdnfjdnfjdnfdjnfdjnfdnfjdnfjdndjfndjfnfndfndd", percentage: "10")
 }
