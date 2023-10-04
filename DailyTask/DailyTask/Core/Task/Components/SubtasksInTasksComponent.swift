@@ -30,7 +30,7 @@ class SubtasksInTasksComponent: UIView {
         return label
     }()
     
-    private let deleteButton: UIButton = {
+    let deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
@@ -67,7 +67,6 @@ class SubtasksInTasksComponent: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 

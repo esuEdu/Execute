@@ -1,6 +1,6 @@
 import UIKit
 
-class TESTViewController: UIViewController, UITextViewDelegate {
+class TESTViewController: UIViewController {
     
 
     

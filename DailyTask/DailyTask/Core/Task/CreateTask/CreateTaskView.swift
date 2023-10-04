@@ -105,7 +105,7 @@ class CreateTaskView: UIViewController {
         return stackView
     }()
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         configurateComponents()
@@ -149,9 +149,9 @@ class CreateTaskView: UIViewController {
         buttonDone.action = #selector(createTask)
         buttonCancel.target = self
         buttonCancel.action = #selector(cancelTask)
-        buttonCreateSubtask.addTarget(self, action: #selector(goToCreateSubtask), for: .touchUpInside)
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
+        buttonCreateSubtask.addTarget(self, action: #selector(createSubtask), for: .touchUpInside)
     }
     
     func setUpUI(){
@@ -180,7 +180,7 @@ class CreateTaskView: UIViewController {
         subTasksContainer?.stackViewContainer.addArrangedSubview(subTasksComponent)
     }
     
-    func setConstraints() {
+    func setConstraints(){
         
         NSLayoutConstraint.activate([
             stackViewContainers.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -213,9 +213,14 @@ extension CreateTaskView: TextFieldComponentDelegate {
         let red = color[0]
         let green = color[1]
         let blue = color[2]
-        let subtasks = subTasksContainer?.getSubtasks() ?? []
+        var subtask: [String] = []
         
-        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: [])
+        for component in subTasksContainer!.stackViewContainer.arrangedSubviews {
+            let compon = component as! SubtasksInTasksComponent
+            subtask.append(compon.returnText())
+        }
+        
+        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: subtask)
         
         viewModel?.removeLastView()
     }
@@ -229,8 +234,24 @@ extension CreateTaskView: TextFieldComponentDelegate {
         self.dateStart = selectDate
     }
     
-    @objc func goToCreateSubtask(){
+    @objc func createSubtask(){
+        let subtask = SubtasksInTasksComponent(name: "")
+        subtask.deleteButton.tag = (subTasksContainer?.getPosition())!
+        subtask.deleteButton.addTarget(self, action: #selector(removeAtPosition), for: .touchUpInside)
+        subTasksContainer?.addNewElements(subtask)
+        print(subtask.deleteButton.tag)
+    }
+    
+    @objc func removeAtPosition(_ button: UIButton){
+        let tag = button.tag
+        let subtask = subTasksContainer?.stackViewContainer.arrangedSubviews[tag]
+        subTasksContainer?.stackViewContainer.removeArrangedSubview(subtask!)
+        subtask?.removeFromSuperview()
         
+        for (index,component) in subTasksContainer!.stackViewContainer.arrangedSubviews.enumerated() {
+            let compon = component as! SubtasksInTasksComponent
+            compon.deleteButton.tag = index
+        }
     }
     
     @objc func getEndDate(_ sender: UIDatePicker){

@@ -10,7 +10,6 @@ import UIKit
 
 class ContainerComponent: UIView {
     
-    let subtasks: [String] = []
         
     let stackViewContainerTitle: UIStackView = {
         let stackViewContainerTitle = UIStackView()
@@ -91,14 +90,18 @@ class ContainerComponent: UIView {
         ])
     }
     
+    func addNewElements(_ view: UIView){
+        stackViewContainer.addArrangedSubview(view)
+    }
+    
+    func getPosition() -> Int{
+        return stackViewContainer.arrangedSubviews.count
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 }
 
-extension ContainerComponent {
-    func getSubtasks() -> [String]{
-        return subtasks
-    }
-}
+

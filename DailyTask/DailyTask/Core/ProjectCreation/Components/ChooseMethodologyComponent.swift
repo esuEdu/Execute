@@ -27,6 +27,8 @@ class ChooseMethodologyComponent: UIView{
     
     weak var delegate: ChooseMethodologyComponentDelegate?
     
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    
     private let methodology = UILabel()
     
     private let viewToResizeTheButton: UIView = UIView()
@@ -63,6 +65,7 @@ class ChooseMethodologyComponent: UIView{
         
         selectMethodology.menu = returnMenu()
         selectMethodology.showsMenuAsPrimaryAction = true
+        selectionFeedbackGenerator.prepare()
     }
     
     required init?(coder: NSCoder) {
@@ -74,14 +77,17 @@ class ChooseMethodologyComponent: UIView{
         
             UIAction(title: "Challenge Based Learning (CBL)", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .CBL)
+                self.selectionFeedbackGenerator.selectionChanged()
         }),
         
             UIAction(title: String(localized: "Scrum"), image: UIImage(systemName: "paperplane.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Scrum)
+                self.selectionFeedbackGenerator.selectionChanged()
         }),
         
             UIAction(title: String(localized: "Custom"), image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Custom)
+                self.selectionFeedbackGenerator.selectionChanged()
         }),
         
         ])
@@ -111,4 +117,8 @@ enum Methodologies: String {
     case Scrum = "Scrum"
     case Custom = "Custom"
     // Add more cases if nedeed
+}
+
+#Preview{
+    ChooseMethodologyComponent(font: .boldSystemFont(ofSize: 12), text: "MAMAMA", textColor: .red)
 }

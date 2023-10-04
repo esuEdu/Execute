@@ -22,8 +22,7 @@ class CreateTaskViewModel: Coordinating  {
         if let project = project{
             let task = taskManager.createTask(name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript, project: project, red: red, green: green, blue: blue)
             for sub in subtasks{
-                addNewSubtask(name: sub, task: task)
-                subTaskManager.save()
+                subTaskManager.createSubTask(name: sub, task: task)
             }
         }
     }
@@ -31,12 +30,5 @@ class CreateTaskViewModel: Coordinating  {
   func removeLastView(){
       coordinator?.eventOccurred(with: .removeTopView)
   }
-    
-    func addNewSubtask(name: String, task: Task){
-        let subtask = SubTask()
-        subtask.id = UUID()
-        subtask.isDone = false
-        subtask.name = name
-    }
     
 }

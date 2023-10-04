@@ -10,6 +10,8 @@ import UIKit
 class ProjectCreationView: UIViewController {
     
     var projectCreationViewModel: ProjectCreationViewModel?
+    
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
 
     // MARK: - OFICIAL
     
@@ -94,6 +96,7 @@ class ProjectCreationView: UIViewController {
         setUpDelegates()
         setUpUI()
         addAllConstraints()
+        selectionFeedbackGenerator.prepare()
     }
     
     func setUpDelegates(){
@@ -174,6 +177,7 @@ class ProjectCreationView: UIViewController {
             alert.addAction(UIAlertAction(title: "Tentar de novo", style: .destructive))
             self.present(alert, animated: true)
         }
+        selectionFeedbackGenerator.selectionChanged()
         
     }
     

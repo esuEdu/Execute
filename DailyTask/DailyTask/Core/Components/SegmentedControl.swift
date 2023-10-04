@@ -28,6 +28,8 @@ import UIKit
 /// - SeeAlso: `UISegmentedControl`
 class SegmentedControl: UISegmentedControl {
     
+    let feedback = UISelectionFeedbackGenerator()
+    
     /// The selected task priority as a string.
     var priority: String?
     
@@ -50,6 +52,7 @@ class SegmentedControl: UISegmentedControl {
         self.selectedSegmentIndex = 0
         // Call the target action manually to update the 'priority' property
       eachSegment(self)
+        feedback.prepare()
     }
     
     required init?(coder: NSCoder) {
@@ -69,14 +72,19 @@ class SegmentedControl: UISegmentedControl {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
           self.priority = Priority.noPriority.rawValue
+            self.feedback.selectionChanged()
         case 1:
           self.priority = Priority.low.rawValue
+            self.feedback.selectionChanged()
         case 2:
           self.priority = Priority.medium.rawValue
+            self.feedback.selectionChanged()
         case 3:
           self.priority = Priority.high.rawValue
+            self.feedback.selectionChanged()
         default:
           self.priority = nil
+            self.feedback.selectionChanged()
         }
     }
 }
