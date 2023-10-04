@@ -121,16 +121,6 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToSubtaskCreation(createTaskDelegate: CreateSubTaskViewModelDelegate){
-        let view: CreateSubTaskView = CreateSubTaskView()
-        let viewModel: CreateSubTaskViewModel & Coordinating = CreateSubTaskViewModel()
-        viewModel.delegate = createTaskDelegate
-        view.viewModel = viewModel
-        viewModel.view = view
-        viewModel.coordinator = self
-        navigationController?.present(view, animated: true)
-    }
-    
     func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate) {
         let view: ModalGetInfoTaskView = ModalGetInfoTaskView()
         let viewModel: ModalGetInfoTaskViewModel & Coordinating = ModalGetInfoTaskViewModel()

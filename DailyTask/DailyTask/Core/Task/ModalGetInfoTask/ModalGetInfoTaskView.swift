@@ -23,6 +23,9 @@ class ModalGetInfoTaskView: UIViewController{
     
     private var sheetDetents: Double = 246
     
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+    
     var titleLabel: LabelComponent?
     
     let icon: ChooseIconComponent = {
@@ -131,6 +134,8 @@ class ModalGetInfoTaskView: UIViewController{
         verifyIfIsDone()
         setUpUI()
         addAllContraints()
+        feedbackGenerator.prepare()
+        notificationFeedbackGenerator.prepare()
     }
     
     func verifyIfIsDone(){
@@ -177,6 +182,10 @@ class ModalGetInfoTaskView: UIViewController{
         icon.changeColor(bgColor: selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
         
         buttonToFinish.addTarget(self, action: #selector(completeTask), for: .touchUpInside)
+        buttonToFinish.addTarget(self, action: #selector(alphaButton), for: .touchDown)
+        buttonToFinish.addTarget(self, action: #selector(disalphaButton), for: .touchCancel)
+        buttonToDelete.addTarget(self, action: #selector(alphaButton), for: .touchDown)
+        buttonToDelete.addTarget(self, action: #selector(disalphaButton), for: .touchCancel)
         buttonToDelete.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
     }
     
@@ -214,23 +223,28 @@ class ModalGetInfoTaskView: UIViewController{
         ])
     }
     
-    @objc func completeTask(){
+    @objc func completeTask(_ button: UIButton){
+        button.alpha = 1
         viewModel?.concludedTask()
         if viewModel!.task!.isDone{
             buttonToFinish.icon.image = UIImage(systemName: "checkmark.circle.fill")!
             buttonToFinish.layoutIfNeeded()
             viewModel?.done.toggle()
+            self.dismiss(animated: true)
         } else{
             buttonToFinish.icon.image = UIImage(systemName: "checkmark.circle")!
             buttonToFinish.layoutIfNeeded()
             viewModel?.done.toggle()
         }
         delegate?.changeHappened()
+        feedbackGenerator.impactOccurred()
     }
     
-    @objc func deleteTask(){
+    @objc func deleteTask(_ button: UIButton){
+        button.alpha = 1
         let alert = UIAlertController(title: "", message: "Você tem certeza que deseja deletar essa task?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Deletar", style: .destructive){_ in
+            self.notificationFeedbackGenerator.notificationOccurred(.warning)
             self.viewModel?.deleteTask()
             self.delegate?.changeHappened()
             self.dismiss(animated: true, completion: nil)
@@ -238,6 +252,14 @@ class ModalGetInfoTaskView: UIViewController{
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel){_ in
         })
         self.present(alert, animated: true)
+    }
+    
+    @objc func alphaButton(_ button: UIButton){
+        button.alpha = 0.5
+    }
+
+    @objc func disalphaButton(_ button: UIButton){
+        button.alpha = 1
     }
 
 }

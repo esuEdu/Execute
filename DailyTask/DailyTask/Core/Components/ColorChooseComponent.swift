@@ -51,6 +51,10 @@ class ColorChooseComponent: UIView{
     
     weak var delegate: ColorChooseComponentDelegate?
     
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+//    let sjfis = UINotificationFeedbackGenerator()
+//    let jdnfjdnj = UIFeedbackGenerator()
+    
     // Variable used to get easily what color was selected
     private var theChoosenOne: ColorSelection?{
         didSet{
@@ -115,6 +119,7 @@ class ColorChooseComponent: UIView{
         color1.isPressed = true
         color1.layoutIfNeeded()
         theChoosenOne = .Red
+        feedbackGenerator.prepare()
     }
     
     required init?(coder: NSCoder) {
@@ -141,6 +146,8 @@ class ColorChooseComponent: UIView{
     
     // Used just to selected only one color button
     private func deselectAllButtons(){
+        feedbackGenerator.impactOccurred(intensity: 0.7)
+        
         color1.isPressed = false
         color2.isPressed = false
         color3.isPressed = false
@@ -174,7 +181,7 @@ class ColorChooseComponent: UIView{
                 let color = UIColor.systemYellow
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Green:
-                let color = UIColor.systemYellow
+                let color = UIColor.systemGreen
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Custom:
                 if let colors = colorWell.selectedColor?.cgColor.components{

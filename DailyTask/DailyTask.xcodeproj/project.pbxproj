@@ -50,6 +50,8 @@
 		9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */; };
 		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
 		9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */; };
+		E82CE09C2ACB5E19008140B8 /* BreakableTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */; };
+		E82CE0A02ACC8F18008140B8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */; };
 		E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BD2ABF3579000AA58B /* ProjectListView.swift */; };
 		E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */; };
 		E84018C82ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84018C72ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift */; };
@@ -115,6 +117,8 @@
 		9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxViewCell.swift; sourceTree = "<group>"; };
 		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksInTasksComponent.swift; sourceTree = "<group>"; };
+		E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakableTextComponent.swift; sourceTree = "<group>"; };
+		E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E84018BD2ABF3579000AA58B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		E84018BF2ABF358B000AA58B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		E84018C72ABFAE0C000AA58B /* ProjectListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -349,6 +353,8 @@
 				9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */,
 				9B6EB2D82AC5FE7100DA1430 /* Priority.swift */,
 				E884683D2AC8D5E9009175BB /* ModalSquareComponent.swift */,
+				E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */,
+				E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 				28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */,
 				E84018CC2ABFAFF5000AA58B /* ProjectCreationView.swift in Sources */,
 				E88468432AC927B8009175BB /* ModalGetInfoTaskViewModel.swift in Sources */,
+				E82CE0A02ACC8F18008140B8 /* TableViewCell.swift in Sources */,
 				818075F92AC4C2D800E4AE26 /* TaskTagViewModel.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
 				E88A24272AC4C37900D77229 /* TextDescriptionComponent.swift in Sources */,
@@ -558,6 +565,7 @@
 				818075FE2AC4D7E100E4AE26 /* ProjectTagView.swift in Sources */,
 				9BB144B02ACB634A0023D7C6 /* ContainerProjectsList.swift in Sources */,
 				9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */,
+				E82CE09C2ACB5E19008140B8 /* BreakableTextComponent.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
 				E87C6F172AC27441001B794C /* TextFieldComponent.swift in Sources */,

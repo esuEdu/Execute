@@ -28,14 +28,13 @@ class SubTaskManager {
         }
     }
     
-    func createSubTask(name: String, startDate: Date) -> SubTask{
+    func createSubTask(name: String, task: Task){
         let subTask = SubTask(context: context)
         subTask.id = UUID()
         subTask.name = name
-        subTask.start = startDate
-        print("Cheguei porra", String(describing: subTask.name), String(describing: subTask.start))
-        
-        return subTask
+        subTask.isDone = false
+        subTask.task = task
+        save()
     }
     
     func save(){

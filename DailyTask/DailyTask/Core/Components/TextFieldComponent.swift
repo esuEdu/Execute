@@ -21,7 +21,7 @@ class TextFieldComponent: UIView {
         let textField = UITextField()
         textField.placeholder = String(localized: "Give a name to the project")
         textField.font = .systemFont(ofSize: 16)
-        textField.textColor = .white
+        textField.textColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField

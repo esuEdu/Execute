@@ -37,6 +37,8 @@ class ChooseIconComponent: UIButton {
     
     weak var delegate: ChooseIconComponentDelegate?
     
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    
     var verticalPadding: CGFloat = 16
     var horizontalPadding: CGFloat = 16
     var isSelectable: Bool = false {
@@ -65,6 +67,7 @@ class ChooseIconComponent: UIButton {
         super.init(frame: frame)
         setUpUI()
         addAllConstraints()
+        selectionFeedbackGenerator.prepare()
     }
     
     required init?(coder: NSCoder) {
@@ -113,22 +116,27 @@ class ChooseIconComponent: UIButton {
             
             UIAction(title: "Globo", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
                 self.delegate?.menuWasPressed("globe.americas.fill")
+                self.selectionFeedbackGenerator.selectionChanged()
             }),
             
             UIAction(title: "PaperPlane", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
                 self.delegate?.menuWasPressed("paperplane.fill")
+                self.selectionFeedbackGenerator.selectionChanged()
             }),
             
             UIAction(title: "Pencil", image: UIImage(systemName: "umbrella.fill") , handler: { _ in
                 self.delegate?.menuWasPressed("umbrella.fill")
+                self.selectionFeedbackGenerator.selectionChanged()
             }),
             
             UIAction(title: "Pencil tip", image: UIImage(systemName: "pencil.tip") , handler: { _ in
                 self.delegate?.menuWasPressed("pencil.tip")
+                self.selectionFeedbackGenerator.selectionChanged()
             }),
             
             UIAction(title: "Dumbbell", image: UIImage(systemName: "dumbbell.fill") , handler: { _ in
                 self.delegate?.menuWasPressed("dumbbell.fill")
+                self.selectionFeedbackGenerator.selectionChanged()
             }),
             
             

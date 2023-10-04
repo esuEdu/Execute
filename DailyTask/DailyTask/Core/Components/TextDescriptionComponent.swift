@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TextDescriptionComponentDelegate: AnyObject {
+    func textFieldDidEndEditing()
+    func textFieldDidBeginEditing()
+}
 /// This is the component to text description that have all the configurations like word limits, return dismiss and placeholder
 ///
 ///  ## How to use?
@@ -24,6 +28,8 @@ import UIKit
 /// let descriptionResult = description.getText() //This return a string
 ///```
 class TextDescriptionComponent: UIView {
+    
+    weak var delegate: TextDescriptionComponentDelegate?
 
     var horizontalPadding: CGFloat?{
         didSet{
@@ -93,6 +99,7 @@ extension TextDescriptionComponent: UITextViewDelegate {
             textView.text = ""
             textView.textColor = textColor
         }
+        delegate?.textFieldDidBeginEditing()
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -100,6 +107,7 @@ extension TextDescriptionComponent: UITextViewDelegate {
             textView.text = placeholder
             textView.textColor = placeholderColor
         }
+        delegate?.textFieldDidEndEditing()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
