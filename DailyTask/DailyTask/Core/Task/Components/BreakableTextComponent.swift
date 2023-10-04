@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol BreakableTextComponentDelegate: AnyObject {
+    func textFieldDidEndEditing()
+    func textFieldDidBeginEditing()
+}
+
 class BreakableTextComponent: UIView {
+    
+    weak var delegate: BreakableTextComponentDelegate?
 
     var textViewHeightConstraint: NSLayoutConstraint!
     let placeholderColor: UIColor?
@@ -91,6 +98,7 @@ extension BreakableTextComponent: UITextViewDelegate{
             textView.text = ""
             textView.textColor = textColor
         }
+        delegate?.textFieldDidBeginEditing()
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -98,6 +106,7 @@ extension BreakableTextComponent: UITextViewDelegate{
             textView.text = placeholder
             textView.textColor = placeholderColor
         }
+        delegate?.textFieldDidEndEditing()
     }
 }
 

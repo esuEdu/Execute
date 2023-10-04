@@ -62,7 +62,7 @@ class Checkbox: UIControl {
     private func setup() {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        self.alpha = 0.2
         addSubview(imageView)
         
         NSLayoutConstraint.activate([

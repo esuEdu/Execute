@@ -77,13 +77,23 @@ class CreateTaskView: UIViewController {
         return textField
     }()
     
+    // Main ScrollView and View
+
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
     // Stack Views
     let stackViewContainers: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .fill
         stackView.spacing = 25
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 15, left: 20, bottom: 0, right: 20)
         return stackView
     }()
     
@@ -111,6 +121,11 @@ class CreateTaskView: UIViewController {
         configurateComponents()
         setUpUI()
         setConstraints()
+    }
+    
+    // Configuração para retirar o observador do teclado
+    deinit{
+        NotificationCenter.default.removeObserver(self)
     }
     
     func configurateComponents(){
@@ -152,26 +167,32 @@ class CreateTaskView: UIViewController {
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
         buttonCreateSubtask.addTarget(self, action: #selector(createSubtask), for: .touchUpInside)
+        
+        
+        // Configuração para retirar o observador do teclado
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     func setUpUI(){
         navigationItem.rightBarButtonItem = buttonDone
         navigationItem.leftBarButtonItem = buttonCancel
         
-        view.addSubview(stackViewContainers)
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackViewContainers)
         
         stackViewContainers.addArrangedSubview(stackViewForIcon)
+        stackViewContainers.addArrangedSubview(dateContainer!)
+        stackViewContainers.addArrangedSubview(priorityContainer!)
+        stackViewContainers.addArrangedSubview(subTasksContainer!)
+        stackViewContainers.addArrangedSubview(descriptionContainer!)
         
         stackViewForIcon.addArrangedSubview(icon)
         stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
         
         stackViewForTitleAndColor.addArrangedSubview(nameTextField)
         stackViewForTitleAndColor.addArrangedSubview(colorPicker)
-        
-        stackViewContainers.addArrangedSubview(dateContainer!)
-        stackViewContainers.addArrangedSubview(priorityContainer!)
-        stackViewContainers.addArrangedSubview(subTasksContainer!)
-        stackViewContainers.addArrangedSubview(descriptionContainer!)
         
     }
     
@@ -183,17 +204,23 @@ class CreateTaskView: UIViewController {
     func setConstraints(){
         
         NSLayoutConstraint.activate([
-            stackViewContainers.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackViewContainers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            stackViewContainers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
+            stackViewContainers.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackViewContainers.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackViewContainers.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackViewContainers.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackViewContainers.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+
             icon.widthAnchor.constraint(equalToConstant: 93),
             icon.heightAnchor.constraint(equalToConstant: 93),
             
             descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
         ])
     }
-    
     
 }
 
@@ -259,6 +286,21 @@ extension CreateTaskView: TextFieldComponentDelegate {
         self.dateEnd = selectDate
     }
     
+    // Configuração para retirar o observador do teclado (TE AMO GEPETO)
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = .zero
+    }
+    
 }
 
 extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDelegate{
@@ -273,6 +315,7 @@ extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDeleg
         icon.iconName = menuIcon
     }
 }
+
 
 
 #Preview {
