@@ -11,26 +11,23 @@ class HomeView: UIViewController {
     
     var homeViewModel: HomeViewModel?
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
         // Create a custom button
-        let teste: TaskContainerComponent = {
-            let teste = TaskContainerComponent()
+        let teste: ProjectTitleComponent = {
+            let teste = ProjectTitleComponent(projectTitle: "teste", color: .blue)
             teste.translatesAutoresizingMaskIntoConstraints = false
-            
             return teste
         }()
         
         view.addSubview(teste)
         
         NSLayoutConstraint.activate([
-            teste.widthAnchor.constraint(equalToConstant: 260),
             teste.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             teste.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            teste.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
         ])
     }
     

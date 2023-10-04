@@ -308,7 +308,7 @@ extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDeleg
     func updateColor() {
         let color = colorPicker.returnColorUIColor()
         print(color)
-        icon.changeColor(bgColor: selectTheBestColor(color: color, isBackground: false), tintColor: color)
+        icon.changeColor(bgColor: UIColor.selectTheBestColor(color: color, isBackground: false), tintColor: color)
     }
     
     func menuWasPressed(_ menuIcon: String) {

@@ -130,7 +130,7 @@ class MainCoordinator: Coordinator {
         viewModel.view = view
         viewModel.task = task
         viewModel.coordinator = self
-        navigationController?.present(view, animated: true)
+        navigationController.present(view, animated: true)
     }
     
     /// Initializes the coordinator and sets up the initial view and state.
@@ -139,12 +139,12 @@ class MainCoordinator: Coordinator {
     /// navigation controller. This method sets up the initial view and state of the app.
     func start() {
         // Create instances of your view controllers
-        let homeView = TESTViewController()
-//        HomeView = HomeView()
-//        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-//        homeViewModel.coordinator = self
-//        homeView.homeViewModel = homeViewModel
-//        homeViewModel.homeView = homeView
+//        let homeView = TESTViewController()
+        let homeView = HomeView()
+        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+        homeViewModel.coordinator = self
+        homeView.homeViewModel = homeViewModel
+        homeViewModel.homeView = homeView
 
         homeView.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
         
@@ -156,7 +156,7 @@ class MainCoordinator: Coordinator {
     
         projectView.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
-        navigationController.setViewControllers([projectView], animated: false)
+        navigationController.setViewControllers([homeView], animated: false)
         // Set the tab bar controller as the root view controller
         // This will display the tab bar with the first tab (HomeView) selected
 

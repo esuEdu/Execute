@@ -30,7 +30,7 @@ class TaskContainerComponent: UIView {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layer.cornerRadius = 10
         stackView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
+        stackView.layoutMargins = UIEdgeInsets(top: 3, left: 13, bottom: 3, right: 13)
         return stackView
     }()
     
@@ -41,16 +41,16 @@ class TaskContainerComponent: UIView {
         stackView.backgroundColor = .systemGray4
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         return stackView
     }()
     
     init(timeLabel: String = "8:20", taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho") {
         super.init(frame: .zero)
         
-        let timeLabel = LabelComponent(text: timeLabel, accessibilityLabel: timeLabel)
+        let timeLabel = LabelComponent(text: timeLabel, accessibilityLabel: timeLabel, font: .caption1)
         
-        let taskName = LabelComponent(text: taskName, accessibilityLabel: taskName)
+        let taskName = LabelComponent(text: taskName, accessibilityLabel: taskName, font: .footnote, numberOfLines: 2 ,lineBreakMode: .byTruncatingTail)
         
         timeStack.addArrangedSubview(timeLabel)
         

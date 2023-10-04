@@ -28,6 +28,7 @@
 		288B59D02ABE4C580058531D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CF2ABE4C580058531D /* HomeView.swift */; };
 		288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59D12ABE4C660058531D /* HomeViewModel.swift */; };
 		28A9E42E2ACAEBD30009FE28 /* TaskContainerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A9E42D2ACAEBD30009FE28 /* TaskContainerComponent.swift */; };
+		28B5E4352ACE106600158060 /* ProjectTitleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */; };
 		28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */; };
 		28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */; };
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
@@ -97,6 +98,7 @@
 		288B59CF2ABE4C580058531D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		288B59D12ABE4C660058531D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		28A9E42D2ACAEBD30009FE28 /* TaskContainerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContainerComponent.swift; sourceTree = "<group>"; };
+		28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTitleComponent.swift; sourceTree = "<group>"; };
 		28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskView.swift; sourceTree = "<group>"; };
 		28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskViewModel.swift; sourceTree = "<group>"; };
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */,
 				28FF78C62AC669CB00F2CB59 /* TagComponent.swift */,
 				9BB144AF2ACB634A0023D7C6 /* ContainerProjectsList.swift */,
+				28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B5E4352ACE106600158060 /* ProjectTitleComponent.swift in Sources */,
 				E884683C2AC8D1B6009175BB /* TESTViewController.swift in Sources */,
 				28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */,
 				818076042AC4D81000E4AE26 /* EditProjectTagViewModel.swift in Sources */,

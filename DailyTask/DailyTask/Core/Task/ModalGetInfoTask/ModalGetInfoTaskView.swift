@@ -179,7 +179,7 @@ class ModalGetInfoTaskView: UIViewController{
         
         labelHour.text = viewModel?.getHour()
         labelDate.text = viewModel?.getDate()
-        icon.changeColor(bgColor: selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
+        icon.changeColor(bgColor: UIColor.selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
         
         buttonToFinish.addTarget(self, action: #selector(completeTask), for: .touchUpInside)
         buttonToFinish.addTarget(self, action: #selector(alphaButton), for: .touchDown)

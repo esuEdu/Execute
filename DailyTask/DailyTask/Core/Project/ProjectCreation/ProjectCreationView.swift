@@ -142,7 +142,7 @@ class ProjectCreationView: UIViewController {
         
         stackViewForTheContainer.addArrangedSubview(createButton)
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
-        iconButton.changeColor(bgColor: .systemRed , tintColor: selectTheBestColor(color: .systemRed, isBackground: true))
+        iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
         
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
@@ -274,7 +274,7 @@ extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponent
     
     func updateColor() {
         let color = colorChooser.returnColorUIColor()
-        iconButton.changeColor(bgColor: color, tintColor: selectTheBestColor(color: color, isBackground: true))
+        iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     }
 
 }

@@ -83,10 +83,10 @@ extension UIColor {
 }
 
 // Extension created to give the ViewControllers permission to use the WCAG calculus
-extension UIViewController{
+extension UIColor {
     
     /// Function to calculate the luminance of a UIColor based on WCAG
-    func calculateLuminance(_ color: UIColor) -> CGFloat {
+    static func calculateLuminance(_ color: UIColor) -> CGFloat {
         
         if color.cgColor.components?.count ?? 0 < 3 || color == .systemBackground{
             let colorLuminance = color.cgColor.components?[0] ?? 0
@@ -110,12 +110,12 @@ extension UIViewController{
     }
 
     /// Function to calculate if the black color looks good with the selected color
-    func calculateBlackContrast(_ color: CGFloat) -> CGFloat {
+    static func calculateBlackContrast(_ color: CGFloat) -> CGFloat {
         return (color + 0.05) / 0.10
     }
 
     /// Function to calculate if the white color looks good with the selected color
-    func calculateWhiteContrast(_ color: CGFloat) -> CGFloat {
+    static func calculateWhiteContrast(_ color: CGFloat) -> CGFloat {
         return 1.05 / (color + 0.05)
     }
 
@@ -132,7 +132,7 @@ extension UIViewController{
     ///```
     ///If the `blackContrast` is higher than the white it will be choosed and the same happens with the white color
     ///
-    func selectTheBestColor(color: UIColor, isBackground: Bool) -> UIColor {
+    static func selectTheBestColor(color: UIColor, isBackground: Bool) -> UIColor {
         let whiteContrast = calculateWhiteContrast(calculateLuminance(color))
         let blackContrast = calculateBlackContrast(calculateLuminance(color))
         
