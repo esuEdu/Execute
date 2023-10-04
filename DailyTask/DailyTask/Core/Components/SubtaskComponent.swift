@@ -92,7 +92,7 @@ class SubtaskComponent: UIView {
             label.trailingAnchor.constraint(equalTo: roundedRect.trailingAnchor, constant: -8),
             label.bottomAnchor.constraint(equalTo: roundedRect.bottomAnchor, constant: -8),
             
-            timeLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
+            timeLabel.bottomAnchor.constraint(equalTo: roundedRect.topAnchor, constant: -2),
             timeLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 14)
         ])
     }
