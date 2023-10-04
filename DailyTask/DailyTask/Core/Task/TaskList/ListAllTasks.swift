@@ -49,11 +49,25 @@ class ListAllTasks: UIViewController {
   let dateNow: LabelComponent = {
     
     let nowDate = Date.now
-    
     let dateFormatter = DateFormatter()
+    
     dateFormatter.locale = .current
-    dateFormatter.dateStyle = .long
-    dateFormatter.timeStyle = .none
+    
+    var language = ""
+    
+    if let preferredLanguage = Locale.preferredLanguages.first {
+        let locale = Locale(identifier: preferredLanguage)
+      let languageCode = locale.language.languageCode?.identifier // Código do idioma, por exemplo, "en" para inglês
+      let regionCode = locale.region?.identifier // Código da região, por exemplo, "US" para Estados Unidos
+      
+      language = languageCode ?? ""
+    }
+    
+    if language == "en" {
+      dateFormatter.dateFormat = "dd, MMMM"
+    } else if language == "pt" {
+      dateFormatter.dateFormat = "dd 'de' MMMM"
+    }
     
     let data = dateFormatter.string(from: nowDate)
     
