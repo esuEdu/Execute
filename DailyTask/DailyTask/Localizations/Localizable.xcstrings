@@ -332,6 +332,40 @@
         }
       }
     },
+    "MyProjectKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Projects"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meus Projetos"
+          }
+        }
+      }
+    },
+    "NewProjectKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Project"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo Projeto"
+          }
+        }
+      }
+    },
     "NoPriorityKey" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -403,6 +437,23 @@
     },
     "Scrum" : {
 
+    },
+    "SearchProjectsPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for Projects"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquise por Projetos"
+          }
+        }
+      }
     },
     "StartDateLabel" : {
       "comment" : "text of start date of the task creation",

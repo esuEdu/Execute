@@ -15,27 +15,56 @@ class ProjectListView: UIViewController {
   
   var filteredData: [String] = []
   
-  let searchBar: UISearchBar = {
-    let search = UISearchBar()
-    search.placeholder = "teste"
-    search.translatesAutoresizingMaskIntoConstraints = false
-    return search
-  }()
-  
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    let buttonToCreateANewProject: UIButton = {
-        let button = UIButton()
-        button.setTitle("+", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 13
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+  let buttonToCreateANewProject: UIButton = {
+      let button = UIButton()
+    button.setTitle("+ \(String(localized: "NewProjectKey"))", for: .normal)
+    
+      button.translatesAutoresizingMaskIntoConstraints = false
+ 
+    var config = UIButton.Configuration.filled()
+    
+    config.baseBackgroundColor = .systemBlue
+    config.background.cornerRadius = 10
+    
+    let spacing: CGFloat = 5
+    config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: spacing, bottom: 0, trailing: spacing)
+  
+    button.configuration = config
+    
+    return button
+  }()
+  
+  let searchBar: UISearchBar = {
+    let search = UISearchBar()
+    search.placeholder = String(localized: "SearchProjectsPlaceholder")
+    search.translatesAutoresizingMaskIntoConstraints = false
+    search.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+    
+    return search
+  }()
+  
+  let stackViewForHeader: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .horizontal
+    stackView.distribution = .equalSpacing
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+
+    return stackView
+  }()
+  
+  let myProjectLabel: LabelComponent = {
+    let label = LabelComponent(text: String(localized: "MyProjectKey"), accessibilityLabel: String(localized: "MyProjectKey"), font: .title1)
+    label.translatesAutoresizingMaskIntoConstraints =  false
+    label.textLabel.font = .boldTitle1
+    return label
+  }()
+  
     
     #warning("temporary")
     let buttonToSupport: UIBarButtonItem = {
@@ -70,10 +99,14 @@ class ProjectListView: UIViewController {
       }
       
         view.backgroundColor = .systemBackground
-        view.addSubview(tableView)
-        view.addSubview(buttonToCreateANewProject)
+      
       view.addSubview(searchBar)
-    
+      view.addSubview(stackViewForHeader)
+      view.addSubview(tableView)
+      
+      stackViewForHeader.addArrangedSubview(myProjectLabel)
+      stackViewForHeader.addArrangedSubview(buttonToCreateANewProject)
+
       searchBar.delegate = self
       
         tableView.delegate = self
@@ -91,21 +124,21 @@ class ProjectListView: UIViewController {
     func addAllConstraints(){
         NSLayoutConstraint.activate([
           
-          buttonToCreateANewProject.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-          //buttonToCreateANewProject.bottomAnchor.constraint(equalTo: view.topAnchor),
-          buttonToCreateANewProject.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-          buttonToCreateANewProject.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+          stackViewForHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+          stackViewForHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+          stackViewForHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+          stackViewForHeader.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -10),
           
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-          searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-          searchBar.topAnchor.constraint(equalTo: buttonToCreateANewProject.bottomAnchor),
+          searchBar.topAnchor.constraint(equalTo: stackViewForHeader.bottomAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+          searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
+          searchBar.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -10),
           
           tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
           tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),  tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-          
-            
+ 
         ])
     }
     
@@ -194,4 +227,8 @@ extension ProjectListView: UISearchBarDelegate {
     
   }
   
+}
+
+#Preview{
+  ProjectListView()
 }
