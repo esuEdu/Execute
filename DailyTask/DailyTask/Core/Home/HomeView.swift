@@ -13,10 +13,24 @@ class HomeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Home"
         view.backgroundColor = .systemBackground
         
+        // Create a custom button
+        let teste: TaskContainerComponent = {
+            let teste = TaskContainerComponent()
+            teste.translatesAutoresizingMaskIntoConstraints = false
+            
+            return teste
+        }()
         
+        view.addSubview(teste)
+        
+        NSLayoutConstraint.activate([
+            teste.widthAnchor.constraint(equalToConstant: 260),
+            teste.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            teste.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
     }
     
 }
+

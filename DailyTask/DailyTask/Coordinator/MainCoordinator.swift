@@ -32,12 +32,13 @@ import UIKit
 /// coordinator.start()
 /// ```
 class MainCoordinator: Coordinator {
-    
-    var tabBarController: UITabBarController?
-    
+            
     /// The navigation controller managed by the coordinator.
-    var navigationController: UINavigationController?
+    var navigationController: UINavigationController
     
+    init( navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
     /// Handles various events by implementing the `eventOccurred(with:)` method.
     ///
     /// This method responds to different types of events, such as button taps and view
@@ -55,11 +56,10 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             viewModel.projectCreationView = view
             view.projectCreationViewModel = viewModel
-            
             if UIDevice.current.userInterfaceIdiom == .pad{
-                navigationController?.present(view, animated: true)
+                navigationController.present(view, animated: true)
             }else{
-                navigationController?.pushViewController(view, animated: true)
+                navigationController.pushViewController(view, animated: true)
             }
             
         case .goToProjectList:
@@ -68,11 +68,12 @@ class MainCoordinator: Coordinator {
             projectListViewModel.coordinator = self
             projectListView.projectListViewModel = projectListViewModel
             projectListViewModel.projectView = projectListView
-            navigationController?.pushViewController(projectListView, animated: true)
+            navigationController.pushViewController(projectListView, animated: true)
             
               
         case .removeTopView:
-            navigationController?.popViewController(animated: true)
+            navigationController.popViewController(animated: true)
+            
             
         case .createModalView:
             let view: CreateSubTaskView = CreateSubTaskView()
@@ -80,7 +81,7 @@ class MainCoordinator: Coordinator {
             view.viewModel = viewModel
             viewModel.coordinator = self
             viewModel.view = view
-            navigationController?.present(view, animated: true)
+            navigationController.present(view, animated: true)
             
         case .goToTaskView:
             let view: TaskView = TaskView()
@@ -88,7 +89,7 @@ class MainCoordinator: Coordinator {
             view.viewModel = viewModel
             viewModel.view = view
             viewModel.coordinator = self
-            navigationController?.pushViewController(view, animated: true)
+            navigationController.pushViewController(view, animated: true)
             
         case .goToCreateTaskView:
           let view: CreateTaskView = CreateTaskView()
@@ -96,7 +97,7 @@ class MainCoordinator: Coordinator {
           view.viewModel = viewModel
           viewModel.viewCreate = view
           viewModel.coordinator = self
-          navigationController?.pushViewController(view, animated: true)
+            navigationController.pushViewController(view, animated: true)
             
         case .goToTaskTagView:
           let view: TaskTagView = TaskTagView()
@@ -104,7 +105,7 @@ class MainCoordinator: Coordinator {
           view.viewModel = viewModel
           viewModel.view = view
           viewModel.coordinator = self
-          navigationController?.pushViewController(view, animated: true)
+            navigationController.pushViewController(view, animated: true)
             
         case .goToProjectTagView:
             let view: ProjectTagView = ProjectTagView()
@@ -112,7 +113,7 @@ class MainCoordinator: Coordinator {
             view.viewModel = viewModel
             viewModel.view = view
             viewModel.coordinator = self
-            navigationController?.pushViewController(view, animated: true)
+            navigationController.pushViewController(view, animated: true)
             
 //        case .goToEditTaskTagView:
 //            
@@ -129,7 +130,7 @@ class MainCoordinator: Coordinator {
         view.viewModel = viewModel
         viewModel.view = view
         viewModel.coordinator = self
-        navigationController?.pushViewController(view, animated: true)
+        navigationController.pushViewController(view, animated: true)
     }
     
     func goToTaskCreation(_ project: Project){
@@ -139,7 +140,7 @@ class MainCoordinator: Coordinator {
         view.viewModel = viewModel
         viewModel.viewCreate = view
         viewModel.coordinator = self
-        navigationController?.pushViewController(view, animated: true)
+        navigationController.pushViewController(view, animated: true)
     }
     
     /// Initializes the coordinator and sets up the initial view and state.
@@ -154,29 +155,20 @@ class MainCoordinator: Coordinator {
         homeView.homeViewModel = homeViewModel
         homeViewModel.homeView = homeView
 
+        homeView.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
+        
         let projectView: ProjectListView = ProjectListView()
         let projectViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
         projectView.projectListViewModel = projectViewModel
         projectViewModel.coordinator = self
         projectViewModel.projectView = projectView
+    
+        projectView.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        
+        navigationController.setViewControllers([projectView], animated: false)
+        // Set the tab bar controller as the root view controller
+        // This will display the tab bar with the first tab (HomeView) selected
 
-        // Create instances of UITabBarItem for each view controller
-        let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: nil)
-        let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
-
-        // Assign tab bar items to the view controllers
-        homeView.tabBarItem = homeTabBarItem
-        projectView.tabBarItem = tableViewCellTabBarItem
-
-        // Set up the view controllers in the tab bar controller
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeView, projectView]
-
-        // Store a reference to the tab bar controller for future reference
-        self.tabBarController = tabBarController
-
-        // Set the tab bar controller as the root view controller of the navigation controller
-        navigationController?.setViewControllers([tabBarController], animated: false)
     }
 }
 
