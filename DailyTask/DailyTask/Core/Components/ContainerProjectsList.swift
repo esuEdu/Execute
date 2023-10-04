@@ -44,10 +44,10 @@ class ContainerProjectsList: UIView {
         stackViewContainerTitle.alignment = .center
         stackViewContainerTitle.distribution = .fill
         stackViewContainerTitle.backgroundColor = .systemGreen
-        stackViewContainerTitle.spacing = 10
+        stackViewContainerTitle.spacing = 12
         stackViewContainerTitle.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainerTitle.isLayoutMarginsRelativeArrangement = true
-        stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15)
+        stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 9, left: 12, bottom: 9, right: 15)
         return stackViewContainerTitle
     }()
     
@@ -71,24 +71,28 @@ class ContainerProjectsList: UIView {
       stackViewContainer.alignment = .center
       stackViewContainer.distribution = .fill
         stackViewContainer.backgroundColor = .systemGray3
-        stackViewContainer.spacing = 20
+        stackViewContainer.spacing = 25
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.isLayoutMarginsRelativeArrangement = true
-        stackViewContainer.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15)
+        stackViewContainer.layoutMargins = UIEdgeInsets(top: 17.5, left: 15, bottom: 17.5, right: 15)
         return stackViewContainer
     }()
     
     /// The label component for the project description.
-    let projectDesc = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .body, numberOfLines: 3, lineBreakMode: .byTruncatingTail)
+    let projectDesc = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .systemGray, font: .caption1, numberOfLines: 3, lineBreakMode: .byTruncatingTail)
        
     /// The label component for displaying the completion percentage.
-    let projectPercentage = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .largeTitle, numberOfLines: 1)
+    let projectPercentage: LabelComponent = {
+        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .largeTitle, numberOfLines: 1)
+        label.textLabel.font = .systemFont(ofSize: 35, weight: .bold)
+        return label
+    }()
        
     /// The label component for displaying the "Progress" label.
     var percentageLabel: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "")
         label.textLabel.text = "\(String(localized: "ProgressLabelKey"))"
-      label.textLabel.font = .systemFont(ofSize: 14)
+        label.textLabel.font = .systemFont(ofSize: 12, weight: .bold)
         return label
     }()
     
@@ -98,6 +102,9 @@ class ContainerProjectsList: UIView {
         stackView.axis = .vertical
       stackView.alignment = .center
       stackView.distribution = .fill
+        stackView.spacing = -1
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: -7, left: 0, bottom: 0, right: 0)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -128,7 +135,7 @@ class ContainerProjectsList: UIView {
     ///   - imageIcon: The icon image for the project.
     ///   - imageIconColor: The tint color for the icon image.
     ///   - chevronColor: The tint color for the chevron icon.
-    init(title: String, titleColor: UIColor = .black, description: String, descriptionColor: UIColor = .black, percentage: String, percentageColor: UIColor = .red, imageIcon: UIImage = UIImage(systemName: "ellipsis.message.fill")!, imageIconColor: UIColor = .white, chevronColor: UIColor = .white) {
+    init(title: String, titleColor: UIColor = .black, description: String, descriptionColor: UIColor = .black, percentage: String, percentageColor: UIColor = .black, imageIcon: UIImage = UIImage(systemName: "ellipsis.message.fill")!, imageIconColor: UIColor = .white, chevronColor: UIColor = .white) {
         super.init(frame: .zero)
         
         projectTitle.textLabel.text = title
@@ -136,7 +143,11 @@ class ContainerProjectsList: UIView {
         
         iconTitle.image = imageIcon
         iconTitle.tintColor = imageIconColor
+        iconTitle.translatesAutoresizingMaskIntoConstraints = false
+        iconTitle.contentMode = .scaleAspectFit
         
+        chevron.translatesAutoresizingMaskIntoConstraints = false
+        chevron.contentMode = .scaleAspectFit
         chevron.tintColor = chevronColor
         
         projectDesc.textLabel.text = description
@@ -171,6 +182,10 @@ class ContainerProjectsList: UIView {
             stackViewContainerTitle.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackViewContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackViewContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            iconTitle.heightAnchor.constraint(equalToConstant: 38),
+            iconTitle.widthAnchor.constraint(equalTo: iconTitle.heightAnchor),
+            chevron.heightAnchor.constraint(equalToConstant: 25),
+            chevron.widthAnchor.constraint(equalToConstant: 25),
         ])
     }
     
@@ -181,5 +196,5 @@ class ContainerProjectsList: UIView {
 }
 
 #Preview {
-  ContainerProjectsList(title: "printmeinrnruirnierninrinfinfinfifnfinfnfnjnananajrjrjrjrjrjjrjrjrjjrjrjrvvvvvvvvvvvvvfurnfunncndncdndincndcnncnefncndocneonewfnwencjndnvjnvvvvvj", description: "fjnejfcmndjnfejffnnnfnfjfjfjfkkkkkkkkkkkkkkkkkkkkkkkkkkjnernvfmdmmjcmdjnmfjnfjndjnfdnfjfnfjnfjfnjfnjdfndjfndjnfdjfndjfndjfnjdnfjdnfjdnfjdnfjdnfdjnfdjnfdnfjdnfjdndjfndjfnfndfndd", percentage: "10")
+  ContainerProjectsList(title: "Mini challenge 02", description: "Mude a perpectiva do mundo com njndjnf jnjjnfd coração", percentage: "100")
 }

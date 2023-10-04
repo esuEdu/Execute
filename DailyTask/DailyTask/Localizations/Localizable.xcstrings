@@ -424,12 +424,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "in progress"
+            "value" : "progress"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "concluído"
           }
         }
