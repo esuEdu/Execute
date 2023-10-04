@@ -75,25 +75,38 @@ class RoundedCheckbox: UIControl {
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 26),
+            imageView.heightAnchor.constraint(equalToConstant: 26)
+
         ])
         
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 2.9
-        imageView.layer.borderColor = UIColor.darkGray.cgColor
-        imageView.layer.cornerRadius = 9.6
+        
+        if checked == true{
+            imageView.layer.borderColor = UIColor.darkGray.cgColor
+        }else{
+            imageView.layer.borderColor = UIColor.blue.cgColor
+        }
+        imageView.layer.cornerRadius = 13
         
         self.imageView = imageView
         
         backgroundColor = UIColor.clear
-        imageView.tintColor = UIColor(CustomColor.customGreen)
+        imageView.tintColor = UIColor.blue
         
         self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
     }
     
     @objc func touchCheckbox() {
         checked = !checked
+        if checked == true{
+            imageView.layer.borderColor = UIColor.lightGray.cgColor
+        }else{
+            imageView.layer.borderColor = UIColor.blue.cgColor
+        }
     }
     
     

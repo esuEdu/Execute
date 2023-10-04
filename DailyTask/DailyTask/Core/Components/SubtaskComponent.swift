@@ -42,9 +42,10 @@ class SubtaskComponent: UIView {
         return roundedRect
     }()
     
+    
+    
     private let label: LabelComponent = {
         let label = LabelComponent(text: "blebelbelbel sgssg ssgdfg sd sdggsdgsgdfgdgfgd sdgdfg fd dfgdgf", accessibilityLabel: "Start")
-        label.tintColor = UIColor.red
         label.textLabel.textAlignment = .left // Set text alignment as needed
         label.textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.textLabel.numberOfLines = 2
@@ -55,10 +56,20 @@ class SubtaskComponent: UIView {
         return label
     }()
     
-    init() {
+    init(timeLabel: String = "8:20", taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho") {
         super.init(frame: .zero)
         
+        let timeLabel: LabelComponent = {
+            let timeLabel = LabelComponent(text: timeLabel, accessibilityLabel: timeLabel)
+            timeLabel.textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+            timeLabel.textLabel.adjustsFontSizeToFitWidth = false
+            timeLabel.translatesAutoresizingMaskIntoConstraints = true
+            
+            return timeLabel
+        }()
+        
         horizontalStackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(timeLabel)
         stackView.addArrangedSubview(horizontalStackView)
         
         stackView.addArrangedSubview(roundedRect)
@@ -80,6 +91,9 @@ class SubtaskComponent: UIView {
             label.leadingAnchor.constraint(equalTo: roundedRect.leadingAnchor, constant: 8),
             label.trailingAnchor.constraint(equalTo: roundedRect.trailingAnchor, constant: -8),
             label.bottomAnchor.constraint(equalTo: roundedRect.bottomAnchor, constant: -8),
+            
+            timeLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
+            timeLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 14)
         ])
     }
     
