@@ -11,6 +11,8 @@ class HomeView: UIViewController {
     
     var homeViewModel: HomeViewModel?
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -31,6 +33,8 @@ class HomeView: UIViewController {
             teste.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
+    
+    
     
 }
 

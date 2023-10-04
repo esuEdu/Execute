@@ -17,13 +17,10 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
     
     private var sheetDetents: Double = 276
     
-    
-    
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalCentering
-        
         return stackView
     }()
     
@@ -57,8 +54,8 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
         return stackView
     }()
     
-    let textField: TextFieldToName = {
-        let textField = TextFieldToName()
+    let textField: TextFieldComponent = {
+        let textField = TextFieldComponent()
         return textField
     }()
     
@@ -139,6 +136,7 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
     }
     
     @objc func saveAndClose() {
+        viewModel?.name = textField.getText() == "" ? "Sem título" : textField.getText()
         viewModel?.createSubTask()
         self.dismiss(animated: true, completion: nil)
     }

@@ -7,20 +7,21 @@
 
 import UIKit
 
-protocol TextFieldToNameDelegate {
+/// Protocol to configurate the changes of the `TextFieldComponent` when the editing of start or end
+protocol TextFieldComponentDelegate: AnyObject {
     func textFieldDidEndEditing()
     func textFieldDidBeginEditing()
 }
 
-class TextFieldToName: UIView {
+class TextFieldComponent: UIView {
     
-    var delegate: TextFieldToNameDelegate?
+    weak var delegate: TextFieldComponentDelegate?
     
     let textFieldToGetTheName: UITextField = {
         let textField = UITextField()
         textField.placeholder = String(localized: "Give a name to the project")
         textField.font = .systemFont(ofSize: 16)
-        textField.textColor = .white
+        textField.textColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -36,31 +37,30 @@ class TextFieldToName: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// If you want do get the updated text of the `textFieldComponent` you can use this function
     func getText() -> String{
         return textFieldToGetTheName.text ?? ""
     }
     
-    func setUpUI(){
+    private func setUpUI(){
         self.textFieldToGetTheName.delegate = self
         backgroundColor = .systemGray2
         layer.cornerRadius = 10
         addSubview(textFieldToGetTheName)
     }
     
-    func addAllConstraints(){
+    private func addAllConstraints(){
         NSLayoutConstraint.activate([
             textFieldToGetTheName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             textFieldToGetTheName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             textFieldToGetTheName.topAnchor.constraint(equalTo: topAnchor, constant: 9),
             textFieldToGetTheName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9),
-//            textFieldToGetTheName.heightAnchor.constraint(equalToConstant: 30),
-//            heightAnchor.constraint(equalTo: textFieldToGetTheName.heightAnchor)
         ])
     }
     
 }
 
-extension TextFieldToName: UITextFieldDelegate {
+extension TextFieldComponent: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxCharactor = 50
         

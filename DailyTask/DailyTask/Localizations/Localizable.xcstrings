@@ -143,6 +143,9 @@
         }
       }
     },
+    "Delete" : {
+
+    },
     "Description" : {
 
     },
@@ -180,6 +183,9 @@
         }
       }
     },
+    "Edit" : {
+
+    },
     "Edit Tag" : {
 
     },
@@ -214,6 +220,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Digite a descrição aqui..."
+          }
+        }
+      }
+    },
+    "Enter the subtask here..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the subtask here..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Digite sua subtask aqui..."
           }
         }
       }
@@ -309,6 +332,40 @@
         }
       }
     },
+    "MyProjectKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Projects"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meus Projetos"
+          }
+        }
+      }
+    },
+    "NewProjectKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Project"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo Projeto"
+          }
+        }
+      }
+    },
     "NoPriorityKey" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -361,8 +418,42 @@
         }
       }
     },
+    "ProgressLabelKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "progress"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "concluído"
+          }
+        }
+      }
+    },
     "Scrum" : {
 
+    },
+    "SearchProjectsPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for Projects"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquise por Projetos"
+          }
+        }
+      }
     },
     "StartDateLabel" : {
       "comment" : "text of start date of the task creation",
@@ -383,7 +474,20 @@
       }
     },
     "SubtasksKey" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subtasks"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subtarefas"
+          }
+        }
+      }
     },
     "Task Tag Title" : {
       "comment" : "Accessibility Label for Task Tag Title"

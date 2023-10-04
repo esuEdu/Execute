@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class TaskView: UIViewController {
-  
+class TaskView: UIViewController{
+    
   var viewModel: TaskViewModel?
   
   var formatter: DateFormatter = {
@@ -106,8 +106,23 @@ extension TaskView: UITableViewDelegate, UITableViewDataSource {
     return UISwipeActionsConfiguration(actions: [actionDelete])
   }
   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let task = viewModel?.getActualTask(index: indexPath.row){
+            print(viewModel?.task[indexPath.row].subtasks?.allObjects)
+            viewModel?.goToModalGetInfo(task, delegate: self)
+            
+        }
+    }
 }
 
+extension TaskView: ModalGetInfoTaskViewDelegate {
+    func changeHappened() {
+        viewModel?.fetchTasks()
+        tableView.reloadData()
+        print("O Victor é gay")
+    }
+}
 #Preview {
   TaskView()
 }

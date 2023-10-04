@@ -9,6 +9,7 @@ import UIKit
 
 
 class ContainerComponent: UIView {
+    
         
     let stackViewContainerTitle: UIStackView = {
         let stackViewContainerTitle = UIStackView()
@@ -38,7 +39,6 @@ class ContainerComponent: UIView {
         stackViewContainer.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15)
         return stackViewContainer
     }()
-    
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -90,8 +90,18 @@ class ContainerComponent: UIView {
         ])
     }
     
+    func addNewElements(_ view: UIView){
+        stackViewContainer.addArrangedSubview(view)
+    }
+    
+    func getPosition() -> Int{
+        return stackViewContainer.arrangedSubviews.count
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 }
+
+
