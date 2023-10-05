@@ -7,10 +7,24 @@
 
 import UIKit
 
+/// The `SubstaskInTaskTableViewCell` class represents a custom table view cell used to display subtasks within a task.
+///
+/// It includes a checkbox, a text component that can display and edit the subtask's text, and a delete button.
 class SubstaskInTaskTableViewCell: UITableViewCell {
     
+    /// A static identifier for the cell that can be used to dequeue reusable cells.
     static let identifier = "SubtaskCell"
     
+    /// The main container view that holds the cell's content.
+    private let view: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
+    /// The stack view that arranges the checkbox, text component, and delete button horizontally.
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -23,26 +37,23 @@ class SubstaskInTaskTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    /// The checkbox component to indicate completion status.
+    let checkbox = Checkbox()
+    
+    /// The text component that displays and allows editing of the subtask's text.
     let labelSubTasks: BreakableTextComponent = {
         let label = BreakableTextComponent(placeholderColor: .systemGray2, textColor: .black)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    /// The delete button to remove the subtask.
     private let deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
         button.contentMode = .scaleAspectFit
         return button
-    }()
-    
-    let view: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -77,16 +88,14 @@ class SubstaskInTaskTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let checkbox = Checkbox()
-    
-    
+    /// Returns the text of the subtask.
+    ///
+    /// - Returns: The text of the subtask.
     func returnText() -> String{
         return labelSubTasks.getText()
     }
-    
 }
 
 #Preview{
     SubstaskInTaskTableViewCell()
 }
-
