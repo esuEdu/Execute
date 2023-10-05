@@ -18,7 +18,8 @@ enum Event {
 }
 
 protocol Coordinator {
-    var navigationController: UINavigationController { get set }
+    var tabBarController: UITabBarController? { get set }
+    var navigationController: UINavigationController? { get set }
     func goToTaskCreation(_ project: Project)
     func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate)
     func eventOccurred(with type: Event)

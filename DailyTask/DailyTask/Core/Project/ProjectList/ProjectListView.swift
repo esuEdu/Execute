@@ -116,7 +116,7 @@ class ProjectListView: UIViewController {
         projectListViewModel?.fetchProjectViewModel()
         for element in projectListViewModel!.project{
             let color = UIColor(red: element.red, green: element.green, blue: element.blue, alpha: 1)
-            let textColor = selectTheBestColor(color: color, isBackground: true)
+            let textColor = UIColor.selectTheBestColor(color: color, isBackground: true)
             let container = ContainerProjectsList(title: element.name!, titleColor: textColor, description: element.descript!, descriptionColor: .systemGray, percentage: "50", percentageColor: .black, imageIcon:  UIImage(systemName: element.icon!)!, imageIconColor: textColor, chevronColor: textColor,bgColor: color, id: element.id!, element: element)
             container.delegate = self
             scrollView.addNewElements(container)
