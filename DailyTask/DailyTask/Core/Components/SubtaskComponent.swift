@@ -36,7 +36,7 @@ class SubtaskComponent: UIView {
         roundedRect.layer.cornerRadius = 10
         roundedRect.clipsToBounds = false
         roundedRect.layer.borderWidth = 3.5
-        roundedRect.layer.borderColor = UIColor.lightGray.cgColor
+        roundedRect.layer.borderColor = UIColor.systemBlue.withAlphaComponent(1).cgColor
         roundedRect.layer.cornerRadius = 9.6
         roundedRect.translatesAutoresizingMaskIntoConstraints = false
         return roundedRect
