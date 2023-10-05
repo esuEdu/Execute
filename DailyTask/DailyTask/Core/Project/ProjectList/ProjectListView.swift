@@ -84,8 +84,6 @@ class ProjectListView: UIViewController {
         
         searchBar.delegate = self
         
-        title = "Meus projetos"
-        
         buttonToCreateANewProject.addTarget(self, action: #selector(createNewProject), for: .touchUpInside)
     }
     
