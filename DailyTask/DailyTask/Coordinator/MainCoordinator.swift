@@ -58,7 +58,7 @@ class MainCoordinator: Coordinator {
             
             if UIDevice.current.userInterfaceIdiom == .pad{
                 navigationController?.present(view, animated: true)
-            }else{
+            } else{
                 navigationController?.pushViewController(view, animated: true)
             }
             
@@ -70,7 +70,6 @@ class MainCoordinator: Coordinator {
             projectListViewModel.projectView = projectListView
             navigationController?.pushViewController(projectListView, animated: true)
             
-              
         case .removeTopView:
             navigationController?.popViewController(animated: true)
             
@@ -82,29 +81,14 @@ class MainCoordinator: Coordinator {
             viewModel.view = view
             navigationController?.present(view, animated: true)
             
-        case .goToTaskView:
-            let view: TaskView = TaskView()
-            let viewModel: TaskViewModel & Coordinating = TaskViewModel(project: Project())
+            
+        case .goToTaskTagView:
+            let view: TaskTagView = TaskTagView()
+            let viewModel: TaskTagViewModel & Coordinating = TaskTagViewModel()
             view.viewModel = viewModel
             viewModel.view = view
             viewModel.coordinator = self
             navigationController?.pushViewController(view, animated: true)
-            
-        case .goToCreateTaskView:
-          let view: CreateTaskView = CreateTaskView()
-          let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
-          view.viewModel = viewModel
-          viewModel.viewCreate = view
-          viewModel.coordinator = self
-          navigationController?.pushViewController(view, animated: true)
-            
-        case .goToTaskTagView:
-          let view: TaskTagView = TaskTagView()
-          let viewModel: TaskTagViewModel & Coordinating = TaskTagViewModel()
-          view.viewModel = viewModel
-          viewModel.view = view
-          viewModel.coordinator = self
-          navigationController?.pushViewController(view, animated: true)
             
         case .goToProjectTagView:
             let view: ProjectTagView = ProjectTagView()
@@ -114,11 +98,6 @@ class MainCoordinator: Coordinator {
             viewModel.coordinator = self
             navigationController?.pushViewController(view, animated: true)
             
-//        case .goToEditTaskTagView:
-//            
-//        case .goToEditProjectTagView:
-        
-          
         }
         
     }
@@ -142,17 +121,31 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
+    func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate) {
+        let view: ModalGetInfoTaskView = ModalGetInfoTaskView()
+        let viewModel: ModalGetInfoTaskViewModel & Coordinating = ModalGetInfoTaskViewModel()
+        view.delegate = delegate
+        view.viewModel = viewModel
+        viewModel.view = view
+        viewModel.task = task
+        viewModel.coordinator = self
+        navigationController?.present(view, animated: true)
+    }
+    
     /// Initializes the coordinator and sets up the initial view and state.
     ///
     /// Call this method to start the coordinator and configure the initial state of the
     /// navigation controller. This method sets up the initial view and state of the app.
     func start() {
         // Create instances of your view controllers
-        let homeView: HomeView = HomeView()
-        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-        homeViewModel.coordinator = self
-        homeView.homeViewModel = homeViewModel
-        homeViewModel.homeView = homeView
+        let homeView = TESTViewController()
+//        HomeView = HomeView()
+//        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+//        homeViewModel.coordinator = self
+//        homeView.homeViewModel = homeViewModel
+//        homeViewModel.homeView = homeView
+      
+      let allTasksView = ListAllTasks()
 
         let projectView: ProjectListView = ProjectListView()
         let projectViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
@@ -162,15 +155,17 @@ class MainCoordinator: Coordinator {
 
         // Create instances of UITabBarItem for each view controller
         let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: nil)
-        let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
+      let tasksTabBarItem = UITabBarItem(title: "Tasks", image: UIImage(systemName: "folder.fill"), selectedImage: nil)
+        let tableViewCellTabBarItem = UITabBarItem(title: "Projects", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
 
         // Assign tab bar items to the view controllers
         homeView.tabBarItem = homeTabBarItem
+      allTasksView.tabBarItem = tasksTabBarItem
         projectView.tabBarItem = tableViewCellTabBarItem
 
         // Set up the view controllers in the tab bar controller
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeView, projectView]
+        tabBarController.viewControllers = [homeView, allTasksView, projectView]
 
         // Store a reference to the tab bar controller for future reference
         self.tabBarController = tabBarController
@@ -179,4 +174,3 @@ class MainCoordinator: Coordinator {
         navigationController?.setViewControllers([tabBarController], animated: false)
     }
 }
-

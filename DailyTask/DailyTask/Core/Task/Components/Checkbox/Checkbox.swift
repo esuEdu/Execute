@@ -62,7 +62,7 @@ class Checkbox: UIControl {
     private func setup() {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        self.alpha = 0.2
         addSubview(imageView)
         
         NSLayoutConstraint.activate([
@@ -78,13 +78,14 @@ class Checkbox: UIControl {
         self.imageView = imageView
         
         backgroundColor = UIColor.clear
+        self.tintColor = .black
         
-        self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
+//        self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
     }
     
-    @objc func touchCheckbox() {
-        checked = !checked
-    }
+//    @objc func touchCheckbox() {
+//        checked = !checked
+//    }
   
 }
 

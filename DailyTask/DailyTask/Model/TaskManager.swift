@@ -14,7 +14,7 @@ class TaskManager {
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
   
-    func fetchTask(_ project: Project) -> [Task] {
+  func fetchTask(_ project: Project) -> [Task] {
     do {
       
       let request: NSFetchRequest<Task> = Task.fetchRequest()
@@ -42,7 +42,7 @@ class TaskManager {
     }
   }
   
-    func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, project: Project) {
+    func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, project: Project, red: Double, green: Double, blue: Double) -> Task{
     let task = Task(context: context)
     task.id = UUID()
     task.name = name
@@ -51,9 +51,13 @@ class TaskManager {
     task.descript = descript
     task.priority = priority
     task.project = project
+    task.isDone = false
+        task.red = red
+        task.green = green
+        task.blue = blue
     
     saveData()
-    
+    return task
   }
   
   #warning("Verificar se no editar precisa de isDone")
@@ -108,5 +112,14 @@ class TaskManager {
     }
     
   }
+    
+    func concludeTask(_ task: Task){
+        do{
+            task.isDone.toggle()
+            try context.save()
+        } catch{
+            fatalError("Erro in complete or descomplete: \(error)")
+        }
+    }
   
 }

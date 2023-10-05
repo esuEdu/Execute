@@ -10,6 +10,8 @@ import UIKit
 class ProjectCreationView: UIViewController {
     
     var projectCreationViewModel: ProjectCreationViewModel?
+    
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
 
     // MARK: - OFICIAL
     
@@ -36,24 +38,33 @@ class ProjectCreationView: UIViewController {
         iconPicker.horizontalPadding = 10
         iconPicker.verticalPadding = 15
         iconPicker.iconName = "pencil.tip"
+        iconPicker.isSelectable = true
         iconPicker.translatesAutoresizingMaskIntoConstraints = false
         return iconPicker
     }()
     
-    let textFieldToGetTheName: TextFieldToName = {
-        let textField = TextFieldToName()
+    let textFieldToGetTheName: TextFieldComponent = {
+        let textField = TextFieldComponent()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     let colorChooser = ColorChooseComponent()
     
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
     let stackViewForTheContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .fill
         stackView.spacing = 25
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
         return stackView
     }()
     
@@ -70,7 +81,7 @@ class ProjectCreationView: UIViewController {
     
     var descriptionContainer: ContainerComponent?
     let descriptionTextField: TextDescriptionComponent = {
-        let textField = TextDescriptionComponent()
+        let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.horizontalPadding = 10
         textField.verticalPadding = 10
@@ -90,10 +101,16 @@ class ProjectCreationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpDelegates()
         setUpUI()
         addAllConstraints()
-        deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
-        deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
+        selectionFeedbackGenerator.prepare()
+    }
+    
+    func setUpDelegates(){
+        methodologyButton.delegate = self
+        colorChooser.delegate = self
+        iconButton.delegate = self
     }
     
     func setUpUI(){
@@ -103,56 +120,62 @@ class ProjectCreationView: UIViewController {
         
         methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
-        methodologyButton.delegate = self
-        colorChooser.delegate = self
+        
+        navigationController?.isNavigationBarHidden = false
         
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
         self.title = String(localized: "Create a project")
-        self.view.addSubview(stackViewForTheContainer)
-
         
+        
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(stackViewForTheContainer)
         stackViewForTheContainer.addArrangedSubview(stackViewForIcon)
         stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
         stackViewForTheContainer.addArrangedSubview(dateContainer!)
         stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
-        
         stackViewForIcon.addArrangedSubview(iconButton)
-        
         stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
-        
         stackViewForTitleAndColor.addArrangedSubview(textFieldToGetTheName)
         stackViewForTitleAndColor.addArrangedSubview(colorChooser)
         
-        view.addSubview(createButton)
         
-        iconButton.menu = setIcon()
+        stackViewForTheContainer.addArrangedSubview(createButton)
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+        iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
+        
+        deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
+        deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit{
+        NotificationCenter.default.removeObserver(self)
     }
 
-    
     func addAllConstraints(){
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            stackViewForTheContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            stackViewForTheContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            stackViewForTheContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            stackViewForTheContainer.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackViewForTheContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackViewForTheContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackViewForTheContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackViewForTheContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             iconButton.widthAnchor.constraint(equalToConstant: 93),
             iconButton.heightAnchor.constraint(equalToConstant: 93),
             
-            createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
-            createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
-            createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            createButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-            
             descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
-            
         ])
     }
     
-    #warning("REFATORAR")
     @objc func defineProjectData(){
         projectCreationViewModel?.colors = colorChooser.returnColorCGFloat()
         
@@ -163,12 +186,11 @@ class ProjectCreationView: UIViewController {
             self.projectCreationViewModel?.createAProject()
             self.projectCreationViewModel?.removeTopView()
         } else{
-            print("")
-            #warning("Temporary")
-            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado, a máquina do tempo não foi inventada ainda", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .destructive))
+            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .cancel))
             self.present(alert, animated: true)
         }
+        selectionFeedbackGenerator.selectionChanged()
         
     }
     
@@ -186,6 +208,20 @@ class ProjectCreationView: UIViewController {
         let selectedDate = sender.date
         print("\(selectedDate)")
         projectCreationViewModel?.end = selectedDate
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = .zero
     }
 
 }
@@ -214,32 +250,8 @@ extension ProjectCreationView {
             button.action = #selector(removeTheView)
             return button
         }()
-
-        return buttonToContinue
-    }
-
-    func setIcon() -> UIMenu{
-        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
-            
-            UIAction(title: "Globo", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
-                self.iconButton.iconName = "globe.americas.fill"
-                self.projectCreationViewModel?.icon = self.iconButton.iconName
-            }),
-            
-            UIAction(title: "PaperPlane", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-                self.iconButton.iconName = "paperplane.fill"
-                self.projectCreationViewModel?.icon = self.iconButton.iconName
-            }),
-            
-            UIAction(title: "Pencil", image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
-                self.iconButton.iconName = "pencil.tip.crop.circle.badge.plus"
-                self.projectCreationViewModel?.icon = self.iconButton.iconName
-            }),
-            
-            
-        ])
         
-        return menuItems
+        return buttonToContinue
     }
 
 }
@@ -247,15 +259,20 @@ extension ProjectCreationView {
 extension ProjectCreationView: ChooseMethodologyComponentDelegate {
     
     func setUpMenuFunction(type: Methodologies) {
-        self.projectCreationViewModel?.methodology = type
-        self.methodologyButton.methodology.text = "\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))"
-        self.methodologyButton.layoutIfNeeded()
+        self.projectCreationViewModel?.selectedMethodology(type)
+        self.methodologyButton.changeTheMethodologyText("\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))")
     }
 }
 
-extension ProjectCreationView: ColorChooseComponentDelegate {
+extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
+    func menuWasPressed(_ menuIcon: String) {
+        self.projectCreationViewModel?.selectedIcon(menuIcon)
+        iconButton.iconName = menuIcon
+    }
+    
     func updateColor() {
-        iconButton.changeColor(bgColor: colorChooser.returnColorUIColor())
+        let color = colorChooser.returnColorUIColor()
+        iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     }
 
 }

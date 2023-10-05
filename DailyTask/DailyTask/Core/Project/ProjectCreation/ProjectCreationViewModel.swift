@@ -49,4 +49,12 @@ class ProjectCreationViewModel: Coordinating {
         let buuu = (start?.compare((end)!))!
         return buuu
     }
+    
+    func selectedMethodology(_ met:Methodologies){
+        methodology = met
+    }
+    
+    func selectedIcon(_ icon: String){
+        self.icon = icon
+    }
 }
