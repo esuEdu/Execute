@@ -67,6 +67,9 @@ class ListAllTasks: UIViewController {
       dateFormatter.dateFormat = "dd, MMMM"
     } else if language == "pt" {
       dateFormatter.dateFormat = "dd 'de' MMMM"
+    } else {
+      dateFormatter.dateStyle = .medium
+      dateFormatter.timeStyle = .none
     }
     
     let data = dateFormatter.string(from: nowDate)
@@ -108,7 +111,7 @@ class ListAllTasks: UIViewController {
   
   func setupConstraints() {
     NSLayoutConstraint.activate([
-      stackViewForHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      stackViewForHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 44),
       stackViewForHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
       stackViewForHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
       stackViewForHeader.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -10),
