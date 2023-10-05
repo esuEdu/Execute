@@ -9,11 +9,13 @@ import UIKit
 
 class ScrollContainerComponent: UIScrollView {
 
-    private let stackViewToShowElements: UIStackView = {
+    let stackViewToShowElements: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.spacing = 25
+        sv.isLayoutMarginsRelativeArrangement = true
+        sv.layoutMargins = UIEdgeInsets(top: 15, left: 25, bottom: 10, right: 25)
         return sv
     }()
     
@@ -36,21 +38,24 @@ class ScrollContainerComponent: UIScrollView {
     
     func contains(_ string: String){
         let text = string.uppercased()
+        
+        for n in stackViewToShowElements.arrangedSubviews{
+            n.isHidden = false
+            layoutIfNeeded()
+        }
+        
         if string != ""{
             for n in stackViewToShowElements.arrangedSubviews{
                 let r = n as! ContainerProjectsList
                 let upperCasedTitle = r.projectTitle.textLabel.text?.uppercased()
                 let upperCasedDescription = r.projectDesc.textLabel.text?.uppercased()
                 if upperCasedTitle!.contains(text) || upperCasedDescription!.contains(text){
-                    
-                    n.isHidden = false
                 } else{
-                    UIView.animate(withDuration: 0.5, animations: {
-                        n.alpha = 0
-                    }) { (completed) in
-                        n.isHidden = true
+                    UIView.animate(withDuration: 0.5) {
                     }
                     n.isHidden = true
+                    print("Cheguei")
+                    layoutIfNeeded()
                 }
             }
             layoutIfNeeded()
@@ -59,6 +64,13 @@ class ScrollContainerComponent: UIScrollView {
     
     func addNewElements(_ view: UIView){
         stackViewToShowElements.addArrangedSubview(view)
+    }
+    
+    func removeAllElements(){
+        for element in stackViewToShowElements.arrangedSubviews{
+            stackViewToShowElements.removeArrangedSubview(element)
+            element.removeFromSuperview()
+        }
     }
     
     func getPosition() -> Int{

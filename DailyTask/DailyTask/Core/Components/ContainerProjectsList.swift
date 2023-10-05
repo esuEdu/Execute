@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+protocol ContainerProjectsListDelegate: AnyObject {
+    func goToTheTaskView(project: Project)
+    func setUpAlert(project: Project)
+}
+
 /// A custom container view for displaying project information.
 ///
 /// `ContainerProjectsList` is a UIView subclass designed to display project details,
@@ -37,13 +42,16 @@ import UIKit
 ///              appearance as needed.
 class ContainerProjectsList: UIView {
     
+    let id: UUID?
+    
+    weak var delegate: ContainerProjectsListDelegate?
+    
     /// The horizontal stack view for the project title, icon, and chevron.
     let stackViewContainerTitle: UIStackView = {
         let stackViewContainerTitle = UIStackView()
         stackViewContainerTitle.axis = .horizontal
         stackViewContainerTitle.alignment = .center
         stackViewContainerTitle.distribution = .fill
-        stackViewContainerTitle.backgroundColor = .systemGreen
         stackViewContainerTitle.spacing = 12
         stackViewContainerTitle.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainerTitle.isLayoutMarginsRelativeArrangement = true
@@ -123,6 +131,11 @@ class ContainerProjectsList: UIView {
         return stackView
     }()
     
+    let oneTapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+    let longTapGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+    
+    var project: Project?
+    
     /// Initializes a `ContainerProjectsList` instance with project details and customization options.
     ///
     /// - Parameters:
@@ -135,9 +148,18 @@ class ContainerProjectsList: UIView {
     ///   - imageIcon: The icon image for the project.
     ///   - imageIconColor: The tint color for the icon image.
     ///   - chevronColor: The tint color for the chevron icon.
-    init(title: String, titleColor: UIColor = .black, description: String, descriptionColor: UIColor = .black, percentage: String, percentageColor: UIColor = .black, imageIcon: UIImage = UIImage(systemName: "ellipsis.message.fill")!, imageIconColor: UIColor = .white, chevronColor: UIColor = .white) {
+    init(title: String, titleColor: UIColor = .black, description: String, descriptionColor: UIColor = .black, percentage: String, percentageColor: UIColor = .black, imageIcon: UIImage = UIImage(systemName: "ellipsis.message.fill")!, imageIconColor: UIColor = .white, chevronColor: UIColor = .white, bgColor: UIColor = .systemGreen, id: UUID, element: Project) {
+        self.id = id
+        self.project = element
         super.init(frame: .zero)
         
+        self.oneTapGesture.addTarget(self, action: #selector(goToTaskView))
+        self.longTapGesture.addTarget(self, action: #selector(goToAlert))
+        
+        self.addGestureRecognizer(oneTapGesture)
+        self.addGestureRecognizer(longTapGesture)
+        
+        stackViewContainerTitle.backgroundColor = bgColor
         projectTitle.textLabel.text = title
         projectTitle.textLabel.textColor = titleColor
         
@@ -182,7 +204,7 @@ class ContainerProjectsList: UIView {
             stackViewContainerTitle.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackViewContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackViewContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-            iconTitle.heightAnchor.constraint(equalToConstant: 38),
+            iconTitle.heightAnchor.constraint(equalToConstant: 28),
             iconTitle.widthAnchor.constraint(equalTo: iconTitle.heightAnchor),
             chevron.heightAnchor.constraint(equalToConstant: 25),
             chevron.widthAnchor.constraint(equalToConstant: 25),
@@ -192,9 +214,14 @@ class ContainerProjectsList: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-  
+    
+    @objc func goToTaskView(){
+        delegate?.goToTheTaskView(project: project!)
+    }
+    
+    @objc func goToAlert(){
+        delegate?.setUpAlert(project: project!)
+    }
+    
 }
 
-#Preview {
-  ContainerProjectsList(title: "Mini challenge 02", description: "Mude a perpectiva do mundo com njndjnf jnjjnfd coração", percentage: "100")
-}

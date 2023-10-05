@@ -121,6 +121,7 @@ class ProjectCreationView: UIViewController {
         methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         
+        navigationController?.isNavigationBarHidden = false
         
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
@@ -175,7 +176,6 @@ class ProjectCreationView: UIViewController {
         ])
     }
     
-    #warning("REFATORAR")
     @objc func defineProjectData(){
         projectCreationViewModel?.colors = colorChooser.returnColorCGFloat()
         
@@ -186,10 +186,8 @@ class ProjectCreationView: UIViewController {
             self.projectCreationViewModel?.createAProject()
             self.projectCreationViewModel?.removeTopView()
         } else{
-            print("")
-            #warning("Temporary")
-            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado, a máquina do tempo não foi inventada ainda", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .destructive))
+            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .cancel))
             self.present(alert, animated: true)
         }
         selectionFeedbackGenerator.selectionChanged()

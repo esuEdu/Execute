@@ -30,7 +30,8 @@ class TaskView: UIViewController{
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+      navigationController?.isNavigationBarHidden = false
+    print("Cheguei")
     view.addSubview(tableView)
     view.backgroundColor = .white
     tableView.delegate = self
