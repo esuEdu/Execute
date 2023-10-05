@@ -121,6 +121,7 @@ class ProjectCreationView: UIViewController {
         methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         
+        navigationController?.isNavigationBarHidden = false
         
         self.view.backgroundColor = .systemBackground
         self.navigationItem.rightBarButtonItem = createRightButtom()
@@ -142,7 +143,7 @@ class ProjectCreationView: UIViewController {
         
         stackViewForTheContainer.addArrangedSubview(createButton)
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
-        iconButton.changeColor(bgColor: .systemRed , tintColor: selectTheBestColor(color: .systemRed, isBackground: true))
+        iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
         
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
@@ -175,7 +176,6 @@ class ProjectCreationView: UIViewController {
         ])
     }
     
-    #warning("REFATORAR")
     @objc func defineProjectData(){
         projectCreationViewModel?.colors = colorChooser.returnColorCGFloat()
         
@@ -186,10 +186,8 @@ class ProjectCreationView: UIViewController {
             self.projectCreationViewModel?.createAProject()
             self.projectCreationViewModel?.removeTopView()
         } else{
-            print("")
-            #warning("Temporary")
-            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado, a máquina do tempo não foi inventada ainda", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .destructive))
+            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .cancel))
             self.present(alert, animated: true)
         }
         selectionFeedbackGenerator.selectionChanged()
@@ -274,7 +272,7 @@ extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponent
     
     func updateColor() {
         let color = colorChooser.returnColorUIColor()
-        iconButton.changeColor(bgColor: color, tintColor: selectTheBestColor(color: color, isBackground: true))
+        iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     }
 
 }

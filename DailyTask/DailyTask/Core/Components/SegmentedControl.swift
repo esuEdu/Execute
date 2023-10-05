@@ -45,6 +45,7 @@ class SegmentedControl: UISegmentedControl {
             String(localized: "MediumKey"),
             String(localized: "HighKey")
         ])
+        self.backgroundColor = UIColor.clear
         
         createSegments()
         

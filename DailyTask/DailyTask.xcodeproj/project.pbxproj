@@ -26,6 +26,8 @@
 		288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59C62ABE30F90058531D /* SubTaskManager.swift */; };
 		288B59D02ABE4C580058531D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59CF2ABE4C580058531D /* HomeView.swift */; };
 		288B59D22ABE4C660058531D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288B59D12ABE4C660058531D /* HomeViewModel.swift */; };
+		28A9E42E2ACAEBD30009FE28 /* TaskContainerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A9E42D2ACAEBD30009FE28 /* TaskContainerComponent.swift */; };
+		28B5E4352ACE106600158060 /* ProjectTitleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */; };
 		28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */; };
 		28B63D092AC2157500DE1D1A /* CreateSubTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */; };
 		28C45BF72ABAE920001CEFED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C45BF62ABAE920001CEFED /* Coordinator.swift */; };
@@ -94,6 +96,8 @@
 		288B59C62ABE30F90058531D /* SubTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskManager.swift; sourceTree = "<group>"; };
 		288B59CF2ABE4C580058531D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		288B59D12ABE4C660058531D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		28A9E42D2ACAEBD30009FE28 /* TaskContainerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContainerComponent.swift; sourceTree = "<group>"; };
+		28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTitleComponent.swift; sourceTree = "<group>"; };
 		28B63D062AC1CB5500DE1D1A /* CreateSubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskView.swift; sourceTree = "<group>"; };
 		28B63D082AC2157500DE1D1A /* CreateSubTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubTaskViewModel.swift; sourceTree = "<group>"; };
 		28C45BF62ABAE920001CEFED /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */,
 				28FF78C62AC669CB00F2CB59 /* TagComponent.swift */,
 				9BB144AF2ACB634A0023D7C6 /* ContainerProjectsList.swift */,
+				28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -231,6 +236,14 @@
 		288B59CE2ABE4C370058531D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		28A9E42C2ACAEBAB0009FE28 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				28A9E42D2ACAEBD30009FE28 /* TaskContainerComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -296,6 +309,7 @@
 		28C45C032ABAF920001CEFED /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				9BC048B32AC45E2500A1E9BB /* TaskList */,
 				9BB144B12ACBAB9D0023D7C6 /* Project */,
 				2829C5022ABB6B8900A75CEB /* Components */,
 				818075FC2AC4C66300E4AE26 /* Tag */,
@@ -343,7 +357,6 @@
 			children = (
 				E884683F2AC92635009175BB /* ModalGetInfoTask */,
 				9BC048B42AC45E3100A1E9BB /* CreateTask */,
-				9BC048B32AC45E2500A1E9BB /* TaskList */,
 				9B0AA4162AC07AF9008D08B6 /* Components */,
 			);
 			path = Task;
@@ -374,6 +387,7 @@
 		9BC048B32AC45E2500A1E9BB /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				28A9E42C2ACAEBAB0009FE28 /* Components */,
 				9B0AA4172AC07B07008D08B6 /* TaskView.swift */,
 				9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */,
 				9B54B3312ACE039E005DDB59 /* ListAllTasks.swift */,
@@ -518,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B5E4352ACE106600158060 /* ProjectTitleComponent.swift in Sources */,
 				E884683C2AC8D1B6009175BB /* TESTViewController.swift in Sources */,
 				28B63D072AC1CB5500DE1D1A /* CreateSubTaskView.swift in Sources */,
 				818076042AC4D81000E4AE26 /* EditProjectTagViewModel.swift in Sources */,
@@ -571,6 +586,7 @@
 				E82CE09C2ACB5E19008140B8 /* BreakableTextComponent.swift in Sources */,
 				2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */,
 				2836A8C32ABA1BA800778B43 /* SceneDelegate.swift in Sources */,
+				28A9E42E2ACAEBD30009FE28 /* TaskContainerComponent.swift in Sources */,
 				E87C6F172AC27441001B794C /* TextFieldComponent.swift in Sources */,
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				9B54B3322ACE039E005DDB59 /* ListAllTasks.swift in Sources */,
@@ -721,7 +737,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = K559Z2V9Q2;
+				DEVELOPMENT_TEAM = SVGXRR5RRA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -734,7 +750,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Victor.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -753,7 +769,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = K559Z2V9Q2;
+				DEVELOPMENT_TEAM = SVGXRR5RRA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -766,7 +782,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Victor.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

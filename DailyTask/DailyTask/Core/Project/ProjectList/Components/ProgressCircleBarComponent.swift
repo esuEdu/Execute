@@ -48,7 +48,7 @@ class CircularProgressView: UIView {
         progressLayer = CAShapeLayer()
         progressLayer.path = circularPath.cgPath
         progressLayer.strokeColor = UIColor.systemBlue.cgColor
-        progressLayer.lineWidth = 10
+        progressLayer.lineWidth = 5
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineCap = .square
         progressLayer.strokeEnd = progress

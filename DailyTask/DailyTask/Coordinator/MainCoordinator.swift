@@ -174,4 +174,3 @@ class MainCoordinator: Coordinator {
         navigationController?.setViewControllers([tabBarController], animated: false)
     }
 }
-
