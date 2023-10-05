@@ -9,7 +9,6 @@ import Foundation
 
 class ListAllTasksViewModel: Coordinating {
   var coordinator: Coordinator?
-  
-  
+
   
 }
