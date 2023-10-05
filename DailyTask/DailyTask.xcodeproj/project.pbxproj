@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */; };
-		282115592ACD9B0C0027CFDD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282115582ACD9B0C0027CFDD /* MainTabBarController.swift */; };
 		2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2829C5002ABB6A1F00A75CEB /* Colors.swift */; };
 		2829C5052ABB6D6200A75CEB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2829C5042ABB6D6200A75CEB /* Localizable.xcstrings */; };
 		2836A8C12ABA1BA800778B43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2836A8C02ABA1BA800778B43 /* AppDelegate.swift */; };
@@ -75,7 +74,6 @@
 
 /* Begin PBXFileReference section */
 		280DD7912ABF2C8000C2ADA9 /* DatePickerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerComponent.swift; sourceTree = "<group>"; };
-		282115582ACD9B0C0027CFDD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		2829C5002ABB6A1F00A75CEB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		2829C5042ABB6D6200A75CEB /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2836A8BD2ABA1BA800778B43 /* DailyTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,14 +152,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2821155A2ACDD73B0027CFDD /* MainTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				282115582ACD9B0C0027CFDD /* MainTabBarController.swift */,
-			);
-			path = MainTabBar;
-			sourceTree = "<group>";
-		};
 		2829C4FF2ABB69F600A75CEB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +307,6 @@
 		28C45C032ABAF920001CEFED /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2821155A2ACDD73B0027CFDD /* MainTabBar */,
 				9BC048B32AC45E2500A1E9BB /* TaskList */,
 				9BB144B12ACBAB9D0023D7C6 /* Project */,
 				2829C5022ABB6B8900A75CEB /* Components */,
@@ -564,7 +553,6 @@
 				818075F72AC4C2A000E4AE26 /* EditTaskTagView.swift in Sources */,
 				818075FB2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift in Sources */,
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
-				282115592ACD9B0C0027CFDD /* MainTabBarController.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E88A24232AC3DB9500D77229 /* ColorChooseComponent.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,

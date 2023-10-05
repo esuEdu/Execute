@@ -176,6 +176,7 @@ class CreateTaskView: UIViewController {
     }
     
     func setUpUI(){
+        navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = buttonDone
         navigationItem.leftBarButtonItem = buttonCancel
         
