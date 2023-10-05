@@ -99,6 +99,8 @@ class ListAllTasks: UIViewController {
     
     view.backgroundColor = .systemBackground
     
+    navigationController?.setNavigationBarHidden(true, animated: true)
+    
     view.addSubview(stackViewForHeader)
     view.addSubview(searchBar)
     
