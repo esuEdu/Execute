@@ -145,12 +145,14 @@ class MainCoordinator: Coordinator {
     /// navigation controller. This method sets up the initial view and state of the app.
     func start() {
         // Create instances of your view controllers
-        let homeView = TESTViewController()
-//        HomeView = HomeView()
-//        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-//        homeViewModel.coordinator = self
-//        homeView.homeViewModel = homeViewModel
-//        homeViewModel.homeView = homeView
+//        let homeView = TESTViewController()
+        let homeView = HomeView()
+        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+        homeViewModel.coordinator = self
+        homeView.homeViewModel = homeViewModel
+        homeViewModel.homeView = homeView
+      
+      let allTasksView = ListAllTasks()
 
         let projectView: ProjectListView = ProjectListView()
         let projectViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
@@ -160,15 +162,17 @@ class MainCoordinator: Coordinator {
 
         // Create instances of UITabBarItem for each view controller
         let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: nil)
-        let tableViewCellTabBarItem = UITabBarItem(title: "Table View", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
+      let tasksTabBarItem = UITabBarItem(title: "Tasks", image: UIImage(systemName: "folder.fill"), selectedImage: nil)
+        let tableViewCellTabBarItem = UITabBarItem(title: "Projects", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
 
         // Assign tab bar items to the view controllers
         homeView.tabBarItem = homeTabBarItem
+      allTasksView.tabBarItem = tasksTabBarItem
         projectView.tabBarItem = tableViewCellTabBarItem
 
         // Set up the view controllers in the tab bar controller
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeView, projectView]
+        tabBarController.viewControllers = [homeView, allTasksView, projectView]
 
         // Store a reference to the tab bar controller for future reference
         self.tabBarController = tabBarController

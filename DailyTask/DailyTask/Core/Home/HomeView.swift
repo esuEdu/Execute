@@ -16,8 +16,8 @@ class HomeView: UIViewController {
         view.backgroundColor = .systemBackground
         
         // Create a custom button
-        let teste: ProjectTitleComponent = {
-            let teste = ProjectTitleComponent(projectTitle: "teste", color: .blue)
+        let teste: DateAndCalendarComponent = {
+            let teste = DateAndCalendarComponent(date: "fadfaf")
             teste.translatesAutoresizingMaskIntoConstraints = false
             return teste
         }()

@@ -369,6 +369,23 @@
         }
       }
     },
+    "NewTaskKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova Tarefa"
+          }
+        }
+      }
+    },
     "NoPriorityKey" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -454,6 +471,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pesquise por Projetos"
+          }
+        }
+      }
+    },
+    "SearchTaskProjectKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for tasks or projects"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquise por tarefas ou projetos"
           }
         }
       }
