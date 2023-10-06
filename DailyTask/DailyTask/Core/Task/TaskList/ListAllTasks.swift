@@ -77,10 +77,36 @@ class ListAllTasks: UIViewController {
     search.placeholder = String(localized: "SearchTaskProjectKey")
     search.translatesAutoresizingMaskIntoConstraints = false
     search.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-    
     return search
   }()
   
+  let projectName: LabelComponent = {
+    let project = LabelComponent(text: "Titulo do projeto", accessibilityLabel: "")
+    project.translatesAutoresizingMaskIntoConstraints = false
+    return project
+  }()
+  
+  let projectNameStackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .horizontal
+    stackView.distribution = .fill
+    stackView.backgroundColor = .systemGreen
+    stackView.layer.cornerRadius = 10
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }()
+  
+  let tasksComponent: AllTaskListComponts = {
+    let tasks = AllTaskListComponts(titleTask: "teste", timeLabel: "hoje")
+    tasks.translatesAutoresizingMaskIntoConstraints = false
+    return tasks
+  }()
+  
+  
+  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setUI()
@@ -96,10 +122,17 @@ class ListAllTasks: UIViewController {
     view.addSubview(stackViewForHeader)
     view.addSubview(searchBar)
     
+    searchBar.delegate = self
+    
     stackViewForHeader.addArrangedSubview(dateNow)
     stackViewForHeader.addArrangedSubview(createTask)
     
-    searchBar.delegate = self
+    view.addSubview(projectNameStackView)
+    
+    projectNameStackView.addArrangedSubview(projectName)
+    
+    view.addSubview(tasksComponent)
+    
     
 //    createTask.addTarget(self, action: #selector(createNewTask), for: .touchUpInside)
     
@@ -114,6 +147,15 @@ class ListAllTasks: UIViewController {
 
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
       searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
+   
+      projectNameStackView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
+      projectNameStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+      projectNameStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      projectNameStackView.heightAnchor.constraint(equalToConstant: 45),
+  
+      tasksComponent.topAnchor.constraint(equalTo: projectName.bottomAnchor, constant: 19),
+      tasksComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      tasksComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
     ])
   }
   
@@ -139,4 +181,8 @@ extension ListAllTasks: UISearchBarDelegate {
       searchBar.endEditing(true)
   }
   
+}
+
+#Preview{
+  ListAllTasks()
 }
