@@ -129,8 +129,3 @@ class ListAllTasks: UIViewController {
 extension ListAllTasks: UISearchBarDelegate {
   
 }
-
-
-#Preview {
-  ListAllTasks()
-}

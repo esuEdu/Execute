@@ -10,120 +10,58 @@ import UIKit
 
 class TaskView: UIViewController{
     
-  var viewModel: TaskViewModel?
-  
-  var formatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = .current
-    dateFormatter.dateStyle = .long
-    dateFormatter.timeStyle = .short
-    return dateFormatter
-  }()
-
-  private let tableView: UITableView = {
-    let tableView = UITableView(frame: .zero, style: .plain)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellTask")
+    var viewModel: TaskViewModel?
     
-    return tableView
-  }()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-      navigationController?.isNavigationBarHidden = false
-    print("Cheguei")
-    view.addSubview(tableView)
-    view.backgroundColor = .white
-    tableView.delegate = self
-    tableView.dataSource = self
-    title = "All Tasks"
+    var formatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        return dateFormatter
+    }()
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
+    let mainStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
-    addConstraintsTableView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = false
+        view.backgroundColor = .systemBackground
+        
+        title = viewModel?.project?.name
     
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    refreshTableView()
-  }
-    
-  func addConstraintsTableView() {
-    NSLayoutConstraint.activate([
-      tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ])
-  }
-  
-}
-
-extension TaskView: UITableViewDelegate, UITableViewDataSource {
-  
-  @objc func refreshTableView(){
-    viewModel?.fetchTasks()
-    self.tableView.reloadData()
-  }
-  
-  @objc func addTask() {
-    viewModel?.goToCreateTasks()
-  }
-  
-  // MARK: BASIC SETTING FOR TABLEVIEW
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel?.task.count ?? 0
-  }
-  
-  // MARK: BASIC SETTING FOR TABLEVIEW
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    let task = viewModel?.task[indexPath.row]
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cellTask")!
-    
-    let data = self.formatter.string(from: task?.end ?? Date.now)
-    
-    var configure = UIListContentConfiguration.cell()
-    configure.text = task?.name
-    configure.secondaryText = task?.descript
-    
-    cell.contentConfiguration = configure
-    
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    
-    let actionDelete = UIContextualAction(style: .destructive, title: "Delete") {
-      (action, view, completionHandler) in
-      
-      let taskToRemove = self.viewModel?.task[indexPath.row].id
-      
-      self.viewModel?.deleteTask(id: taskToRemove!)
-      self.tableView.reloadData()
-    
+        let dateAndCalendarComponent = DateAndCalendarComponent(date: formatter.string(from: Date.now))
+        dateAndCalendarComponent.button.addTarget(self, action: #selector(openCalendar), for: .touchUpInside)
+        mainStack.addArrangedSubview(dateAndCalendarComponent)
+        
+        view.addSubview(mainStack)
+        
+        NSLayoutConstraint.activate([
+            mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+        ])
+        
     }
-
-    return UISwipeActionsConfiguration(actions: [actionDelete])
-  }
-  
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if let task = viewModel?.getActualTask(index: indexPath.row){
-            print(viewModel?.task[indexPath.row].subtasks?.allObjects)
-            viewModel?.goToModalGetInfo(task, delegate: self)
-            
+    
+    override func viewDidAppear(_ animated: Bool) {
+    }
+    
+    @objc func openCalendar() {
+        // Open the default calendar app
+        if let calendarURL = URL(string: "calshow://") {
+            UIApplication.shared.open(calendarURL, options: [:], completionHandler: nil)
         }
     }
+    
 }
 
 extension TaskView: ModalGetInfoTaskViewDelegate {
     func changeHappened() {
         viewModel?.fetchTasks()
-        tableView.reloadData()
-        print("O Victor é gay")
     }
-}
-#Preview {
-  TaskView()
 }

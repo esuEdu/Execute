@@ -58,7 +58,7 @@ class LabelComponent: UIView {
   ///   - numberOfLines: The maximum number of lines for the label text.
   ///   - lineBreakMode: The line break mode for the label text.
   init(text: String, backgroundColor: UIColor = .clear, accessibilityLabel: String, textColor: UIColor = .label, font: UIFont.TextStyle = .body, numberOfLines: Int = 0, lineBreakMode: NSLineBreakMode = .byWordWrapping) {
-    super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+      super.init(frame: .zero)
     
     // Configure textLabel
     textLabel.text = text
