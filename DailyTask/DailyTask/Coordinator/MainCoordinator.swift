@@ -138,12 +138,12 @@ class MainCoordinator: Coordinator {
     /// navigation controller. This method sets up the initial view and state of the app.
     func start() {
         // Create instances of your view controllers
-        let homeView = TESTViewController()
-//        HomeView = HomeView()
-//        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-//        homeViewModel.coordinator = self
-//        homeView.homeViewModel = homeViewModel
-//        homeViewModel.homeView = homeView
+//        let homeView = TESTViewController()
+        let homeView = HomeView()
+        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
+        homeViewModel.coordinator = self
+        homeView.homeViewModel = homeViewModel
+        homeViewModel.homeView = homeView
       
       let allTasksView = ListAllTasks()
 

@@ -37,15 +37,13 @@ import UIKit
 
 /// An enumeration representing custom colors available for use in the application.
 enum CustomColor {
-    /// Represents a custom red color.
-    case customRed
     
-    /// Represents a custom green color.
-    case customGreen
+    case customTertiaryBlue
     
-    /// Represents a custom blue color.
-    case customBlue
-    // Add more color cases as needed
+    case customSecondaryBlue
+    
+    case customPrimaryBlue
+    
 }
 
 extension UIColor {
@@ -71,11 +69,11 @@ extension UIColor {
      ///         enumeration as needed.
     convenience init?(_ customColor: CustomColor) {
         switch customColor {
-        case .customRed:
+        case .customTertiaryBlue:
             self.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
-        case .customGreen:
+        case .customSecondaryBlue:
             self.init(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
-        case .customBlue:
+        case .customPrimaryBlue:
             self.init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
             // Add more cases and color values as needed
         }
