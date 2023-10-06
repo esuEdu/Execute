@@ -7,10 +7,24 @@
 
 import UIKit
 
-
+/// `ContainerComponent` is a custom UIView subclass that provides a container with a title, optional button, and a stack of components.
+///
+/// ## Example Usage
+///
+/// ```swift
+/// let container = ContainerComponent(
+///     text: "Container Title",
+///     textColor: .label,
+///     button: addButton, // Optional UIButton
+///     components: [component1, component2],
+///     spacing: 16
+/// )
+/// ```
+///
+/// - Note: You can add components to the container using `addNewElements(_:)` method and retrieve the position using `getPosition()` method.
 class ContainerComponent: UIView {
     
-        
+    /// The stack view that contains the title and optional button.
     let stackViewContainerTitle: UIStackView = {
         let stackViewContainerTitle = UIStackView()
         stackViewContainerTitle.axis = .horizontal
@@ -23,11 +37,13 @@ class ContainerComponent: UIView {
         return stackViewContainerTitle
     }()
     
+    /// The title label.
     let containetTitle: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .label, font: .headline)
         return label
     }()
     
+    /// The stack view that contains components.
     let stackViewContainer: UIStackView = {
         let stackViewContainer = UIStackView()
         stackViewContainer.axis = .vertical
@@ -40,6 +56,7 @@ class ContainerComponent: UIView {
         return stackViewContainer
     }()
     
+    /// The main stack view that contains all elements.
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -53,6 +70,14 @@ class ContainerComponent: UIView {
         return stackView
     }()
     
+    /// Initializes a new `ContainerComponent`.
+    ///
+    /// - Parameters:
+    ///   - text: The title text.
+    ///   - textColor: The text color for the title.
+    ///   - button: An optional UIButton to be included in the title stack.
+    ///   - components: An array of UIView components to be included in the container.
+    ///   - spacing: The spacing between components in the stack view.
     init(text: String, textColor: UIColor = .label, button: UIButton? = nil, components: [UIView], spacing: CGFloat = 0 ) {
         super.init(frame: .zero)
         
@@ -63,7 +88,7 @@ class ContainerComponent: UIView {
         
         if let button = button {
             stackViewContainerTitle.addArrangedSubview(button)
-        }else {
+        } else {
             containetTitle.stackView.alignment = .leading
         }
         
@@ -90,18 +115,22 @@ class ContainerComponent: UIView {
         ])
     }
     
+    /// Adds a new UIView component to the container's stack.
+    ///
+    /// - Parameter view: The UIView component to add.
     func addNewElements(_ view: UIView){
         stackViewContainer.addArrangedSubview(view)
     }
     
-    func getPosition() -> Int{
+    /// Returns the position of the component in the container's stack.
+    ///
+    /// - Returns: The position of the component.
+    func getPosition() -> Int {
         return stackViewContainer.arrangedSubviews.count
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
-
 

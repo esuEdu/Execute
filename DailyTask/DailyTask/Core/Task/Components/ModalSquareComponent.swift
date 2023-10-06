@@ -7,10 +7,18 @@
 
 import UIKit
 
-
-
+/// `ModalSquareComponent` is a custom UIButton subclass that represents a square modal component with an icon and a label.
+///
+/// Example usage:
+///
+/// ```swift
+/// let modalComponent = ModalSquareComponent(text: "Sample", iconImage: UIImage(systemName: "backpack")!)
+/// ```
+///
+/// This component provides a square button with an icon and a label, typically used for modal actions or options.
 class ModalSquareComponent: UIButton {
 
+    /// The icon image view.
     let icon: UIImageView = {
         let icon = UIImageView()
         icon.image = UIImage(systemName: "backpack")
@@ -20,8 +28,10 @@ class ModalSquareComponent: UIButton {
         return icon
     }()
     
+    /// The label displaying text.
     var label: UILabel = UILabel()
     
+    /// The main stack view that contains the icon and label.
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +44,12 @@ class ModalSquareComponent: UIButton {
         return stackView
     }()
     
-    init(text: String, iconImage: UIImage){
+    /// Initializes a new `ModalSquareComponent` with the given text and icon image.
+    ///
+    /// - Parameters:
+    ///   - text: The text to display.
+    ///   - iconImage: The icon image to display.
+    init(text: String, iconImage: UIImage) {
         super.init(frame: .zero)
         backgroundColor = .systemBlue
         layer.cornerRadius = 10
@@ -48,16 +63,23 @@ class ModalSquareComponent: UIButton {
         addAllConstraints()
     }
     
+    /// Required initializer that is not implemented for this class.
+    ///
+    /// - Parameter coder: The NSCoder used for encoding and decoding.
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func changeIconSymbol(image: UIImage){
+    /// Changes the icon symbol to the provided image.
+    ///
+    /// - Parameter image: The new icon image.
+    func changeIconSymbol(image: UIImage) {
         icon.image = image
         icon.layoutIfNeeded()
     }
     
-    func addAllConstraints(){
+    /// Adds all necessary constraints for the component.
+    private func addAllConstraints() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
