@@ -29,7 +29,7 @@ class ChooseMethodologyComponent: UIView{
     
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
-    private let methodology = UILabel()
+    var methodology = UILabel()
     
     private let viewToResizeTheButton: UIView = UIView()
     
@@ -108,6 +108,14 @@ class ChooseMethodologyComponent: UIView{
     func changeTheMethodologyText(_ text: String){
         methodology.text = text
         methodology.layoutIfNeeded()
+    }
+    
+    func hideButton(_ t: Bool){
+        if t{
+            selectMethodology.alpha = 0
+        } else{
+            selectMethodology.alpha = 1
+        }
     }
 }
 

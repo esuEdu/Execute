@@ -30,5 +30,9 @@ class ProjectListViewModel: Coordinating {
         coordinator?.goToTaskView(project)
     }
     
+    func goToEditProject(_ project: Project, isEditable: Bool){
+        coordinator?.goToProjectEditionView(project, isEditable: isEditable)
+    }
+    
     
 }

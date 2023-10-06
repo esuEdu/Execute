@@ -124,6 +124,16 @@ class ProjectListView: UIViewController {
         }
     }
     
+    func removeAtPosition(project: Project){
+        for n in scrollView.stackViewToShowElements.arrangedSubviews{
+            let r = n as! ContainerProjectsList
+            if r.project == project{
+                r.removeFromSuperview()
+                self.scrollView.layoutIfNeeded()
+            }
+        }
+    }
+    
     // MARK: - Button functions
     @objc func createNewProject(){
         projectListViewModel?.coordinator?.eventOccurred(with: .goToProjectCreation)
@@ -139,18 +149,16 @@ class ProjectListView: UIViewController {
 extension ProjectListView: ContainerProjectsListDelegate{
     func setUpAlert(project: Project) {
         let alert = UIAlertController(title: "\(project.name!)", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            
-        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Editar", style: .default, handler: { action in
-            
+            self.projectListViewModel?.goToEditProject(project, isEditable: true)
         }))
         alert.addAction(UIAlertAction(title: "Detalhes", style: .default, handler: { action in
-            
+            self.projectListViewModel?.goToEditProject(project, isEditable: false)
         }))
         alert.addAction(UIAlertAction(title: "Deletar", style: .destructive, handler: { action in
+            self.removeAtPosition(project: project)
             self.projectListViewModel?.deleteAProject(project: project)
-            self.addElements()
         }))
         alert.modalPresentationStyle = .overCurrentContext
         self.present(alert, animated: true)

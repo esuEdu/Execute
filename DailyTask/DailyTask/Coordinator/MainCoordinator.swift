@@ -56,11 +56,7 @@ class MainCoordinator: Coordinator {
             viewModel.projectCreationView = view
             view.projectCreationViewModel = viewModel
             
-            if UIDevice.current.userInterfaceIdiom == .pad{
-                navigationController?.present(view, animated: true)
-            } else{
-                navigationController?.pushViewController(view, animated: true)
-            }
+            navigationController?.pushViewController(view, animated: true)
             
         case .goToProjectList:
             let projectListView: ProjectListView = ProjectListView()
@@ -100,6 +96,17 @@ class MainCoordinator: Coordinator {
             
         }
         
+    }
+    
+    func goToProjectEditionView(_ project: Project, isEditable: Bool){
+        let view: ProjectEditionView = ProjectEditionView()
+        let viewModel: ProjectEditionViewModel & Coordinating = ProjectEditionViewModel()
+        viewModel.coordinator = self
+        viewModel.view = view
+        viewModel.project = project
+        view.isEditable = isEditable
+        view.viewModel = viewModel
+        navigationController?.pushViewController(view, animated: true)
     }
     
     func goToTaskView(_ project: Project){
