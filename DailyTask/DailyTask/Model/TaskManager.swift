@@ -13,7 +13,6 @@ class TaskManager {
   
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
-  
   func fetchTask(_ project: Project) -> [Task] {
     do {
       
@@ -24,8 +23,20 @@ class TaskManager {
         
       let tasks = try context.fetch(request)
       
-#warning("Delete this print after finish")
-      print("fetch of tasks done")
+      return tasks
+      
+    } catch {
+      fatalError("error in fetchTask \(error)")
+    }
+  }
+    
+    func fetchTask() -> [Task] {
+    do {
+      
+      let request: NSFetchRequest<Task> = Task.fetchRequest()
+        
+        
+      let tasks = try context.fetch(request)
       
       return tasks
       
@@ -60,7 +71,6 @@ class TaskManager {
     return task
   }
   
-  #warning("Verificar se no editar precisa de isDone")
   func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: String, descript: String) {
     
     do {

@@ -8,7 +8,14 @@
 import Foundation
 import UIKit
 
-class SubtaskComponent: UIView {
+protocol SubtaskContainerComponentDelegate: AnyObject{
+    func valueChanged() -> CGFloat
+    func isChecked(_ check: Bool)
+}
+
+class SubtaskContainerComponent: UIView {
+    
+    weak var delegate: SubtaskContainerComponentDelegate?
     
     private let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -87,7 +94,7 @@ class SubtaskComponent: UIView {
         return view
     }()
     
-    init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho") {
+    init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho", mainColor: UIColor = .systemBlue) {
         super.init(frame: .zero)
         roundedCheckbox.delegate = self
         horizontalStackView.addArrangedSubview(label)
@@ -102,6 +109,7 @@ class SubtaskComponent: UIView {
         addSubview(backCircle)
         addSubview(frontCircle)
         
+        roundedRect.layer.borderColor = mainColor.cgColor
         
         let footnoteSize = (UIFont.preferredFont(forTextStyle: .footnote).lineHeight)
         
@@ -159,7 +167,7 @@ class SubtaskComponent: UIView {
     
 }
 
-extension SubtaskComponent: RoundedCheckboxDelegate{
+extension SubtaskContainerComponent: RoundedCheckboxDelegate{
     func buttonWasPressed(pressed: Bool) {
         if pressed{
             UIView.animate(withDuration: 0.2) {
@@ -171,6 +179,8 @@ extension SubtaskComponent: RoundedCheckboxDelegate{
                 self.roundedRect.alpha = 0.4
                 self.line.backgroundColor =  .systemBlue
                 self.secondLine.backgroundColor =  .systemBlue
+                self.backCircle.tintColor = .systemBlue
+                self.frontCircle.tintColor = .systemGray
             }
         } else{
             UIView.animate(withDuration: 0.2) {
@@ -182,6 +192,8 @@ extension SubtaskComponent: RoundedCheckboxDelegate{
                 self.roundedRect.alpha = 1
                 self.line.backgroundColor = .white
                 self.secondLine.backgroundColor = .white
+                self.backCircle.tintColor = .black
+                self.frontCircle.tintColor = .systemBlue
             }
             
         }
@@ -189,5 +201,5 @@ extension SubtaskComponent: RoundedCheckboxDelegate{
 }
 
 #Preview{
-    SubtaskComponent()
+    SubtaskContainerComponent(mainColor: .primaryBlue)
 }

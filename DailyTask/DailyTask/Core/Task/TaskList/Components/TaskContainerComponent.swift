@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol TaskContainerComponentDelegate: AnyObject{
+    func valueChanged() -> CGFloat
+    func isChecked(_ check: Bool)
+}
+
 /// `TaskContainerComponent` is a custom UIView subclass that displays a task container with a time label and task name.
 ///
 /// Example usage:
@@ -17,6 +22,8 @@ import UIKit
 ///
 /// - Note: This component includes a time label and a task name label.
 class TaskContainerComponent: UIView {
+    
+    weak var delegate: TaskContainerComponentDelegate?
     
     /// The stack view for the time label and task name.
     let timeStack: UIStackView = {
@@ -29,7 +36,7 @@ class TaskContainerComponent: UIView {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layer.cornerRadius = 10
         stackView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         return stackView
     }()
     
@@ -57,7 +64,7 @@ class TaskContainerComponent: UIView {
     
     let labelPercent: UILabel = {
         let label = UILabel()
-        label.text = "100%"
+        label.text = "50%"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .caption1).lineHeight, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -68,11 +75,29 @@ class TaskContainerComponent: UIView {
     let line: UIView = {
         let line = UIView()
         line.translatesAutoresizingMaskIntoConstraints = false
+//        line.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         line.backgroundColor = .systemBlue
         return line
     }()
     
+    let bgLine: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .white
+        return line
+    }()
     
+    var isUnique: Bool = true {
+        didSet{
+            if isUnique{
+                bgLine.isHidden = true
+                line.isHidden = true
+            } else{
+                bgLine.isHidden = false
+                line.isHidden = false
+            }
+        }
+    }
     
     var taskName: LabelComponent?
     
@@ -81,8 +106,13 @@ class TaskContainerComponent: UIView {
     /// - Parameters:
     ///   - timeLabel: The time label to display.
     ///   - taskName: The task name to display.
-    init(timeLabel: String = "8:20", taskName: String = "Sample task ljnsjdnjs n dfmd fm ndjnfjdn fjndjfndjn jkndjnfj dkn fjkdnkj nfdjknf jd") {
+    init(timeLabel: String = "18:20", taskName: String = "Sample task ljnsjdnjs n dfmd fm ndjnfjdn fjndjfndjn jkndjnfj dkn fjkdnkj nfdjknf jd", mainColor: UIColor = .systemBlue) {
         super.init(frame: .zero)
+        
+        if isUnique{
+            bgLine.isHidden = true
+            line.isHidden = true
+        }
         
         progressBar = CircularProgressView(lineWidth: labelPercent.font.lineHeight/3.5)
         progressBar!.setProgress(0.5)
@@ -107,6 +137,7 @@ class TaskContainerComponent: UIView {
         addSubview(timeStack)
         
         addSubview(progressBar!)
+        addSubview(bgLine)
         addSubview(line)
         addSubview(labelPercent)
         
@@ -145,7 +176,17 @@ class TaskContainerComponent: UIView {
             line.widthAnchor.constraint(equalToConstant: (self.taskName!.textLabel.font.lineHeight * 3.3)/8.6),
             line.centerXAnchor.constraint(equalTo: progressBar!.centerXAnchor),
             
+            bgLine.topAnchor.constraint(equalTo: containerStack.bottomAnchor),
+            bgLine.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bgLine.heightAnchor.constraint(equalToConstant: (self.taskName!.textLabel.font.lineHeight * 3.3)/2),
+            bgLine.widthAnchor.constraint(equalToConstant: (self.taskName!.textLabel.font.lineHeight * 3.3)/8.6),
+            bgLine.centerXAnchor.constraint(equalTo: progressBar!.centerXAnchor),
+            
         ])
+        
+//        let lineWidth = (self.taskName!.textLabel.font.lineHeight * 3.3 ) / 8.6
+//        
+//        line.layer.cornerRadius = (lineWidth / 2.5)
     }
     
     /// Required initializer that is not implemented for this class.
@@ -166,7 +207,11 @@ extension TaskContainerComponent: RoundedCheckboxDelegate{
             taskName!.textLabel.alpha = 0.4
             progressBar?.setProgress(1)
             labelPercent.text = "\(100)%"
-            line.backgroundColor = .systemBlue
+            if !isUnique{
+                line.isHidden = false
+            }
+                
+            
             layoutIfNeeded()
         } else{
             let attributedText = NSMutableAttributedString(string: taskName!.textLabel.text!)
@@ -176,8 +221,9 @@ extension TaskContainerComponent: RoundedCheckboxDelegate{
             taskName!.textLabel.alpha = 1
             progressBar?.setProgress(0)
             labelPercent.text = "\(0)%"
-            line.backgroundColor = .white
-            line.alpha = 1
+            if !isUnique{
+                line.isHidden = true
+            }
             layoutIfNeeded()
         }
     }

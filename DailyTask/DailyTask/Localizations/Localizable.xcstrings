@@ -352,6 +352,23 @@
     "Name the project" : {
 
     },
+    "New task" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova tarefa"
+          }
+        }
+      }
+    },
     "NewProjectKey" : {
       "extractionState" : "manual",
       "localizations" : {

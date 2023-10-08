@@ -21,7 +21,6 @@ class SubTaskManager {
             
             let subTasks = try context.fetch(request)
             
-            print("")
             return subTasks
         }catch {
             fatalError("erro in fetchSubTask \(error)")
