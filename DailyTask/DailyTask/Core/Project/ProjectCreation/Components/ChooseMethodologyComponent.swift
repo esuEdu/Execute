@@ -71,10 +71,10 @@ class ChooseMethodologyComponent: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+#warning("MUDAR A LAUNCHSCREEN")
     private func returnMenu() -> UIMenu{
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
-        
+
             UIAction(title: "Challenge Based Learning (CBL)", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .CBL)
                 self.selectionFeedbackGenerator.selectionChanged()

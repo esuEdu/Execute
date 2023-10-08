@@ -111,10 +111,11 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToTaskCreation(_ project: Project){
+    func goToTaskCreation(_ project: Project, _ step: steps?){
         let view: CreateTaskView = CreateTaskView()
         let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
         viewModel.project = project
+        viewModel.step = step
         view.viewModel = viewModel
         viewModel.viewCreate = view
         viewModel.coordinator = self

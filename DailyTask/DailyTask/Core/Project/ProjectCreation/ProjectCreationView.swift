@@ -69,6 +69,7 @@ class ProjectCreationView: UIViewController {
     }()
     
     var methodologyContainer: ContainerComponent?
+    
     let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .black)
     
     

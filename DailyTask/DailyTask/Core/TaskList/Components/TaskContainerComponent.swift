@@ -13,8 +13,7 @@ class TaskContainerComponent: UIView {
     let mainStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.layer.cornerRadius = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false        
         stackView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner,.layerMinXMaxYCorner]
         stackView.clipsToBounds = true
         return stackView
