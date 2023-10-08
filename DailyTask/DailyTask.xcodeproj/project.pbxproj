@@ -58,9 +58,9 @@
 		9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */; };
 		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
 		9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */; };
+		9BF884A52ACF3C0D000656A6 /* ListAllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */; };
 		E8299F1F2ACF3BF300A9C87E /* ProjectEditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */; };
 		E8299F212ACF3C1800A9C87E /* ProjectEditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */; };
-		9BF884A52ACF3C0D000656A6 /* ListAllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */; };
 		E82CE09C2ACB5E19008140B8 /* BreakableTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */; };
 		E82CE0A02ACC8F18008140B8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */; };
 		E82CE0A22ACDD8AB008140B8 /* ScrollContainerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */; };
@@ -78,6 +78,8 @@
 		E88468432AC927B8009175BB /* ModalGetInfoTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88468422AC927B8009175BB /* ModalGetInfoTaskViewModel.swift */; };
 		E88A24232AC3DB9500D77229 /* ColorChooseComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A24222AC3DB9500D77229 /* ColorChooseComponent.swift */; };
 		E88A24272AC4C37900D77229 /* TextDescriptionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A24262AC4C37900D77229 /* TextDescriptionComponent.swift */; };
+		E89618812AD07F45008BCA5B /* TaskPercentComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89618802AD07F45008BCA5B /* TaskPercentComponent.swift */; };
+		E8BE91F32AD1EC7400F20C76 /* SubtaskBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE91F22AD1EC7400F20C76 /* SubtaskBoxComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,9 +137,9 @@
 		9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxViewCell.swift; sourceTree = "<group>"; };
 		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksInTasksComponent.swift; sourceTree = "<group>"; };
+		9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllTasksViewModel.swift; sourceTree = "<group>"; };
 		E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditionView.swift; sourceTree = "<group>"; };
 		E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditionViewModel.swift; sourceTree = "<group>"; };
-		9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllTasksViewModel.swift; sourceTree = "<group>"; };
 		E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakableTextComponent.swift; sourceTree = "<group>"; };
 		E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollContainerComponent.swift; sourceTree = "<group>"; };
@@ -155,6 +157,8 @@
 		E88468422AC927B8009175BB /* ModalGetInfoTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalGetInfoTaskViewModel.swift; sourceTree = "<group>"; };
 		E88A24222AC3DB9500D77229 /* ColorChooseComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChooseComponent.swift; sourceTree = "<group>"; };
 		E88A24262AC4C37900D77229 /* TextDescriptionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDescriptionComponent.swift; sourceTree = "<group>"; };
+		E89618802AD07F45008BCA5B /* TaskPercentComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPercentComponent.swift; sourceTree = "<group>"; };
+		E8BE91F22AD1EC7400F20C76 /* SubtaskBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtaskBoxComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +196,6 @@
 				286CAE962AC5B49300200E82 /* DatePickerView.swift */,
 				9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */,
 				28FF78C62AC669CB00F2CB59 /* TagComponent.swift */,
-				818076222ACB476D00E4AE26 /* RoundedCheckboxComponent.swift */,
 				81DE7AB72ACDDF5500D359A4 /* SubtaskComponent.swift */,
 				9BB144AF2ACB634A0023D7C6 /* ContainerProjectsList.swift */,
 				28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */,
@@ -260,8 +263,12 @@
 		28A9E42C2ACAEBAB0009FE28 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */,
+				818076222ACB476D00E4AE26 /* RoundedCheckboxComponent.swift */,
 				28A9E42D2ACAEBD30009FE28 /* TaskContainerComponent.swift */,
 				2800A5CB2ACFA411000988FC /* DateAndCalendarComponent.swift */,
+				E89618802AD07F45008BCA5B /* TaskPercentComponent.swift */,
+				E8BE91F22AD1EC7400F20C76 /* SubtaskBoxComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -455,7 +462,6 @@
 		E84018BB2ABF3549000AA58B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E87C6EF22AC208A4001B794C /* ProgressCircleBarComponent.swift */,
 				E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */,
 			);
 			path = Components;
@@ -587,6 +593,7 @@
 				818075F72AC4C2A000E4AE26 /* EditTaskTagView.swift in Sources */,
 				818075FB2AC4C2F100E4AE26 /* EditTaskTagViewModel.swift in Sources */,
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
+				E8BE91F32AD1EC7400F20C76 /* SubtaskBoxComponent.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E88A24232AC3DB9500D77229 /* ColorChooseComponent.swift in Sources */,
 				E8299F212ACF3C1800A9C87E /* ProjectEditionViewModel.swift in Sources */,
@@ -602,6 +609,7 @@
 				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
 				81DE7AB82ACDDF5500D359A4 /* SubtaskComponent.swift in Sources */,
 				818075F52AC4C28800E4AE26 /* TaskTagView.swift in Sources */,
+				E89618812AD07F45008BCA5B /* TaskPercentComponent.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
 				9B6EB2D92AC5FE7100DA1430 /* Priority.swift in Sources */,
 				9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */,

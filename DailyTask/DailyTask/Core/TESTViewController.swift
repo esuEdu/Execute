@@ -1,32 +1,27 @@
 import UIKit
 
-class TESTViewController: UIViewController {
-    
-    let textField = TextFieldComponent()
-    
-    let scrollView = ScrollContainerComponent()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        textField.translatesAutoresizingMaskIntoConstraints = false
+//class TESTViewController: UIViewController {
+//    
+//    let teste = TaskPercentComponent()
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        teste.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(teste)
 //        addAllConstraints()
-        
-        scrollView.contains("")
-    }
-    
+//    }
+//
 //    func addAllConstraints(){
 //        NSLayoutConstraint.activate([
-//            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            teste.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            teste.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            teste.topAnchor.constraint(equalTo: view.topAnchor),
+//            teste.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 //        ])
 //    }
-    
-}
-
-#Preview{
-    TESTViewController()
-}
+//    
+//}
+//
+//#Preview{
+//    TESTViewController()
+//}
