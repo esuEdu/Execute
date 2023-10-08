@@ -31,17 +31,18 @@ class TaskManager {
   }
     
     func fetchTask() -> [Task] {
-    do {
-      
-      let request: NSFetchRequest<Task> = Task.fetchRequest()
-        
-        
-      let tasks = try context.fetch(request)
-      
-      return tasks
-      
-    } catch {
-      fatalError("error in fetchTask \(error)")
+        do {
+            
+            let request: NSFetchRequest<Task> = Task.fetchRequest()
+            
+            
+            let tasks = try context.fetch(request)
+            
+            return tasks
+            
+        } catch {
+            fatalError("error in fetchTask \(error)")
+        }
     }
     
     func saveData(){
