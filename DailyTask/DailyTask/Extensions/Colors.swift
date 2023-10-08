@@ -70,11 +70,11 @@ extension UIColor {
     convenience init?(_ customColor: CustomColor) {
         switch customColor {
         case .customTertiaryBlue:
-            self.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            self.init(named: "TertiaryBlue")
         case .customSecondaryBlue:
-            self.init(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
+            self.init(named: "SecondaryBlue")
         case .customPrimaryBlue:
-            self.init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+            self.init(named: "PrimaryBlue")
             // Add more cases and color values as needed
         }
     }

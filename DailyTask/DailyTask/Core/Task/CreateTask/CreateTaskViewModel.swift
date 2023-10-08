@@ -9,26 +9,26 @@ import Foundation
 import UIKit
 
 class CreateTaskViewModel: Coordinating  {
-  
-  var coordinator: Coordinator?
+    
+    var coordinator: Coordinator?
     var project: Project?
-  
-  var viewCreate: CreateTaskView?
-  
-  private let taskManager = TaskManager()
-  private let subTaskManager = SubTaskManager()
-  
+    var step: steps?
+    var viewCreate: CreateTaskView?
+    
+    private let taskManager = TaskManager()
+    private let subTaskManager = SubTaskManager()
+    
     func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, red: Double, green: Double, blue: Double, subtasks: [String]){
         if let project = project{
-            let task = taskManager.createTask(name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript, project: project, red: red, green: green, blue: blue)
+            let task = taskManager.createTask(name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript, project: project, red: red, green: green, blue: blue, step: step)
             for sub in subtasks{
                 subTaskManager.createSubTask(name: sub, task: task)
             }
         }
     }
-  
-  func removeLastView(){
-      coordinator?.eventOccurred(with: .removeTopView)
-  }
+    
+    func removeLastView(){
+        coordinator?.eventOccurred(with: .removeTopView)
+    }
     
 }

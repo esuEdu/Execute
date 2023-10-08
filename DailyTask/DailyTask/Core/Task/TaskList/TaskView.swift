@@ -12,6 +12,12 @@ class TaskView: UIViewController{
     
     var viewModel: TaskViewModel?
     
+    let datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        return picker
+    }()
+     
     var formatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
@@ -23,8 +29,29 @@ class TaskView: UIViewController{
     let mainStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    let secondaryStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 64
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+        return stackView
+    }()
+    
+    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Steps", textColor: UIColor.accent)
+    
+    let newTask = {
+       let newTask = UIButton()
+        newTask.setImage(UIImage(systemName: "plus"), for: .normal)
+        newTask.setTitle("New Task", for: .normal)
+        newTask.setTitleColor(.accent, for: .normal)
+        return newTask
     }()
     
     override func viewDidLoad() {
@@ -33,12 +60,26 @@ class TaskView: UIViewController{
         view.backgroundColor = .systemBackground
         
         title = viewModel?.project?.name
-    
+        
         let dateAndCalendarComponent = DateAndCalendarComponent(date: formatter.string(from: Date.now))
-        dateAndCalendarComponent.button.addTarget(self, action: #selector(openCalendar), for: .touchUpInside)
+        
+        chooseStep.delegate = self
         mainStack.addArrangedSubview(dateAndCalendarComponent)
         
+        if viewModel?.project?.methodology == "CBL" {
+            secondaryStack.addArrangedSubview(chooseStep)
+        }else {
+            secondaryStack.alignment = .trailing
+        }
+        
+        newTask.addTarget(self, action: #selector(createTask), for: .touchUpInside)
+        
+        secondaryStack.addArrangedSubview(newTask)
+        
+        mainStack.addArrangedSubview(secondaryStack)
         view.addSubview(mainStack)
+        
+        datePicker.addTarget(self, action: #selector(date), for: .valueChanged)
         
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -49,13 +90,20 @@ class TaskView: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     @objc func openCalendar() {
-        // Open the default calendar app
-        if let calendarURL = URL(string: "calshow://") {
-            UIApplication.shared.open(calendarURL, options: [:], completionHandler: nil)
-        }
+
+    }
+    
+    @objc func date(_ sender: UIDatePicker) {
+        let date = sender.date
+        print(date)
+    }
+    
+    @objc func createTask() {
+        viewModel?.goToCreateTasks()
     }
     
 }
@@ -63,5 +111,13 @@ class TaskView: UIViewController{
 extension TaskView: ModalGetInfoTaskViewDelegate {
     func changeHappened() {
         viewModel?.fetchTasks()
+    }
+}
+
+extension TaskView: ChooseStepComponentDelegate {
+    
+    func setUpMenuFunction(type: steps) {
+        self.viewModel?.selectedStep(type)
+        self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step!.rawValue))
     }
 }

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Act" : {
+
+    },
     "Cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -275,6 +278,9 @@
           }
         }
       }
+    },
+    "Investigate" : {
+
     },
     "Key" : {
       "extractionState" : "manual"
