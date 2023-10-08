@@ -42,7 +42,7 @@ class TextDescriptionComponent: UIView {
         }
     }
     
-    private let descriptionBox: UITextView = {
+    let descriptionBox: UITextView = {
         let description = UITextView()
       description.translatesAutoresizingMaskIntoConstraints = false
         return description

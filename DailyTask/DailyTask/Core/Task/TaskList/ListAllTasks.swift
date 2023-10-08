@@ -38,14 +38,6 @@ class ListAllTasks: UIViewController {
     return button
   }()
   
-  var formatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.locale = .current
-    dateFormatter.dateStyle = .long
-    dateFormatter.timeStyle = .none
-    return dateFormatter
-  }()
-  
   let dateNow: LabelComponent = {
     
     let nowDate = Date.now
@@ -109,6 +101,8 @@ class ListAllTasks: UIViewController {
     
     searchBar.delegate = self
     
+//    createTask.addTarget(self, action: #selector(createNewTask), for: .touchUpInside)
+    
   }
   
   func setupConstraints() {
@@ -117,8 +111,7 @@ class ListAllTasks: UIViewController {
       stackViewForHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
       stackViewForHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
       stackViewForHeader.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -10),
-      
-      searchBar.topAnchor.constraint(equalTo: stackViewForHeader.bottomAnchor),
+
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
       searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
     ])
@@ -126,6 +119,24 @@ class ListAllTasks: UIViewController {
   
 }
 
+//extension ListAllTasks {
+//  @objc func createNewTask(){
+//    
+//  }
+//}
+
 extension ListAllTasks: UISearchBarDelegate {
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+      searchBar.setShowsCancelButton(true, animated: true)
+  }
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+      searchBar.setShowsCancelButton(false, animated: true)
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+      searchBar.endEditing(true)
+  }
   
 }

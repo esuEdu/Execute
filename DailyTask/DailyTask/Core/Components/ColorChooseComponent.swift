@@ -145,7 +145,7 @@ class ColorChooseComponent: UIView{
     }
     
     // Used just to selected only one color button
-    private func deselectAllButtons(){
+    func deselectAllButtons(){
         feedbackGenerator.impactOccurred(intensity: 0.7)
         
         color1.isPressed = false

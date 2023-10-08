@@ -220,7 +220,12 @@ class ContainerProjectsList: UIView {
     }
     
     @objc func goToAlert(){
-        delegate?.setUpAlert(project: project!)
+        self.alpha = 0.6
+        self.delegate?.setUpAlert(project: self.project!)
+        UIView.animate(withDuration: 0.7) {
+            self.alpha = 1
+        }
+        
     }
     
 }

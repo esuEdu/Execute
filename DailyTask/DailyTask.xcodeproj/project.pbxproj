@@ -45,6 +45,8 @@
 		818076002AC4D7ED00E4AE26 /* ProjectTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818075FF2AC4D7ED00E4AE26 /* ProjectTagViewModel.swift */; };
 		818076022AC4D7FE00E4AE26 /* EditProjectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818076012AC4D7FE00E4AE26 /* EditProjectTagView.swift */; };
 		818076042AC4D81000E4AE26 /* EditProjectTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818076032AC4D81000E4AE26 /* EditProjectTagViewModel.swift */; };
+		818076232ACB476D00E4AE26 /* RoundedCheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818076222ACB476D00E4AE26 /* RoundedCheckboxComponent.swift */; };
+		81DE7AB82ACDDF5500D359A4 /* SubtaskComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DE7AB72ACDDF5500D359A4 /* SubtaskComponent.swift */; };
 		9B0AA4182AC07B07008D08B6 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4172AC07B07008D08B6 /* TaskView.swift */; };
 		9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */; };
 		9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */; };
@@ -57,6 +59,9 @@
 		9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */; };
 		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
 		9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */; };
+		E8299F1F2ACF3BF300A9C87E /* ProjectEditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */; };
+		E8299F212ACF3C1800A9C87E /* ProjectEditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */; };
+		9BF884A52ACF3C0D000656A6 /* ListAllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */; };
 		E82CE09C2ACB5E19008140B8 /* BreakableTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */; };
 		E82CE0A02ACC8F18008140B8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */; };
 		E82CE0A22ACDD8AB008140B8 /* ScrollContainerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */; };
@@ -118,6 +123,8 @@
 		818075FF2AC4D7ED00E4AE26 /* ProjectTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagViewModel.swift; sourceTree = "<group>"; };
 		818076012AC4D7FE00E4AE26 /* EditProjectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectTagView.swift; sourceTree = "<group>"; };
 		818076032AC4D81000E4AE26 /* EditProjectTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectTagViewModel.swift; sourceTree = "<group>"; };
+		818076222ACB476D00E4AE26 /* RoundedCheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCheckboxComponent.swift; sourceTree = "<group>"; };
+		81DE7AB72ACDDF5500D359A4 /* SubtaskComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtaskComponent.swift; sourceTree = "<group>"; };
 		9B0AA4172AC07B07008D08B6 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		9B0AA41B2AC089D6008D08B6 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
@@ -130,6 +137,9 @@
 		9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxViewCell.swift; sourceTree = "<group>"; };
 		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksInTasksComponent.swift; sourceTree = "<group>"; };
+		E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditionView.swift; sourceTree = "<group>"; };
+		E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditionViewModel.swift; sourceTree = "<group>"; };
+		9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllTasksViewModel.swift; sourceTree = "<group>"; };
 		E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakableTextComponent.swift; sourceTree = "<group>"; };
 		E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollContainerComponent.swift; sourceTree = "<group>"; };
@@ -184,6 +194,8 @@
 				286CAE962AC5B49300200E82 /* DatePickerView.swift */,
 				9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */,
 				28FF78C62AC669CB00F2CB59 /* TagComponent.swift */,
+				818076222ACB476D00E4AE26 /* RoundedCheckboxComponent.swift */,
+				81DE7AB72ACDDF5500D359A4 /* SubtaskComponent.swift */,
 				9BB144AF2ACB634A0023D7C6 /* ContainerProjectsList.swift */,
 				28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */,
 				28DC4C2D2ACF421E00E18AAA /* AllTaskListComponts.swift */,
@@ -318,7 +330,6 @@
 		28C45C032ABAF920001CEFED /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				9BC048B32AC45E2500A1E9BB /* TaskList */,
 				9BB144B12ACBAB9D0023D7C6 /* Project */,
 				2829C5022ABB6B8900A75CEB /* Components */,
 				818075FC2AC4C66300E4AE26 /* Tag */,
@@ -364,6 +375,7 @@
 		9B0AA4152AC07AF2008D08B6 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				9BC048B32AC45E2500A1E9BB /* TaskList */,
 				E884683F2AC92635009175BB /* ModalGetInfoTask */,
 				9BC048B42AC45E3100A1E9BB /* CreateTask */,
 				9B0AA4162AC07AF9008D08B6 /* Components */,
@@ -387,6 +399,7 @@
 		9BB144B12ACBAB9D0023D7C6 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				E8299F1D2ACF3B9100A9C87E /* ProjectEdition */,
 				E84018CF2ABFE3D3000AA58B /* ProjectCreation */,
 				E84018B92ABF3532000AA58B /* ProjectList */,
 			);
@@ -400,6 +413,7 @@
 				9B0AA4172AC07B07008D08B6 /* TaskView.swift */,
 				9B0AA4192AC07B11008D08B6 /* TaskViewModel.swift */,
 				9B54B3312ACE039E005DDB59 /* ListAllTasks.swift */,
+				9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */,
 			);
 			path = TaskList;
 			sourceTree = "<group>";
@@ -420,6 +434,15 @@
 				9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */,
 			);
 			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		E8299F1D2ACF3B9100A9C87E /* ProjectEdition */ = {
+			isa = PBXGroup;
+			children = (
+				E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */,
+				E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */,
+			);
+			path = ProjectEdition;
 			sourceTree = "<group>";
 		};
 		E84018B92ABF3532000AA58B /* ProjectList */ = {
@@ -559,6 +582,7 @@
 				288B59C12ABE30750058531D /* ProjectTagManager.swift in Sources */,
 				28FF78C72AC669CB00F2CB59 /* TagComponent.swift in Sources */,
 				9B0AA41C2AC089D6008D08B6 /* CreateTaskView.swift in Sources */,
+				E8299F1F2ACF3BF300A9C87E /* ProjectEditionView.swift in Sources */,
 				2829C5012ABB6A1F00A75CEB /* Colors.swift in Sources */,
 				286CAE972AC5B49300200E82 /* DatePickerView.swift in Sources */,
 				286CAE712AC455EE00200E82 /* LabelComponent.swift in Sources */,
@@ -568,16 +592,19 @@
 				28C45BF92ABAF0E8001CEFED /* MainCoordinator.swift in Sources */,
 				E84018C02ABF358B000AA58B /* ProjectListViewModel.swift in Sources */,
 				E88A24232AC3DB9500D77229 /* ColorChooseComponent.swift in Sources */,
+				E8299F212ACF3C1800A9C87E /* ProjectEditionViewModel.swift in Sources */,
 				288B59C52ABE30DE0058531D /* TaskTagManager.swift in Sources */,
 				E87C6EF52AC24A62001B794C /* ChooseIconComponent.swift in Sources */,
 				288B59C32ABE30B20058531D /* TaskManager.swift in Sources */,
 				9B0AA4222AC1E8D7008D08B6 /* CreateTaskViewModel.swift in Sources */,
 				9B0AA41A2AC07B11008D08B6 /* TaskViewModel.swift in Sources */,
 				280DD7922ABF2C8000C2ADA9 /* DatePickerComponent.swift in Sources */,
+				818076232ACB476D00E4AE26 /* RoundedCheckboxComponent.swift in Sources */,
 				286CAE732AC4BD3C00200E82 /* ContainerComponent.swift in Sources */,
 				9B2510032ACDE50500B4BE54 /* UIfont.swift in Sources */,
 				E87C6EF32AC208A4001B794C /* ProgressCircleBarComponent.swift in Sources */,
 				28693B512AD09C51001EC93A /* ChooseStepComponent.swift in Sources */,
+				81DE7AB82ACDDF5500D359A4 /* SubtaskComponent.swift in Sources */,
 				818075F52AC4C28800E4AE26 /* TaskTagView.swift in Sources */,
 				E84018BE2ABF3579000AA58B /* ProjectListView.swift in Sources */,
 				9B6EB2D92AC5FE7100DA1430 /* Priority.swift in Sources */,
@@ -603,6 +630,7 @@
 				288B59D02ABE4C580058531D /* HomeView.swift in Sources */,
 				9B54B3322ACE039E005DDB59 /* ListAllTasks.swift in Sources */,
 				E84018CE2ABFB01F000AA58B /* ProjectCreationViewModel.swift in Sources */,
+				9BF884A52ACF3C0D000656A6 /* ListAllTasksViewModel.swift in Sources */,
 				818076022AC4D7FE00E4AE26 /* EditProjectTagView.swift in Sources */,
 				288B59C72ABE30F90058531D /* SubTaskManager.swift in Sources */,
 			);
@@ -749,7 +777,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = PCTRQS8Z4G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -762,7 +790,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Leonardo.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -781,7 +809,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = PCTRQS8Z4G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -794,7 +822,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Leonardo.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

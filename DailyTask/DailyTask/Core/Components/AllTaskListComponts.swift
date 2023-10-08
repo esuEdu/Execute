@@ -42,6 +42,12 @@ class AllTaskListComponts: UIView {
         mainStack.addArrangedSubview(icon)
         mainStack.addArrangedSubview(texts)
         
+        NSLayoutConstraint.activate([
+            mainStack.topAnchor.constraint(equalTo: topAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
     }
     
     required init?(coder: NSCoder) {

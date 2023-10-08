@@ -1,15 +1,17 @@
 //
-//  ProjectCreationViewController.swift
+//  ProjectEditionView.swift
 //  DailyTask
 //
-//  Created by Leonardo Mesquita Alves on 23/09/23.
+//  Created by Leonardo Mesquita Alves on 05/10/23.
 //
 
 import UIKit
 
-class ProjectCreationView: UIViewController {
+class ProjectEditionView: UIViewController {
     
-    var projectCreationViewModel: ProjectCreationViewModel?
+    var isEditable: Bool = false
+
+    var viewModel: ProjectEditionViewModel?
     
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
 
@@ -37,7 +39,6 @@ class ProjectCreationView: UIViewController {
         let iconPicker = ChooseIconComponent()
         iconPicker.horizontalPadding = 10
         iconPicker.verticalPadding = 15
-        iconPicker.iconName = "pencil.tip"
         iconPicker.isSelectable = true
         iconPicker.translatesAutoresizingMaskIntoConstraints = false
         return iconPicker
@@ -45,11 +46,16 @@ class ProjectCreationView: UIViewController {
     
     let textFieldToGetTheName: TextFieldComponent = {
         let textField = TextFieldComponent()
+        textField.layer.zPosition = 10
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    let colorChooser = ColorChooseComponent()
+    let colorChooser: ColorChooseComponent = {
+        let colorChooser = ColorChooseComponent()
+        colorChooser.layer.zPosition = 9
+        return colorChooser
+    }()
     
     let scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -69,13 +75,16 @@ class ProjectCreationView: UIViewController {
     }()
     
     var methodologyContainer: ContainerComponent?
-    
-    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .black)
+    let methodologyButton: ChooseMethodologyComponent = {
+        let met = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .black)
+        return met
+    }()
     
     
     var dateContainer: ContainerComponent?
     let deadLine: DeadlineComponent = {
         let deadLine = DeadlineComponent()
+        
         return deadLine
     }()
     
@@ -89,7 +98,7 @@ class ProjectCreationView: UIViewController {
         return textField
     }()
 
-    let createButton: UIButton = {
+    let updateButton: UIButton = {
         let button = UIButton(primaryAction: nil)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
@@ -97,15 +106,95 @@ class ProjectCreationView: UIViewController {
         button.setTitle(String(localized: "Create a new project"), for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
+    }()
+    
+    let deleteButton: UIButton = {
+        let button = UIButton(primaryAction: nil)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.setTitle(String(localized: "Create a new project"), for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let barButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: ProjectEditionView.self, action: nil)
+    
+    let pencilEditor1: UIButton = {
+        let pencil = UIButton()
+        pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
+        pencil.isUserInteractionEnabled = false
+        pencil.contentMode = .scaleAspectFit
+        pencil.tintColor = .black
+        return pencil
+    }()
+    
+    let pencilEditor2: UIButton = {
+        let pencil = UIButton()
+        pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
+        pencil.isUserInteractionEnabled = false
+        pencil.tintColor = .black
+        pencil.contentMode = .scaleAspectFit
+        return pencil
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let bgColor = UIColor(red: viewModel!.project!.red, green: viewModel!.project!.green, blue: viewModel!.project!.blue, alpha: 1)
+        
+        colorChooser.deselectAllButtons()
+        colorChooser.layoutIfNeeded()
+        
         setUpDelegates()
         setUpUI()
         addAllConstraints()
         selectionFeedbackGenerator.prepare()
+        
+        verifyIfIsEditable()
+        
+        textFieldToGetTheName.textFieldToGetTheName.text = viewModel?.project?.name
+        methodologyButton.methodology.text = viewModel?.project?.methodology
+        deadLine.startDatePicker.setDate((viewModel?.project?.start) ?? Date.now, animated: true)
+        deadLine.endDatePicker.setDate((viewModel?.project?.end) ?? Date.now, animated: true)
+        descriptionTextField.descriptionBox.text = viewModel?.project?.descript
+        iconButton.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
+        iconButton.iconName = viewModel?.project?.icon
+    }
+    
+    func verifyIfIsEditable(){
+        if isEditable {
+            pencilEditor1.isHidden = false
+            self.iconButton.isUserInteractionEnabled = true
+            self.descriptionTextField.isUserInteractionEnabled = true
+            self.deadLine.isUserInteractionEnabled = true
+            self.methodologyButton.hideButton(false)
+            self.textFieldToGetTheName.isUserInteractionEnabled = true
+            self.colorChooser.isHidden = false
+            self.navigationItem.rightBarButtonItem = self.createRightButtom()
+            self.navigationItem.leftBarButtonItem = self.createLeftButtom()
+            self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = false
+            self.updateButton.isHidden = false
+            self.deleteButton.isHidden = false
+            isEditable.toggle()
+        } else {
+            pencilEditor1.isHidden = true
+            self.iconButton.isUserInteractionEnabled = false
+            self.descriptionTextField.isUserInteractionEnabled = false
+            self.deadLine.isUserInteractionEnabled = false
+            self.methodologyButton.hideButton(true)
+            self.textFieldToGetTheName.isUserInteractionEnabled = false
+            self.colorChooser.isHidden = true
+            self.barButton.menu = self.menu()
+            self.navigationItem.rightBarButtonItem = self.barButton
+            self.navigationItem.leftBarButtonItem = nil
+            self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = true
+            self.stackViewForTitleAndColor.layoutMargins = UIEdgeInsets(top: 19, left: 0, bottom: 19, right: 0)
+            self.updateButton.isHidden = true
+            self.deleteButton.isHidden = true
+            isEditable.toggle()
+        }
     }
     
     func setUpDelegates(){
@@ -117,7 +206,7 @@ class ProjectCreationView: UIViewController {
     func setUpUI(){
         dateContainer = ContainerComponent(text: String(localized: "Deadline"), textColor: .black, components: [deadLine])
         
-        descriptionContainer = ContainerComponent(text: String(localized: "Description"), textColor: .black, components: [descriptionTextField])
+        descriptionContainer = ContainerComponent(text: String(localized: "Description"),textColor: .black, button: pencilEditor1, components: [descriptionTextField])
         
         methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
@@ -125,9 +214,8 @@ class ProjectCreationView: UIViewController {
         navigationController?.isNavigationBarHidden = false
         
         self.view.backgroundColor = .systemBackground
-        self.navigationItem.rightBarButtonItem = createRightButtom()
-        self.navigationItem.leftBarButtonItem = createLeftButtom()
-        self.title = String(localized: "Create a project")
+        
+        self.title = String(localized: "Name the project")
         
         
         self.view.addSubview(scrollView)
@@ -142,8 +230,9 @@ class ProjectCreationView: UIViewController {
         stackViewForTitleAndColor.addArrangedSubview(colorChooser)
         
         
-        stackViewForTheContainer.addArrangedSubview(createButton)
-        createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+        stackViewForTheContainer.addArrangedSubview(updateButton)
+        stackViewForTheContainer.addArrangedSubview(deleteButton)
+        updateButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
         iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
         
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
@@ -156,7 +245,7 @@ class ProjectCreationView: UIViewController {
     deinit{
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     func addAllConstraints(){
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -173,44 +262,47 @@ class ProjectCreationView: UIViewController {
             iconButton.widthAnchor.constraint(equalToConstant: 93),
             iconButton.heightAnchor.constraint(equalToConstant: 93),
             
+//            deleteButton.topAnchor.constraint(equalTo: updateButton.bottomAnchor, constant: 12),
+            
             descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
     @objc func defineProjectData(){
-        projectCreationViewModel?.colors = colorChooser.returnColorCGFloat()
         
-        if (projectCreationViewModel?.compareDates() == .orderedAscending){
-            self.projectCreationViewModel?.name = textFieldToGetTheName.getText() == "" ? self.projectCreationViewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
-            self.projectCreationViewModel?.description = descriptionTextField.getText() == "" ? self.projectCreationViewModel?.description : descriptionTextField.getText()
-            
-            self.projectCreationViewModel?.createAProject()
-            self.projectCreationViewModel?.removeTopView()
-        } else{
+        
+        if (viewModel?.compareDates() == .orderedAscending){
+            self.viewModel?.name = textFieldToGetTheName.getText() == "" ? self.viewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
+            self.viewModel?.description = descriptionTextField.getText() == "" ? self.viewModel?.description : descriptionTextField.getText()
+            viewModel?.editProject()
+            verifyIfIsEditable()
+        }else{
             let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Tentar de novo", style: .cancel))
             self.present(alert, animated: true)
         }
+        
         selectionFeedbackGenerator.selectionChanged()
         
     }
     
-    @objc func removeTheView(){
-        projectCreationViewModel?.removeTopView()
+    @objc func showMenu(){
+        
     }
     
-    // START COREDATA
+    @objc func removeTheView(){
+        isEditable = false
+        verifyIfIsEditable()
+    }
+    
     @objc func getStartDate(_ sender: UIDatePicker){
         let selectedDate = sender.date
-        print("\(selectedDate)")
-        projectCreationViewModel?.start = selectedDate
+        viewModel!.start = selectedDate
     }
     
-    // END COREDATA
     @objc func getEndDate(_ sender: UIDatePicker){
         let selectedDate = sender.date
-        print("\(selectedDate)")
-        projectCreationViewModel?.end = selectedDate
+        viewModel!.end = selectedDate
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -229,8 +321,7 @@ class ProjectCreationView: UIViewController {
 
 }
 
-#warning("REFATORAR")
-extension ProjectCreationView {
+extension ProjectEditionView {
     
     func createRightButtom() -> UIBarButtonItem{
         let buttonToContinue: UIBarButtonItem = {
@@ -257,28 +348,48 @@ extension ProjectCreationView {
         return buttonToContinue
     }
 
-}
-
-extension ProjectCreationView: ChooseMethodologyComponentDelegate {
-    func setUpMenuFunction(type: Methodologies) {
-        self.projectCreationViewModel?.selectedMethodology(type)
-        self.methodologyButton.changeTheMethodologyText("\(String(describing: self.projectCreationViewModel!.methodology!.rawValue))")
+    func menu() -> UIMenu {
+        let menuItems = UIMenu(title: "", options: .displayInline, children: [
+            UIAction(title: "Editar", image: nil, handler: { _ in
+                self.verifyIfIsEditable()
+        }),
+            UIAction(title: "Deletar", image: nil, attributes: .destructive, handler: { _ in
+                let alert = UIAlertController(title: "Tem certeza?", message: "Essa ação será irreversível!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Sim", style: .destructive, handler: { _ in
+                    self.viewModel?.removeProject()
+                    self.viewModel?.removeTopView()
+                }))
+                alert.addAction(UIAlertAction(title: "Não", style: .cancel))
+                self.present(alert, animated: true)
+        })
+        ])
+        
+        return menuItems
     }
 }
 
-extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
+extension ProjectEditionView: ChooseMethodologyComponentDelegate {
+    
+    func setUpMenuFunction(type: Methodologies) {
+        self.viewModel?.selectedMethodology(type)
+        self.methodologyButton.changeTheMethodologyText(String(describing: self.viewModel!.methodology!))
+    }
+}
+
+extension ProjectEditionView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
     func menuWasPressed(_ menuIcon: String) {
-        self.projectCreationViewModel?.selectedIcon(menuIcon)
+        self.viewModel?.selectedIcon(menuIcon)
         iconButton.iconName = menuIcon
     }
     
     func updateColor() {
         let color = colorChooser.returnColorUIColor()
+        let CGColor = colorChooser.returnColorCGFloat()
         iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
+        viewModel?.red = CGColor[0]
+        viewModel?.green = CGColor[1]
+        viewModel?.blue = CGColor[2]
     }
 
 }
 
-#Preview{
-    ProjectCreationView()
-}
