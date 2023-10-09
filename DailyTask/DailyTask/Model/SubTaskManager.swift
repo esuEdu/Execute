@@ -21,7 +21,6 @@ class SubTaskManager {
             
             let subTasks = try context.fetch(request)
             
-            print("")
             return subTasks
         }catch {
             fatalError("erro in fetchSubTask \(error)")
@@ -121,6 +120,15 @@ class SubTaskManager {
             print("Subtask with ID \(id) deleted successfully.")
         } catch {
             fatalError("Error in deleteSubTask: \(error)")
+        }
+    }
+    
+    func concludeSubtask(_ subtask: SubTask){
+        do{
+            subtask.isDone.toggle()
+            try context.save()
+        } catch{
+            fatalError("Erro in complete or descomplete: \(error)")
         }
     }
 }

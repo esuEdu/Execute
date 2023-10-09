@@ -10,22 +10,33 @@ import UIKit
 import CoreData
 
 class TaskManager {
+  
+  private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  
+  func fetchTask(_ project: Project) -> [Task] {
+    do {
+      
+      let request: NSFetchRequest<Task> = Task.fetchRequest()
+        
+      request.predicate = NSPredicate(format: "project == %@", project)
+        
+        
+      let tasks = try context.fetch(request)
+      
+      return tasks
+      
+    } catch {
+      fatalError("error in fetchTask \(error)")
+    }
+  }
     
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    
-    func fetchTask(_ project: Project) -> [Task] {
+    func fetchTask() -> [Task] {
         do {
             
             let request: NSFetchRequest<Task> = Task.fetchRequest()
             
-            request.predicate = NSPredicate(format: "project == %@", project)
-            
             
             let tasks = try context.fetch(request)
-            
-#warning("Delete this print after finish")
-            print("fetch of tasks done")
             
             return tasks
             
@@ -124,5 +135,7 @@ class TaskManager {
             fatalError("Erro in complete or descomplete: \(error)")
         }
     }
+    
+    
     
 }

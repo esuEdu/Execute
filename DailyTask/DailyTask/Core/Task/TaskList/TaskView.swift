@@ -8,9 +8,25 @@
 import Foundation
 import UIKit
 
-class TaskView: UIViewController{
+class TaskView: UIViewController {
     
     var viewModel: TaskViewModel?
+    
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.showsVerticalScrollIndicator = false
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    let stackForTask: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.translatesAutoresizingMaskIntoConstraints = false
+//        sv.isLayoutMarginsRelativeArrangement = true
+//        sv.layoutMargins = UIEdgeInsets.init(top: 31, left: 16, bottom: 0, right: 16)
+        return sv
+    }()
     
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -80,6 +96,8 @@ class TaskView: UIViewController{
         
         mainStack.addArrangedSubview(secondaryStack)
         view.addSubview(mainStack)
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackForTask)
         
         datePicker.addTarget(self, action: #selector(date), for: .valueChanged)
         newTask.addTarget(self, action: #selector(createTask), for: .touchUpInside)
@@ -93,12 +111,43 @@ class TaskView: UIViewController{
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            mainStack.bottomAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
+            scrollView.topAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 10),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            stackForTask.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackForTask.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackForTask.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackForTask.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackForTask.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
+        
+        getTasksAndSubtasks()
+        
+    }
+    
+    func getTasksAndSubtasks(){
+        print("Aqui é o BO")
+        for task in stackForTask.arrangedSubviews{
+            task.removeFromSuperview()
+        }
+        print("Aqui é o BO2")
+        viewModel?.fetchTasks()
+        if let tasks = viewModel?.task{
+            for task in tasks{
+                let taskComponent = StackTaskAndSubtaskComponent(task: task)
+                taskComponent.delegate = self
+                stackForTask.addArrangedSubview(taskComponent)
+            }
+        } 
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        navigationController?.isNavigationBarHidden = false
     }
     
     @objc func date(_ sender: UIDatePicker) {
@@ -113,9 +162,23 @@ class TaskView: UIViewController{
     
 }
 
-extension TaskView: ModalGetInfoTaskViewDelegate {
-    func changeHappened() {
+extension TaskView: ModalGetInfoTaskViewDelegate, StackTaskAndSubtaskComponentDelegate {
+    func itWasPressed(_ task: Task) {
+        viewModel?.goToModalGetInfo(task, delegate: self)
+    }
+    
+    func changeHappened(_ task: Task) {
         viewModel?.fetchTasks()
+        
+        for n in stackForTask.arrangedSubviews{
+            if let r = n as? StackTaskAndSubtaskComponent{
+                if r.task == task{
+                    r.removeFromSuperview()
+                    stackForTask.layoutSubviews()
+                }
+            }
+            
+        }
     }
 }
 
@@ -125,4 +188,5 @@ extension TaskView: ChooseStepComponentDelegate {
         self.viewModel?.selectedStep(type)
         self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step!.rawValue))
     }
+    
 }
