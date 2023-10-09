@@ -14,6 +14,7 @@ class TaskViewModel: Coordinating {
     var view: TaskView?
     
     var step: steps?
+    var date: Date = Date.now
     
     private let taskManager = TaskManager()
     

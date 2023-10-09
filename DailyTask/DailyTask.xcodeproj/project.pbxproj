@@ -59,9 +59,9 @@
 		9BC048B92AC467E600A1E9BB /* CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */; };
 		9BC048BE2AC4AA5000A1E9BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */; };
 		9BEC391E2AC7661B00B42C4C /* SubtasksInTasksComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */; };
+		9BF884A52ACF3C0D000656A6 /* ListAllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */; };
 		E8299F1F2ACF3BF300A9C87E /* ProjectEditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */; };
 		E8299F212ACF3C1800A9C87E /* ProjectEditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */; };
-		9BF884A52ACF3C0D000656A6 /* ListAllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */; };
 		E82CE09C2ACB5E19008140B8 /* BreakableTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */; };
 		E82CE0A02ACC8F18008140B8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */; };
 		E82CE0A22ACDD8AB008140B8 /* ScrollContainerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */; };
@@ -137,9 +137,9 @@
 		9BC048B82AC467E600A1E9BB /* CheckboxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxViewCell.swift; sourceTree = "<group>"; };
 		9BC048BD2AC4AA5000A1E9BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9BEC391D2AC7661B00B42C4C /* SubtasksInTasksComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksInTasksComponent.swift; sourceTree = "<group>"; };
+		9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllTasksViewModel.swift; sourceTree = "<group>"; };
 		E8299F1E2ACF3BF300A9C87E /* ProjectEditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditionView.swift; sourceTree = "<group>"; };
 		E8299F202ACF3C1800A9C87E /* ProjectEditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditionViewModel.swift; sourceTree = "<group>"; };
-		9BF884A42ACF3C0D000656A6 /* ListAllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllTasksViewModel.swift; sourceTree = "<group>"; };
 		E82CE09B2ACB5E19008140B8 /* BreakableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakableTextComponent.swift; sourceTree = "<group>"; };
 		E82CE09F2ACC8F18008140B8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E82CE0A12ACDD8AB008140B8 /* ScrollContainerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollContainerComponent.swift; sourceTree = "<group>"; };
