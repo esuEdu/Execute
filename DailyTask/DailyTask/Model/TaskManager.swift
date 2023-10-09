@@ -34,6 +34,26 @@ class TaskManager {
     }
   }
   
+  func fetchTaskDate() {
+      do {
+          let request: NSFetchRequest<Task> = Task.fetchRequest()
+          
+          // Obtenha a data atual
+          let currentDate = Date()
+          
+          // Crie o NSPredicate para corresponder à data de início igual à data atual
+          request.predicate = NSPredicate(format: "start >= %@ AND start <= %@", currentDate.startOfDay() as CVarArg, currentDate.endOfDay() as CVarArg)
+          
+          // Realize a consulta
+          let results = try context.fetch(request)
+          
+          // Agora 'results' contém as tarefas com a data de início correspondente à data atual.
+      } catch {
+          print("Erro ao buscar tarefas: \(error)")
+      }
+  }
+
+  
   func saveData(){
     do {
       try context.save()
@@ -122,4 +142,19 @@ class TaskManager {
         }
     }
   
+}
+
+extension Date {
+    func startOfDay() -> Date {
+        let calendar = Calendar.current
+        return calendar.startOfDay(for: self)
+    }
+
+    func endOfDay() -> Date {
+        let calendar = Calendar.current
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return calendar.date(byAdding: components, to: startOfDay()) ?? self
+    }
 }

@@ -10,6 +10,9 @@ import UIKit
 
 class ListAllTasks: UIViewController {
   
+  var collectionView: UICollectionView!
+  var collectionView2: UICollectionView!
+  
   let stackViewForHeader: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
@@ -98,15 +101,32 @@ class ListAllTasks: UIViewController {
     return stackView
   }()
   
-  let tasksComponent: AllTaskListComponts = {
-    let tasks = AllTaskListComponts(titleTask: "teste", timeLabel: "hoje")
-    tasks.translatesAutoresizingMaskIntoConstraints = false
-    return tasks
+  let stackViewForTest: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+//    stackView.distribution = .fillProportionally
+//    stackView.backgroundColor = .systemGreen
+//    stackView.layer.cornerRadius = 10
+    stackView.spacing = 20
+//    stackView.isLayoutMarginsRelativeArrangement = true
+//    stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
   }()
   
+  let testStack: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+//    stackView.distribution = .fillProportionally
+//    stackView.backgroundColor = .systemGreen
+//    stackView.layer.cornerRadius = 10
+//    stackView.spacing = 20
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }()
   
-  
-
   override func viewDidLoad() {
     super.viewDidLoad()
     setUI()
@@ -121,21 +141,38 @@ class ListAllTasks: UIViewController {
     
     view.addSubview(stackViewForHeader)
     view.addSubview(searchBar)
+    view.addSubview(stackViewForTest)
     
     searchBar.delegate = self
     
     stackViewForHeader.addArrangedSubview(dateNow)
     stackViewForHeader.addArrangedSubview(createTask)
     
-    view.addSubview(projectNameStackView)
+    //view.addSubview(projectNameStackView)
     
+    
+    
+    
+    let layout = UICollectionViewFlowLayout()
+    
+    layout.scrollDirection = .horizontal
+    layout.minimumLineSpacing = 15
+    layout.minimumInteritemSpacing = 0
+    layout.estimatedItemSize = CGSize(width: 340, height: 70)
+    
+//    collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+    
+    collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.register(CustomCellCollectionView.self, forCellWithReuseIdentifier: "cell")
+    
+    stackViewForTest.addArrangedSubview(testStack)
+    stackViewForTest.addArrangedSubview(collectionView)
+    
+    testStack.addArrangedSubview(projectNameStackView)
     projectNameStackView.addArrangedSubview(projectName)
-    
-    view.addSubview(tasksComponent)
-    
-    
-//    createTask.addTarget(self, action: #selector(createNewTask), for: .touchUpInside)
-    
   }
   
   func setupConstraints() {
@@ -148,24 +185,33 @@ class ListAllTasks: UIViewController {
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
       searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
    
-      projectNameStackView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
-      projectNameStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      projectNameStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//      projectNameStackView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
+//      projectNameStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//      projectNameStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+     
+      
+//      collectionView.topAnchor.constraint(equalTo: projectNameStackView.bottomAnchor, constant: 19),
+//      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//      collectionView.heightAnchor.constraint(equalToConstant: 235),
+      
+      
       projectNameStackView.heightAnchor.constraint(equalToConstant: 45),
-  
-      tasksComponent.topAnchor.constraint(equalTo: projectName.bottomAnchor, constant: 19),
-      tasksComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      tasksComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+      
+      stackViewForTest.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
+      stackViewForTest.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      
+      stackViewForTest.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      
+      stackViewForTest.heightAnchor.constraint(equalToConstant: 300),
+    
+ 
+      
     ])
   }
   
 }
-
-//extension ListAllTasks {
-//  @objc func createNewTask(){
-//    
-//  }
-//}
 
 extension ListAllTasks: UISearchBarDelegate {
   
@@ -179,6 +225,19 @@ extension ListAllTasks: UISearchBarDelegate {
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
       searchBar.endEditing(true)
+  }
+  
+}
+
+extension ListAllTasks: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 200
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCellCollectionView
+    return cell
   }
   
 }
