@@ -8,10 +8,13 @@
 import Foundation
 
 class TaskViewModel: Coordinating {
-    
+     
     var coordinator: Coordinator?
     var project: Project?
     var view: TaskView?
+    
+    var step: steps?
+    var date: Date = Date.now
     
     private let taskManager = TaskManager()
     
@@ -31,18 +34,13 @@ class TaskViewModel: Coordinating {
         fetchTasks(project: project!)
     }
     
-    func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: String, descript: String){
-        taskManager.editTask(id: id, name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript)
-        fetchTasks()
-    }
-    
     func deleteTask(id: UUID) {
         taskManager.deleteTask(id: id)
         fetchTasks()
     }
     
     func goToCreateTasks() {
-        coordinator?.goToTaskCreation(project!)
+        coordinator?.goToTaskCreation(project!, step)
     }
     
     func getActualTask(index: Int) -> Task{
@@ -54,5 +52,8 @@ class TaskViewModel: Coordinating {
     }
     
     
+    func selectedStep(_ step:steps){
+        self.step = step
+    }
 }
 

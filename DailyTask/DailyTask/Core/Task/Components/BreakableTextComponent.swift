@@ -86,6 +86,10 @@ class BreakableTextComponent: UIView {
         return textView.text
     }
     
+    func changeBgColor(color: UIColor){
+        textView.backgroundColor = color
+    }
+    
     /// Required initializer that is not implemented for this class.
     ///
     /// - Parameter coder: The NSCoder used for encoding and decoding.

@@ -10,7 +10,7 @@ import UIKit
 class HomeView: UIViewController {
     
     var homeViewModel: HomeViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -43,9 +43,9 @@ class HomeView: UIViewController {
             
             
         ])
+
     }
-    
-    
-    
+
 }
+
 

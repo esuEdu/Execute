@@ -38,6 +38,7 @@ class SubtasksInTasksComponent: UIView {
     /// The breakable text label for displaying the subtask name.
     let labelSubTasks: BreakableTextComponent = {
         let label = BreakableTextComponent(placeholderColor: .systemGray2, textColor: .black)
+        label.changeBgColor(color: UIColor.clear)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

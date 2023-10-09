@@ -13,7 +13,6 @@ class TaskManager {
   
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
-  
   func fetchTask(_ project: Project) -> [Task] {
     do {
       
@@ -24,114 +23,109 @@ class TaskManager {
         
       let tasks = try context.fetch(request)
       
-#warning("Delete this print after finish")
-      print("fetch of tasks done")
-      
       return tasks
       
     } catch {
       fatalError("error in fetchTask \(error)")
     }
   }
-  
-  func fetchTaskDate() {
-      do {
-          let request: NSFetchRequest<Task> = Task.fetchRequest()
-          
-          // Obtenha a data atual
-          let currentDate = Date()
-          
-          // Crie o NSPredicate para corresponder à data de início igual à data atual
-          request.predicate = NSPredicate(format: "start >= %@ AND start <= %@", currentDate.startOfDay() as CVarArg, currentDate.endOfDay() as CVarArg)
-          
-          // Realize a consulta
-          let results = try context.fetch(request)
-          
-          // Agora 'results' contém as tarefas com a data de início correspondente à data atual.
-      } catch {
-          print("Erro ao buscar tarefas: \(error)")
-      }
-  }
-
-  
-  func saveData(){
-    do {
-      try context.save()
-    } catch {
-      fatalError("Error in save the data of tasks")
+    
+    func fetchTask() -> [Task] {
+        do {
+            
+            let request: NSFetchRequest<Task> = Task.fetchRequest()
+            
+            
+            let tasks = try context.fetch(request)
+            
+            return tasks
+            
+        } catch {
+            fatalError("error in fetchTask \(error)")
+        }
     }
-  }
-  
-    func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, project: Project, red: Double, green: Double, blue: Double) -> Task{
-    let task = Task(context: context)
-    task.id = UUID()
-    task.name = name
-    task.start = startDate
-    task.end = endDate
-    task.descript = descript
-    task.priority = priority
-    task.project = project
-    task.isDone = false
+    
+    func saveData(){
+        do {
+            try context.save()
+        } catch {
+            fatalError("Error in save the data of tasks")
+        }
+    }
+    
+    func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, project: Project, red: Double, green: Double, blue: Double, step: steps?) -> Task{
+        let task = Task(context: context)
+        task.id = UUID()
+        task.name = name
+        task.start = startDate
+        task.end = endDate
+        task.descript = descript
+        task.priority = priority
+        if let step = step {
+            task.step = step.rawValue
+        }
+        task.project = project
+        task.isDone = false
         task.red = red
         task.green = green
         task.blue = blue
-    
-    saveData()
-    return task
-  }
-  
-  #warning("Verificar se no editar precisa de isDone")
-  func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: String, descript: String) {
-    
-    do {
-      let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-      
-      let tasks = try context.fetch(fetchRequest)
-      
-      guard let tasksToEdit = tasks.first else {
-        print("Task with ID \(id) not found.")
-        return
-      }
-      
-      tasksToEdit.name = name
-      tasksToEdit.start = startDate
-      tasksToEdit.end = endDate
-      tasksToEdit.priority = priority
-      tasksToEdit.descript = descript
-      
-      try context.save()
-      
-      print("Task with ID \(id) edited successfully.")
-    } catch {
-      fatalError("Error in editTask: \(error)")
+        
+        saveData()
+        return task
     }
     
-  }
-  
-  func deleteTask(id: UUID) {
-    do{
-      let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-      fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-      
-      let tasks = try context.fetch(fetchRequest)
-      
-      guard let tasksToDelete = tasks.first else {
-        print("Task with ID \(id) not found.")
-        return
-      }
-      
-      context.delete(tasksToDelete)
-      
-      try context.save()
-      
-      print("Task with ID \(id) deleted successfully.")
-      
-    } catch {
-      fatalError("Error in deleteTask: \(error)")
+#warning("Verificar se no editar precisa de isDone")
+    func editTask(id: UUID, name: String, startDate: Date, endDate: Date, priority: String, descript: String) {
+        
+        do {
+            let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            
+            let tasks = try context.fetch(fetchRequest)
+            
+            guard let tasksToEdit = tasks.first else {
+                print("Task with ID \(id) not found.")
+                return
+            }
+            
+            tasksToEdit.name = name
+            tasksToEdit.start = startDate
+            tasksToEdit.end = endDate
+            tasksToEdit.priority = priority
+            tasksToEdit.descript = descript
+            
+            try context.save()
+            
+            print("Task with ID \(id) edited successfully.")
+        } catch {
+            fatalError("Error in editTask: \(error)")
+        }
+        
     }
     
-  }
+    func deleteTask(id: UUID) {
+        do{
+            let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            
+            let tasks = try context.fetch(fetchRequest)
+            
+            guard let tasksToDelete = tasks.first else {
+                print("Task with ID \(id) not found.")
+                return
+            }
+            
+            context.delete(tasksToDelete)
+            
+            try context.save()
+            
+            print("Task with ID \(id) deleted successfully.")
+            
+        } catch {
+            fatalError("Error in deleteTask: \(error)")
+        }
+        
+    }
     
     func concludeTask(_ task: Task){
         do{
@@ -141,7 +135,9 @@ class TaskManager {
             fatalError("Erro in complete or descomplete: \(error)")
         }
     }
-  
+    
+    
+    
 }
 
 extension Date {

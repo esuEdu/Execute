@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol RoundedCheckboxDelegate: AnyObject{
+    func buttonWasPressed(pressed: Bool)
+}
+
 /// A custom checkbox control for toggling a bool state.
 ///
 /// `Checkbox` is a subclass of `UIControl` that provides a checkbox-like appearance
@@ -36,16 +40,15 @@ import UIKit
 /// - SeeAlso: `UIControl`
 class RoundedCheckbox: UIControl {
     
+    weak var delegate: RoundedCheckboxDelegate?
+    
     private weak var imageView: UIImageView!
     
     private var image: UIImage {
         return checked ? UIImage(systemName: "circle.fill")! : UIImage(systemName: "circle")!
-        
     }
     
     private var backgroundImage: UIImage = UIImage(systemName: "circle")!
-        
-    
     
     /// A boolean value that determines the checkbox state. `true` represents a checked
     /// state, while `false` represents an unchecked state.
@@ -71,10 +74,11 @@ class RoundedCheckbox: UIControl {
         addSubview(imageView)
         
         NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
+//            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 26),
             imageView.heightAnchor.constraint(equalToConstant: 26)
 
@@ -87,15 +91,16 @@ class RoundedCheckbox: UIControl {
         
         if checked == true{
             imageView.layer.borderColor = UIColor.darkGray.cgColor
-        }else{
-            imageView.layer.borderColor = UIColor.blue.cgColor
+            
+        } else{
+            imageView.layer.borderColor = UIColor.systemBlue.cgColor
         }
         imageView.layer.cornerRadius = 13
         
         self.imageView = imageView
         
         backgroundColor = UIColor.clear
-        imageView.tintColor = UIColor.blue
+        imageView.tintColor = UIColor.systemBlue
         
         self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
     }
@@ -103,12 +108,16 @@ class RoundedCheckbox: UIControl {
     @objc func touchCheckbox() {
         checked = !checked
         if checked == true{
-            imageView.layer.borderColor = UIColor.lightGray.cgColor
-        }else{
-            imageView.layer.borderColor = UIColor.blue.cgColor
+            UIView.animate(withDuration: 0.2) {
+                self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+            }
+        } else{
+            UIView.animate(withDuration: 0.2) {
+                self.imageView.layer.borderColor = UIColor.systemBlue.cgColor
+            }
         }
+        delegate?.buttonWasPressed(pressed: checked)
     }
-    
     
 }
 

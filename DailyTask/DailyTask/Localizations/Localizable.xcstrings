@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Act" : {
+
+    },
     "Cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -276,6 +279,9 @@
         }
       }
     },
+    "Investigate" : {
+
+    },
     "Key" : {
       "extractionState" : "manual"
     },
@@ -351,6 +357,23 @@
     },
     "Name the project" : {
 
+    },
+    "New task" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova tarefa"
+          }
+        }
+      }
     },
     "NewProjectKey" : {
       "extractionState" : "manual",
