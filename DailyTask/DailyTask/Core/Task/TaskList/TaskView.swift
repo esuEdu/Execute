@@ -31,6 +31,10 @@ class TaskView: UIViewController {
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.alpha = 0.011
+        picker.isOpaque = true
+        picker.isHidden = false
         return picker
     }()
      
@@ -87,9 +91,7 @@ class TaskView: UIViewController {
         }else {
             secondaryStack.alignment = .trailing
         }
-        
-        newTask.addTarget(self, action: #selector(createTask), for: .touchUpInside)
-        
+                
         secondaryStack.addArrangedSubview(newTask)
         
         mainStack.addArrangedSubview(secondaryStack)
@@ -98,8 +100,14 @@ class TaskView: UIViewController {
         scrollView.addSubview(stackForTask)
         
         datePicker.addTarget(self, action: #selector(date), for: .valueChanged)
+        newTask.addTarget(self, action: #selector(createTask), for: .touchUpInside)
+        
+        view.addSubview(datePicker)
         
         NSLayoutConstraint.activate([
+            datePicker.centerXAnchor.constraint(equalTo: dateAndCalendarComponent.button.centerXAnchor),
+            datePicker.centerYAnchor.constraint(equalTo: dateAndCalendarComponent.button.centerYAnchor),
+            datePicker.widthAnchor.constraint(equalTo: dateAndCalendarComponent.widthAnchor,multiplier: 0.1),
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -142,13 +150,10 @@ class TaskView: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    @objc func openCalendar() {
-
-    }
-    
     @objc func date(_ sender: UIDatePicker) {
         let date = sender.date
         print(date)
+        viewModel?.date = date
     }
     
     @objc func createTask() {
