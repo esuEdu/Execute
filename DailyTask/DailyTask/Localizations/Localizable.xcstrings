@@ -149,6 +149,26 @@
     "Delete" : {
 
     },
+    "Delete the project" : {
+
+    },
+    "DeleteTaskKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletar Tarefa"
+          }
+        }
+      }
+    },
     "Description" : {
 
     },
@@ -191,6 +211,22 @@
     },
     "Edit Tag" : {
 
+    },
+    "EditTaskKey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Tarefa"
+          }
+        }
+      }
     },
     "EndDateLabel" : {
       "comment" : "text of end date",
@@ -283,6 +319,9 @@
 
     },
     "Key" : {
+      "extractionState" : "manual"
+    },
+    "Key 1" : {
       "extractionState" : "manual"
     },
     "LowKey" : {
@@ -551,6 +590,23 @@
     },
     "Task Tag Title" : {
       "comment" : "Accessibility Label for Task Tag Title"
+    },
+    "UpdateTaskKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atualizar Tarefa"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

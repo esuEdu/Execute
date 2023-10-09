@@ -46,14 +46,12 @@ class ProjectEditionView: UIViewController {
     
     let textFieldToGetTheName: TextFieldComponent = {
         let textField = TextFieldComponent()
-        textField.layer.zPosition = 10
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     let colorChooser: ColorChooseComponent = {
         let colorChooser = ColorChooseComponent()
-        colorChooser.layer.zPosition = 9
         return colorChooser
     }()
     
@@ -113,7 +111,7 @@ class ProjectEditionView: UIViewController {
     let deleteButton: UIButton = {
         let button = UIButton(primaryAction: nil)
         button.setTitleColor(.systemRed, for: .normal)
-        button.setTitle(String(localized: "Create a new project"), for: .normal)
+        button.setTitle(String(localized: "Delete the project"), for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -270,7 +268,6 @@ class ProjectEditionView: UIViewController {
     
     @objc func defineProjectData(){
         
-        
         if (viewModel?.compareDates() == .orderedAscending){
             self.viewModel?.name = textFieldToGetTheName.getText() == "" ? self.viewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
             self.viewModel?.description = descriptionTextField.getText() == "" ? self.viewModel?.description : descriptionTextField.getText()
@@ -283,10 +280,6 @@ class ProjectEditionView: UIViewController {
         }
         
         selectionFeedbackGenerator.selectionChanged()
-        
-    }
-    
-    @objc func showMenu(){
         
     }
     

@@ -23,6 +23,7 @@ protocol Coordinator {
     func goToTaskCreation(_ project: Project, _ step: steps?)
     func goToProjectEditionView(_ project: Project,  isEditable: Bool)
     func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate)
+  func goToTaskEditionView(_ task: Task)
     func eventOccurred(with type: Event)
     func goToTaskView(_ project: Project)
     func start()

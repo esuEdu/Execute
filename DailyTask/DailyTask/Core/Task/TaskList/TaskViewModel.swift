@@ -34,11 +34,6 @@ class TaskViewModel: Coordinating {
         fetchTasks(project: project!)
     }
     
-    func deleteTask(id: UUID) {
-        taskManager.deleteTask(id: id)
-        fetchTasks()
-    }
-    
     func goToCreateTasks() {
         coordinator?.goToTaskCreation(project!, step)
     }

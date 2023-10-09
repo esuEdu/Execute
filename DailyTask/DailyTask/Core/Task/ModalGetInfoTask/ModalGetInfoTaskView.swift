@@ -180,10 +180,14 @@ class ModalGetInfoTaskView: UIViewController{
         labelHour.text = viewModel?.getHour()
         labelDate.text = viewModel?.getDate()
         icon.changeColor(bgColor: UIColor.selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
+      icon.iconName = viewModel?.task?.icon
         
         buttonToFinish.addTarget(self, action: #selector(completeTask), for: .touchUpInside)
         buttonToFinish.addTarget(self, action: #selector(alphaButton), for: .touchDown)
         buttonToFinish.addTarget(self, action: #selector(disalphaButton), for: .touchCancel)
+      
+      buttonToEdit.addTarget(self, action: #selector(goToTaskEdition), for: .touchUpInside)
+      
         buttonToDelete.addTarget(self, action: #selector(alphaButton), for: .touchDown)
         buttonToDelete.addTarget(self, action: #selector(disalphaButton), for: .touchCancel)
         buttonToDelete.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
@@ -253,6 +257,11 @@ class ModalGetInfoTaskView: UIViewController{
         })
         self.present(alert, animated: true)
     }
+  
+  @objc func goToTaskEdition() {
+    viewModel?.goToEditView()
+    self.dismiss(animated: true, completion: nil)
+  }
     
     @objc func alphaButton(_ button: UIButton){
         button.alpha = 0.5

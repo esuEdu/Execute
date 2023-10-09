@@ -132,7 +132,13 @@ class CreateTaskView: UIViewController {
         // View configuration
         title = String(localized: "CreateTaskTitleKey")
         view.backgroundColor = .systemBackground
-        
+      
+      deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+      deadLine.startDatePicker.maximumDate = viewModel?.project?.end
+      
+      deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+      deadLine.endDatePicker.maximumDate = viewModel?.project?.end
+      
         // Configurate the textfield
         nameTextField.textFieldToGetTheName.returnKeyType = .done
         nameTextField.textFieldToGetTheName.autocapitalizationType = .none
@@ -248,7 +254,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
             subtask.append(compon.returnText())
         }
         
-        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: subtask)
+      self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
         
         viewModel?.removeLastView()
     }
@@ -316,8 +322,6 @@ extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDeleg
         icon.iconName = menuIcon
     }
 }
-
-
 
 #Preview {
     CreateTaskView()

@@ -16,6 +16,7 @@ class ModalGetInfoTaskViewModel: Coordinating {
     var task: Task?
     
     private let taskManager = TaskManager()
+  
     
     func getTaskName() -> String{
         return task?.name ?? "ERRO"
@@ -45,7 +46,7 @@ class ModalGetInfoTaskViewModel: Coordinating {
     
     func deleteTask(){
         if let task = task {
-            taskManager.deleteTask(id: task.id!)
+          taskManager.deleteTask(task: task)
         }
     }
     
@@ -64,4 +65,11 @@ class ModalGetInfoTaskViewModel: Coordinating {
 
         return dateFormatter.string(from: (task?.start)!)
     }
+  
+  func goToEditView() {
+    coordinator?.goToTaskEditionView(task!)
+  }
+  
+  
+  
 }

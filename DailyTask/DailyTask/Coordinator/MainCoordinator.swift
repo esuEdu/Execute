@@ -108,6 +108,16 @@ class MainCoordinator: Coordinator {
         view.viewModel = viewModel
         navigationController?.pushViewController(view, animated: true)
     }
+  
+  func goToTaskEditionView(_ task: Task){
+    let view = TaskEditionView()
+    let viewModel: TaskEditionViewModel & Coordinating = TaskEditionViewModel()
+    viewModel.coordinator = self
+    viewModel.view = view
+    viewModel.task = task
+    view.viewModel = viewModel
+    navigationController?.pushViewController(view, animated: true)
+  }
     
     func goToTaskView(_ project: Project){
         let view: TaskView = TaskView()
