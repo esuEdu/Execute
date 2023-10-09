@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 protocol SubtaskContainerComponentDelegate: AnyObject{
-    func valueChanged() -> CGFloat
     func isChecked(_ check: Bool)
 }
 
@@ -23,7 +22,7 @@ class SubtaskContainerComponent: UIView {
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 8)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -37,6 +36,11 @@ class SubtaskContainerComponent: UIView {
         roundedRect.layer.borderColor = UIColor.systemBlue.withAlphaComponent(1).cgColor
         roundedRect.layer.cornerRadius = 9.6
         roundedRect.translatesAutoresizingMaskIntoConstraints = false
+        roundedRect.layer.shadowColor = UIColor.white.cgColor
+        roundedRect.layer.shadowOffset = CGSize(width: 0, height: 0)
+        roundedRect.layer.shadowOpacity = 0.33
+        roundedRect.layer.shadowRadius = 8.0
+        roundedRect.layer.masksToBounds = false
         return roundedRect
     }()
     
@@ -63,7 +67,7 @@ class SubtaskContainerComponent: UIView {
         label.textLabel.numberOfLines = 2
         label.textLabel.adjustsFontSizeToFitWidth = false
         label.translatesAutoresizingMaskIntoConstraints = true
-        label.textLabel.textColor = .white
+        label.textLabel.textColor = .black
         label.textLabel.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -79,23 +83,27 @@ class SubtaskContainerComponent: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+    #warning("Mudar a cor")
     let line: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray4
         return view
     }()
     
     let secondLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray4
         return view
     }()
     
     init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho", mainColor: UIColor = .systemBlue) {
         super.init(frame: .zero)
+        
+        label.textLabel.text = taskName
+        
+        
         roundedCheckbox.delegate = self
         horizontalStackView.addArrangedSubview(label)
         addSubview(view)
@@ -110,6 +118,7 @@ class SubtaskContainerComponent: UIView {
         addSubview(frontCircle)
         
         roundedRect.layer.borderColor = mainColor.cgColor
+//        roundedRect.layer.shadowColor = mainColor.cgColor
         
         let footnoteSize = (UIFont.preferredFont(forTextStyle: .footnote).lineHeight)
         
@@ -190,8 +199,8 @@ extension SubtaskContainerComponent: RoundedCheckboxDelegate{
                 self.label.textLabel.attributedText = attributedText
                 self.label.textLabel.alpha = 1
                 self.roundedRect.alpha = 1
-                self.line.backgroundColor = .white
-                self.secondLine.backgroundColor = .white
+                self.line.backgroundColor = .systemGray4
+                self.secondLine.backgroundColor = .systemGray4
                 self.backCircle.tintColor = .black
                 self.frontCircle.tintColor = .systemBlue
             }

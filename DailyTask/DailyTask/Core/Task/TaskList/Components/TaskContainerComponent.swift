@@ -10,6 +10,7 @@ import UIKit
 protocol TaskContainerComponentDelegate: AnyObject{
     func valueChanged() -> CGFloat
     func isChecked(_ check: Bool)
+    func itWasPressed()
 }
 
 /// `TaskContainerComponent` is a custom UIView subclass that displays a task container with a time label and task name.
@@ -34,9 +35,9 @@ class TaskContainerComponent: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .systemGray
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layer.cornerRadius = 10
+        stackView.layer.cornerRadius = 8
         stackView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 9, bottom: 0, right: 9)
         return stackView
     }()
     
@@ -49,7 +50,7 @@ class TaskContainerComponent: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layer.cornerRadius = 10
-        stackView.layoutMargins = UIEdgeInsets(top: 3, left: 12, bottom: 3, right: 12)
+        stackView.layoutMargins = UIEdgeInsets(top: 3, left: 9, bottom: 3, right: 9)
         stackView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
         return stackView
     }()
@@ -64,8 +65,8 @@ class TaskContainerComponent: UIView {
     
     let labelPercent: UILabel = {
         let label = UILabel()
-        label.text = "50%"
-        label.textColor = .white
+        label.text = "0%"
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .caption1).lineHeight, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -83,13 +84,14 @@ class TaskContainerComponent: UIView {
     let bgLine: UIView = {
         let line = UIView()
         line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = .white
+        line.backgroundColor = .systemGray4
         return line
     }()
     
     var isUnique: Bool = true {
         didSet{
             if isUnique{
+                print("ue")
                 bgLine.isHidden = true
                 line.isHidden = true
             } else{
@@ -101,6 +103,8 @@ class TaskContainerComponent: UIView {
     
     var taskName: LabelComponent?
     
+    var touch: UITapGestureRecognizer?
+    
     /// Initializes a new `TaskContainerComponent`.
     ///
     /// - Parameters:
@@ -109,13 +113,22 @@ class TaskContainerComponent: UIView {
     init(timeLabel: String = "18:20", taskName: String = "Sample task ljnsjdnjs n dfmd fm ndjnfjdn fjndjfndjn jkndjnfj dkn fjkdnkj nfdjknf jd", mainColor: UIColor = .systemBlue) {
         super.init(frame: .zero)
         
+        touch = UITapGestureRecognizer(target: self, action: #selector(taskIsPressed))
+        
+        containerStack.addGestureRecognizer(touch!)
+        
         if isUnique{
             bgLine.isHidden = true
             line.isHidden = true
         }
         
-        progressBar = CircularProgressView(lineWidth: labelPercent.font.lineHeight/3.5)
-        progressBar!.setProgress(0.5)
+        containerStack.backgroundColor = mainColor.withAlphaComponent(0.5)
+        timeStack.backgroundColor = mainColor
+        
+        labelPercent.textColor = UIColor.selectTheBestColor(color: mainColor, isBackground: true)
+        
+        progressBar = CircularProgressView(lineWidth: labelPercent.font.lineHeight/3.5, color: mainColor)
+        progressBar!.setProgress(0)
         progressBar!.translatesAutoresizingMaskIntoConstraints = false
         
         roundedCheckbox.delegate = self
@@ -125,6 +138,10 @@ class TaskContainerComponent: UIView {
         
         // Create and configure task name label
         self.taskName = LabelComponent(text: taskName, accessibilityLabel: taskName, font: .footnote, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
+        
+        #warning("Trocar")
+        self.taskName?.textLabel.textColor = .black
+        timeLabel.textLabel.textColor = UIColor.selectTheBestColor(color: mainColor, isBackground: true)
         
         // Add time label to the time stack
         timeStack.addArrangedSubview(timeLabel)
@@ -145,7 +162,7 @@ class TaskContainerComponent: UIView {
         NSLayoutConstraint.activate([
             timeStack.topAnchor.constraint(equalTo: topAnchor),
             timeStack.leadingAnchor.constraint(equalTo: containerStack.leadingAnchor),
-            timeStack.heightAnchor.constraint(equalTo: timeLabel.heightAnchor, constant: 4),
+            timeStack.heightAnchor.constraint(equalTo: timeLabel.heightAnchor, constant: 5),
             
             containerStack.topAnchor.constraint(equalTo: timeStack.bottomAnchor),
             containerStack.leadingAnchor.constraint(equalTo: progressBar!.trailingAnchor, constant: 20),
@@ -195,23 +212,30 @@ class TaskContainerComponent: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func doneTheTask(){
+        let attributedText = NSMutableAttributedString(string: taskName!.textLabel.text!)
+        attributedText.addAttribute(.strikethroughStyle, value: 2, range: NSRange(location: 0, length: taskName!.textLabel.text!.count))
+        
+        taskName!.textLabel.attributedText = attributedText
+        taskName!.textLabel.alpha = 0.4
+        progressBar?.setProgress(1)
+        labelPercent.text = "\(100)%"
+        if !isUnique{
+            line.isHidden = false
+        }
+    }
+    
+    @objc func taskIsPressed(){
+        delegate?.itWasPressed()
+        print("Cheguei")
+    }
 }
 
 extension TaskContainerComponent: RoundedCheckboxDelegate{
     func buttonWasPressed(pressed: Bool) {
         if pressed{
-            let attributedText = NSMutableAttributedString(string: taskName!.textLabel.text!)
-            attributedText.addAttribute(.strikethroughStyle, value: 2, range: NSRange(location: 0, length: taskName!.textLabel.text!.count))
-            
-            taskName!.textLabel.attributedText = attributedText
-            taskName!.textLabel.alpha = 0.4
-            progressBar?.setProgress(1)
-            labelPercent.text = "\(100)%"
-            if !isUnique{
-                line.isHidden = false
-            }
-                
-            
+            doneTheTask()
             layoutIfNeeded()
         } else{
             let attributedText = NSMutableAttributedString(string: taskName!.textLabel.text!)

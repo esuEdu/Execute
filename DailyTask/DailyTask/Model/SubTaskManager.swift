@@ -122,4 +122,13 @@ class SubTaskManager {
             fatalError("Error in deleteSubTask: \(error)")
         }
     }
+    
+    func concludeSubtask(_ subtask: SubTask){
+        do{
+            subtask.isDone.toggle()
+            try context.save()
+        } catch{
+            fatalError("Erro in complete or descomplete: \(error)")
+        }
+    }
 }

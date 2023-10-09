@@ -10,16 +10,23 @@ import UIKit
 class CircularProgressView: UIView {
     private var progressLayer: CAShapeLayer!
     private var bgProgressLayer: CAShapeLayer!
+    private var bgFillProgressLayer: CAShapeLayer!
     private var progress: CGFloat = 0.0
     private var lineWidth: CGFloat?
+    var color: UIColor?{
+        didSet{
+            bgFillProgressLayer.fillColor = color?.cgColor
+        }
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         updateCircularProgressLayer()
     }
     
-    init(lineWidth: CGFloat = 5) {
+    init(lineWidth: CGFloat = 5, color: UIColor = .systemBlue) {
         self.lineWidth = lineWidth
+        self.color = color
         super.init(frame: .zero)
         
         setupCircularProgressLayer()
@@ -38,6 +45,11 @@ class CircularProgressView: UIView {
             endAngle: 3 * CGFloat.pi / 2,
             clockwise: true
         )
+        
+        bgFillProgressLayer = CAShapeLayer()
+        bgFillProgressLayer.path = circularPath.cgPath
+        bgFillProgressLayer.fillColor = color?.cgColor
+        layer.addSublayer(bgFillProgressLayer)
         
         bgProgressLayer = CAShapeLayer()
         bgProgressLayer.path = circularPath.cgPath
@@ -73,7 +85,15 @@ class CircularProgressView: UIView {
             endAngle: 3 * .pi / 2,
             clockwise: true
         )
+        let circularPath2 = UIBezierPath(
+            arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2),
+            radius: (frame.size.width - lineWidth!) / 2.55,
+            startAngle: -.pi / 2,
+            endAngle: 3 * .pi / 2,
+            clockwise: true
+        )
         
+        bgFillProgressLayer.path = circularPath2.cgPath
         progressLayer.path = circularPath.cgPath
         bgProgressLayer.path = circularPath.cgPath
     }
