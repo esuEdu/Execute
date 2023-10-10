@@ -11,6 +11,8 @@ import UIKit
 class CreateTaskView: UIViewController {
     
     var viewModel: CreateTaskViewModel?
+  
+  let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
     // Containers
     var priorityContainer: ContainerComponent?
@@ -242,21 +244,32 @@ extension CreateTaskView: TextFieldComponentDelegate {
 
     // Button actions
     @objc func createTask() {
-        
+      #warning("Colocar o localizable")
+      if(viewModel?.compareDates(start: self.dateStart ?? Date.now, end: self.dateEnd ?? Date.now) == .orderedAscending) {
         let color = colorPicker.returnColorCGFloat()
         let red = color[0]
         let green = color[1]
         let blue = color[2]
+        
         var subtask: [String] = []
         
         for component in subTasksContainer!.stackViewContainer.arrangedSubviews {
-            let compon = component as! SubtasksInTasksComponent
-            subtask.append(compon.returnText())
+          let compon = component as! SubtasksInTasksComponent
+          subtask.append(compon.returnText())
         }
         
-      self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
+        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
         
         viewModel?.removeLastView()
+      }
+      else {
+        let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))
+        self.present(alert, animated: true)
+      }
+      
+      selectionFeedbackGenerator.selectionChanged()
+      
     }
     
     @objc func cancelTask(){

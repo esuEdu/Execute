@@ -59,6 +59,22 @@ class SegmentedControl: UISegmentedControl {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+  
+  func indexForPriority(_ priority: String) -> Int? {
+      switch priority {
+      case Priority.noPriority.rawValue:
+          return 0
+      case Priority.low.rawValue:
+          return 1
+      case Priority.medium.rawValue:
+          return 2
+      case Priority.high.rawValue:
+          return 3
+      default:
+          return nil
+      }
+  }
+
     
     /// Creates the segmented control segments and sets up the target action.
     private func createSegments() {

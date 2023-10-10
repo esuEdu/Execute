@@ -41,7 +41,7 @@ class TaskEditionViewModel: Coordinating {
       coordinator?.eventOccurred(with: .removeTopView)
   }
   
-  func removeTask() {
+  func deleteTask() {
     projectManager.deleteTask(task: task!)
   }
   

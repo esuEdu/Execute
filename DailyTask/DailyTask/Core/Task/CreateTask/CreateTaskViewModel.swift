@@ -30,5 +30,10 @@ class CreateTaskViewModel: Coordinating  {
     func removeLastView(){
         coordinator?.eventOccurred(with: .removeTopView)
     }
+  
+  func compareDates(start: Date, end: Date) -> ComparisonResult{
+      let compareDate = start.compare(end)
+      return compareDate
+  }
     
 }

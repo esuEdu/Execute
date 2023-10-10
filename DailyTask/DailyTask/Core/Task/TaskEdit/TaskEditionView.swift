@@ -132,6 +132,14 @@ class TaskEditionView: UIViewController {
     return stackView
   }()
   
+  let pencil: UIButton = {
+    let pencil = UIButton()
+    pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
+    pencil.isUserInteractionEnabled = false
+    pencil.contentMode = .scaleAspectFit
+    pencil.tintColor = .black
+    return pencil
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -146,8 +154,31 @@ class TaskEditionView: UIViewController {
     
     setUpDelegates()
     setUpUI()
+    addActions()
     setConstraints()
     
+    selectionFeedbackGenerator.prepare()
+    
+    nameTextField.textFieldToGetTheName.text = viewModel?.task?.name
+    deadLine.startDatePicker.setDate(viewModel?.task?.start ?? Date.now, animated: true)
+    deadLine.endDatePicker.setDate(viewModel?.task?.end ?? Date.now, animated: true)
+    
+    if let priority = viewModel?.task?.priority {
+      segmentedControl.priority = priority
+      
+      if let index = segmentedControl.indexForPriority(priority) {
+        segmentedControl.selectedSegmentIndex = index
+      }
+    }
+    
+    descriptionTextField.descriptionBox.text = viewModel?.task?.descript
+    icon.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
+    icon.iconName = viewModel?.task?.icon
+    
+  }
+  
+  deinit{
+    NotificationCenter.default.removeObserver(self)
   }
   
   func setUpDelegates(){
@@ -156,18 +187,11 @@ class TaskEditionView: UIViewController {
   }
   
   func setUpUI(){
-    
-    deadLine.startDatePicker.minimumDate = viewModel?.task?.start
-    deadLine.startDatePicker.maximumDate = viewModel?.task?.end
-    
-    deadLine.endDatePicker.minimumDate = viewModel?.task?.start
-    deadLine.endDatePicker.maximumDate = viewModel?.task?.end
-    
     priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, components: [segmentedControl])
     priorityContainer?.translatesAutoresizingMaskIntoConstraints = false
     dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
     dateContainer?.translatesAutoresizingMaskIntoConstraints = false
-    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, components: [descriptionTextField])
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black,button: pencil, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     //    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
     //    subTasksContainer?.stackViewContainer.spacing = 8
@@ -178,11 +202,7 @@ class TaskEditionView: UIViewController {
     navigationController?.isNavigationBarHidden = false
     
     navigationItem.rightBarButtonItem = buttonDone
-    buttonDone.target = self
-    buttonDone.action = #selector(updateTask)
     navigationItem.leftBarButtonItem = buttonCancel
-    buttonCancel.target = self
-    buttonCancel.action = #selector(cancelTask)
     
     view.addSubview(scrollView)
     scrollView.addSubview(stackViewContainers)
@@ -194,8 +214,6 @@ class TaskEditionView: UIViewController {
     stackViewContainers.addArrangedSubview(descriptionContainer!)
     stackViewContainers.addArrangedSubview(updateButton)
     
-    updateButton.addTarget(self, action: #selector(updateTask), for: .touchUpInside)
-    
     stackViewContainers.addArrangedSubview(deleteButton)
     
     stackViewForIcon.addArrangedSubview(icon)
@@ -204,10 +222,33 @@ class TaskEditionView: UIViewController {
     stackViewForTitleAndColor.addArrangedSubview(nameTextField)
     stackViewForTitleAndColor.addArrangedSubview(colorPicker)
     
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+  }
+  
+  func addActions() {
+    deadLine.startDatePicker.minimumDate = viewModel?.task?.start
+    deadLine.startDatePicker.maximumDate = viewModel?.task?.end
+    
+    deadLine.endDatePicker.minimumDate = viewModel?.task?.start
+    deadLine.endDatePicker.maximumDate = viewModel?.task?.end
+    
+    deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
+    deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
+    
+    buttonDone.target = self
+    buttonDone.action = #selector(updateTask)
+    
+    buttonCancel.target = self
+    buttonCancel.action = #selector(cancelTask)
+    
+    updateButton.addTarget(self, action: #selector(updateTask), for: .touchUpInside)
+    
+    deleteButton.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
   }
   
   func setConstraints(){
-    
     NSLayoutConstraint.activate([
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -224,28 +265,70 @@ class TaskEditionView: UIViewController {
       icon.heightAnchor.constraint(equalToConstant: 93),
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
+    
+     
+//      updateButton.heightAnchor.constraint(equalToConstant: 270),
     ])
+    #warning("Ver a questao do tamanho do botao de alterar/update la embaixo")
   }
+  
+}
+
+extension TaskEditionView {
   
   @objc func cancelTask(){
-      viewModel?.removeTopView()
+    viewModel?.removeTopView()
   }
   
-  @objc func updateTask(){
-    
+  @objc func getStartDate(_ sender: UIDatePicker){
+    let selectedDate = sender.date
+    viewModel!.start = selectedDate
+  }
+  
+  @objc func getEndDate(_ sender: UIDatePicker){
+    let selectedDate = sender.date
+    viewModel!.end = selectedDate
+  }
+  
+  @objc func updateTask() {
     if (viewModel?.compareDates() == .orderedAscending){
       self.viewModel?.name = nameTextField.getText() == "" ? self.viewModel?.name : nameTextField.textFieldToGetTheName.text
       self.viewModel?.description = descriptionTextField.getText() == "" ? self.viewModel?.description : descriptionTextField.getText()
+      self.viewModel?.priority = segmentedControl.priority
       viewModel?.editTask()
       viewModel?.removeTopView()
     } else {
-      let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Tentar de novo", style: .cancel))
+      let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))
       self.present(alert, animated: true)
     }
     
     selectionFeedbackGenerator.selectionChanged()
+  }
+  
+  @objc func deleteTask() {
+    let alert = UIAlertController(title: String(localized: "sureKey"), message: String(localized: "actionPermanent"), preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: String(localized: "yesKey"), style: .destructive, handler: { _ in
+      self.viewModel?.deleteTask()
+      self.viewModel?.removeTopView()
+    }))
     
+    alert.addAction(UIAlertAction(title: String(localized: "noKey"), style: .cancel))
+    self.present(alert, animated: true)
+  }
+  
+  @objc func keyboardWillShow(_ notification: Notification) {
+    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+      
+      let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+      scrollView.contentInset = contentInset
+      scrollView.scrollIndicatorInsets = contentInset
+    }
+  }
+  
+  @objc func keyboardWillHide(_ notification: Notification) {
+    scrollView.contentInset = .zero
+    scrollView.scrollIndicatorInsets = .zero
   }
   
 }
