@@ -189,11 +189,11 @@ class TaskEditionView: UIViewController {
   }
   
   func setUpUI(){
-    priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, components: [segmentedControl])
+    priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, acessibilityLabel: String(localized: "PriorityName"), components: [segmentedControl])
     priorityContainer?.translatesAutoresizingMaskIntoConstraints = false
-    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
+    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), acessibilityLabel: String(localized: "DeadLineKey"), components: [deadLine])
     dateContainer?.translatesAutoresizingMaskIntoConstraints = false
-    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black,button: pencil, components: [descriptionTextField])
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, acessibilityLabel: String(localized: "DescriptionKey"),button: pencil, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     //    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
     //    subTasksContainer?.stackViewContainer.spacing = 8

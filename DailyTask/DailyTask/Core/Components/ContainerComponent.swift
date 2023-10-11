@@ -39,7 +39,7 @@ class ContainerComponent: UIView {
     
     /// The title label.
     let containetTitle: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .label, font: .headline)
+        let label = LabelComponent(text: "", accessibilityLabel: "", textColor: .label, font: .headline)
         return label
     }()
     
@@ -78,11 +78,12 @@ class ContainerComponent: UIView {
     ///   - button: An optional UIButton to be included in the title stack.
     ///   - components: An array of UIView components to be included in the container.
     ///   - spacing: The spacing between components in the stack view.
-    init(text: String, textColor: UIColor = .label, button: UIButton? = nil, components: [UIView], spacing: CGFloat = 0 ) {
+  init(text: String, textColor: UIColor = .label, acessibilityLabel: String , button: UIButton? = nil, components: [UIView], spacing: CGFloat = 0 ) {
         super.init(frame: .zero)
         
         containetTitle.textLabel.text = text
         containetTitle.textLabel.textColor = textColor
+    containetTitle.textLabel.accessibilityLabel = acessibilityLabel
         
         stackViewContainerTitle.addArrangedSubview(containetTitle)
         
