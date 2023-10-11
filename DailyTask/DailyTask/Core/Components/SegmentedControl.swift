@@ -105,7 +105,3 @@ class SegmentedControl: UISegmentedControl {
         }
     }
 }
-
-#Preview {
-  SegmentedControl()
-}

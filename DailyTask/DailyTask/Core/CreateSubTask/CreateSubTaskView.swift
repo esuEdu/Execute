@@ -146,7 +146,3 @@ class CreateSubTaskView: UIViewController, UISheetPresentationControllerDelegate
         viewModel?.startDate = date 
     }
 }
-
-#Preview{
-    CreateSubTaskView()
-}

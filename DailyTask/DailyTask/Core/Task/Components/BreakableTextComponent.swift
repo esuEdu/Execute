@@ -141,6 +141,3 @@ extension BreakableTextComponent: UITextViewDelegate {
     }
 }
 
-#Preview{
-    BreakableTextComponent(placeholderColor: .systemGray2, textColor: .black)
-}

@@ -95,7 +95,3 @@ class SubtasksInTasksComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-#Preview{
-    SubtasksInTasksComponent(name: "Bom dia")
-}

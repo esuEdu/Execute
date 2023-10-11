@@ -120,4 +120,9 @@ enum steps: String {
     case Investigate = "Investigate"
     case Act = "Act"
     // Add more cases if nedeed
+  
+  func localized() -> String {
+    return NSLocalizedString(self.rawValue, comment: "")
+  }
+  
 }

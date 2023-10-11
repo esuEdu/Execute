@@ -11,6 +11,8 @@ import UIKit
 class TaskView: UIViewController {
     
     var viewModel: TaskViewModel?
+  
+  let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
     let scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -82,6 +84,8 @@ class TaskView: UIViewController {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
         view.backgroundColor = UIColor(.customBackground)
+      
+      selectionFeedbackGenerator.prepare()
         
         datePicker.minimumDate = viewModel?.project?.start
         datePicker.maximumDate = viewModel?.project?.end
@@ -226,6 +230,7 @@ extension TaskView: ModalGetInfoTaskViewDelegate, StackTaskAndSubtaskComponentDe
     }
     
     func itWasPressed(_ task: Task) {
+      selectionFeedbackGenerator.selectionChanged()
         viewModel?.goToModalGetInfo(task, delegate: self)
     }
     
@@ -239,7 +244,7 @@ extension TaskView: ChooseStepComponentDelegate {
     
     func setUpMenuFunction(type: steps) {
         self.viewModel?.selectedStep(type)
-        self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step.rawValue))
+      self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step.localized()))
         self.reloadStack()
     }
     

@@ -242,7 +242,6 @@ class ProjectCreationView: UIViewController {
 
 }
 
-#warning("REFATORAR")
 extension ProjectCreationView {
     
     func createRightButtom() -> UIBarButtonItem{

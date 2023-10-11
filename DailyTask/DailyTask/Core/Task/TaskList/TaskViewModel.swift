@@ -13,7 +13,7 @@ class TaskViewModel: Coordinating {
     var project: Project?
     var view: TaskView?
     
-    var step: steps = .Engage
+  var step: steps = .Engage
     
     let currentDate = Date()
 

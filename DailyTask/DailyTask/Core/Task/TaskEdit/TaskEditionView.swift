@@ -275,7 +275,6 @@ class TaskEditionView: UIViewController {
       
       //      updateButton.heightAnchor.constraint(equalToConstant: 270),
     ])
-#warning("Ver a questao do tamanho do botao de alterar/update la embaixo")
   }
   
 }

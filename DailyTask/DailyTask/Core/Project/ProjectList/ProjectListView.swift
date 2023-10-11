@@ -215,6 +215,4 @@ extension ProjectListView: UISearchBarDelegate {
     searchBar.endEditing(true)
   }
   
-  
 }
-

@@ -96,7 +96,3 @@ class CheckboxTableViewCell: UITableViewCell {
         label.attributedText = attributedString
     }
 }
-
-#Preview{
-  CheckboxTableViewCell()
-}

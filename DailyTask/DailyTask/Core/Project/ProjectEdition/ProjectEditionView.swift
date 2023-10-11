@@ -261,7 +261,7 @@ class ProjectEditionView: UIViewController {
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
     ])
-#warning("Ver a questao do tamanho do botao de alterar/update la embaixo")
+    
   }
   
   @objc func defineProjectData(){

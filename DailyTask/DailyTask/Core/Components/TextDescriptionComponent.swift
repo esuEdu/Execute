@@ -52,7 +52,6 @@ class TextDescriptionComponent: UIView {
     
     private var textColor: UIColor = .lightGray
     
-    #warning("Change the color")
     let placeholder: String = String(localized: "Enter the description here...")
     
     init(placeholderColor: UIColor, textColor: UIColor) {
@@ -129,8 +128,4 @@ extension TextDescriptionComponent: UITextViewDelegate {
         return newString.length <= maxCharactor
     }
     
-}
-
-#Preview(){
-    TextDescriptionComponent(placeholderColor: .brown, textColor: .black)
 }

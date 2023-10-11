@@ -160,7 +160,6 @@ class ColorChooseComponent: UIView{
         colorWell.selectedColor = color
     }
     
-    #warning("Colocar as cores oficiais quando elas existirem!")
     /// Use this function to get the red, gree and blue of the user's selected color in CGFloat format
     ///
     ///## Return
@@ -196,7 +195,6 @@ class ColorChooseComponent: UIView{
         
     }
     
-    #warning("Colocar as cores oficiais quando elas existirem!")
     /// Use this function to get the `UIColor` of the user's selected color
     func returnColorUIColor() -> UIColor{
         if let theChoosenOne = theChoosenOne{
@@ -343,8 +341,3 @@ enum ColorSelection: String{
     case Green = "Green"
     case Custom = ""
 }
-
-#Preview {
-    ColorChooseComponent()
-}
-
