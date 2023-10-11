@@ -26,6 +26,8 @@ class DateAndCalendarComponent: UIView {
         return button
     }()
     
+    var dateLabel: LabelComponent?
+    
     init(date: String) {
         super.init(frame: .zero)
         let dateLabel = LabelComponent(text: date, accessibilityLabel: date,textColor: .white, font: .title2)

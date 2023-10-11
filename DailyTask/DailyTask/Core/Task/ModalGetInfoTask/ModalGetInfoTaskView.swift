@@ -9,6 +9,7 @@ import UIKit
 
 protocol ModalGetInfoTaskViewDelegate: AnyObject {
     func changeHappened(_ task: Task)
+    func deleted(_ task: Task)
 }
 
 class ModalGetInfoTaskView: UIViewController{
@@ -254,7 +255,7 @@ class ModalGetInfoTaskView: UIViewController{
         alert.addAction(UIAlertAction(title: String(localized: "Delete"), style: .destructive){_ in
             self.notificationFeedbackGenerator.notificationOccurred(.warning)
             self.viewModel?.deleteTask()
-            self.delegate?.changeHappened(self.viewModel!.task!)
+            self.delegate?.deleted(self.viewModel!.task!)
             self.dismiss(animated: true, completion: nil)
         })
         alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel){_ in

@@ -72,27 +72,13 @@ class SubTaskManager {
     }
 
     
-    func ToggleIsDoneSubTask(id: UUID) {
+    func ToggleIsDoneSubTask(subtask: SubTask, isDone: Bool) {
         do {
-            // Fetch the subtask you want to edit by its ID
-            let fetchRequest: NSFetchRequest<SubTask> = SubTask.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-
-            let subTasks = try context.fetch(fetchRequest)
-
-            // Check if a subtask with the specified ID exists
-            guard let subTaskToggle = subTasks.first else {
-                print("Subtask with ID \(id) not found.")
-                return
-            }
-            let isDone = subTaskToggle.isDone
-            // Update the propertie isDone if it is false of the fetched subtask
-            subTaskToggle.isDone = isDone ? true : false
+            subtask.isDone = isDone
 
             // Save the context to persist the changes
             try context.save()
 
-            print("Subtask with ID \(id) toggle successfully.")
         } catch {
             fatalError("Error in toggleIsDoneSubTask: \(error)")
         }

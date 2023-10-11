@@ -190,6 +190,12 @@ class CreateTaskView: UIViewController {
       tapGesture.cancelsTouchesInView = false
       view.addGestureRecognizer(tapGesture)
         
+        deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.startDatePicker.maximumDate = viewModel?.project?.end
+        
+        deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.endDatePicker.maximumDate = viewModel?.project?.end
+        
     }
     
     func setUpUI(){
@@ -254,8 +260,6 @@ extension CreateTaskView: TextFieldComponentDelegate {
 
     // Button actions
     @objc func createTask() {
-     
-      if(viewModel?.compareDates(start: self.dateStart ?? Date.now, end: self.dateEnd ?? Date.now) == .orderedAscending) {
         let color = colorPicker.returnColorCGFloat()
         let red = color[0]
         let green = color[1]
@@ -270,14 +274,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
         
         self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : String(localized: "noNameKey"), startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : String(localized: "noDescKey"), red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
         
-        viewModel?.removeLastView()
-      }
-      else {
-        let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))
-        self.present(alert, animated: true)
-      }
-      
+        viewModel?.removeLastView()    
       impactFeedbackGenerator.impactOccurred(intensity: 1)
       
     }
@@ -294,6 +291,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
     @objc func getStartDate(_ sender: UIDatePicker){
         let selectDate = sender.date
         self.dateStart = selectDate
+        deadLine.endDatePicker.minimumDate = selectDate
     }
     
     @objc func createSubtask(){
