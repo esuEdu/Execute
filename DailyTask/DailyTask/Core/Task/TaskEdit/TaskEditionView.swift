@@ -88,7 +88,7 @@ class TaskEditionView: UIViewController {
   }()
   
   let descriptionTextField: TextDescriptionComponent = {
-    let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
+      let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .label)
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.horizontalPadding = 10
     textField.verticalPadding = 10
@@ -144,7 +144,7 @@ class TaskEditionView: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    view.backgroundColor = .systemBackground
+      view.backgroundColor = UIColor(.customBackground)
     title = String(localized: "EditTaskKey")
     
     let bgColor = UIColor(red: viewModel!.task!.red, green: viewModel!.task!.green, blue: viewModel!.task!.blue, alpha: 1)
@@ -187,11 +187,11 @@ class TaskEditionView: UIViewController {
   }
   
   func setUpUI(){
-    priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, components: [segmentedControl])
+      priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .white, components: [segmentedControl])
     priorityContainer?.translatesAutoresizingMaskIntoConstraints = false
     dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
     dateContainer?.translatesAutoresizingMaskIntoConstraints = false
-    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black,button: pencil, components: [descriptionTextField])
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white,button: pencil, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     //    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
     //    subTasksContainer?.stackViewContainer.spacing = 8

@@ -61,7 +61,7 @@ class ContainerProjectsList: UIView {
     
     /// The label component for the project title.
     let projectTitle = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .headline, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
-     
+    
     /// The image view for the project icon.
     let iconTitle = UIImageView()
     
@@ -76,8 +76,8 @@ class ContainerProjectsList: UIView {
     let stackViewContainer: UIStackView = {
         let stackViewContainer = UIStackView()
         stackViewContainer.axis = .horizontal
-      stackViewContainer.alignment = .center
-      stackViewContainer.distribution = .fill
+        stackViewContainer.alignment = .center
+        stackViewContainer.distribution = .fill
         stackViewContainer.backgroundColor = UIColor(.customContainerComponent)
         stackViewContainer.spacing = 25
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -86,16 +86,23 @@ class ContainerProjectsList: UIView {
         return stackViewContainer
     }()
     
+    let stackViewProgressBar: UIStackView = {
+        let stackViewContainer = UIStackView()
+        stackViewContainer.axis = .vertical
+        stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        return stackViewContainer
+    }()
+    
     /// The label component for the project description.
     let projectDesc = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .systemGray, font: .caption1, numberOfLines: 3, lineBreakMode: .byTruncatingTail)
-       
+    
     /// The label component for displaying the completion percentage.
     let projectPercentage: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .largeTitle, numberOfLines: 1)
         label.textLabel.font = .systemFont(ofSize: 35, weight: .bold)
         return label
     }()
-       
+    
     /// The label component for displaying the "Progress" label.
     var percentageLabel: LabelComponent = {
         let label = LabelComponent(text: "Default", accessibilityLabel: "")
@@ -108,8 +115,8 @@ class ContainerProjectsList: UIView {
     let stackViewForPercentage: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-      stackView.alignment = .center
-      stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.distribution = .fill
         stackView.spacing = -1
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: -7, left: 0, bottom: 0, right: 0)
@@ -121,7 +128,7 @@ class ContainerProjectsList: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-      stackView.alignment = .center
+        stackView.alignment = .center
         stackView.distribution = .fill
         stackView.layer.cornerRadius = 10
         stackView.clipsToBounds = true
@@ -130,6 +137,9 @@ class ContainerProjectsList: UIView {
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return stackView
     }()
+    
+    let progressBar = UIProgressView()
+    
     
     let oneTapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
     let longTapGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
@@ -190,8 +200,14 @@ class ContainerProjectsList: UIView {
         stackViewForPercentage.addArrangedSubview(projectPercentage)
         stackViewForPercentage.addArrangedSubview(percentageLabel)
         
+        progressBar.progress = 0.5
+        progressBar.tintColor = UIColor(.progressBar)
+        
+        stackViewProgressBar.addArrangedSubview(stackViewContainer)
+        stackViewProgressBar.addArrangedSubview(progressBar)
+        
         stackView.addArrangedSubview(stackViewContainerTitle)
-        stackView.addArrangedSubview(stackViewContainer)
+        stackView.addArrangedSubview(stackViewProgressBar)
         
         addSubview(stackView)
         
@@ -208,11 +224,18 @@ class ContainerProjectsList: UIView {
             iconTitle.widthAnchor.constraint(equalTo: iconTitle.heightAnchor),
             chevron.heightAnchor.constraint(equalToConstant: 25),
             chevron.widthAnchor.constraint(equalToConstant: 25),
+            progressBar.heightAnchor.constraint(equalToConstant: 15)
         ])
     }
     
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateProgress(_ value: Float) {
+        progressBar.progress = value
     }
     
     @objc func goToTaskView(){
