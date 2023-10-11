@@ -68,13 +68,17 @@ class TaskView: UIViewController {
         return stackView
     }()
     
-    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Engage", textColor: UIColor(.customButtonMenu) ?? .label)
+    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: String(localized: "Engage"), textColor: UIColor(.customButtonMenu) ?? .label)
     
     let newTask = {
        let newTask = UIButton()
-        newTask.setImage(UIImage(systemName: "plus"), for: .normal)
-        newTask.setTitle("New Task", for: .normal)
-        newTask.setTitleColor(.accent, for: .normal)
+      newTask.configuration = .borderless()
+      newTask.configuration?.image = UIImage(systemName: "plus")
+      newTask.configuration?.title = String(localized: "NewTaskKey")
+      newTask.configuration?.imagePadding = 6
+//        newTask.setImage(UIImage(systemName: "plus"), for: .normal)
+//        newTask.setTitle(String(localized: "NewTaskKey"), for: .normal)
+//        newTask.setTitleColor(.accent, for: .normal)
         return newTask
     }()
     
