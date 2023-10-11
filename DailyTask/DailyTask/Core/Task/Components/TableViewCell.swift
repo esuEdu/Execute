@@ -95,7 +95,3 @@ class SubstaskInTaskTableViewCell: UITableViewCell {
         return labelSubTasks.getText()
     }
 }
-
-#Preview{
-    SubstaskInTaskTableViewCell()
-}

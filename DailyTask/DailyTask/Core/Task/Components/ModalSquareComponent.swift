@@ -91,7 +91,3 @@ class ModalSquareComponent: UIButton {
         ])
     }
 }
-
-#Preview{
-    ModalSquareComponent(text: "Teste", iconImage: UIImage(systemName: "checkmark.circle.fill")!)
-}

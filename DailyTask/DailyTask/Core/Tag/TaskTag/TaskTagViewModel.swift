@@ -30,7 +30,6 @@ class TaskTagViewModel: Coordinating {
         fetchTagTasks()
     }
     
-    #warning("Remove the delete as it won't be used here in the final version")
     func deleteTagTask(id: UUID) {
         taskTagManager.deleteTagTask(id: id)
     }

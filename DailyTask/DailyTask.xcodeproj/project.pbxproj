@@ -16,7 +16,6 @@
 		2836A8CB2ABA1BA800778B43 /* DailyTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2836A8C92ABA1BA800778B43 /* DailyTask.xcdatamodeld */; };
 		2836A8CD2ABA1BA900778B43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2836A8CC2ABA1BA900778B43 /* Assets.xcassets */; };
 		2836A8D02ABA1BA900778B43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2836A8CE2ABA1BA900778B43 /* LaunchScreen.storyboard */; };
-		2852138F2AD6DB2500095C0C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852138E2AD6DB2500095C0C /* ProgressBar.swift */; };
 		28693B512AD09C51001EC93A /* ChooseStepComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28693B502AD09C51001EC93A /* ChooseStepComponent.swift */; };
 		286CAE712AC455EE00200E82 /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CAE702AC455EE00200E82 /* LabelComponent.swift */; };
 		286CAE732AC4BD3C00200E82 /* ContainerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CAE722AC4BD3C00200E82 /* ContainerComponent.swift */; };
@@ -96,7 +95,6 @@
 		2836A8CF2ABA1BA900778B43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2836A8D12ABA1BA900778B43 /* DailyTask.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyTask.entitlements; sourceTree = "<group>"; };
 		2836A8D22ABA1BA900778B43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2852138E2AD6DB2500095C0C /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		28693B502AD09C51001EC93A /* ChooseStepComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseStepComponent.swift; sourceTree = "<group>"; };
 		286CAE702AC455EE00200E82 /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
 		286CAE722AC4BD3C00200E82 /* ContainerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerComponent.swift; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 				9BB144AF2ACB634A0023D7C6 /* ContainerProjectsList.swift */,
 				28B5E4342ACE106600158060 /* ProjectTitleComponent.swift */,
 				28DC4C2D2ACF421E00E18AAA /* AllTaskListComponts.swift */,
-				2852138E2AD6DB2500095C0C /* ProgressBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -635,7 +632,6 @@
 				9BDCA3492AD4771E00E19CAA /* TaskEditionViewModel.swift in Sources */,
 				288B59BF2ABE303F0058531D /* ProjectManager.swift in Sources */,
 				E88A24272AC4C37900D77229 /* TextDescriptionComponent.swift in Sources */,
-				2852138F2AD6DB2500095C0C /* ProgressBar.swift in Sources */,
 				286CAE952AC59AED00200E82 /* DeadlineComponent.swift in Sources */,
 				818075FE2AC4D7E100E4AE26 /* ProjectTagView.swift in Sources */,
 				9BB144B02ACB634A0023D7C6 /* ContainerProjectsList.swift in Sources */,
@@ -793,7 +789,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = K559Z2V9Q2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -826,7 +822,7 @@
 				CODE_SIGN_ENTITLEMENTS = DailyTask/Icloud/DailyTask.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = K559Z2V9Q2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";

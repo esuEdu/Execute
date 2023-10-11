@@ -56,13 +56,13 @@ class DeadlineComponent: UIView {
     
     /// The label for the start date.
     private let startLabel: LabelComponent = {
-        let label = LabelComponent(text: String(localized: "StartDateLabel"), accessibilityLabel: "Start")
+        let label = LabelComponent(text: String(localized: "StartDateLabel"), accessibilityLabel: "")
         return label
     }()
     
     /// The label for the end date.
     private let endLabel: LabelComponent = {
-        let label = LabelComponent(text: String(localized: "EndDateLabel"), accessibilityLabel: "End")
+        let label = LabelComponent(text: String(localized: "EndDateLabel"), accessibilityLabel: "")
         return label
     }()
     
@@ -130,8 +130,4 @@ class DeadlineComponent: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-#Preview{
-    DeadlineComponent()
 }

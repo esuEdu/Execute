@@ -80,15 +80,6 @@ class Checkbox: UIControl {
         backgroundColor = UIColor.clear
         self.tintColor = .black
         
-//        self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
     }
     
-//    @objc func touchCheckbox() {
-//        checked = !checked
-//    }
-  
-}
-
-#Preview {
-  Checkbox()
 }

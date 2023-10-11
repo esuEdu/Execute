@@ -29,12 +29,3 @@ class DatePickerComponent: UIDatePicker  {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-#Preview {
-  let datePickerController = DatePickerView<Date>()
- datePickerController.datePickerMode = .time
- datePickerController.valueChangedHandler = { selectedDate in
-      print("Selected Time: \(selectedDate)")
- }
-  return datePickerController
-}

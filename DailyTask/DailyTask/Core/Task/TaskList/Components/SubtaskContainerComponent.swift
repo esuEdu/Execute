@@ -85,7 +85,7 @@ class SubtaskContainerComponent: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    #warning("Mudar a cor")
+  
     let line: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false

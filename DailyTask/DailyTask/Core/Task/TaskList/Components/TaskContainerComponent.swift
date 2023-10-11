@@ -140,7 +140,6 @@ class TaskContainerComponent: UIView {
         // Create and configure task name label
         self.taskName = LabelComponent(text: taskName, accessibilityLabel: taskName, font: .footnote, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
         
-        #warning("Trocar")
         self.taskName?.textLabel.textColor = .label
         timeLabel.textLabel.textColor = UIColor.selectTheBestColor(color: mainColor, isBackground: true)
         
@@ -295,8 +294,4 @@ extension TaskContainerComponent: RoundedCheckboxDelegate{
             
         }
     }
-}
-
-#Preview{
-    TaskContainerComponent(isPressed: true)
 }

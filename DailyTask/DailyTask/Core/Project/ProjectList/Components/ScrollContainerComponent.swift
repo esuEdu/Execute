@@ -54,7 +54,6 @@ class ScrollContainerComponent: UIScrollView {
                     UIView.animate(withDuration: 0.5) {
                     }
                     n.isHidden = true
-                    print("Cheguei")
                     layoutIfNeeded()
                 }
             }

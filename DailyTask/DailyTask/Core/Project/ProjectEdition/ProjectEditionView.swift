@@ -100,7 +100,7 @@ class ProjectEditionView: UIViewController {
   let updateButton: UIButton = {
     let button = UIButton(primaryAction: nil)
     button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .systemBlue
+      button.backgroundColor = .primaryBlue
     button.layer.cornerRadius = 10
     button.setTitle(String(localized: "Create a new project"), for: .normal)
     button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -196,11 +196,11 @@ class ProjectEditionView: UIViewController {
   }
   
   func setUpUI(){
-    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), textColor: .white, components: [deadLine])
+    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), textColor: .white, acessibilityLabel: String(localized: "DeadLineKey"), components: [deadLine])
     
-    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"),textColor: .white, button: pencilEditor1, components: [descriptionTextField])
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"),textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"), button: pencilEditor1, components: [descriptionTextField])
     
-    methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .white, components: [methodologyButton])
+    methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .white, acessibilityLabel: String(localized: "Methodology"), components: [methodologyButton])
     methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
     
     navigationController?.isNavigationBarHidden = false
@@ -261,7 +261,7 @@ class ProjectEditionView: UIViewController {
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
     ])
-#warning("Ver a questao do tamanho do botao de alterar/update la embaixo")
+    
   }
   
   @objc func defineProjectData(){

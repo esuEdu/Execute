@@ -30,7 +30,6 @@ class ProjectTagViewModel: Coordinating {
         fetchTagProjects()
     }
     
-    #warning("Remove the delete as it won't be used here in the final version")
     func deleteTagProject(id: UUID) {
         projectTagManager.deleteTagProject(id: id)
     }

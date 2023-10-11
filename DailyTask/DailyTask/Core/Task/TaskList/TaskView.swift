@@ -11,6 +11,8 @@ import UIKit
 class TaskView: UIViewController {
     
     var viewModel: TaskViewModel?
+  
+  let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
     let scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -61,19 +63,18 @@ class TaskView: UIViewController {
         stackView.axis = .horizontal
         stackView.spacing = 64
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
         return stackView
     }()
     
-    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Engage", textColor: UIColor(.customButtonMenu) ?? .label)
+    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: String(localized: "Engage"), textColor: UIColor(.customButtonMenu) ?? .label)
     
     let newTask = {
        let newTask = UIButton()
-        newTask.setImage(UIImage(systemName: "plus"), for: .normal)
-        newTask.setTitle("New Task", for: .normal)
-        newTask.setTitleColor(.accent, for: .normal)
-        return newTask
+      newTask.configuration = .borderless()
+      newTask.configuration?.image = UIImage(systemName: "plus")
+      newTask.configuration?.title = String(localized: "NewTaskKey")
+      newTask.configuration?.imagePadding = 6
+      return newTask
     }()
     
     var dateAndCalendarComponent: DateAndCalendarComponent?
@@ -82,6 +83,8 @@ class TaskView: UIViewController {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
         view.backgroundColor = UIColor(.customBackground)
+      
+      selectionFeedbackGenerator.prepare()
         
         datePicker.minimumDate = viewModel?.project?.start
         datePicker.maximumDate = viewModel?.project?.end
@@ -226,6 +229,7 @@ extension TaskView: ModalGetInfoTaskViewDelegate, StackTaskAndSubtaskComponentDe
     }
     
     func itWasPressed(_ task: Task) {
+      selectionFeedbackGenerator.selectionChanged()
         viewModel?.goToModalGetInfo(task, delegate: self)
     }
     
@@ -239,7 +243,7 @@ extension TaskView: ChooseStepComponentDelegate {
     
     func setUpMenuFunction(type: steps) {
         self.viewModel?.selectedStep(type)
-        self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step.rawValue))
+      self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step.localized()))
         self.reloadStack()
     }
     

@@ -71,7 +71,7 @@ class ChooseMethodologyComponent: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-#warning("MUDAR A LAUNCHSCREEN")
+  
     private func returnMenu() -> UIMenu{
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
 
@@ -125,8 +125,4 @@ enum Methodologies: String {
     case Scrum = "Scrum"
     case Custom = "Custom"
     // Add more cases if nedeed
-}
-
-#Preview{
-    ChooseMethodologyComponent(font: .boldSystemFont(ofSize: 12), text: "MAMAMA", textColor: .red)
 }

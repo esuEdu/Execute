@@ -43,6 +43,8 @@ class RoundedCheckbox: UIControl {
     weak var delegate: RoundedCheckboxDelegate?
     
     private weak var imageView: UIImageView!
+  
+  let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
     private var image: UIImage {
         return checked ? UIImage(systemName: "circle.fill")! : UIImage(systemName: "circle")!
@@ -60,6 +62,7 @@ class RoundedCheckbox: UIControl {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+      impactFeedbackGenerator.prepare()
         setup()
     }
     
@@ -117,22 +120,19 @@ class RoundedCheckbox: UIControl {
             }
         }
         delegate?.buttonWasPressed(pressed: checked)
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
     }
     
     func manualCheckCheckbox() {
         checked = true
         self.imageView.layer.borderColor = UIColor.progressLine.cgColor
-
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
     }
     
     func manualDisCheckCheckbox() {
         checked = false
         self.imageView.layer.borderColor = UIColor.completeProgressLine.cgColor
-
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
     }
     
-}
-
-#Preview{
-    RoundedCheckbox()
 }
