@@ -13,6 +13,7 @@ class TaskEditionView: UIViewController {
   var viewModel: TaskEditionViewModel?
   
   let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+  let feedbackImpact = UIImpactFeedbackGenerator(style: .soft)
   
   // Containers
   var priorityContainer: ContainerComponent?
@@ -48,13 +49,13 @@ class TaskEditionView: UIViewController {
   // Buttons
   let buttonDone: UIBarButtonItem = {
     let button = UIBarButtonItem()
-    button.title = String(localized: "CreateTaskButton", comment: "Button in the navigation bar that create the task")
+    button.title = String(localized: "Done")
     return button
   }()
   
   let buttonCancel: UIBarButtonItem = {
     let button = UIBarButtonItem()
-    button.title = String(localized: "CancelTaskButton", comment: "Button in the navigation bar that cancel the task creation")
+    button.title = String(localized: "Cancel")
     button.tintColor = .red
     return button
   }()
@@ -158,6 +159,7 @@ class TaskEditionView: UIViewController {
     setConstraints()
     
     selectionFeedbackGenerator.prepare()
+    feedbackImpact.prepare()
     
     nameTextField.textFieldToGetTheName.text = viewModel?.task?.name
     deadLine.startDatePicker.setDate(viewModel?.task?.start ?? Date.now, animated: true)
@@ -221,10 +223,7 @@ class TaskEditionView: UIViewController {
     
     stackViewForTitleAndColor.addArrangedSubview(nameTextField)
     stackViewForTitleAndColor.addArrangedSubview(colorPicker)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    
+
   }
   
   func addActions() {
@@ -246,6 +245,13 @@ class TaskEditionView: UIViewController {
     updateButton.addTarget(self, action: #selector(updateTask), for: .touchUpInside)
     
     deleteButton.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+    tapGesture.cancelsTouchesInView = false
+    view.addGestureRecognizer(tapGesture)
   }
   
   func setConstraints(){
@@ -265,18 +271,23 @@ class TaskEditionView: UIViewController {
       icon.heightAnchor.constraint(equalToConstant: 93),
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
-    
-     
-//      updateButton.heightAnchor.constraint(equalToConstant: 270),
+      
+      
+      //      updateButton.heightAnchor.constraint(equalToConstant: 270),
     ])
-    #warning("Ver a questao do tamanho do botao de alterar/update la embaixo")
+#warning("Ver a questao do tamanho do botao de alterar/update la embaixo")
   }
   
 }
 
 extension TaskEditionView {
   
+  @objc func dismissKeyboard(){
+    view.endEditing(true)
+  }
+  
   @objc func cancelTask(){
+    self.feedbackImpact.impactOccurred(intensity: 1)
     viewModel?.removeTopView()
   }
   
@@ -308,7 +319,9 @@ extension TaskEditionView {
   
   @objc func deleteTask() {
     let alert = UIAlertController(title: String(localized: "sureKey"), message: String(localized: "actionPermanent"), preferredStyle: .alert)
+    self.selectionFeedbackGenerator.selectionChanged()
     alert.addAction(UIAlertAction(title: String(localized: "yesKey"), style: .destructive, handler: { _ in
+      self.feedbackImpact.impactOccurred(intensity: 1)
       self.viewModel?.deleteTask()
       self.viewModel?.removeTopView()
     }))

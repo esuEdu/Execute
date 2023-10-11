@@ -22,8 +22,8 @@ class ProjectCreationViewModel: Coordinating {
     
     init(){
         icon = "trophy"
-        name = "Sem nome"
-        description = "Sem descrição"
+        name = String(localized: "noNameKey")
+        description = String(localized: "noDescKey")
         methodology = .CBL
         start = Date.now
         end = Date.now.addingTimeInterval(30)

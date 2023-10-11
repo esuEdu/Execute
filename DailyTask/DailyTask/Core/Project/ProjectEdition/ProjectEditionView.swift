@@ -14,6 +14,7 @@ class ProjectEditionView: UIViewController {
   var viewModel: ProjectEditionViewModel?
   
   let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+  let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
   
   // MARK: - OFICIAL
   
@@ -139,7 +140,9 @@ class ProjectEditionView: UIViewController {
     setUpDelegates()
     setUpUI()
     addAllConstraints()
+    
     selectionFeedbackGenerator.prepare()
+    impactFeedbackGenerator.prepare()
     
     verifyIfIsEditable()
     
@@ -221,6 +224,7 @@ class ProjectEditionView: UIViewController {
     stackViewForTheContainer.addArrangedSubview(updateButton)
     stackViewForTheContainer.addArrangedSubview(deleteButton)
     updateButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+    deleteButton.addTarget(self, action: #selector(deleteProject), for: .touchUpInside)
     
     iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
     
@@ -229,6 +233,10 @@ class ProjectEditionView: UIViewController {
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+    tapGesture.cancelsTouchesInView = false
+    view.addGestureRecognizer(tapGesture)
   }
   
   deinit{
@@ -271,9 +279,24 @@ class ProjectEditionView: UIViewController {
     selectionFeedbackGenerator.selectionChanged()
   }
   
-  @objc func removeTheView(){
+  @objc func dismissKeyboard(){
+    view.endEditing(true)
+  }
+  
+  @objc func removeTheView() {
     isEditable = false
     verifyIfIsEditable()
+  }
+  
+  @objc func deleteProject() {
+    let alert = UIAlertController(title: String(localized: "sureKey"), message: String(localized: "actionPermanent"), preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: String(localized: "yesKey"), style: .destructive, handler: { _ in
+      self.impactFeedbackGenerator.impactOccurred(intensity: 1)
+      self.viewModel?.removeProject()
+      self.viewModel?.removeTopView()
+    }))
+    alert.addAction(UIAlertAction(title: String(localized: "noKey"), style: .cancel))
+    self.present(alert, animated: true)
   }
   
   @objc func getStartDate(_ sender: UIDatePicker){
@@ -333,10 +356,13 @@ extension ProjectEditionView {
     let menuItems = UIMenu(title: "", options: .displayInline, children: [
       UIAction(title: String(localized: "Edit"), image: nil, handler: { _ in
         self.verifyIfIsEditable()
+        self.selectionFeedbackGenerator.selectionChanged()
       }),
       UIAction(title: String(localized: "Delete"), image: nil, attributes: .destructive, handler: { _ in
+        self.impactFeedbackGenerator.impactOccurred(intensity: 1)
         let alert = UIAlertController(title: String(localized: "sureKey"), message: String(localized: "actionPermanent"), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: String(localized: "yesKey"), style: .destructive, handler: { _ in
+          self.impactFeedbackGenerator.impactOccurred(intensity: 1)
           self.viewModel?.removeProject()
           self.viewModel?.removeTopView()
         }))
@@ -347,6 +373,7 @@ extension ProjectEditionView {
     
     return menuItems
   }
+  
 }
 
 extension ProjectEditionView: ChooseMethodologyComponentDelegate {
