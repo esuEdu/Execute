@@ -60,7 +60,7 @@ class TaskContainerComponent: UIView {
         let stackView = UIStackView()
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.backgroundColor = .systemGray4
+        stackView.backgroundColor = .progressLine
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layer.cornerRadius = 10
@@ -91,7 +91,7 @@ class TaskContainerComponent: UIView {
         let line = UIView()
         line.translatesAutoresizingMaskIntoConstraints = false
 //        line.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        line.backgroundColor = .systemBlue
+        line.backgroundColor = .completeProgressLine
         return line
     }()
     
@@ -105,7 +105,7 @@ class TaskContainerComponent: UIView {
     /// - Parameters:
     ///   - timeLabel: The time label to display.
     ///   - taskName: The task name to display.
-    init(timeLabel: String = "18:20", taskName: String = "Sample task ljnsjdnjs n dfmd fm ndjnfjdn fjndjfndjn jkndjnfj dkn fjkdnkj nfdjknf jd", mainColor: UIColor = .systemBlue, priority: String = "!!!", isPressed: Bool) {
+    init(timeLabel: String = "18:20", taskName: String = "Sample task ljnsjdnjs n dfmd fm ndjnfjdn fjndjfndjn jkndjnfj dkn fjkdnkj nfdjknf jd", mainColor: UIColor = .completeProgressLine, priority: String = "!!!", isPressed: Bool) {
         super.init(frame: .zero)
         
        
@@ -114,7 +114,12 @@ class TaskContainerComponent: UIView {
         
         containerStack.addGestureRecognizer(touch!)
         
-        containerStack.backgroundColor = mainColor.withAlphaComponent(0.2)
+        if self.traitCollection.userInterfaceStyle == .dark{
+            containerStack.backgroundColor = mainColor.withAlphaComponent(0.45)
+        } else{
+            containerStack.backgroundColor = mainColor.withAlphaComponent(0.2)
+        }
+        
         timeStack.backgroundColor = mainColor
         
         labelPercent.textColor = UIColor.selectTheBestColor(color: mainColor, isBackground: true)
@@ -136,7 +141,7 @@ class TaskContainerComponent: UIView {
         self.taskName = LabelComponent(text: taskName, accessibilityLabel: taskName, font: .footnote, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
         
         #warning("Trocar")
-        self.taskName?.textLabel.textColor = .black
+        self.taskName?.textLabel.textColor = .label
         timeLabel.textLabel.textColor = UIColor.selectTheBestColor(color: mainColor, isBackground: true)
         
         // Add time label to the time stack
@@ -226,9 +231,9 @@ class TaskContainerComponent: UIView {
             ])
             
             if isPressed{
-                line.backgroundColor = .systemBlue
+                line.backgroundColor = .completeProgressLine
             } else {
-                line.backgroundColor = .systemGray4
+                line.backgroundColor = .progressLine
             }
         }
         
@@ -249,7 +254,7 @@ class TaskContainerComponent: UIView {
         taskName!.textLabel.alpha = 0.4
         progressBar?.setProgress(1)
         labelPercent.text = "\(100)%"
-        line.backgroundColor = .systemBlue
+        line.backgroundColor = .completeProgressLine
         roundedCheckbox.manualCheckCheckbox()
     }
     
@@ -260,7 +265,7 @@ class TaskContainerComponent: UIView {
         taskName!.textLabel.attributedText = attributedText
         taskName!.textLabel.alpha = 1
 
-        line.backgroundColor = .systemGray4
+        line.backgroundColor = .progressLine
     }
     
     @objc func taskIsPressed(){
@@ -274,7 +279,7 @@ extension TaskContainerComponent: RoundedCheckboxDelegate{
             doneTheTask()
             layoutIfNeeded()
             delegate?.wasChecked(pressed)
-            line.backgroundColor = .systemBlue
+            line.backgroundColor = .completeProgressLine
         } else{
             let attributedText = NSMutableAttributedString(string: taskName!.textLabel.text!)
             attributedText.removeAttribute(.strikethroughStyle, range: NSRange(location: 0, length: attributedText.length))
@@ -283,7 +288,7 @@ extension TaskContainerComponent: RoundedCheckboxDelegate{
             taskName!.textLabel.alpha = 1
             progressBar?.setProgress(0)
             labelPercent.text = "\(0)%"
-            line.backgroundColor = .systemGray4
+            line.backgroundColor = .progressLine
             
             delegate?.wasChecked(pressed)
             layoutIfNeeded()

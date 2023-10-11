@@ -107,7 +107,7 @@ class StackTaskAndSubtaskComponent: UIView {
     
     func createNewStacks(){
         for (index, sub) in self.subtasks!.enumerated(){
-            let subtask = SubtaskContainerComponent(taskName: sub.name ?? "Sem titulo" , mainColor: color ?? .systemBlue, subtask: sub, isDone: sub.isDone)
+            let subtask = SubtaskContainerComponent(taskName: sub.name ?? "Sem titulo" , mainColor: color ?? .completeProgressLine, subtask: sub, isDone: sub.isDone)
             subtask.delegate = self
             self.stackview.addArrangedSubview(subtask)
             self.index = index + 1

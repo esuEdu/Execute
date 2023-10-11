@@ -27,7 +27,7 @@ class DeadlineComponent: UIView {
         stackView.backgroundColor = UIColor(.customDeadline)
         stackView.clipsToBounds = true
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
+        stackView.layoutMargins = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 0)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -38,6 +38,8 @@ class DeadlineComponent: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
         return stackView
     }()
     
@@ -47,6 +49,8 @@ class DeadlineComponent: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
         return stackView
     }()
     
@@ -115,10 +119,6 @@ class DeadlineComponent: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            startStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            startStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            endStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            endStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             line.heightAnchor.constraint(equalToConstant: 0.4),
             line.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

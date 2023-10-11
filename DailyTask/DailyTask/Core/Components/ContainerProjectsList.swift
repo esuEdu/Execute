@@ -140,7 +140,6 @@ class ContainerProjectsList: UIView {
     
     let progressBar = UIProgressView()
     
-    
     let oneTapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
     let longTapGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
     
@@ -187,7 +186,13 @@ class ContainerProjectsList: UIView {
         
         projectPercentage.textLabel.text = percentage + "%"
         projectPercentage.textLabel.textColor = percentageColor
-        percentageLabel.textLabel.textColor = percentageColor
+        percentageLabel.textLabel.textColor = percentageColor.withAlphaComponent(0.7)
+        
+        if self.traitCollection.userInterfaceStyle == .dark {
+            stackViewContainer.backgroundColor = bgColor.withAlphaComponent(0.45)
+        } else{
+            stackViewContainer.backgroundColor = bgColor.withAlphaComponent(0.2)
+        }
         
         stackViewContainerTitle.addArrangedSubview(iconTitle)
         stackViewContainerTitle.addArrangedSubview(projectTitle)

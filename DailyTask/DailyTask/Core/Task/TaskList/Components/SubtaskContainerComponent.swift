@@ -31,16 +31,16 @@ class SubtaskContainerComponent: UIView {
     
     private let roundedRect: UIView = {
         let roundedRect = UIView()
-        roundedRect.backgroundColor = UIColor.systemBlue.withAlphaComponent(0)
+        roundedRect.backgroundColor = UIColor.completeProgressLine.withAlphaComponent(0)
         roundedRect.layer.cornerRadius = 10
         roundedRect.clipsToBounds = false
         roundedRect.layer.borderWidth = 3.5
-        roundedRect.layer.borderColor = UIColor.systemBlue.withAlphaComponent(1).cgColor
+        roundedRect.layer.borderColor = UIColor.completeProgressLine.withAlphaComponent(1).cgColor
         roundedRect.layer.cornerRadius = 9.6
         roundedRect.translatesAutoresizingMaskIntoConstraints = false
         roundedRect.layer.shadowColor = UIColor.white.cgColor
         roundedRect.layer.shadowOffset = CGSize(width: 0, height: 0)
-        roundedRect.layer.shadowOpacity = 0.33
+        roundedRect.layer.shadowOpacity = 0.28
         roundedRect.layer.shadowRadius = 8.0
         roundedRect.layer.masksToBounds = false
         return roundedRect
@@ -49,7 +49,7 @@ class SubtaskContainerComponent: UIView {
     private let frontCircle: UIImageView = {
         let circle = UIImageView()
         circle.image = UIImage(systemName: "circle")!
-        circle.tintColor = .systemBlue
+        circle.tintColor = .completeProgressLine
         circle.translatesAutoresizingMaskIntoConstraints = false
         return circle
     }()
@@ -89,22 +89,23 @@ class SubtaskContainerComponent: UIView {
     let line: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = .progressLine
         return view
     }()
     
     let secondLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = .progressLine
         return view
     }()
     
-    init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho", mainColor: UIColor = .systemBlue, subtask: SubTask, isDone: Bool) {
+    init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho", mainColor: UIColor = .completeProgressLine, subtask: SubTask, isDone: Bool) {
         self.subtask = subtask
         super.init(frame: .zero)
         
         label.textLabel.text = taskName
+        label.textLabel.textColor = .label
         
         if isDone{
             roundedCheckbox.manualCheckCheckbox()
@@ -113,10 +114,10 @@ class SubtaskContainerComponent: UIView {
             self.label.textLabel.attributedText = attributedText
             self.label.textLabel.alpha = 0.4
             self.roundedRect.alpha = 0.4
-            self.line.backgroundColor =  .systemBlue
-            self.secondLine.backgroundColor =  .systemBlue
-            self.backCircle.tintColor = .systemBlue
-            self.frontCircle.tintColor = .systemGray
+            self.line.backgroundColor =  .completeProgressLine
+            self.secondLine.backgroundColor =  .completeProgressLine
+            self.backCircle.tintColor = .completeProgressLine
+            self.frontCircle.tintColor = .completeProgressLine
             
         } else{
             let attributedText = NSMutableAttributedString(string: self.label.textLabel.text!)
@@ -125,10 +126,10 @@ class SubtaskContainerComponent: UIView {
             self.label.textLabel.attributedText = attributedText
             self.label.textLabel.alpha = 1
             self.roundedRect.alpha = 1
-            self.line.backgroundColor = .systemGray4
-            self.secondLine.backgroundColor = .systemGray4
-            self.backCircle.tintColor = .black
-            self.frontCircle.tintColor = .systemBlue
+            self.line.backgroundColor = .progressLine
+            self.secondLine.backgroundColor = .progressLine
+            self.backCircle.tintColor = .progressLine
+            self.frontCircle.tintColor = .completeProgressLine
             
         }
 
@@ -204,9 +205,9 @@ class SubtaskContainerComponent: UIView {
         self.label.textLabel.attributedText = attributedText
         self.label.textLabel.alpha = 0.4
         self.roundedRect.alpha = 0.4
-        self.line.backgroundColor =  .systemBlue
-        self.secondLine.backgroundColor =  .systemBlue
-        self.backCircle.tintColor = .systemBlue
+        self.line.backgroundColor =  .completeProgressLine
+        self.secondLine.backgroundColor =  .completeProgressLine
+        self.backCircle.tintColor = .completeProgressLine
         self.frontCircle.tintColor = .systemGray
         roundedCheckbox.manualCheckCheckbox()
     }
@@ -218,10 +219,10 @@ class SubtaskContainerComponent: UIView {
         self.label.textLabel.attributedText = attributedText
         self.label.textLabel.alpha = 1
         self.roundedRect.alpha = 1
-        self.line.backgroundColor = .systemGray4
-        self.secondLine.backgroundColor = .systemGray4
+        self.line.backgroundColor = .progressLine
+        self.secondLine.backgroundColor = .progressLine
         self.backCircle.tintColor = .black
-        self.frontCircle.tintColor = .systemBlue
+        self.frontCircle.tintColor = .completeProgressLine
         roundedCheckbox.manualDisCheckCheckbox()
         
     }
@@ -243,10 +244,10 @@ extension SubtaskContainerComponent: RoundedCheckboxDelegate{
                 self.label.textLabel.attributedText = attributedText
                 self.label.textLabel.alpha = 0.4
                 self.roundedRect.alpha = 0.4
-                self.line.backgroundColor =  .systemBlue
-                self.secondLine.backgroundColor =  .systemBlue
-                self.backCircle.tintColor = .systemBlue
-                self.frontCircle.tintColor = .systemGray
+                self.line.backgroundColor =  .completeProgressLine
+                self.secondLine.backgroundColor =  .completeProgressLine
+                self.backCircle.tintColor = .completeProgressLine
+                self.frontCircle.tintColor = .progressLine
             }
         } else{
             UIView.animate(withDuration: 0.2) {
@@ -256,10 +257,10 @@ extension SubtaskContainerComponent: RoundedCheckboxDelegate{
                 self.label.textLabel.attributedText = attributedText
                 self.label.textLabel.alpha = 1
                 self.roundedRect.alpha = 1
-                self.line.backgroundColor = .systemGray4
-                self.secondLine.backgroundColor = .systemGray4
-                self.backCircle.tintColor = .black
-                self.frontCircle.tintColor = .systemBlue
+                self.line.backgroundColor = .progressLine
+                self.secondLine.backgroundColor = .progressLine
+                self.backCircle.tintColor = .progressLine
+                self.frontCircle.tintColor = .completeProgressLine
             }
             
         }

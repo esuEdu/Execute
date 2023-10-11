@@ -90,17 +90,17 @@ class RoundedCheckbox: UIControl {
         imageView.layer.borderWidth = 2.9
         
         if checked == true{
-            imageView.layer.borderColor = UIColor.darkGray.cgColor
+            imageView.layer.borderColor = UIColor.progressLine.cgColor
             
         } else{
-            imageView.layer.borderColor = UIColor.systemBlue.cgColor
+            imageView.layer.borderColor = UIColor.completeProgressLine.cgColor
         }
         imageView.layer.cornerRadius = 13
         
         self.imageView = imageView
         
         backgroundColor = UIColor.clear
-        imageView.tintColor = UIColor.systemBlue
+        imageView.tintColor = UIColor.completeProgressLine
         
         self.addTarget(self, action: #selector(touchCheckbox), for: .touchUpInside)
     }
@@ -109,11 +109,11 @@ class RoundedCheckbox: UIControl {
         checked = !checked
         if checked == true{
             UIView.animate(withDuration: 0.2) {
-                self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+                self.imageView.layer.borderColor = UIColor.progressLine.cgColor
             }
         } else{
             UIView.animate(withDuration: 0.2) {
-                self.imageView.layer.borderColor = UIColor.systemBlue.cgColor
+                self.imageView.layer.borderColor = UIColor.completeProgressLine.cgColor
             }
         }
         delegate?.buttonWasPressed(pressed: checked)
@@ -121,13 +121,13 @@ class RoundedCheckbox: UIControl {
     
     func manualCheckCheckbox() {
         checked = true
-        self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+        self.imageView.layer.borderColor = UIColor.progressLine.cgColor
 
     }
     
     func manualDisCheckCheckbox() {
         checked = false
-        self.imageView.layer.borderColor = UIColor.systemBlue.cgColor
+        self.imageView.layer.borderColor = UIColor.completeProgressLine.cgColor
 
     }
     

@@ -24,7 +24,7 @@ class CircularProgressView: UIView {
         updateCircularProgressLayer()
     }
     
-    init(lineWidth: CGFloat = 5, color: UIColor = .systemBlue) {
+    init(lineWidth: CGFloat = 5, color: UIColor = .progressLine) {
         self.lineWidth = lineWidth
         self.color = color
         super.init(frame: .zero)
@@ -53,7 +53,7 @@ class CircularProgressView: UIView {
         
         bgProgressLayer = CAShapeLayer()
         bgProgressLayer.path = circularPath.cgPath
-        bgProgressLayer.strokeColor = UIColor.systemGray4.cgColor
+        bgProgressLayer.strokeColor = UIColor.progressLine.cgColor
         bgProgressLayer.lineWidth = lineWidth!
         bgProgressLayer.fillColor = UIColor.clear.cgColor
         bgProgressLayer.lineCap = .square
@@ -62,7 +62,7 @@ class CircularProgressView: UIView {
         
         progressLayer = CAShapeLayer()
         progressLayer.path = circularPath.cgPath
-        progressLayer.strokeColor = UIColor.systemBlue.cgColor
+        progressLayer.strokeColor = UIColor.completeProgressLine.cgColor
         progressLayer.lineWidth = lineWidth!
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineCap = .square
@@ -99,7 +99,63 @@ class CircularProgressView: UIView {
     }
 }
 
+class CircularView: UIView {
+    private var bgProgressLayer: CAShapeLayer!
+    private var lineWidth: CGFloat?
+    var color: UIColor?{
+        didSet{
+            bgProgressLayer.fillColor = color?.cgColor
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateCircularProgressLayer()
+    }
+    
+    init(lineWidth: CGFloat = 5, color: UIColor = .progressLine) {
+        self.lineWidth = lineWidth
+        self.color = color
+        super.init(frame: .zero)
+        
+        setupCircularProgressLayer()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupCircularProgressLayer()
+    }
+    
+    private func setupCircularProgressLayer() {
+        let circularPath = UIBezierPath(
+            arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2),
+            radius: (frame.size.width - lineWidth!) / 2,
+            startAngle: -CGFloat.pi / 2,
+            endAngle: 3 * CGFloat.pi / 2,
+            clockwise: true
+        )
+        
+        bgProgressLayer = CAShapeLayer()
+        bgProgressLayer.path = circularPath.cgPath
+        bgProgressLayer.strokeColor = UIColor.progressLine.cgColor
+        bgProgressLayer.lineWidth = lineWidth!
+        bgProgressLayer.fillColor = UIColor.clear.cgColor
+        layer.addSublayer(bgProgressLayer)
+        
+    }
+    
+    private func updateCircularProgressLayer() {
+        let circularPath = UIBezierPath(
+            arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2),
+            radius: (frame.size.width - lineWidth!) / 2,
+            startAngle: -.pi / 2,
+            endAngle: 3 * .pi / 2,
+            clockwise: true
+        )
 
+        bgProgressLayer.path = circularPath.cgPath
+    }
+}
 
 #Preview{
     CircularProgressView()

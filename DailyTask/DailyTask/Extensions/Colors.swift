@@ -55,10 +55,18 @@ enum CustomColor {
     case customSubTask
     
     case customDeadline
+    
     case customContainerComponent
+    
     case customButtonMenu
+    
     case progressBar
+    
     case customIcon
+    
+    case progressLine
+    
+    case completeProgressLine
 }
 
 extension UIColor {
@@ -110,6 +118,10 @@ extension UIColor {
             self.init(named: "ProgressBar")
         case .customIcon:
             self.init(named: "Icon")
+        case .progressLine:
+            self.init(named: "ProgressLine")
+        case .completeProgressLine:
+            self.init(named: "CompleteProgressLine")
         }
     }
 }
