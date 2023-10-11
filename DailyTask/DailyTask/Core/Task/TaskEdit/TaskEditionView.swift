@@ -63,7 +63,7 @@ class TaskEditionView: UIViewController {
   let updateButton: UIButton = {
     let button = UIButton(primaryAction: nil)
     button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .systemBlue
+      button.backgroundColor = .primaryBlue
     button.layer.cornerRadius = 10
     button.setTitle(String(localized: "UpdateTaskKey"), for: .normal)
     button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
