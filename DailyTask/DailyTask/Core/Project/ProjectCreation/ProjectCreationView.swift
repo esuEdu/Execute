@@ -118,11 +118,11 @@ class ProjectCreationView: UIViewController {
     }
     
     func setUpUI(){
-      dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), textColor: .black, acessibilityLabel: String(localized: "DeadLineKey"), components: [deadLine])
+      dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), textColor: .white, acessibilityLabel: String(localized: "DeadLineKey"), components: [deadLine])
         
-      descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, acessibilityLabel: String(localized: "DescriptionKey"), components: [descriptionTextField])
+      descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"), components: [descriptionTextField])
         
-      methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, acessibilityLabel: String(localized: "Methodology"), components: [methodologyButton])
+      methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .white, acessibilityLabel: String(localized: "Methodology"), components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         
         
