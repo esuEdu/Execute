@@ -3,10 +3,16 @@
   "strings" : {
     "Act" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Act"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Ação"
           }
         }
       }
@@ -29,24 +35,6 @@
       }
     },
     "Cancel" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        }
-      }
-    },
-    "CancelTaskButton" : {
-      "comment" : "Button in the navigation bar that cancel the task creation",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -93,24 +81,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Criar projeto"
-          }
-        }
-      }
-    },
-    "CreateTaskButton" : {
-      "comment" : "Button in the navigation bar that create the task",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Concluido"
           }
         }
       }
@@ -165,9 +135,6 @@
           }
         }
       }
-    },
-    "Deadline" : {
-
     },
     "DeadLineKey" : {
       "comment" : "Deadline string of the container of deadline",
@@ -236,8 +203,22 @@
         }
       }
     },
-    "Description" : {
-
+    "deleteTaskMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this task?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tem certeza que deseja deletar essa tarefa?"
+          }
+        }
+      }
     },
     "DescriptionKey" : {
       "comment" : "String of the contêiner description",
@@ -257,7 +238,25 @@
         }
       }
     },
+    "details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalhes"
+          }
+        }
+      }
+    },
     "Done" : {
+      "comment" : "Button in the navigation bar that create the task",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -268,7 +267,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Concluido"
+            "value" : "Concluído"
           }
         }
       }
@@ -322,6 +321,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fim"
+          }
+        }
+      }
+    },
+    "Engage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engage"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engajamento"
           }
         }
       }
@@ -413,7 +429,20 @@
       }
     },
     "Investigate" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Investigate"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Investigação"
+          }
+        }
+      }
     },
     "LowKey" : {
       "comment" : "priority of the tasks",
@@ -536,6 +565,23 @@
         }
       }
     },
+    "noDescKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Without description"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem descrição"
+          }
+        }
+      }
+    },
     "noKey" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -553,6 +599,23 @@
         }
       }
     },
+    "noNameKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Without name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sem nome"
+          }
+        }
+      }
+    },
     "NoPriorityKey" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -566,6 +629,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhuma"
+          }
+        }
+      }
+    },
+    "ofKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", of "
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", de "
           }
         }
       }
@@ -622,9 +702,6 @@
         }
       }
     },
-    "Scrum" : {
-
-    },
     "SearchProjectsPlaceholder" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -655,6 +732,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pesquise por tarefas ou projetos"
+          }
+        }
+      }
+    },
+    "startAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start at "
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Começa "
           }
         }
       }

@@ -78,7 +78,7 @@ class ChooseStepComponent: UIView {
     private func returnMenu() -> UIMenu {
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
         
-            UIAction(title: "Engage", handler: { _ in
+            UIAction(title: String(localized: "Engage"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Engage)
                 self.selectionFeedbackGenerator.selectionChanged()
         }),

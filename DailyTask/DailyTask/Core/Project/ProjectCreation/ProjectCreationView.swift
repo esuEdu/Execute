@@ -11,7 +11,7 @@ class ProjectCreationView: UIViewController {
     
     var projectCreationViewModel: ProjectCreationViewModel?
     
-    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+  let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
 
     // MARK: - OFICIAL
     
@@ -103,10 +103,12 @@ class ProjectCreationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setUpDelegates()
         setUpUI()
         addAllConstraints()
-        selectionFeedbackGenerator.prepare()
+
+      impactFeedbackGenerator.prepare()
     }
     
     func setUpDelegates(){
@@ -116,9 +118,9 @@ class ProjectCreationView: UIViewController {
     }
     
     func setUpUI(){
-        dateContainer = ContainerComponent(text: String(localized: "Deadline"), components: [deadLine])
+        dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
         
-        descriptionContainer = ContainerComponent(text: String(localized: "Description"), components: [descriptionTextField])
+        descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), components: [descriptionTextField])
         
         methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
@@ -153,6 +155,10 @@ class ProjectCreationView: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+      tapGesture.cancelsTouchesInView = false
+      view.addGestureRecognizer(tapGesture)
     }
     
     deinit{
@@ -193,12 +199,13 @@ class ProjectCreationView: UIViewController {
           alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))
           self.present(alert, animated: true)
         }
-        selectionFeedbackGenerator.selectionChanged()
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
         
     }
     
     @objc func removeTheView(){
         projectCreationViewModel?.removeTopView()
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
     }
     
     // START COREDATA
@@ -228,6 +235,10 @@ class ProjectCreationView: UIViewController {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }
+  
+  @objc func dismissKeyboard(){
+    view.endEditing(true)
+  }
 
 }
 
@@ -279,8 +290,4 @@ extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponent
         iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     }
 
-}
-
-#Preview{
-    ProjectCreationView()
 }

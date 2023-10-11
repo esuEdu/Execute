@@ -80,7 +80,7 @@ class ChooseMethodologyComponent: UIView{
                 self.selectionFeedbackGenerator.selectionChanged()
         }),
         
-            UIAction(title: String(localized: "Scrum"), image: UIImage(systemName: "paperplane.fill"), handler: { _ in
+            UIAction(title: "Scrum", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
             self.delegate?.setUpMenuFunction(type: .Scrum)
                 self.selectionFeedbackGenerator.selectionChanged()
         }),

@@ -54,7 +54,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     let labelStartAt: UILabel = {
         let label = UILabel()
-        label.text = "Start at "
+        label.text = String(localized: "startAt")
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,7 +62,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     let labelHour: UILabel = {
         let label = UILabel()
-        label.text = "2 AM"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -70,7 +70,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     let labelOf: UILabel = {
         let label = UILabel()
-        label.text = ", of "
+        label.text = String(localized: "ofKey")
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -78,7 +78,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     let labelDate: UILabel = {
         let label = UILabel()
-        label.text = "09/28/2023"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -246,17 +246,18 @@ class ModalGetInfoTaskView: UIViewController{
         delegate?.changeHappened(viewModel!.task!)
         feedbackGenerator.impactOccurred()
     }
-    
+  
     @objc func deleteTask(_ button: UIButton){
         button.alpha = 1
-        let alert = UIAlertController(title: "", message: "Você tem certeza que deseja deletar essa task?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Deletar", style: .destructive){_ in
+        let alert = UIAlertController(title: "", message: String(localized: "deleteTaskMessage"), preferredStyle: .actionSheet)
+      self.feedbackGenerator.impactOccurred()
+        alert.addAction(UIAlertAction(title: String(localized: "Delete"), style: .destructive){_ in
             self.notificationFeedbackGenerator.notificationOccurred(.warning)
             self.viewModel?.deleteTask()
             self.delegate?.changeHappened(self.viewModel!.task!)
             self.dismiss(animated: true, completion: nil)
         })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel){_ in
+        alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel){_ in
         })
         self.present(alert, animated: true)
     }

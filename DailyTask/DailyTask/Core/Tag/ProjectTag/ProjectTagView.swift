@@ -25,7 +25,7 @@ class ProjectTagView: UIViewController, UISheetPresentationControllerDelegate, U
     
     let buttonDone: UIBarButtonItem = {
       let button = UIBarButtonItem()
-      button.title = String(localized: "CreateTaskButton", comment: "Button in the navigation bar that create the task")
+      button.title = String(localized: "Done")
       return button
     }()
     

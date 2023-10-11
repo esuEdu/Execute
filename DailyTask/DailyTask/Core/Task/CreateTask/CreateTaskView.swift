@@ -13,6 +13,7 @@ class CreateTaskView: UIViewController {
     var viewModel: CreateTaskViewModel?
   
   let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+  let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
     
     // Containers
     var priorityContainer: ContainerComponent?
@@ -46,13 +47,13 @@ class CreateTaskView: UIViewController {
     // Buttons
     let buttonDone: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.title = String(localized: "CreateTaskButton", comment: "Button in the navigation bar that create the task")
+        button.title = String(localized: "Done")
         return button
     }()
     
     let buttonCancel: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.title = String(localized: "CancelTaskButton", comment: "Button in the navigation bar that cancel the task creation")
+        button.title = String(localized: "Cancel")
         button.tintColor = .red
         return button
     }()
@@ -120,6 +121,8 @@ class CreateTaskView: UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+      
+      impactFeedbackGenerator.prepare()
         
         configurateComponents()
         setUpUI()
@@ -182,11 +185,16 @@ class CreateTaskView: UIViewController {
         // Configuração para retirar o observador do teclado
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+      tapGesture.cancelsTouchesInView = false
+      view.addGestureRecognizer(tapGesture)
         
     }
     
     func setUpUI(){
         navigationController?.isNavigationBarHidden = false
+      
         navigationItem.rightBarButtonItem = buttonDone
         navigationItem.leftBarButtonItem = buttonCancel
         
@@ -246,8 +254,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
 
     // Button actions
     @objc func createTask() {
-         
-      #warning("Colocar o localizable")
+     
       if(viewModel?.compareDates(start: self.dateStart ?? Date.now, end: self.dateEnd ?? Date.now) == .orderedAscending) {
         let color = colorPicker.returnColorCGFloat()
         let red = color[0]
@@ -261,7 +268,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
           subtask.append(compon.returnText())
         }
         
-        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : "Sem nome", startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : "Sem descrição", red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
+        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : String(localized: "noNameKey"), startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : String(localized: "noDescKey"), red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
         
         viewModel?.removeLastView()
       }
@@ -271,12 +278,17 @@ extension CreateTaskView: TextFieldComponentDelegate {
         self.present(alert, animated: true)
       }
       
-      selectionFeedbackGenerator.selectionChanged()
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
       
     }
+  
+  @objc func dismissKeyboard(){
+    view.endEditing(true)
+  }
     
     @objc func cancelTask(){
         viewModel?.removeLastView()
+      impactFeedbackGenerator.impactOccurred(intensity: 1)
     }
     
     @objc func getStartDate(_ sender: UIDatePicker){
@@ -289,7 +301,9 @@ extension CreateTaskView: TextFieldComponentDelegate {
         subtask.deleteButton.tag = (subTasksContainer?.getPosition())!
         subtask.deleteButton.addTarget(self, action: #selector(removeAtPosition), for: .touchUpInside)
         subTasksContainer?.addNewElements(subtask)
-        print(subtask.deleteButton.tag)
+        
+      selectionFeedbackGenerator.selectionChanged()
+        
     }
     
     @objc func removeAtPosition(_ button: UIButton){
@@ -301,7 +315,11 @@ extension CreateTaskView: TextFieldComponentDelegate {
         for (index,component) in subTasksContainer!.stackViewContainer.arrangedSubviews.enumerated() {
             let compon = component as! SubtasksInTasksComponent
             compon.deleteButton.tag = index
+          impactFeedbackGenerator.impactOccurred()
         }
+      
+      
+      
     }
     
     @objc func getEndDate(_ sender: UIDatePicker){
