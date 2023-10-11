@@ -22,7 +22,7 @@ class ModalSquareComponent: UIButton {
     let icon: UIImageView = {
         let icon = UIImageView()
         icon.image = UIImage(systemName: "backpack")
-        icon.tintColor = .white
+        icon.tintColor = UIColor(.customIcon)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.contentMode = .scaleAspectFit
         return icon
@@ -51,7 +51,7 @@ class ModalSquareComponent: UIButton {
     ///   - iconImage: The icon image to display.
     init(text: String, iconImage: UIImage) {
         super.init(frame: .zero)
-        backgroundColor = .systemBlue
+        backgroundColor = UIColor(.customPrimaryBlue)
         layer.cornerRadius = 10
         icon.image = iconImage
         label.text = text

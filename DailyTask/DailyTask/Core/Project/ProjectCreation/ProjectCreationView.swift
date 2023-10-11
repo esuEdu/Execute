@@ -46,6 +46,7 @@ class ProjectCreationView: UIViewController {
     let textFieldToGetTheName: TextFieldComponent = {
         let textField = TextFieldComponent()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = UIColor(.customSecondaryBlue)
         return textField
     }()
     
@@ -70,7 +71,7 @@ class ProjectCreationView: UIViewController {
     
     var methodologyContainer: ContainerComponent?
     
-    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .black)
+    let methodologyButton: ChooseMethodologyComponent = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .label)
     
     
     var dateContainer: ContainerComponent?
@@ -92,7 +93,7 @@ class ProjectCreationView: UIViewController {
     let createButton: UIButton = {
         let button = UIButton(primaryAction: nil)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor(.customPrimaryBlue)
         button.layer.cornerRadius = 10
         button.setTitle(String(localized: "Create a new project"), for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -124,9 +125,10 @@ class ProjectCreationView: UIViewController {
       methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, acessibilityLabel: String(localized: "Methodology"), components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         
+        
         navigationController?.isNavigationBarHidden = false
         
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = UIColor(.customBackground)
         self.navigationItem.rightBarButtonItem = createRightButtom()
         self.navigationItem.leftBarButtonItem = createLeftButtom()
         self.title = String(localized: "Create a project")

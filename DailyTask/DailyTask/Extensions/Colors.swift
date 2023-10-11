@@ -44,6 +44,21 @@ enum CustomColor {
     
     case customPrimaryBlue
     
+    case customLabel
+    
+    case customButtom
+    
+    case customBackground
+    
+    case customTextField
+    
+    case customSubTask
+    
+    case customDeadline
+    case customContainerComponent
+    case customButtonMenu
+    case progressBar
+    case customIcon
 }
 
 extension UIColor {
@@ -75,7 +90,26 @@ extension UIColor {
             self.init(named: "SecondaryBlue")
         case .customPrimaryBlue:
             self.init(named: "PrimaryBlue")
-            // Add more cases and color values as needed
+        case .customLabel:
+            self.init(named: "Label")
+        case .customButtom:
+            self.init(named: "Buttom")
+        case .customBackground:
+            self.init(named: "Background")
+        case .customTextField:
+            self.init(named: "BlueTextField")
+        case .customSubTask:
+            self.init(named: "SubtaskDarkBlue")
+        case .customDeadline:
+            self.init(named: "DeadLine")
+        case .customContainerComponent:
+            self.init(named: "ContainerComponent")
+        case .customButtonMenu:
+            self.init(named: "buttonMenu")
+        case .progressBar:
+            self.init(named: "ProgressBar")
+        case .customIcon:
+            self.init(named: "Icon")
         }
     }
 }

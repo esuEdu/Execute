@@ -26,7 +26,7 @@ class ProjectListView: UIViewController {
     
     var config = UIButton.Configuration.filled()
     
-    config.baseBackgroundColor = .systemBlue
+    config.baseBackgroundColor = UIColor.accent
     config.background.cornerRadius = 10
     
     let spacing: CGFloat = 5
@@ -55,12 +55,12 @@ class ProjectListView: UIViewController {
     return stackView
   }()
   
-  let myProjectLabel: LabelComponent = {
-    let label = LabelComponent(text: String(localized: "MyProjectKey"), accessibilityLabel: String(localized: "MyProjectKey"), font: .title1)
-    label.translatesAutoresizingMaskIntoConstraints =  false
-    label.textLabel.font = .boldTitle1
-    return label
-  }()
+    let myProjectLabel: LabelComponent = {
+        let label = LabelComponent(text: String(localized: "MyProjectKey"), accessibilityLabel: String(localized: "MyProjectKey"), textColor: .accent, font: .title1)
+        label.translatesAutoresizingMaskIntoConstraints =  false
+        label.textLabel.font = .boldTitle1
+        return label
+    }()
   
   // Setting up the UIElements and constraint
   override func viewDidLoad() {

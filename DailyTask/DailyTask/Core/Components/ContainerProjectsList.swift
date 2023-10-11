@@ -79,13 +79,20 @@ class ContainerProjectsList: UIView {
     let stackViewContainer: UIStackView = {
         let stackViewContainer = UIStackView()
         stackViewContainer.axis = .horizontal
-      stackViewContainer.alignment = .center
-      stackViewContainer.distribution = .fill
-        stackViewContainer.backgroundColor = .systemGray3
+        stackViewContainer.alignment = .center
+        stackViewContainer.distribution = .fill
+        stackViewContainer.backgroundColor = UIColor(.customContainerComponent)
         stackViewContainer.spacing = 25
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.isLayoutMarginsRelativeArrangement = true
         stackViewContainer.layoutMargins = UIEdgeInsets(top: 17.5, left: 15, bottom: 17.5, right: 15)
+        return stackViewContainer
+    }()
+    
+    let stackViewProgressBar: UIStackView = {
+        let stackViewContainer = UIStackView()
+        stackViewContainer.axis = .vertical
+        stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         return stackViewContainer
     }()
     
@@ -98,7 +105,7 @@ class ContainerProjectsList: UIView {
         label.textLabel.font = .systemFont(ofSize: 35, weight: .bold)
         return label
     }()
-       
+    
     /// The label component for displaying the "Progress" label.
     var percentageLabel: LabelComponent = {
         let label = LabelComponent(text: String(localized: "ProgressLabelKey"), accessibilityLabel: String(localized: "ProgressLabelKey"))
@@ -111,8 +118,8 @@ class ContainerProjectsList: UIView {
     let stackViewForPercentage: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-      stackView.alignment = .center
-      stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.distribution = .fill
         stackView.spacing = -1
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: -7, left: 0, bottom: 0, right: 0)
@@ -124,7 +131,7 @@ class ContainerProjectsList: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-      stackView.alignment = .center
+        stackView.alignment = .center
         stackView.distribution = .fill
         stackView.layer.cornerRadius = 10
         stackView.clipsToBounds = true
@@ -133,6 +140,9 @@ class ContainerProjectsList: UIView {
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return stackView
     }()
+    
+    let progressBar = UIProgressView()
+    
     
     let oneTapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
     let longTapGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
@@ -197,8 +207,14 @@ class ContainerProjectsList: UIView {
         stackViewForPercentage.addArrangedSubview(projectPercentage)
         stackViewForPercentage.addArrangedSubview(percentageLabel)
         
+        progressBar.progress = 0.5
+        progressBar.tintColor = UIColor(.progressBar)
+        
+        stackViewProgressBar.addArrangedSubview(stackViewContainer)
+        stackViewProgressBar.addArrangedSubview(progressBar)
+        
         stackView.addArrangedSubview(stackViewContainerTitle)
-        stackView.addArrangedSubview(stackViewContainer)
+        stackView.addArrangedSubview(stackViewProgressBar)
         
         addSubview(stackView)
         
@@ -215,11 +231,18 @@ class ContainerProjectsList: UIView {
             iconTitle.widthAnchor.constraint(equalTo: iconTitle.heightAnchor),
             chevron.heightAnchor.constraint(equalToConstant: 25),
             chevron.widthAnchor.constraint(equalToConstant: 25),
+            progressBar.heightAnchor.constraint(equalToConstant: 15)
         ])
     }
     
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateProgress(_ value: Float) {
+        progressBar.progress = value
     }
     
     @objc func goToTaskView(){

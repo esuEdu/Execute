@@ -70,10 +70,11 @@ class CreateTaskView: UIViewController {
         let textField = TextFieldComponent()
         textField.textFieldToGetTheName.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = UIColor(.customTertiaryBlue)
         return textField
     }()
     let descriptionTextField: TextDescriptionComponent = {
-        let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
+        let textField = TextDescriptionComponent(placeholderColor: UIColor(.customTextField) ?? .blue, textColor: UIColor(.customPrimaryBlue) ?? .label)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.horizontalPadding = 10
         textField.verticalPadding = 10
@@ -136,7 +137,8 @@ class CreateTaskView: UIViewController {
     func configurateComponents(){
         // View configuration
         title = String(localized: "CreateTaskTitleKey")
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(.customBackground)
+        
       
       deadLine.startDatePicker.minimumDate = viewModel?.project?.start
       deadLine.startDatePicker.maximumDate = viewModel?.project?.end
@@ -163,9 +165,9 @@ class CreateTaskView: UIViewController {
         subTasksContainer?.translatesAutoresizingMaskIntoConstraints = false
         
         // Container configuration
-      priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, acessibilityLabel: String(localized: "PriorityName"), components: [segmentedControl])
+      priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .white, acessibilityLabel: String(localized: "PriorityName"), components: [segmentedControl])
         dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), acessibilityLabel: String(localized: "DeadLineKey") , components: [deadLine])
-      descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, acessibilityLabel: String(localized: "DescriptionKey"), components: [descriptionTextField])
+      descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"), components: [descriptionTextField])
       subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), acessibilityLabel: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
         subTasksContainer?.stackViewContainer.spacing = 8
         
@@ -187,6 +189,12 @@ class CreateTaskView: UIViewController {
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
       tapGesture.cancelsTouchesInView = false
       view.addGestureRecognizer(tapGesture)
+        
+        deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.startDatePicker.maximumDate = viewModel?.project?.end
+        
+        deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.endDatePicker.maximumDate = viewModel?.project?.end
         
     }
     
@@ -252,8 +260,6 @@ extension CreateTaskView: TextFieldComponentDelegate {
 
     // Button actions
     @objc func createTask() {
-     
-      if(viewModel?.compareDates(start: self.dateStart ?? Date.now, end: self.dateEnd ?? Date.now) == .orderedAscending) {
         let color = colorPicker.returnColorCGFloat()
         let red = color[0]
         let green = color[1]
@@ -268,14 +274,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
         
         self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : String(localized: "noNameKey"), startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : String(localized: "noDescKey"), red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
         
-        viewModel?.removeLastView()
-      }
-      else {
-        let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))
-        self.present(alert, animated: true)
-      }
-      
+        viewModel?.removeLastView()    
       impactFeedbackGenerator.impactOccurred(intensity: 1)
       
     }
@@ -292,6 +291,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
     @objc func getStartDate(_ sender: UIDatePicker){
         let selectDate = sender.date
         self.dateStart = selectDate
+        deadLine.endDatePicker.minimumDate = selectDate
     }
     
     @objc func createSubtask(){

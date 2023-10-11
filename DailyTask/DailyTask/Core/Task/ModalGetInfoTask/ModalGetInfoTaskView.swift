@@ -9,6 +9,7 @@ import UIKit
 
 protocol ModalGetInfoTaskViewDelegate: AnyObject {
     func changeHappened(_ task: Task)
+    func deleted(_ task: Task)
 }
 
 class ModalGetInfoTaskView: UIViewController{
@@ -130,6 +131,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(.customBackground)
         setUpModalConfiguration()
         verifyIfIsDone()
         setUpUI()
@@ -148,13 +150,14 @@ class ModalGetInfoTaskView: UIViewController{
         }
     }
     
-    func setUpUI(){
-        view.backgroundColor = .systemBackground
+    func setUpUI() {
+        
+        view.backgroundColor = UIColor(.customBackground)
         titleLabel = LabelComponent(text: viewModel?.task?.name ?? "Teste", accessibilityLabel: "Teste")
         titleLabel?.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 6)
         titleLabel?.textLabel.numberOfLines = 2
         titleLabel?.layer.cornerRadius = 10
-        titleLabel?.backgroundColor = .systemGray3
+        titleLabel?.backgroundColor = UIColor(.customSecondaryBlue)
         titleLabel?.textLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         titleLabel?.textLabel.lineBreakMode = .byWordWrapping
         titleLabel?.textLabel.textAlignment = .left
@@ -187,6 +190,7 @@ class ModalGetInfoTaskView: UIViewController{
         buttonToFinish.addTarget(self, action: #selector(disalphaButton), for: .touchCancel)
       
       buttonToEdit.addTarget(self, action: #selector(goToTaskEdition), for: .touchUpInside)
+        
       
         buttonToDelete.addTarget(self, action: #selector(alphaButton), for: .touchDown)
         buttonToDelete.addTarget(self, action: #selector(disalphaButton), for: .touchCancel)
@@ -251,7 +255,7 @@ class ModalGetInfoTaskView: UIViewController{
         alert.addAction(UIAlertAction(title: String(localized: "Delete"), style: .destructive){_ in
             self.notificationFeedbackGenerator.notificationOccurred(.warning)
             self.viewModel?.deleteTask()
-            self.delegate?.changeHappened(self.viewModel!.task!)
+            self.delegate?.deleted(self.viewModel!.task!)
             self.dismiss(animated: true, completion: nil)
         })
         alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel){_ in

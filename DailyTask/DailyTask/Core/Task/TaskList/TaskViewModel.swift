@@ -13,10 +13,16 @@ class TaskViewModel: Coordinating {
     var project: Project?
     var view: TaskView?
     
-    var step: steps?
-    var date: Date = Date.now
+    var step: steps = .Engage
     
-    private let taskManager = TaskManager()
+    let currentDate = Date()
+
+    let calendar = Calendar.current
+    
+    var date: Date = Date()
+    
+    let taskManager = TaskManager()
+    let subtaskManager = SubTaskManager()
     
     var task: [Task] = []
     
@@ -50,5 +56,21 @@ class TaskViewModel: Coordinating {
     func selectedStep(_ step:steps){
         self.step = step
     }
+    
+    func concludedTask(_ task: Task){
+        taskManager.concludeTask(task)
+        print("Cheguei")
+    }
+    
+    func concludeSubtask(task: Task){
+        let subtasks = subtaskManager.fetchSubTask(task: task)
+        let isDone = task.isDone
+        
+        for subtask in subtasks {
+            subtaskManager.ToggleIsDoneSubTask(subtask: subtask, isDone: isDone)
+        }
+        
+    }
+    
 }
 
