@@ -47,7 +47,7 @@ class SubtasksInTasksComponent: UIView {
     let deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = UIColor(.customCloseButtom)
         button.contentMode = .scaleAspectFit
         return button
     }()

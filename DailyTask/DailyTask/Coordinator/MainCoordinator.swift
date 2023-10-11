@@ -155,31 +155,15 @@ class MainCoordinator: Coordinator {
     /// Call this method to start the coordinator and configure the initial state of the
     /// navigation controller. This method sets up the initial view and state of the app.
     func start() {
-        // Create instances of your view controllers
-//        let homeView = TESTViewController()
-        let homeView = HomeView()
-        let homeViewModel: HomeViewModel & Coordinating = HomeViewModel()
-        homeViewModel.coordinator = self
-        homeView.homeViewModel = homeViewModel
-        homeViewModel.homeView = homeView
-
         let projectView: ProjectListView = ProjectListView()
         let projectViewModel: ProjectListViewModel & Coordinating = ProjectListViewModel()
         projectView.projectListViewModel = projectViewModel
         projectViewModel.coordinator = self
         projectViewModel.projectView = projectView
 
-        // Create instances of UITabBarItem for each view controller
-        let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: nil)
-        let tableViewCellTabBarItem = UITabBarItem(title: "Projects", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
-
-        // Assign tab bar items to the view controllers
-        homeView.tabBarItem = homeTabBarItem
-        projectView.tabBarItem = tableViewCellTabBarItem
-
         // Set up the view controllers in the tab bar controller
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeView, projectView]
+        tabBarController.viewControllers = [projectView]
 
         // Store a reference to the tab bar controller for future reference
         self.tabBarController = tabBarController

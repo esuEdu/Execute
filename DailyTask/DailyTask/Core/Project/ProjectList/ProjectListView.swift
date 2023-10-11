@@ -51,7 +51,7 @@ class ProjectListView: UIViewController {
     stackView.distribution = .equalSpacing
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.isLayoutMarginsRelativeArrangement = true
-    stackView.layoutMargins = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+    stackView.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     return stackView
   }()
   
