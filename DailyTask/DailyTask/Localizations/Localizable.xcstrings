@@ -2,7 +2,31 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Act" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "actionPermanent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This action will be permanent!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essa ação será irreversível!"
+          }
+        }
+      }
     },
     "Cancel" : {
       "extractionState" : "manual",
@@ -125,6 +149,23 @@
         }
       }
     },
+    "dateFinalBeforeBegin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End date before the start date"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data final anterior a data inicial"
+          }
+        }
+      }
+    },
     "Deadline" : {
 
     },
@@ -147,7 +188,53 @@
       }
     },
     "Delete" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletar"
+          }
+        }
+      }
+    },
+    "Delete the project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Project"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deletar Projeto"
+          }
+        }
+      }
+    },
+    "DeleteTaskKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletar Tarefa"
+          }
+        }
+      }
     },
     "Description" : {
 
@@ -187,10 +274,39 @@
       }
     },
     "Edit" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
+          }
+        }
+      }
     },
     "Edit Tag" : {
 
+    },
+    "EditTaskKey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Tarefa"
+          }
+        }
+      }
     },
     "EndDateLabel" : {
       "comment" : "text of end date",
@@ -244,6 +360,23 @@
         }
       }
     },
+    "ErrorCreationTaskKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error of creation"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro de criação"
+          }
+        }
+      }
+    },
     "Give a name to the project" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -281,9 +414,6 @@
     },
     "Investigate" : {
 
-    },
-    "Key" : {
-      "extractionState" : "manual"
     },
     "LowKey" : {
       "comment" : "priority of the tasks",
@@ -355,9 +485,6 @@
         }
       }
     },
-    "Name the project" : {
-
-    },
     "New task" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -405,6 +532,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nova Tarefa"
+          }
+        }
+      }
+    },
+    "noKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não"
           }
         }
       }
@@ -549,8 +693,76 @@
         }
       }
     },
+    "sureKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tem certeza?"
+          }
+        }
+      }
+    },
     "Task Tag Title" : {
       "comment" : "Accessibility Label for Task Tag Title"
+    },
+    "TryAgainKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tente novamente"
+          }
+        }
+      }
+    },
+    "UpdateTaskKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atualizar Tarefa"
+          }
+        }
+      }
+    },
+    "yesKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sim"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

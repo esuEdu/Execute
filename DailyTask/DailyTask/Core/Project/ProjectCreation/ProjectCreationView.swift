@@ -189,9 +189,9 @@ class ProjectCreationView: UIViewController {
             self.projectCreationViewModel?.createAProject()
             self.projectCreationViewModel?.removeTopView()
         } else{
-            let alert = UIAlertController(title: "Erro de criação", message: "Você não pode criar um projeto que termine no passado", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Tentar de novo", style: .cancel))
-            self.present(alert, animated: true)
+          let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))
+          self.present(alert, animated: true)
         }
         selectionFeedbackGenerator.selectionChanged()
         

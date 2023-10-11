@@ -18,9 +18,9 @@ class CreateTaskViewModel: Coordinating  {
     private let taskManager = TaskManager()
     private let subTaskManager = SubTaskManager()
     
-    func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, red: Double, green: Double, blue: Double, subtasks: [String]){
+  func createTask(name: String, startDate: Date, endDate: Date, priority: String, descript: String, red: Double, green: Double, blue: Double, subtasks: [String], icon: String){
         if let project = project{
-            let task = taskManager.createTask(name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript, project: project, red: red, green: green, blue: blue, step: step)
+            let task = taskManager.createTask(name: name, startDate: startDate, endDate: endDate, priority: priority, descript: descript, project: project, red: red, green: green, blue: blue, step: step, icon: icon)
             for sub in subtasks{
                 subTaskManager.createSubTask(name: sub, task: task)
             }
@@ -30,5 +30,10 @@ class CreateTaskViewModel: Coordinating  {
     func removeLastView(){
         coordinator?.eventOccurred(with: .removeTopView)
     }
+  
+  func compareDates(start: Date, end: Date) -> ComparisonResult{
+      let compareDate = start.compare(end)
+      return compareDate
+  }
     
 }
