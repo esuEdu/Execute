@@ -63,8 +63,6 @@ class TaskView: UIViewController {
         stackView.axis = .horizontal
         stackView.spacing = 64
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
         return stackView
     }()
     
@@ -76,10 +74,7 @@ class TaskView: UIViewController {
       newTask.configuration?.image = UIImage(systemName: "plus")
       newTask.configuration?.title = String(localized: "NewTaskKey")
       newTask.configuration?.imagePadding = 6
-//        newTask.setImage(UIImage(systemName: "plus"), for: .normal)
-//        newTask.setTitle(String(localized: "NewTaskKey"), for: .normal)
-//        newTask.setTitleColor(.accent, for: .normal)
-        return newTask
+      return newTask
     }()
     
     var dateAndCalendarComponent: DateAndCalendarComponent?
