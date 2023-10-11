@@ -123,7 +123,7 @@ class CreateTaskView: UIViewController {
         super.viewDidLoad()
       
       impactFeedbackGenerator.prepare()
-        
+    
         configurateComponents()
         setUpUI()
         setConstraints()
@@ -165,10 +165,10 @@ class CreateTaskView: UIViewController {
         subTasksContainer?.translatesAutoresizingMaskIntoConstraints = false
         
         // Container configuration
-        priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .white, components: [segmentedControl])
-        dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
-        descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, components: [descriptionTextField])
-        subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
+      priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .white, acessibilityLabel: String(localized: "PriorityName"), components: [segmentedControl])
+        dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), acessibilityLabel: String(localized: "DeadLineKey") , components: [deadLine])
+      descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"), components: [descriptionTextField])
+      subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), acessibilityLabel: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
         subTasksContainer?.stackViewContainer.spacing = 8
         
         
@@ -353,8 +353,4 @@ extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDeleg
     func menuWasPressed(_ menuIcon: String) {
         icon.iconName = menuIcon
     }
-}
-
-#Preview {
-    CreateTaskView()
 }

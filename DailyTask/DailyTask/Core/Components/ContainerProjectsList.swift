@@ -45,6 +45,8 @@ class ContainerProjectsList: UIView {
     let id: UUID?
     
     weak var delegate: ContainerProjectsListDelegate?
+  
+  var nameContainerTitle: String = ""
     
     /// The horizontal stack view for the project title, icon, and chevron.
     let stackViewContainerTitle: UIStackView = {
@@ -56,12 +58,13 @@ class ContainerProjectsList: UIView {
         stackViewContainerTitle.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainerTitle.isLayoutMarginsRelativeArrangement = true
         stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 9, left: 12, bottom: 9, right: 15)
+      stackViewContainerTitle.isAccessibilityElement = true
         return stackViewContainerTitle
     }()
     
     /// The label component for the project title.
-    let projectTitle = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .headline, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
-    
+    let projectTitle = LabelComponent(text: "", accessibilityLabel: "", textColor: .black, font: .headline, numberOfLines: 2, lineBreakMode: .byTruncatingTail)
+     
     /// The image view for the project icon.
     let iconTitle = UIImageView()
     
@@ -94,18 +97,18 @@ class ContainerProjectsList: UIView {
     }()
     
     /// The label component for the project description.
-    let projectDesc = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .systemGray, font: .caption1, numberOfLines: 3, lineBreakMode: .byTruncatingTail)
-    
+    let projectDesc = LabelComponent(text: "", accessibilityLabel: "", textColor: .systemGray, font: .caption1, numberOfLines: 3, lineBreakMode: .byTruncatingTail)
+       
     /// The label component for displaying the completion percentage.
     let projectPercentage: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "", textColor: .black, font: .largeTitle, numberOfLines: 1)
+        let label = LabelComponent(text: "", accessibilityLabel: "", textColor: .black, font: .largeTitle, numberOfLines: 1)
         label.textLabel.font = .systemFont(ofSize: 35, weight: .bold)
         return label
     }()
     
     /// The label component for displaying the "Progress" label.
     var percentageLabel: LabelComponent = {
-        let label = LabelComponent(text: "Default", accessibilityLabel: "")
+        let label = LabelComponent(text: String(localized: "ProgressLabelKey"), accessibilityLabel: String(localized: "ProgressLabelKey"))
         label.textLabel.text = "\(String(localized: "ProgressLabelKey"))"
         label.textLabel.font = .systemFont(ofSize: 12, weight: .bold)
         return label
@@ -158,7 +161,7 @@ class ContainerProjectsList: UIView {
     ///   - imageIcon: The icon image for the project.
     ///   - imageIconColor: The tint color for the icon image.
     ///   - chevronColor: The tint color for the chevron icon.
-    init(title: String, titleColor: UIColor = .black, description: String, descriptionColor: UIColor = .black, percentage: String, percentageColor: UIColor = .black, imageIcon: UIImage = UIImage(systemName: "ellipsis.message.fill")!, imageIconColor: UIColor = .white, chevronColor: UIColor = .white, bgColor: UIColor = .systemGreen, id: UUID, element: Project) {
+  init(title: String, acessibilityLabelNameProject: String, titleColor: UIColor = .black, description: String, acessibilityLabelDescProject: String , descriptionColor: UIColor = .black, percentage: String, percentageColor: UIColor = .black, imageIcon: UIImage = UIImage(systemName: "ellipsis.message.fill")!, imageIconColor: UIColor = .white, chevronColor: UIColor = .white, bgColor: UIColor = .systemGreen, id: UUID, element: Project) {
         self.id = id
         self.project = element
         super.init(frame: .zero)
@@ -170,9 +173,11 @@ class ContainerProjectsList: UIView {
         self.addGestureRecognizer(longTapGesture)
         
         stackViewContainerTitle.backgroundColor = bgColor
+    stackViewContainerTitle.accessibilityLabel = acessibilityLabelNameProject
         projectTitle.textLabel.text = title
         projectTitle.textLabel.textColor = titleColor
-        
+    projectTitle.textLabel.accessibilityLabel = acessibilityLabelNameProject
+    
         iconTitle.image = imageIcon
         iconTitle.tintColor = imageIconColor
         iconTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -184,6 +189,8 @@ class ContainerProjectsList: UIView {
         
         projectDesc.textLabel.text = description
         projectDesc.textLabel.textColor = descriptionColor
+    projectDesc.textLabel.accessibilityLabel = acessibilityLabelDescProject
+    
         
         projectPercentage.textLabel.text = percentage + "%"
         projectPercentage.textLabel.textColor = percentageColor

@@ -196,11 +196,11 @@ class ProjectEditionView: UIViewController {
   }
   
   func setUpUI(){
-    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), textColor: .white, components: [deadLine])
+    dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), textColor: .white, acessibilityLabel: String(localized: "DeadLineKey"), components: [deadLine])
     
-    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"),textColor: .white, button: pencilEditor1, components: [descriptionTextField])
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"),textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"), button: pencilEditor1, components: [descriptionTextField])
     
-    methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .white, components: [methodologyButton])
+    methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .white, acessibilityLabel: String(localized: "Methodology"), components: [methodologyButton])
     methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
     
     navigationController?.isNavigationBarHidden = false
