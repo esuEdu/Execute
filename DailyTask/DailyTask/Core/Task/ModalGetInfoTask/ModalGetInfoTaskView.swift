@@ -149,7 +149,7 @@ class ModalGetInfoTaskView: UIViewController{
         }
     }
     
-    func setUpUI(){
+    func setUpUI() {
         
         view.backgroundColor = UIColor(.customBackground)
         titleLabel = LabelComponent(text: viewModel?.task?.name ?? "Teste", accessibilityLabel: "Teste")
