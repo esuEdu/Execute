@@ -17,6 +17,7 @@ class StackTaskAndSubtaskComponent: UIView {
     weak var delegate: StackTaskAndSubtaskComponentDelegate?
     let stackview = UIStackView()
     let subtaskManager: SubTaskManager = SubTaskManager()
+    let taskManager: TaskManager = TaskManager()
     var mainTask: TaskContainerComponent?
     let task: Task?
     var subtasks: [SubTask]?
@@ -67,13 +68,22 @@ class StackTaskAndSubtaskComponent: UIView {
         
         if completed != 0{
             mainTask?.undoneTheTask()
-            let percent = Int(((Double(completed) / Double(index)) * 100))
+            mainTask?.roundedCheckbox.manualDisCheckCheckbox()
+            taskManager.concludeTask(task!, isDone: false)
+            let decimal = (Double(completed) / Double(index))
+            let percent = Int((decimal) * 100)
             mainTask?.labelPercent.text = "\(percent)%"
+            mainTask?.progressBar?.setProgress(decimal)
             if percent == 100{
                 mainTask?.doneTheTask()
+                if let task = task{
+                    taskManager.concludeTask(task, isDone: true)
+                }
+                
             }
         } else if completed == 0{
             mainTask?.labelPercent.text = "0%"
+            mainTask?.progressBar?.setProgress(0)
         }
         
     }

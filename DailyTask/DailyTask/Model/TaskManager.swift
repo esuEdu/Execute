@@ -138,6 +138,15 @@ class TaskManager {
         }
     }
     
+    func concludeTask(_ task: Task, isDone: Bool){
+        do{
+            task.isDone = isDone
+            try context.save()
+        } catch{
+            fatalError("Erro in complete or descomplete: \(error)")
+        }
+    }
+    
     
     
 }
