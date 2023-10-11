@@ -13,13 +13,15 @@ class TaskManager {
   
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
-  func fetchTask(_ project: Project) -> [Task] {
+    func fetchTask(_ project: Project, date: Date = Date.now) -> [Task] {
     do {
       
       let request: NSFetchRequest<Task> = Task.fetchRequest()
         
       request.predicate = NSPredicate(format: "project == %@", project)
         
+        let sortDescriptor = NSSortDescriptor(key: "start", ascending: true) // Substitua "data" pelo nome do seu atributo de data/horário.
+        request.sortDescriptors = [sortDescriptor]
         
       let tasks = try context.fetch(request)
       

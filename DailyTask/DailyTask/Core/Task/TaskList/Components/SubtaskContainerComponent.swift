@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 
 protocol SubtaskContainerComponentDelegate: AnyObject{
-    func isChecked(_ check: Bool)
+    func isChecked(_ check: Bool, sub: SubTask)
 }
 
 class SubtaskContainerComponent: UIView {
     
     weak var delegate: SubtaskContainerComponentDelegate?
+    
+    let subtask: SubTask?
     
     private let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -98,11 +100,38 @@ class SubtaskContainerComponent: UIView {
         return view
     }()
     
-    init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho", mainColor: UIColor = .systemBlue) {
+    init(taskName: String = "Nome da tarefa do usuario testando o tamanho imagina uma task desse tamanho", mainColor: UIColor = .systemBlue, subtask: SubTask, isDone: Bool) {
+        self.subtask = subtask
         super.init(frame: .zero)
         
         label.textLabel.text = taskName
         
+        if isDone{
+            roundedCheckbox.manualCheckCheckbox()
+            let attributedText = NSMutableAttributedString(string: self.label.textLabel.text!)
+            attributedText.addAttribute(.strikethroughStyle, value: 2, range: NSRange(location: 0, length: self.label.textLabel.text!.count))
+            self.label.textLabel.attributedText = attributedText
+            self.label.textLabel.alpha = 0.4
+            self.roundedRect.alpha = 0.4
+            self.line.backgroundColor =  .systemBlue
+            self.secondLine.backgroundColor =  .systemBlue
+            self.backCircle.tintColor = .systemBlue
+            self.frontCircle.tintColor = .systemGray
+            
+        } else{
+            let attributedText = NSMutableAttributedString(string: self.label.textLabel.text!)
+            attributedText.removeAttribute(.strikethroughStyle, range: NSRange(location: 0, length: attributedText.length))
+            
+            self.label.textLabel.attributedText = attributedText
+            self.label.textLabel.alpha = 1
+            self.roundedRect.alpha = 1
+            self.line.backgroundColor = .systemGray4
+            self.secondLine.backgroundColor = .systemGray4
+            self.backCircle.tintColor = .black
+            self.frontCircle.tintColor = .systemBlue
+            
+        }
+
         
         roundedCheckbox.delegate = self
         horizontalStackView.addArrangedSubview(label)
@@ -156,18 +185,45 @@ class SubtaskContainerComponent: UIView {
             
             line.bottomAnchor.constraint(equalTo: backCircle.topAnchor, constant: 4),
             line.topAnchor.constraint(equalTo: topAnchor),
-            line.heightAnchor.constraint(equalToConstant: ((footnoteSize * 3.3)/1.7) + 4) ,
+            line.heightAnchor.constraint(equalToConstant: ((footnoteSize * 3.3)/2.2) + 4) ,
             line.widthAnchor.constraint(equalToConstant: (footnoteSize * 3.3)/8.6),
             line.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             secondLine.bottomAnchor.constraint(equalTo: bottomAnchor),
             secondLine.topAnchor.constraint(equalTo: backCircle.bottomAnchor, constant: -4),
-            secondLine.heightAnchor.constraint(equalToConstant: ((footnoteSize * 3.3)/1.7) + 4) ,
+            secondLine.heightAnchor.constraint(equalToConstant: ((footnoteSize * 3.3)/1.2) + 4),
             secondLine.widthAnchor.constraint(equalToConstant: (footnoteSize * 3.3)/8.6),
             secondLine.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            
         ])
+    }
+    
+    func checkIfNeeded(){
+        roundedCheckbox.manualCheckCheckbox()
+        let attributedText = NSMutableAttributedString(string: self.label.textLabel.text!)
+        attributedText.addAttribute(.strikethroughStyle, value: 2, range: NSRange(location: 0, length: self.label.textLabel.text!.count))
+        self.label.textLabel.attributedText = attributedText
+        self.label.textLabel.alpha = 0.4
+        self.roundedRect.alpha = 0.4
+        self.line.backgroundColor =  .systemBlue
+        self.secondLine.backgroundColor =  .systemBlue
+        self.backCircle.tintColor = .systemBlue
+        self.frontCircle.tintColor = .systemGray
+        roundedCheckbox.manualCheckCheckbox()
+    }
+    
+    func discheckIfNeeded(){
+        let attributedText = NSMutableAttributedString(string: self.label.textLabel.text!)
+        attributedText.removeAttribute(.strikethroughStyle, range: NSRange(location: 0, length: attributedText.length))
+        
+        self.label.textLabel.attributedText = attributedText
+        self.label.textLabel.alpha = 1
+        self.roundedRect.alpha = 1
+        self.line.backgroundColor = .systemGray4
+        self.secondLine.backgroundColor = .systemGray4
+        self.backCircle.tintColor = .black
+        self.frontCircle.tintColor = .systemBlue
+        roundedCheckbox.manualDisCheckCheckbox()
+        
     }
     
     required init(coder: NSCoder) {
@@ -178,6 +234,7 @@ class SubtaskContainerComponent: UIView {
 
 extension SubtaskContainerComponent: RoundedCheckboxDelegate{
     func buttonWasPressed(pressed: Bool) {
+        delegate?.isChecked(pressed, sub: subtask!)
         if pressed{
             UIView.animate(withDuration: 0.2) {
                 let attributedText = NSMutableAttributedString(string: self.label.textLabel.text!)
@@ -209,6 +266,3 @@ extension SubtaskContainerComponent: RoundedCheckboxDelegate{
     }
 }
 
-#Preview{
-    SubtaskContainerComponent(mainColor: .primaryBlue)
-}

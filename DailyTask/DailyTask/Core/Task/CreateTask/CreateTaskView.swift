@@ -173,6 +173,12 @@ class CreateTaskView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.startDatePicker.maximumDate = viewModel?.project?.end
+        
+        deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.endDatePicker.maximumDate = viewModel?.project?.end
+        
     }
     
     func setUpUI(){
@@ -236,7 +242,6 @@ extension CreateTaskView: TextFieldComponentDelegate {
 
     // Button actions
     @objc func createTask() {
-        
         let color = colorPicker.returnColorCGFloat()
         let red = color[0]
         let green = color[1]
@@ -260,6 +265,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
     @objc func getStartDate(_ sender: UIDatePicker){
         let selectDate = sender.date
         self.dateStart = selectDate
+        deadLine.endDatePicker.minimumDate = selectDate
     }
     
     @objc func createSubtask(){

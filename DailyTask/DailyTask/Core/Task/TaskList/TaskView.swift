@@ -19,6 +19,8 @@ class TaskView: UIViewController {
         return sv
     }()
     
+    let calendar = Calendar.current
+    
     let stackForTask: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
@@ -64,7 +66,7 @@ class TaskView: UIViewController {
         return stackView
     }()
     
-    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Steps", textColor: UIColor.accent)
+    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Engage", textColor: UIColor.accent)
     
     let newTask = {
        let newTask = UIButton()
@@ -74,17 +76,22 @@ class TaskView: UIViewController {
         return newTask
     }()
     
+    var dateAndCalendarComponent: DateAndCalendarComponent?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
         view.backgroundColor = .systemBackground
         
+        datePicker.minimumDate = viewModel?.project?.start
+        datePicker.maximumDate = viewModel?.project?.end
+        
         title = viewModel?.project?.name
         
-        let dateAndCalendarComponent = DateAndCalendarComponent(date: formatter.string(from: Date.now))
+        dateAndCalendarComponent = DateAndCalendarComponent(date: formatter.string(from: viewModel!.date))
         
         chooseStep.delegate = self
-        mainStack.addArrangedSubview(dateAndCalendarComponent)
+        mainStack.addArrangedSubview(dateAndCalendarComponent!)
         
         if viewModel?.project?.methodology == "CBL" {
             secondaryStack.addArrangedSubview(chooseStep)
@@ -105,15 +112,15 @@ class TaskView: UIViewController {
         view.addSubview(datePicker)
         
         NSLayoutConstraint.activate([
-            datePicker.centerXAnchor.constraint(equalTo: dateAndCalendarComponent.button.centerXAnchor),
-            datePicker.centerYAnchor.constraint(equalTo: dateAndCalendarComponent.button.centerYAnchor),
-            datePicker.widthAnchor.constraint(equalTo: dateAndCalendarComponent.widthAnchor,multiplier: 0.1),
+            datePicker.centerXAnchor.constraint(equalTo: dateAndCalendarComponent!.button.centerXAnchor),
+            datePicker.centerYAnchor.constraint(equalTo: dateAndCalendarComponent!.button.centerYAnchor),
+            datePicker.widthAnchor.constraint(equalTo: dateAndCalendarComponent!.widthAnchor,multiplier: 0.1),
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            mainStack.bottomAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
-            scrollView.topAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 10),
+            mainStack.bottomAnchor.constraint(equalTo: scrollView.topAnchor, constant: -25),
+            scrollView.topAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 25),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -130,23 +137,37 @@ class TaskView: UIViewController {
     }
     
     func getTasksAndSubtasks(){
-        print("Aqui é o BO")
+        
         for task in stackForTask.arrangedSubviews{
             task.removeFromSuperview()
         }
-        print("Aqui é o BO2")
+
         viewModel?.fetchTasks()
         if let tasks = viewModel?.task{
             for task in tasks{
                 let taskComponent = StackTaskAndSubtaskComponent(task: task)
                 taskComponent.delegate = self
                 stackForTask.addArrangedSubview(taskComponent)
+                if let taskStart = taskComponent.task?.start,
+                   let taskEnd = taskComponent.task?.end{
+                    let comparisonResult = calendar.compare(taskStart, to: viewModel!.date, toGranularity: .day)
+                    let comparisonResult2 = calendar.compare(taskEnd, to: viewModel!.date, toGranularity: .day)
+                    
+                    if ((comparisonResult == .orderedSame && comparisonResult2 == .orderedDescending) || (comparisonResult == .orderedSame && comparisonResult2 == .orderedSame) || (comparisonResult == .orderedAscending && comparisonResult2 == .orderedDescending)) && (taskComponent.task?.step == viewModel?.step.rawValue){
+                        taskComponent.isHidden = false
+                    } else{
+                        taskComponent.isHidden = true
+                    }
+                    
+                }
+                   
             }
-        } 
+        }
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        getTasksAndSubtasks()
         navigationController?.isNavigationBarHidden = false
     }
     
@@ -154,6 +175,30 @@ class TaskView: UIViewController {
         let date = sender.date
         print(date)
         viewModel?.date = date
+        dateAndCalendarComponent?.dateLabel?.textLabel.text = formatter.string(from: viewModel!.date)
+        
+        reloadStack()
+    }
+    
+    func reloadStack(){
+        for task in stackForTask.arrangedSubviews{
+            let taskComponent = task as? StackTaskAndSubtaskComponent
+            if let taskStart = taskComponent?.task?.start,
+               let taskEnd = taskComponent?.task?.end{
+                let comparisonResult = calendar.compare(taskStart, to: viewModel!.date, toGranularity: .day)
+                let comparisonResult2 = calendar.compare(taskEnd, to: viewModel!.date, toGranularity: .day)
+                
+                if ((comparisonResult == .orderedSame && comparisonResult2 == .orderedDescending) || (comparisonResult == .orderedSame && comparisonResult2 == .orderedSame) || (comparisonResult == .orderedAscending && comparisonResult2 == .orderedDescending)) && (taskComponent?.task?.step == viewModel?.step.rawValue){
+                    print(taskStart, taskEnd)
+                    print(comparisonResult == .orderedSame, comparisonResult2 == .orderedDescending)
+                    taskComponent!.isHidden = false
+                    
+                } else{
+                    taskComponent!.isHidden = true
+                    
+                }
+            }
+        }
     }
     
     @objc func createTask() {
@@ -163,11 +208,11 @@ class TaskView: UIViewController {
 }
 
 extension TaskView: ModalGetInfoTaskViewDelegate, StackTaskAndSubtaskComponentDelegate {
-    func itWasPressed(_ task: Task) {
-        viewModel?.goToModalGetInfo(task, delegate: self)
+    func wasItChecked(_ task: Task) {
+        viewModel?.concludedTask(task)
     }
     
-    func changeHappened(_ task: Task) {
+    func deleted(_ task: Task) {
         viewModel?.fetchTasks()
         
         for n in stackForTask.arrangedSubviews{
@@ -177,8 +222,16 @@ extension TaskView: ModalGetInfoTaskViewDelegate, StackTaskAndSubtaskComponentDe
                     stackForTask.layoutSubviews()
                 }
             }
-            
         }
+    }
+    
+    func itWasPressed(_ task: Task) {
+        viewModel?.goToModalGetInfo(task, delegate: self)
+    }
+    
+    func changeHappened(_ task: Task) {
+        viewModel?.concludeSubtask(task: task)
+        getTasksAndSubtasks()
     }
 }
 
@@ -186,7 +239,8 @@ extension TaskView: ChooseStepComponentDelegate {
     
     func setUpMenuFunction(type: steps) {
         self.viewModel?.selectedStep(type)
-        self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step!.rawValue))
+        self.chooseStep.changeTheStepText(String(describing: self.viewModel!.step.rawValue))
+        self.reloadStack()
     }
     
 }

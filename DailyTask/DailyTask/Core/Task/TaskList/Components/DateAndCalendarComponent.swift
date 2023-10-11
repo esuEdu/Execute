@@ -26,10 +26,12 @@ class DateAndCalendarComponent: UIView {
         return button
     }()
     
+    var dateLabel: LabelComponent?
+    
     init(date: String) {
         super.init(frame: .zero)
-        let dateLabel = LabelComponent(text: date, accessibilityLabel: date, font: .title2)
-        mainStack.addArrangedSubview(dateLabel)
+        dateLabel = LabelComponent(text: date, accessibilityLabel: date, font: .title2)
+        mainStack.addArrangedSubview(dateLabel!)
         mainStack.addArrangedSubview(button)
         addSubview(mainStack)
         

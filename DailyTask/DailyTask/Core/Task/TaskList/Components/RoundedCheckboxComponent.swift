@@ -119,6 +119,18 @@ class RoundedCheckbox: UIControl {
         delegate?.buttonWasPressed(pressed: checked)
     }
     
+    func manualCheckCheckbox() {
+        checked = true
+        self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+
+    }
+    
+    func manualDisCheckCheckbox() {
+        checked = false
+        self.imageView.layer.borderColor = UIColor.systemBlue.cgColor
+
+    }
+    
 }
 
 #Preview{
