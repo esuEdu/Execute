@@ -59,6 +59,10 @@ enum CustomColor {
     case customButtonMenu
     case progressBar
     case customIcon
+    case customCloseButtom
+    case customAddIcon
+    case customCalendar
+    case customProgressBarBackground
 }
 
 extension UIColor {
@@ -110,6 +114,14 @@ extension UIColor {
             self.init(named: "ProgressBar")
         case .customIcon:
             self.init(named: "Icon")
+        case .customCloseButtom:
+            self.init(named: "CloseButtom")
+        case .customAddIcon:
+            self.init(named: "AddIcon")
+        case .customCalendar:
+            self.init(named: "Calendar")
+        case .customProgressBarBackground:
+            self.init(named: "ProgressBarBackground")
         }
     }
 }

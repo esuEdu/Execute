@@ -23,6 +23,7 @@ class DateAndCalendarComponent: UIView {
     let button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "calendar"), for: .normal)
+        button.tintColor = UIColor(.customCalendar)
         return button
     }()
     

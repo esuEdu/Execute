@@ -51,7 +51,7 @@ class ProjectListView: UIViewController {
     stackView.distribution = .equalSpacing
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.isLayoutMarginsRelativeArrangement = true
-    stackView.layoutMargins = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+    stackView.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     return stackView
   }()
   
@@ -128,7 +128,7 @@ class ProjectListView: UIViewController {
     for element in projectListViewModel!.project{
       let color = UIColor(red: element.red, green: element.green, blue: element.blue, alpha: 1)
       let textColor = UIColor.selectTheBestColor(color: color, isBackground: true)
-      let container = ContainerProjectsList(title: element.name!, acessibilityLabelNameProject: element.name! ,titleColor: textColor, description: element.descript!, acessibilityLabelDescProject: element.descript!, descriptionColor: .systemGray, percentage: "50", percentageColor: .black, imageIcon:  UIImage(systemName: element.icon!)!, imageIconColor: textColor, chevronColor: textColor,bgColor: color, id: element.id!, element: element)
+        let container = ContainerProjectsList(title: element.name!, acessibilityLabelNameProject: element.name! ,titleColor: textColor, description: element.descript!, acessibilityLabelDescProject: element.descript!, descriptionColor: .systemGray, percentage: "50", percentageColor: .label, imageIcon:  UIImage(systemName: element.icon!)!, imageIconColor: textColor, chevronColor: textColor,bgColor: color, id: element.id!, element: element)
       container.delegate = self
       scrollView.addNewElements(container)
       scrollView.layoutIfNeeded()

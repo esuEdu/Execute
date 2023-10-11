@@ -61,7 +61,7 @@ class CreateTaskView: UIViewController {
     let buttonCreateSubtask: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = UIColor(.customAddIcon)
         return button
     }()
     

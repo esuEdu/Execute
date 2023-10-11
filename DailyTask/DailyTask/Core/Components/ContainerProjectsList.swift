@@ -209,6 +209,7 @@ class ContainerProjectsList: UIView {
         
         progressBar.progress = 0.5
         progressBar.tintColor = UIColor(.progressBar)
+        progressBar.backgroundColor = UIColor(.customProgressBarBackground)
         
         stackViewProgressBar.addArrangedSubview(stackViewContainer)
         stackViewProgressBar.addArrangedSubview(progressBar)
