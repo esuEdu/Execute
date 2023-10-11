@@ -37,7 +37,7 @@ class SubtasksInTasksComponent: UIView {
     
     /// The breakable text label for displaying the subtask name.
     let labelSubTasks: BreakableTextComponent = {
-        let label = BreakableTextComponent(placeholderColor: .systemGray2, textColor: .black)
+        let label = BreakableTextComponent(placeholderColor: .label, textColor: .black)
         label.changeBgColor(color: UIColor.clear)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -59,6 +59,7 @@ class SubtasksInTasksComponent: UIView {
         super.init(frame: .zero)
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
+        self.backgroundColor = UIColor(.customSubTask)
         self.addSubview(stackView)
                 
         // Add checkbox, label, and delete button to the stack view

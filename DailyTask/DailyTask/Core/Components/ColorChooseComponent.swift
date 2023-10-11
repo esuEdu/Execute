@@ -110,6 +110,7 @@ class ColorChooseComponent: UIView{
         translatesAutoresizingMaskIntoConstraints = false
         setUpUI()
         addAllConstraints()
+        backgroundColor = UIColor(.customTertiaryBlue)
         color1.layer.cornerRadius = 50
         color1.addTarget(self, action: #selector(chooseButton), for: .touchUpInside)
         color2.addTarget(self, action: #selector(chooseButton), for: .touchUpInside)

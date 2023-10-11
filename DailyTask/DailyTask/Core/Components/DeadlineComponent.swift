@@ -22,10 +22,12 @@ class DeadlineComponent: UIView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fill
         stackView.spacing = 5
         stackView.layer.cornerRadius = 10
+        stackView.backgroundColor = UIColor(.customDeadline)
         stackView.clipsToBounds = true
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -34,7 +36,6 @@ class DeadlineComponent: UIView {
     private let startStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -64,7 +65,6 @@ class DeadlineComponent: UIView {
     /// The date picker for selecting the start date.
     let startDatePicker: DatePickerComponent = {
         let datePicker = DatePickerComponent(datePickerStyle: .automatic, datePickerMode: .dateAndTime)
-        datePicker.tintColor = .lightGray
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
@@ -72,7 +72,6 @@ class DeadlineComponent: UIView {
     /// The date picker for selecting the end date.
     let endDatePicker: DatePickerComponent = {
         let datePicker = DatePickerComponent(datePickerStyle: .automatic, datePickerMode: .dateAndTime)
-        datePicker.tintColor = .lightGray
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
@@ -116,10 +115,10 @@ class DeadlineComponent: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            startStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            startStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            endStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            endStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            startStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            startStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            endStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            endStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             line.heightAnchor.constraint(equalToConstant: 0.4),
             line.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

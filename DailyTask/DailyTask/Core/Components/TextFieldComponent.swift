@@ -21,7 +21,7 @@ class TextFieldComponent: UIView {
         let textField = UITextField()
         textField.placeholder = String(localized: "Give a name to the project")
         textField.font = .systemFont(ofSize: 16)
-        textField.textColor = .black
+        textField.textColor = .label
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -44,7 +44,7 @@ class TextFieldComponent: UIView {
     
     private func setUpUI(){
         self.textFieldToGetTheName.delegate = self
-        backgroundColor = .systemGray2
+        backgroundColor = UIColor(.customTextField)
         layer.cornerRadius = 10
         addSubview(textFieldToGetTheName)
     }

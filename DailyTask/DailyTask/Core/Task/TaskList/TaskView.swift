@@ -64,7 +64,7 @@ class TaskView: UIViewController {
         return stackView
     }()
     
-    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Steps", textColor: UIColor.accent)
+    let chooseStep = ChooseStepComponent(font: .preferredFont(forTextStyle: .body), text: "Steps", textColor: UIColor(.customButtonMenu) ?? .label)
     
     let newTask = {
        let newTask = UIButton()
@@ -77,8 +77,7 @@ class TaskView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
-        view.backgroundColor = .systemBackground
-        
+        view.backgroundColor = UIColor(.customBackground)
         title = viewModel?.project?.name
         
         let dateAndCalendarComponent = DateAndCalendarComponent(date: formatter.string(from: Date.now))
@@ -130,11 +129,9 @@ class TaskView: UIViewController {
     }
     
     func getTasksAndSubtasks(){
-        print("Aqui é o BO")
         for task in stackForTask.arrangedSubviews{
             task.removeFromSuperview()
         }
-        print("Aqui é o BO2")
         viewModel?.fetchTasks()
         if let tasks = viewModel?.task{
             for task in tasks{

@@ -46,7 +46,7 @@ class ChooseStepComponent: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.backgroundColor = .tertiaryBlue
+        stackView.backgroundColor = UIColor(.customTertiaryBlue)
         stackView.layer.cornerRadius = 10
         stackView.layoutMargins = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         stackView.translatesAutoresizingMaskIntoConstraints = false

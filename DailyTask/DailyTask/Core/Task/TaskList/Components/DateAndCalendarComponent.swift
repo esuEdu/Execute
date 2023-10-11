@@ -12,7 +12,7 @@ class DateAndCalendarComponent: UIView {
     let mainStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .systemGray4
+        stackView.backgroundColor = UIColor(.customPrimaryBlue)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.layoutMargins = UIEdgeInsets(top: 9, left: 20, bottom: 9, right: 20)
@@ -28,7 +28,7 @@ class DateAndCalendarComponent: UIView {
     
     init(date: String) {
         super.init(frame: .zero)
-        let dateLabel = LabelComponent(text: date, accessibilityLabel: date, font: .title2)
+        let dateLabel = LabelComponent(text: date, accessibilityLabel: date,textColor: .white, font: .title2)
         mainStack.addArrangedSubview(dateLabel)
         mainStack.addArrangedSubview(button)
         addSubview(mainStack)

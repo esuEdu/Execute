@@ -30,7 +30,7 @@ class ContainerComponent: UIView {
         stackViewContainerTitle.axis = .horizontal
         stackViewContainerTitle.alignment = .center
         stackViewContainerTitle.distribution = .fill
-        stackViewContainerTitle.backgroundColor = .systemGray2
+        stackViewContainerTitle.backgroundColor = UIColor(.customPrimaryBlue)
         stackViewContainerTitle.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainerTitle.isLayoutMarginsRelativeArrangement = true
         stackViewContainerTitle.layoutMargins = UIEdgeInsets(top: 9, left: 15, bottom: 9, right: 15)
@@ -49,7 +49,7 @@ class ContainerComponent: UIView {
         stackViewContainer.axis = .vertical
         stackViewContainer.alignment = .fill
         stackViewContainer.distribution = .fill
-        stackViewContainer.backgroundColor = .systemGray5
+        stackViewContainer.backgroundColor = UIColor(.customContainerComponent)
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.isLayoutMarginsRelativeArrangement = true
         stackViewContainer.layoutMargins = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15)
@@ -78,7 +78,7 @@ class ContainerComponent: UIView {
     ///   - button: An optional UIButton to be included in the title stack.
     ///   - components: An array of UIView components to be included in the container.
     ///   - spacing: The spacing between components in the stack view.
-    init(text: String, textColor: UIColor = .label, button: UIButton? = nil, components: [UIView], spacing: CGFloat = 0 ) {
+    init(text: String, textColor: UIColor = .white, button: UIButton? = nil, components: [UIView], spacing: CGFloat = 0 ) {
         super.init(frame: .zero)
         
         containetTitle.textLabel.text = text

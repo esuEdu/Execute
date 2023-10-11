@@ -76,7 +76,7 @@ class ProjectEditionView: UIViewController {
     
     var methodologyContainer: ContainerComponent?
     let methodologyButton: ChooseMethodologyComponent = {
-        let met = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .black)
+        let met = ChooseMethodologyComponent(font: UIFont.preferredFont(forTextStyle: .body), text: "Challenge Based Learning (CBL)", textColor: .label)
         return met
     }()
     
@@ -91,7 +91,7 @@ class ProjectEditionView: UIViewController {
     
     var descriptionContainer: ContainerComponent?
     let descriptionTextField: TextDescriptionComponent = {
-        let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
+        let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .label)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.horizontalPadding = 10
         textField.verticalPadding = 10
@@ -204,11 +204,11 @@ class ProjectEditionView: UIViewController {
     }
     
     func setUpUI(){
-        dateContainer = ContainerComponent(text: String(localized: "Deadline"), textColor: .black, components: [deadLine])
+        dateContainer = ContainerComponent(text: String(localized: "Deadline"), textColor: .white, components: [deadLine])
         
-        descriptionContainer = ContainerComponent(text: String(localized: "Description"),textColor: .black, button: pencilEditor1, components: [descriptionTextField])
+        descriptionContainer = ContainerComponent(text: String(localized: "Description"),textColor: .white, button: pencilEditor1, components: [descriptionTextField])
         
-        methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .black, components: [methodologyButton])
+        methodologyContainer = ContainerComponent(text: String(localized: "Methodology"), textColor: .white, components: [methodologyButton])
         methodologyContainer?.translatesAutoresizingMaskIntoConstraints = false
         
         navigationController?.isNavigationBarHidden = false

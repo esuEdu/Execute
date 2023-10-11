@@ -67,10 +67,11 @@ class CreateTaskView: UIViewController {
         let textField = TextFieldComponent()
         textField.textFieldToGetTheName.placeholder = String(localized: "PlaceholderNameTask", comment: "Placeholder text name task")
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = UIColor(.customTertiaryBlue)
         return textField
     }()
     let descriptionTextField: TextDescriptionComponent = {
-        let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
+        let textField = TextDescriptionComponent(placeholderColor: UIColor(.customTextField) ?? .blue, textColor: UIColor(.customPrimaryBlue) ?? .label)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.horizontalPadding = 10
         textField.verticalPadding = 10
@@ -131,7 +132,7 @@ class CreateTaskView: UIViewController {
     func configurateComponents(){
         // View configuration
         title = String(localized: "CreateTaskTitleKey")
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(.customBackground)
         
         // Configurate the textfield
         nameTextField.textFieldToGetTheName.returnKeyType = .done
@@ -152,9 +153,9 @@ class CreateTaskView: UIViewController {
         subTasksContainer?.translatesAutoresizingMaskIntoConstraints = false
         
         // Container configuration
-        priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .black, components: [segmentedControl])
+        priorityContainer = ContainerComponent(text: String(localized: "PriorityName"), textColor: .white, components: [segmentedControl])
         dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), components: [deadLine])
-        descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .black, components: [descriptionTextField])
+        descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, components: [descriptionTextField])
         subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
         subTasksContainer?.stackViewContainer.spacing = 8
         
@@ -236,7 +237,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
 
     // Button actions
     @objc func createTask() {
-        
+         
         let color = colorPicker.returnColorCGFloat()
         let red = color[0]
         let green = color[1]

@@ -78,7 +78,7 @@ class ContainerProjectsList: UIView {
         stackViewContainer.axis = .horizontal
       stackViewContainer.alignment = .center
       stackViewContainer.distribution = .fill
-        stackViewContainer.backgroundColor = .systemGray3
+        stackViewContainer.backgroundColor = UIColor(.customContainerComponent)
         stackViewContainer.spacing = 25
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.isLayoutMarginsRelativeArrangement = true
