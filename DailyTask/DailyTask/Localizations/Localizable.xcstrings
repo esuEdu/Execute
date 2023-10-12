@@ -288,9 +288,6 @@
         }
       }
     },
-    "Edit Tag" : {
-
-    },
     "EditTaskKey" : {
       "localizations" : {
         "en" : {
@@ -803,9 +800,6 @@
           }
         }
       }
-    },
-    "Task Tag Title" : {
-      "comment" : "Accessibility Label for Task Tag Title"
     },
     "TryAgainKey" : {
       "extractionState" : "manual",

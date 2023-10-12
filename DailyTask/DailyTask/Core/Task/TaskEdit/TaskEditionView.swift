@@ -195,8 +195,6 @@ class TaskEditionView: UIViewController {
     dateContainer?.translatesAutoresizingMaskIntoConstraints = false
     descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"),button: pencil, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
-    //    subTasksContainer = ContainerComponent(text: String(localized: "SubtasksKey"), button: buttonCreateSubtask, components: [])
-    //    subTasksContainer?.stackViewContainer.spacing = 8
     
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     deadLine.translatesAutoresizingMaskIntoConstraints = false
@@ -212,7 +210,6 @@ class TaskEditionView: UIViewController {
     stackViewContainers.addArrangedSubview(stackViewForIcon)
     stackViewContainers.addArrangedSubview(dateContainer!)
     stackViewContainers.addArrangedSubview(priorityContainer!)
-    //    stackViewContainers.addArrangedSubview(subTasksContainer!)
     stackViewContainers.addArrangedSubview(descriptionContainer!)
     stackViewContainers.addArrangedSubview(updateButton)
     
@@ -274,8 +271,6 @@ class TaskEditionView: UIViewController {
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
       
-      
-      //      updateButton.heightAnchor.constraint(equalToConstant: 270),
     ])
   }
   

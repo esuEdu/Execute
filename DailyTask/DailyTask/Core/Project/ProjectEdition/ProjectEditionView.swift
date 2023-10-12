@@ -102,7 +102,7 @@ class ProjectEditionView: UIViewController {
     button.setTitleColor(.white, for: .normal)
       button.backgroundColor = .primaryBlue
     button.layer.cornerRadius = 10
-    button.setTitle(String(localized: "Create a new project"), for: .normal)
+    button.setTitle(String(localized: "Update the project"), for: .normal)
     button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
     button.translatesAutoresizingMaskIntoConstraints = false
     

@@ -103,7 +103,7 @@ extension UIColor {
         case .customPrimaryBlue:
             self.init(named: "PrimaryBlue")
         case .customLabel:
-            self.init(named: "Label")
+            self.init(named: "CustomLabel")
         case .customButtom:
             self.init(named: "Buttom")
         case .customBackground:

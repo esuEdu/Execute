@@ -112,7 +112,7 @@ class ChooseIconComponent: UIButton {
     
     private func setIcon(){
 
-        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
+      let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
             
             UIAction(title: "", image: UIImage(systemName: "star.fill"), handler: { _ in
                 self.delegate?.menuWasPressed("star.fill")
