@@ -114,28 +114,33 @@ class ChooseIconComponent: UIButton {
 
         let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
             
-            UIAction(title: "Globo", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
-                self.delegate?.menuWasPressed("globe.americas.fill")
+            UIAction(title: "", image: UIImage(systemName: "star.fill"), handler: { _ in
+                self.delegate?.menuWasPressed("star.fill")
                 self.selectionFeedbackGenerator.selectionChanged()
             }),
             
-            UIAction(title: "PaperPlane", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-                self.delegate?.menuWasPressed("paperplane.fill")
+            UIAction(title: "", image: UIImage(systemName: "doc.text.fill"), handler: { _ in
+                self.delegate?.menuWasPressed("doc.text.fill")
                 self.selectionFeedbackGenerator.selectionChanged()
             }),
             
-            UIAction(title: "Pencil", image: UIImage(systemName: "umbrella.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("umbrella.fill")
+            UIAction(title: "", image: UIImage(systemName: "bubble.left.and.bubble.right.fill") , handler: { _ in
+                self.delegate?.menuWasPressed("bubble.left.and.bubble.right.fill")
                 self.selectionFeedbackGenerator.selectionChanged()
             }),
             
-            UIAction(title: "Pencil tip", image: UIImage(systemName: "pencil.tip") , handler: { _ in
-                self.delegate?.menuWasPressed("pencil.tip")
+            UIAction(title: "", image: UIImage(systemName: "trophy.fill") , handler: { _ in
+                self.delegate?.menuWasPressed("trophy.fill")
                 self.selectionFeedbackGenerator.selectionChanged()
             }),
             
-            UIAction(title: "Dumbbell", image: UIImage(systemName: "dumbbell.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("dumbbell.fill")
+            UIAction(title: "", image: UIImage(systemName: "list.clipboard.fill") , handler: { _ in
+                self.delegate?.menuWasPressed("list.clipboard.fill")
+                self.selectionFeedbackGenerator.selectionChanged()
+            }),    
+            
+            UIAction(title: "", image: UIImage(systemName: "lightbulb.fill") , handler: { _ in
+                self.delegate?.menuWasPressed("lightbulb.fill")
                 self.selectionFeedbackGenerator.selectionChanged()
             }),
             
