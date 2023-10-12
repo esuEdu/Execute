@@ -77,7 +77,7 @@ class ProjectListView: UIViewController {
   // Creating the UIElements setups
   func setUpUI(){
     
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = .background
     
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -197,7 +197,6 @@ extension ProjectListView: UISearchBarDelegate {
     if searchText.contains("\n"){
       searchBar.resignFirstResponder()
     }
-    print(searchText)
     scrollView.contains(searchText)
     scrollView.layoutIfNeeded()
   }

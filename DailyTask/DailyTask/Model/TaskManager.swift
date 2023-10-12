@@ -109,7 +109,6 @@ class TaskManager {
                 let tasks = try context.fetch(fetchRequest)
                 
                 guard let tasksToDelete = tasks.first else {
-                    print("Task with ID \(id) not found.")
                     return
                 }
                 
@@ -117,7 +116,6 @@ class TaskManager {
                 
                 try context.save()
                 
-                print("Task with ID \(id) deleted successfully.")
                 
             } catch {
                 fatalError("Error in deleteTask: \(error)")

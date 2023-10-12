@@ -129,7 +129,6 @@ class ColorChooseComponent: UIView{
     
     // Used when the color picker is the selected, it`s important in every changed deselect the other ones
     @objc private func chooseColorPicker(){
-        print("OI")
         deselectAllButtons()
         theChoosenOne = ColorSelection.Custom
     }
@@ -141,7 +140,6 @@ class ColorChooseComponent: UIView{
         button.isPressed = true
         button.layoutIfNeeded()
         theChoosenOne = button.colorName
-        print("Escolhido \(theChoosenOne)")
         colorWell.selectedColor = .white
     }
     
@@ -172,16 +170,16 @@ class ColorChooseComponent: UIView{
         if let theChoosenOne = theChoosenOne{
             switch theChoosenOne {
             case .Blue:
-                let color = UIColor.systemBlue
+                let color = UIColor.customBlue
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Red:
-                let color = UIColor.systemRed
+                let color = UIColor.customRed
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Yellow:
-                let color = UIColor.systemYellow
+                let color = UIColor.customYellow
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Green:
-                let color = UIColor.systemGreen
+                let color = UIColor.customGreen
                 return [color.cgColor.components![0], color.cgColor.components![1],  color.cgColor.components![2]]
             case .Custom:
                 if let colors = colorWell.selectedColor?.cgColor.components{
@@ -200,18 +198,18 @@ class ColorChooseComponent: UIView{
         if let theChoosenOne = theChoosenOne{
             switch theChoosenOne {
             case .Blue:
-                return .systemBlue
+                return .customBlue
             case .Red:
-                return .systemRed
+                return .customRed
             case .Yellow:
-                return .systemYellow
+                return .customYellow
             case .Green:
-                return .systemGreen
+                return .customGreen
             case .Custom:
-                return colorWell.selectedColor ?? .systemRed
+                return colorWell.selectedColor ?? .customRed
             }
         }
-        return UIColor.systemRed
+        return UIColor.customRed
     }
     
     private func setUpUI(){

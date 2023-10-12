@@ -134,7 +134,6 @@ extension StackTaskAndSubtaskComponent: SubtaskContainerComponentDelegate{
     func isChecked(_ check: Bool, sub: SubTask) {
         subtaskManager.ToggleIsDoneSubTask(subtask: sub, isDone: check)
         verifyIfIsDone()
-        print("To aqui")
     }
     
     

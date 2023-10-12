@@ -90,7 +90,7 @@ class ProjectEditionView: UIViewController {
   
   var descriptionContainer: ContainerComponent?
   let descriptionTextField: TextDescriptionComponent = {
-      let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .label)
+      let textField = TextDescriptionComponent(placeholderColor: .descriptionPlaceholder, textColor: .descriptionText)
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.horizontalPadding = 10
     textField.verticalPadding = 10
@@ -258,6 +258,8 @@ class ProjectEditionView: UIViewController {
       
       iconButton.widthAnchor.constraint(equalToConstant: 93),
       iconButton.heightAnchor.constraint(equalToConstant: 93),
+      
+      updateButton.heightAnchor.constraint(equalToConstant: 55),
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
     ])

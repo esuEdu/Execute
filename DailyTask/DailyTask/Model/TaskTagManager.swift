@@ -22,7 +22,6 @@ class TaskTagManager {
         tagTask.blue = blue
         do {
             try context.save()
-            print("Task Tag created with succesfully")
         }catch {
             fatalError("Error in createTagTask \(error)")
         }
@@ -31,7 +30,6 @@ class TaskTagManager {
     func fetchTagTask() -> [TagTask] {
         do{
             let tagTasks = try context.fetch(TagTask.fetchRequest())
-            print("")
             return tagTasks
         }catch {
             fatalError("Error in fetchTagTask \(error)")
@@ -48,7 +46,6 @@ class TaskTagManager {
 
             // Check if a project tag with the specified ID exists
             guard let tagTaskToEdit = tagTasks.first else {
-                print("Task Tag with ID \(id) not found.")
                 return
             }
 
@@ -61,7 +58,6 @@ class TaskTagManager {
             // Save the context to persist the changes
             try context.save()
 
-            print("Task Tag with ID \(id) edited successfully.")
         } catch {
             fatalError("Error in editTagTask: \(error)")
         }
@@ -77,7 +73,6 @@ class TaskTagManager {
 
             // Check if a project tag with the specified ID exists
             guard let tagTaskToDelete = tagTasks.first else {
-                print("Task Tag with ID \(id) not found.")
                 return
             }
             
@@ -86,7 +81,6 @@ class TaskTagManager {
             // Save the context to persist the changes
             try context.save()
 
-            print("Task Tag with ID \(id) deleted successfully.")
         } catch {
             fatalError("Error in deleteTagTask: \(error)")
         }

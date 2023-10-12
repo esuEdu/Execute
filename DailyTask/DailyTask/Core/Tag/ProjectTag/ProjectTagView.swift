@@ -161,11 +161,11 @@ extension ProjectTagView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-      print("inside of textViewDidBeginEditing")
+
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-      print("inside of textViewDidEndEditing")
+
     }
   
 }

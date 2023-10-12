@@ -74,7 +74,7 @@ class CreateTaskView: UIViewController {
         return textField
     }()
     let descriptionTextField: TextDescriptionComponent = {
-        let textField = TextDescriptionComponent(placeholderColor: UIColor(.customTextField) ?? .blue, textColor: UIColor(.customPrimaryBlue) ?? .label)
+        let textField = TextDescriptionComponent(placeholderColor: .descriptionPlaceholder, textColor: .descriptionText)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.horizontalPadding = 10
         textField.verticalPadding = 10
@@ -117,6 +117,17 @@ class CreateTaskView: UIViewController {
         stackView.spacing = 14
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    let createButton: UIButton = {
+        let button = UIButton(primaryAction: nil)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(.customPrimaryBlue)
+        button.layer.cornerRadius = 10
+        button.setTitle(String(localized: "Create a new project"), for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override func viewDidLoad(){
@@ -180,6 +191,7 @@ class CreateTaskView: UIViewController {
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
         buttonCreateSubtask.addTarget(self, action: #selector(createSubtask), for: .touchUpInside)
+        createButton.addTarget(self, action: #selector(createTask), for: .touchUpInside)
         
         
         // Configuração para retirar o observador do teclado
@@ -212,6 +224,7 @@ class CreateTaskView: UIViewController {
         stackViewContainers.addArrangedSubview(priorityContainer!)
         stackViewContainers.addArrangedSubview(subTasksContainer!)
         stackViewContainers.addArrangedSubview(descriptionContainer!)
+        stackViewContainers.addArrangedSubview(createButton)
         
         stackViewForIcon.addArrangedSubview(icon)
         stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
@@ -242,6 +255,8 @@ class CreateTaskView: UIViewController {
 
             icon.widthAnchor.constraint(equalToConstant: 93),
             icon.heightAnchor.constraint(equalToConstant: 93),
+            
+            createButton.heightAnchor.constraint(equalToConstant: 55),
             
             descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
         ])
@@ -346,7 +361,6 @@ extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDeleg
     // Pickers cofigurations with delegate
     func updateColor() {
         let color = colorPicker.returnColorUIColor()
-        print(color)
         icon.changeColor(bgColor: UIColor.selectTheBestColor(color: color, isBackground: false), tintColor: color)
     }
     

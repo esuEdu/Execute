@@ -27,7 +27,6 @@ class TagsColectionComponent: UIView {
         
         let maxWidth = view.frame.width - 70
         
-        print(view.frame.size)
         var currentLineStackView: UIStackView?
         
         var currentLineStackViewWidth: CGFloat = 0.0

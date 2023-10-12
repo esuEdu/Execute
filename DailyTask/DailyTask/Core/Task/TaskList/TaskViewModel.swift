@@ -59,7 +59,6 @@ class TaskViewModel: Coordinating {
     
     func concludedTask(_ task: Task){
         taskManager.concludeTask(task)
-        print("Cheguei")
     }
     
     func concludeSubtask(task: Task){

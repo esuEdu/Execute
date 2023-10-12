@@ -83,7 +83,7 @@ class ProjectCreationView: UIViewController {
     
     var descriptionContainer: ContainerComponent?
     let descriptionTextField: TextDescriptionComponent = {
-        let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .black)
+        let textField = TextDescriptionComponent(placeholderColor: .descriptionPlaceholder, textColor: .descriptionText)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.horizontalPadding = 10
         textField.verticalPadding = 10
@@ -181,6 +181,8 @@ class ProjectCreationView: UIViewController {
             iconButton.widthAnchor.constraint(equalToConstant: 93),
             iconButton.heightAnchor.constraint(equalToConstant: 93),
             
+            createButton.heightAnchor.constraint(equalToConstant: 55),
+            
             descriptionTextField.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
@@ -211,14 +213,13 @@ class ProjectCreationView: UIViewController {
     // START COREDATA
     @objc func getStartDate(_ sender: UIDatePicker){
         let selectedDate = sender.date
-        print("\(selectedDate)")
         projectCreationViewModel?.start = selectedDate
     }
     
     // END COREDATA
     @objc func getEndDate(_ sender: UIDatePicker){
         let selectedDate = sender.date
-        print("\(selectedDate)")
+
         projectCreationViewModel?.end = selectedDate
     }
     

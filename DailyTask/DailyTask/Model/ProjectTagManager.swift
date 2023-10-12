@@ -22,7 +22,6 @@ class ProjectTagManager {
         tagProject.blue = blue
         do {
             try context.save()
-            print("Project Tag created with succesfully")
         }catch {
             fatalError("Error in createTagProject \(error)")
         }
@@ -31,7 +30,6 @@ class ProjectTagManager {
     func fetchTagProject() -> [TagProject] {
         do{
             let tagProjects = try context.fetch(TagProject.fetchRequest())
-            print("")
             return tagProjects
         }catch {
             fatalError("Error in fetchTagProject \(error)")
@@ -48,7 +46,6 @@ class ProjectTagManager {
 
             // Check if a project tag with the specified ID exists
             guard let tagProjectToEdit = tagProjects.first else {
-                print("Project Tag with ID \(id) not found.")
                 return
             }
 
@@ -61,7 +58,6 @@ class ProjectTagManager {
             // Save the context to persist the changes
             try context.save()
 
-            print("Project Tag with ID \(id) edited successfully.")
         } catch {
             fatalError("Error in editTagProject: \(error)")
         }
@@ -77,7 +73,6 @@ class ProjectTagManager {
 
             // Check if a project tag with the specified ID exists
             guard let tagProjectToDelete = tagProjects.first else {
-                print("Project Tag with ID \(id) not found.")
                 return
             }
             
@@ -86,7 +81,6 @@ class ProjectTagManager {
             // Save the context to persist the changes
             try context.save()
 
-            print("Project Tag with ID \(id) deleted successfully.")
         } catch {
             fatalError("Error in deleteTagProject: \(error)")
         }

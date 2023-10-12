@@ -176,7 +176,6 @@ class TaskView: UIViewController {
     
     @objc func date(_ sender: UIDatePicker) {
         let date = sender.date
-        print(date)
         viewModel?.date = date
         dateAndCalendarComponent?.dateLabel?.textLabel.text = formatter.string(from: viewModel!.date)
         
@@ -192,8 +191,6 @@ class TaskView: UIViewController {
                 let comparisonResult2 = calendar.compare(taskEnd, to: viewModel!.date, toGranularity: .day)
                 
                 if ((comparisonResult == .orderedSame && comparisonResult2 == .orderedDescending) || (comparisonResult == .orderedSame && comparisonResult2 == .orderedSame) || (comparisonResult == .orderedAscending && comparisonResult2 == .orderedDescending)) && (taskComponent?.task?.step == viewModel?.step.rawValue){
-                    print(taskStart, taskEnd)
-                    print(comparisonResult == .orderedSame, comparisonResult2 == .orderedDescending)
                     taskComponent!.isHidden = false
                     
                 } else{

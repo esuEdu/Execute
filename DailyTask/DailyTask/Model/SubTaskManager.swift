@@ -54,7 +54,7 @@ class SubTaskManager {
 
             // Check if a subtask with the specified ID exists
             guard let subTaskToEdit = subTasks.first else {
-                print("Subtask with ID \(id) not found.")
+
                 return
             }
 
@@ -65,7 +65,6 @@ class SubTaskManager {
             // Save the context to persist the changes
             try context.save()
 
-            print("Subtask with ID \(id) edited successfully.")
         } catch {
             fatalError("Error in editSubTask: \(error)")
         }
@@ -94,7 +93,6 @@ class SubTaskManager {
 
             // Check if a subtask with the specified ID exists
             guard let subTaskToDelete = subTasks.first else {
-                print("Subtask with ID \(id) not found.")
                 return
             }
             
@@ -103,7 +101,6 @@ class SubTaskManager {
             // Save the context to persist the changes
             try context.save()
 
-            print("Subtask with ID \(id) deleted successfully.")
         } catch {
             fatalError("Error in deleteSubTask: \(error)")
         }

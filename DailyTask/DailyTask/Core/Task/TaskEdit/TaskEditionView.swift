@@ -89,7 +89,7 @@ class TaskEditionView: UIViewController {
   }()
   
   let descriptionTextField: TextDescriptionComponent = {
-      let textField = TextDescriptionComponent(placeholderColor: .systemGray, textColor: .label)
+      let textField = TextDescriptionComponent(placeholderColor: .descriptionPlaceholder, textColor: .descriptionText)
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.horizontalPadding = 10
     textField.verticalPadding = 10
@@ -269,6 +269,8 @@ class TaskEditionView: UIViewController {
       
       icon.widthAnchor.constraint(equalToConstant: 93),
       icon.heightAnchor.constraint(equalToConstant: 93),
+      
+      updateButton.heightAnchor.constraint(equalToConstant: 55),
       
       descriptionTextField.heightAnchor.constraint(equalToConstant: 150),
       
