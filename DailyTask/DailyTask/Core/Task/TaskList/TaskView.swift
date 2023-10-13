@@ -61,7 +61,7 @@ class TaskView: UIViewController {
     let secondaryStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 64
+        stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -95,11 +95,12 @@ class TaskView: UIViewController {
         
         chooseStep.delegate = self
         mainStack.addArrangedSubview(dateAndCalendarComponent!)
-        
+        secondaryStack.addArrangedSubview(chooseStep)
         if viewModel?.project?.methodology == "CBL" {
-            secondaryStack.addArrangedSubview(chooseStep)
+            chooseStep.isOpaque = false
+
         }else {
-            secondaryStack.alignment = .trailing
+            chooseStep.layer.opacity = 0
         }
                 
         secondaryStack.addArrangedSubview(newTask)

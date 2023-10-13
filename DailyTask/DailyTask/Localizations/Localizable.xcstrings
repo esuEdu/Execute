@@ -441,6 +441,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "LowKey" : {
       "comment" : "priority of the tasks",
       "extractionState" : "manual",
@@ -609,6 +612,16 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sem nome"
+          }
+        }
+      }
+    },
+    "None" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum"
           }
         }
       }

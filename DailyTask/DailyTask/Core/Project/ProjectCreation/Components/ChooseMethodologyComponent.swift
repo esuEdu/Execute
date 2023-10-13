@@ -79,14 +79,8 @@ class ChooseMethodologyComponent: UIView{
             self.delegate?.setUpMenuFunction(type: .CBL)
                 self.selectionFeedbackGenerator.selectionChanged()
         }),
-        
-            UIAction(title: "Scrum", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-            self.delegate?.setUpMenuFunction(type: .Scrum)
-                self.selectionFeedbackGenerator.selectionChanged()
-        }),
-        
-            UIAction(title: String(localized: "Custom"), image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
-            self.delegate?.setUpMenuFunction(type: .Custom)
+            UIAction(title: String(localized: "None"), image: UIImage(systemName: "pencil.tip.crop.circle.badge.plus") , handler: { _ in
+            self.delegate?.setUpMenuFunction(type: .None)
                 self.selectionFeedbackGenerator.selectionChanged()
         }),
         
@@ -122,7 +116,6 @@ class ChooseMethodologyComponent: UIView{
 /// Adding the methodologies of the project. You will create a enum case that support the especific methodology wanted. You have CBL, Scrum and Custom
 enum Methodologies: String {
     case CBL = "CBL"
-    case Scrum = "Scrum"
-    case Custom = "Custom"
+    case None = "None"
     // Add more cases if nedeed
 }

@@ -104,6 +104,7 @@ class ChooseStepComponent: UIView {
             chooseStepBox.trailingAnchor.constraint(equalTo: trailingAnchor),
             chooseStepBox.topAnchor.constraint(equalTo: topAnchor),
             chooseStepBox.bottomAnchor.constraint(equalTo: bottomAnchor),
+            chooseStepBox.widthAnchor.constraint(equalToConstant: steps.font.lineHeight * 8)
         ])
     }
     
