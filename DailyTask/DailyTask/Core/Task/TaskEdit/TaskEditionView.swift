@@ -223,11 +223,11 @@ class TaskEditionView: UIViewController {
   }
   
   func addActions() {
-    deadLine.startDatePicker.minimumDate = viewModel?.task?.start
-    deadLine.startDatePicker.maximumDate = viewModel?.task?.end
+    deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+    deadLine.startDatePicker.maximumDate = viewModel?.project?.end
     
-    deadLine.endDatePicker.minimumDate = viewModel?.task?.start
-    deadLine.endDatePicker.maximumDate = viewModel?.task?.end
+    deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+    deadLine.endDatePicker.maximumDate = viewModel?.project?.end
     
     deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
     deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)

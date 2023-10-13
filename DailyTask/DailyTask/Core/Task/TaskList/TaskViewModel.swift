@@ -49,7 +49,7 @@ class TaskViewModel: Coordinating {
     }
     
     func goToModalGetInfo(_ task: Task, delegate: ModalGetInfoTaskViewDelegate){
-        coordinator?.goToModalGetInfo(task, delegate)
+        coordinator?.goToModalGetInfo(task, delegate, project: project!)
     }
     
     

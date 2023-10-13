@@ -99,11 +99,12 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
   
-  func goToTaskEditionView(_ task: Task){
+    func goToTaskEditionView(_ task: Task, project: Project){
     let view = TaskEditionView()
     let viewModel: TaskEditionViewModel & Coordinating = TaskEditionViewModel()
     viewModel.coordinator = self
     viewModel.view = view
+        viewModel.project = project
     viewModel.task = task
     view.viewModel = viewModel
     navigationController?.pushViewController(view, animated: true)
@@ -129,11 +130,12 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate) {
+    func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate, project: Project) {
         let view: ModalGetInfoTaskView = ModalGetInfoTaskView()
         let viewModel: ModalGetInfoTaskViewModel & Coordinating = ModalGetInfoTaskViewModel()
         view.delegate = delegate
         view.viewModel = viewModel
+        viewModel.project = project
         viewModel.view = view
         viewModel.task = task
         viewModel.coordinator = self
