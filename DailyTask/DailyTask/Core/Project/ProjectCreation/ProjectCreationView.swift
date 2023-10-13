@@ -7,12 +7,7 @@
 
 import UIKit
 
-class ProjectCreationView: UIViewController, PickIconComponentDelegate {
-    func buttonWasPressed(_ menuIcon: String) {
-        self.projectCreationViewModel?.selectedIcon(menuIcon)
-        iconButton.iconName = menuIcon
-    }
-    
+class ProjectCreationView: UIViewController {
     
     var projectCreationViewModel: ProjectCreationViewModel?
     
@@ -281,8 +276,8 @@ extension ProjectCreationView: ChooseMethodologyComponentDelegate {
     }
 }
 
-extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
-    func menuWasPressed(_ menuIcon: String) {
+extension ProjectCreationView: ColorChooseComponentDelegate, PickIconComponentDelegate {
+    func buttonWasPressed(_ menuIcon: String) {
         self.projectCreationViewModel?.selectedIcon(menuIcon)
         iconButton.iconName = menuIcon
     }

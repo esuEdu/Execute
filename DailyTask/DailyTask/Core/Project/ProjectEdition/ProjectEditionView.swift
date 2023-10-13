@@ -7,12 +7,7 @@
 
 import UIKit
 
-class ProjectEditionView: UIViewController, PickIconComponentDelegate {
-    func buttonWasPressed(_ menuIcon: String) {
-        self.viewModel?.selectedIcon(menuIcon)
-        iconButton.iconName = menuIcon
-    }
-    
+class ProjectEditionView: UIViewController {
     
     var isEditable: Bool = false
 
@@ -391,8 +386,8 @@ extension ProjectEditionView: ChooseMethodologyComponentDelegate {
     }
 }
 
-extension ProjectEditionView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
-    func menuWasPressed(_ menuIcon: String) {
+extension ProjectEditionView: ColorChooseComponentDelegate, PickIconComponentDelegate {
+    func buttonWasPressed(_ menuIcon: String) {
         self.viewModel?.selectedIcon(menuIcon)
         iconButton.iconName = menuIcon
     }
