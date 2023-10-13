@@ -10,7 +10,7 @@ import UIKit
 
 protocol ContainerProjectsListDelegate: AnyObject {
     func goToTheTaskView(project: Project)
-    func setUpAlert(project: Project)
+    func setUpAlert(project: Project, gesture: CGPoint, delegate: ContainerProjectsList)
 }
 
 /// A custom container view for displaying project information.
@@ -255,9 +255,12 @@ class ContainerProjectsList: UIView {
         delegate?.goToTheTaskView(project: project!)
     }
     
-    @objc func goToAlert(){
+    @objc func goToAlert(gesture: UILongPressGestureRecognizer){
+        
+        let location = gesture.location(in: self)
+        
         self.alpha = 0.6
-        self.delegate?.setUpAlert(project: self.project!)
+        self.delegate?.setUpAlert(project: self.project!, gesture: location, delegate: self)
         UIView.animate(withDuration: 0.7) {
             self.alpha = 1
         }

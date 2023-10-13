@@ -7,9 +7,21 @@
 
 import UIKit
 
-class ProjectCreationView: UIViewController {
+protocol ProjectCreationViewDelegate: AnyObject{
+    func projectCreated()
+}
+
+class ProjectCreationView: UIViewController, UISheetPresentationControllerDelegate{
     
     var projectCreationViewModel: ProjectCreationViewModel?
+    
+    override var sheetPresentationController: UISheetPresentationController? {
+        presentationController as? UISheetPresentationController
+    }
+    
+    private var sheetDetents: Double = 0
+    
+    weak var delegate: ProjectCreationViewDelegate?
     
   let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
 
@@ -107,7 +119,17 @@ class ProjectCreationView: UIViewController {
         setUpDelegates()
         setUpUI()
         addAllConstraints()
+        
+        let contentHeight = stackViewForTheContainer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        self.sheetDetents = Double(contentHeight)
 
+        sheetPresentationController?.delegate = self
+        sheetPresentationController?.prefersGrabberVisible = true
+        sheetPresentationController?.preferredCornerRadius = 10
+        sheetPresentationController?.detents = [.custom(resolver: { context in
+            return self.sheetDetents
+        })]
+        
       impactFeedbackGenerator.prepare()
     }
     
@@ -153,16 +175,20 @@ class ProjectCreationView: UIViewController {
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-      
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
       tapGesture.cancelsTouchesInView = false
       view.addGestureRecognizer(tapGesture)
     }
     
     deinit{
-        NotificationCenter.default.removeObserver(self)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            NotificationCenter.default.removeObserver(self)
+        }
     }
 
     func addAllConstraints(){
@@ -195,7 +221,13 @@ class ProjectCreationView: UIViewController {
             self.projectCreationViewModel?.description = descriptionTextField.getText() == "" ? self.projectCreationViewModel?.description : descriptionTextField.getText()
             
             self.projectCreationViewModel?.createAProject()
-            self.projectCreationViewModel?.removeTopView()
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                self.projectCreationViewModel?.removeTopView()
+            } else if UIDevice.current.userInterfaceIdiom == .pad {
+                delegate?.projectCreated()
+                self.dismiss(animated: true)
+            }
+            
         } else{
           let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: String(localized: "TryAgainKey"), style: .cancel))

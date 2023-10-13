@@ -49,14 +49,6 @@ class MainCoordinator: Coordinator {
         switch type {
             
             // Handle the case when a button is tapped
-        case .goToProjectCreation:
-            let view: ProjectCreationView = ProjectCreationView()
-            let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
-            viewModel.coordinator = self
-            viewModel.projectCreationView = view
-            view.projectCreationViewModel = viewModel
-            
-            navigationController?.pushViewController(view, animated: true)
             
         case .goToProjectList:
             let projectListView: ProjectListView = ProjectListView()
@@ -79,6 +71,21 @@ class MainCoordinator: Coordinator {
             
         }
         
+    }
+    
+    func goToProjectCreation(delegate: ProjectCreationViewDelegate){
+        let view: ProjectCreationView = ProjectCreationView()
+        let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
+        viewModel.coordinator = self
+        viewModel.projectCreationView = view
+        view.projectCreationViewModel = viewModel
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            navigationController?.pushViewController(view, animated: true)
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            view.delegate = delegate
+            navigationController?.present(view, animated: true)
+        }
     }
     
     func goToProjectEditionView(_ project: Project, isEditable: Bool){

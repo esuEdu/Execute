@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 enum Event {
-  case goToProjectCreation
   case goToProjectList
   case createModalView
   case removeTopView
@@ -22,6 +21,7 @@ protocol Coordinator {
   func goToProjectEditionView(_ project: Project,  isEditable: Bool)
   func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate)
   func goToTaskEditionView(_ task: Task)
+  func goToProjectCreation(delegate: ProjectCreationViewDelegate)
   func eventOccurred(with type: Event)
   func goToTaskView(_ project: Project)
   func start()
