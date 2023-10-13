@@ -7,7 +7,12 @@
 
 import UIKit
 
-class ProjectEditionView: UIViewController {
+class ProjectEditionView: UIViewController, PickIconComponentDelegate {
+    func buttonWasPressed(_ menuIcon: String) {
+        self.viewModel?.selectedIcon(menuIcon)
+        iconButton.iconName = menuIcon
+    }
+    
     
     var isEditable: Bool = false
 
@@ -161,6 +166,9 @@ class ProjectEditionView: UIViewController {
         descriptionTextField.descriptionBox.text = viewModel?.project?.descript
         iconButton.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
         iconButton.iconName = viewModel?.project?.icon
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(iconButtonTapped))
+            iconButton.addGestureRecognizer(tapGesture)
     }
     
     func verifyIfIsEditable(){
@@ -200,7 +208,6 @@ class ProjectEditionView: UIViewController {
     func setUpDelegates(){
         methodologyButton.delegate = self
         colorChooser.delegate = self
-        iconButton.delegate = self
     }
     
     func setUpUI(){
@@ -318,6 +325,14 @@ class ProjectEditionView: UIViewController {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }
+    
+    @objc func iconButtonTapped() {
+            let modalViewController = PickIconModalViewController() // Initialize your modal view controller
+            // Set the delegate if needed
+            modalViewController.delegate = self
+            // Present the modal view controller
+            present(modalViewController, animated: true, completion: nil)
+        }
 
 }
 

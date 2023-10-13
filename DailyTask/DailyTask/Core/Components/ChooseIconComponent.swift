@@ -33,9 +33,11 @@ protocol ChooseIconComponentDelegate: AnyObject{
 /// }()
 /// ```
 ///
-class ChooseIconComponent: UIButton {
+class ChooseIconComponent: UIButton, PickIconComponentDelegate {
     
-    weak var delegate: ChooseIconComponentDelegate?
+    func buttonWasPressed(_ menuIcon: String) {
+        self.iconName = menuIcon
+    }
     
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
@@ -112,38 +114,39 @@ class ChooseIconComponent: UIButton {
     
     private func setIcon(){
 
-        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
-            
-            UIAction(title: "Globo", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
-                self.delegate?.menuWasPressed("globe.americas.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "PaperPlane", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
-                self.delegate?.menuWasPressed("paperplane.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "Pencil", image: UIImage(systemName: "umbrella.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("umbrella.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "Pencil tip", image: UIImage(systemName: "pencil.tip") , handler: { _ in
-                self.delegate?.menuWasPressed("pencil.tip")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "Dumbbell", image: UIImage(systemName: "dumbbell.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("dumbbell.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            
-        ])
-        
-        self.menu = menuItems
-        self.showsMenuAsPrimaryAction = true
+        self.selectionFeedbackGenerator.selectionChanged()
+//        let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
+//            
+//            UIAction(title: "Globo", image: UIImage(systemName: "globe.americas.fill"), handler: { _ in
+//                self.delegate?.menuWasPressed("globe.americas.fill")
+//                self.selectionFeedbackGenerator.selectionChanged()
+//            }),
+//            
+//            UIAction(title: "PaperPlane", image: UIImage(systemName: "paperplane.fill"), handler: { _ in
+//                self.delegate?.menuWasPressed("paperplane.fill")
+//                self.selectionFeedbackGenerator.selectionChanged()
+//            }),
+//            
+//            UIAction(title: "Pencil", image: UIImage(systemName: "umbrella.fill") , handler: { _ in
+//                self.delegate?.menuWasPressed("umbrella.fill")
+//                self.selectionFeedbackGenerator.selectionChanged()
+//            }),
+//            
+//            UIAction(title: "Pencil tip", image: UIImage(systemName: "pencil.tip") , handler: { _ in
+//                self.delegate?.menuWasPressed("pencil.tip")
+//                self.selectionFeedbackGenerator.selectionChanged()
+//            }),
+//            
+//            UIAction(title: "Dumbbell", image: UIImage(systemName: "dumbbell.fill") , handler: { _ in
+//                self.delegate?.menuWasPressed("dumbbell.fill")
+//                self.selectionFeedbackGenerator.selectionChanged()
+//            }),
+//            
+//            
+//        ])
+//
+//        self.menu = menuItems
+//        self.showsMenuAsPrimaryAction = true
     }
     
 }

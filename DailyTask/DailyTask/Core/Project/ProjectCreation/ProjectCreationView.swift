@@ -7,7 +7,12 @@
 
 import UIKit
 
-class ProjectCreationView: UIViewController {
+class ProjectCreationView: UIViewController, PickIconComponentDelegate {
+    func buttonWasPressed(_ menuIcon: String) {
+        self.projectCreationViewModel?.selectedIcon(menuIcon)
+        iconButton.iconName = menuIcon
+    }
+    
     
     var projectCreationViewModel: ProjectCreationViewModel?
     
@@ -106,12 +111,14 @@ class ProjectCreationView: UIViewController {
         setUpUI()
         addAllConstraints()
         selectionFeedbackGenerator.prepare()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(iconButtonTapped))
+            iconButton.addGestureRecognizer(tapGesture)
     }
     
     func setUpDelegates(){
         methodologyButton.delegate = self
         colorChooser.delegate = self
-        iconButton.delegate = self
     }
     
     func setUpUI(){
@@ -226,6 +233,14 @@ class ProjectCreationView: UIViewController {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }
+    
+    @objc func iconButtonTapped() {
+            let modalViewController = PickIconModalViewController() // Initialize your modal view controller
+            // Set the delegate if needed
+            modalViewController.delegate = self
+            // Present the modal view controller
+            present(modalViewController, animated: true, completion: nil)
+        }
 
 }
 

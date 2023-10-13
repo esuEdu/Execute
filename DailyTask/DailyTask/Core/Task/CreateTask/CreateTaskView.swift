@@ -8,7 +8,11 @@
 import Foundation
 import UIKit
 
-class CreateTaskView: UIViewController {
+class CreateTaskView: UIViewController, PickIconComponentDelegate {
+    func buttonWasPressed(_ menuIcon: String) {
+        icon.iconName = menuIcon
+    }
+    
     
     var viewModel: CreateTaskViewModel?
     
@@ -121,6 +125,9 @@ class CreateTaskView: UIViewController {
         configurateComponents()
         setUpUI()
         setConstraints()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(iconButtonTapped))
+            icon.addGestureRecognizer(tapGesture)
     }
     
     // Configuração para retirar o observador do teclado
@@ -141,7 +148,6 @@ class CreateTaskView: UIViewController {
         
         // Delegates
         nameTextField.delegate = self
-        icon.delegate = self
         colorPicker.delegate = self
         
         // Constraints activated
@@ -223,6 +229,14 @@ class CreateTaskView: UIViewController {
         ])
     }
     
+    @objc func iconButtonTapped() {
+            let modalViewController = PickIconModalViewController() // Initialize your modal view controller
+            // Set the delegate if needed
+            modalViewController.delegate = self
+            // Present the modal view controller
+            present(modalViewController, animated: true, completion: nil)
+        }
+    
 }
 
 extension CreateTaskView: TextFieldComponentDelegate {
@@ -301,6 +315,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }
+
     
 }
 

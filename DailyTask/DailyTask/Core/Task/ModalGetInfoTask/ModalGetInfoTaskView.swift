@@ -11,7 +11,11 @@ protocol ModalGetInfoTaskViewDelegate: AnyObject {
     func changeHappened(_ task: Task)
 }
 
-class ModalGetInfoTaskView: UIViewController{
+class ModalGetInfoTaskView: UIViewController, PickIconComponentDelegate{
+    func buttonWasPressed(_ menuIcon: String) {
+        icon.iconName = menuIcon
+    }
+    
 
     var viewModel: ModalGetInfoTaskViewModel?
     
@@ -136,6 +140,9 @@ class ModalGetInfoTaskView: UIViewController{
         addAllContraints()
         feedbackGenerator.prepare()
         notificationFeedbackGenerator.prepare()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(iconButtonTapped))
+            icon.addGestureRecognizer(tapGesture)
     }
     
     func verifyIfIsDone(){
@@ -261,6 +268,14 @@ class ModalGetInfoTaskView: UIViewController{
     @objc func disalphaButton(_ button: UIButton){
         button.alpha = 1
     }
+    
+    @objc func iconButtonTapped() {
+            let modalViewController = PickIconModalViewController() // Initialize your modal view controller
+            // Set the delegate if needed
+            modalViewController.delegate = self
+            // Present the modal view controller
+            present(modalViewController, animated: true, completion: nil)
+        }
 
 }
 
