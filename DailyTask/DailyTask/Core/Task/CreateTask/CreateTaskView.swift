@@ -124,7 +124,7 @@ class CreateTaskView: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(.customPrimaryBlue)
         button.layer.cornerRadius = 10
-        button.setTitle(String(localized: "Update the project"), for: .normal)
+        button.setTitle(String(localized: "CreateTaskTitleKey"), for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -330,9 +330,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
             compon.deleteButton.tag = index
           impactFeedbackGenerator.impactOccurred()
         }
-      
-      
-      
+    
     }
     
     @objc func getEndDate(_ sender: UIDatePicker){

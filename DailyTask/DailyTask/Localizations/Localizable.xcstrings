@@ -824,13 +824,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update the project"
+            "value" : "Update Project"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atualizar o projeto"
+            "state" : "needs_review",
+            "value" : "Atualizar projeto"
           }
         }
       }
