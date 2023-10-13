@@ -48,6 +48,10 @@ class ProjectEditionView: UIViewController {
   let textFieldToGetTheName: TextFieldComponent = {
     let textField = TextFieldComponent()
     textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.textFieldToGetTheName.textColor = UIColor(.customDescriptionText)
+    if let currentFont = textField.textFieldToGetTheName.font {
+      textField.textFieldToGetTheName.font = UIFont(descriptor: currentFont.fontDescriptor.withSymbolicTraits(.traitBold)!, size: currentFont.pointSize)
+    }
     return textField
   }()
   
@@ -120,12 +124,22 @@ class ProjectEditionView: UIViewController {
   
   let barButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: ProjectEditionView.self, action: nil)
   
+  let pencilName: UIButton = {
+    let pencil = UIButton()
+    pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
+    pencil.isUserInteractionEnabled = false
+    pencil.translatesAutoresizingMaskIntoConstraints = false
+    pencil.contentMode = .scaleAspectFit
+    pencil.tintColor = UIColor(.customPencilEditName)
+    return pencil
+  }()
+  
   let pencilEditor1: UIButton = {
     let pencil = UIButton()
     pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
     pencil.isUserInteractionEnabled = false
     pencil.contentMode = .scaleAspectFit
-    pencil.tintColor = .black
+    pencil.tintColor = .white
     return pencil
   }()
   
@@ -158,6 +172,7 @@ class ProjectEditionView: UIViewController {
   func verifyIfIsEditable(){
     if isEditable {
       pencilEditor1.isHidden = false
+      pencilName.isHidden = false
       self.iconButton.isUserInteractionEnabled = true
       self.descriptionTextField.isUserInteractionEnabled = true
       self.deadLine.isUserInteractionEnabled = true
@@ -172,6 +187,7 @@ class ProjectEditionView: UIViewController {
       isEditable.toggle()
     } else {
       pencilEditor1.isHidden = true
+      pencilName.isHidden = true
       self.iconButton.isUserInteractionEnabled = false
       self.descriptionTextField.isUserInteractionEnabled = false
       self.deadLine.isUserInteractionEnabled = false
@@ -218,6 +234,7 @@ class ProjectEditionView: UIViewController {
     stackViewForIcon.addArrangedSubview(iconButton)
     stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
     stackViewForTitleAndColor.addArrangedSubview(textFieldToGetTheName)
+    stackViewForTitleAndColor.addSubview(pencilName)
     stackViewForTitleAndColor.addArrangedSubview(colorChooser)
     
     
@@ -258,6 +275,9 @@ class ProjectEditionView: UIViewController {
       
       iconButton.widthAnchor.constraint(equalToConstant: 93),
       iconButton.heightAnchor.constraint(equalToConstant: 93),
+      
+      pencilName.centerYAnchor.constraint(equalTo: textFieldToGetTheName.centerYAnchor),
+      pencilName.trailingAnchor.constraint(equalTo: textFieldToGetTheName.trailingAnchor, constant: -12),
       
       updateButton.heightAnchor.constraint(equalToConstant: 55),
       
