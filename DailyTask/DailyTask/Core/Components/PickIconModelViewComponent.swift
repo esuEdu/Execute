@@ -19,7 +19,7 @@ class PickIconModalViewController: UIViewController {
         presentationController as? UISheetPresentationController
     }
     
-    private var sheetDetents: Double = 491
+    private var sheetDetents: Double = 391
 
     func setUpModalConfiguration(){
         sheetPresentationController?.prefersGrabberVisible = true
@@ -28,7 +28,7 @@ class PickIconModalViewController: UIViewController {
             return self.sheetDetents
         })]
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpModalConfiguration()
@@ -42,6 +42,7 @@ class PickIconModalViewController: UIViewController {
           let stackView = UIStackView()
           stackView.axis = .vertical
             stackView.distribution = .fillEqually
+            stackView.spacing = 10
           stackView.translatesAutoresizingMaskIntoConstraints = false
           
           return stackView
@@ -60,6 +61,7 @@ class PickIconModalViewController: UIViewController {
           let stackView = UIStackView()
           stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.spacing = 20
           stackView.translatesAutoresizingMaskIntoConstraints = false
           
           return stackView
@@ -69,6 +71,7 @@ class PickIconModalViewController: UIViewController {
           let stackView = UIStackView()
           stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.spacing = 20
           stackView.translatesAutoresizingMaskIntoConstraints = false
           
           return stackView
@@ -78,6 +81,7 @@ class PickIconModalViewController: UIViewController {
           let stackView = UIStackView()
           stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.spacing = 20
           stackView.translatesAutoresizingMaskIntoConstraints = false
           
           return stackView
@@ -87,6 +91,7 @@ class PickIconModalViewController: UIViewController {
           let stackView = UIStackView()
           stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.spacing = 20
           stackView.translatesAutoresizingMaskIntoConstraints = false
           
           return stackView
@@ -96,6 +101,7 @@ class PickIconModalViewController: UIViewController {
           let stackView = UIStackView()
           stackView.axis = .horizontal
             stackView.distribution = .fillEqually
+            stackView.spacing = 20
           stackView.translatesAutoresizingMaskIntoConstraints = false
           
           return stackView
@@ -103,267 +109,69 @@ class PickIconModalViewController: UIViewController {
         
         //First Stack Start
         
-        let imageOneView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "lightbulb.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-
-        let imageTwoView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "star.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageOneView = CustomIconButton(image: UIImage(systemName: "lightbulb.fill")!)
         
-        let imageThreeView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "trophy.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageTwoView = CustomIconButton(image: UIImage(systemName: "star.fill")!)
         
-        let imageFourView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "pencil"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageThreeView = CustomIconButton(image: UIImage(systemName: "trophy.fill")!)
         
-        let imageFiveView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "paperclip"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageFourView = CustomIconButton(image: UIImage(systemName: "pencil")!)
+        
+        let imageFiveView = CustomIconButton(image: UIImage(systemName: "paperclip")!)
         
         //First Stack End
         //Second Stack Start
-    
-        let imageSixView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "scribble.variable"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-
-        let imageSevenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "arrow.clockwise"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
         
-        let imageEightView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageSixView = CustomIconButton(image: UIImage(systemName: "scribble.variable")!)
         
-        let imageNineView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "books.vertical.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageSevenView = CustomIconButton(image: UIImage(systemName: "arrow.clockwise")!)
         
-        let imageTenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "book.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageEightView = CustomIconButton(image: UIImage(systemName: "magnifyingglass")!)
+        
+        let imageNineView = CustomIconButton(image: UIImage(systemName: "books.vertical.fill")!)
+        
+        let imageTenView = CustomIconButton(image: UIImage(systemName: "book.fill")!)
         
         //Second Stack End
         //Third Stack Start
         
-        let imageElevenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "doc.text.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageElevenView = CustomIconButton(image: UIImage(systemName: "doc.text.fill")!)
+        
+        let imageTwelveView = CustomIconButton(image: UIImage(systemName: "doc.on.doc.fill")!)
+        
+        let imageThirteenView = CustomIconButton(image: UIImage(systemName: "list.bullet.clipboard.fill")!)
+        
+        let imageFourteenView = CustomIconButton(image: UIImage(systemName: "doc.append.fill")!)
+        
+        let imageFifteenView = CustomIconButton(image: UIImage(systemName: "chart.bar.doc.horizontal.fill")!)
+        
 
-        let imageTwelveView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "doc.on.doc.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-        
-        let imageThirteenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "list.bullet.clipboard.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-        
-        let imageFourteenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "doc.append.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-        
-        let imageFifteenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "chart.bar.doc.horizontal.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-        
         //Third Stack End
         //Fourth Stack Start
         
-        let imageSixteenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "folder.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-
-        let imageSeventeenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "tray.full.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageSixteenView = CustomIconButton(image: UIImage(systemName: "folder.fill")!)
         
-        let imageEighteenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "tray.2.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageSeventeenView = CustomIconButton(image: UIImage(systemName: "tray.full.fill")!)
         
-        let imageNineteenView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "person.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageEighteenView = CustomIconButton(image: UIImage(systemName: "tray.2.fill")!)
         
-        let imageTwentyView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "person.3.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageNineteenView = CustomIconButton(image: UIImage(systemName: "person.fill")!)
+        
+        let imageTwentyView = CustomIconButton(image: UIImage(systemName: "person.3.fill")!)
+            
         
         //Fourth Stack End
         //Fifth Stack Start
         
-        let imageTwentyOneView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "rectangle.3.group.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
-
-        let imageTwentyTwoView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "questionmark.bubble.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageTwentyOneView = CustomIconButton(image: UIImage(systemName: "rectangle.3.group.fill")!)
         
-        let imageTwentyThreeView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "checkmark.bubble.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageTwentyTwoView = CustomIconButton(image: UIImage(systemName: "questionmark.bubble.fill")!)
         
-        let imageTwentyFourView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "info.bubble.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageTwentyThreeView = CustomIconButton(image: UIImage(systemName: "checkmark.bubble.fill")!)
         
-        let imageTwentyFiveView: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "bubble.left.and.bubble.right.fill"))
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.backgroundColor = UIColor.tertiaryBlue
-            imageView.layer.cornerRadius = 10
-            return imageView
-        }()
+        let imageTwentyFourView = CustomIconButton(image: UIImage(systemName: "info.bubble.fill")!)
+        
+        let imageTwentyFiveView = CustomIconButton(image: UIImage(systemName: "bubble.left.and.bubble.right.fill")!)
         
         //Fifth Stack End
 
@@ -476,9 +284,6 @@ class PickIconModalViewController: UIViewController {
         fifthStack.addArrangedSubview(imageTwentyThreeView)
         fifthStack.addArrangedSubview(imageTwentyFourView)
         fifthStack.addArrangedSubview(imageTwentyFiveView)
-
-
-
 
         titleStack.addArrangedSubview(label)
         titleStack.addArrangedSubview(closeButton)
@@ -644,4 +449,48 @@ class PickIconModalViewController: UIViewController {
 
 #Preview{
     PickIconModalViewController()
+}
+
+class CustomIconButton: UIButton{
+    
+    let stackView: UIStackView = {
+        let sv = UIStackView()
+        sv.isLayoutMarginsRelativeArrangement = true
+        sv.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    let image: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    init(image: UIImage){
+        super.init(frame: .zero)
+        
+        self.image.image = image
+        
+        addSubview(stackView)
+        stackView.addArrangedSubview(self.image)
+        backgroundColor = UIColor.tertiaryBlue
+        layer.cornerRadius = 10
+        addAllConstraints()
+    }
+    
+    func addAllConstraints(){
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
