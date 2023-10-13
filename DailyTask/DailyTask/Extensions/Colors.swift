@@ -71,6 +71,8 @@ enum CustomColor {
     case customAddIcon
     case customCalendar
     case customProgressBarBackground
+    case iconModalBg
+    case iconModal
 }
 
 extension UIColor {
@@ -134,6 +136,10 @@ extension UIColor {
             self.init(named: "Calendar")
         case .customProgressBarBackground:
             self.init(named: "ProgressBarBackground")
+        case .iconModalBg:
+            self.init(named: "IconModalBg")
+        case .iconModal:
+            self.init(named: "IconModal")
         }
     }
 }

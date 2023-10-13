@@ -38,12 +38,16 @@ class ChooseIconComponent: UIButton {
     weak var delegate: ChooseIconComponentDelegate?
     
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-    
+    var father: UIViewController?
     var verticalPadding: CGFloat = 16
     var horizontalPadding: CGFloat = 16
     var isSelectable: Bool = false {
         didSet{
-            setIcon()
+            if isSelectable{
+                tapGesture.isEnabled = true
+            } else{
+                tapGesture.isEnabled = false
+            }
         }
     }
     var iconName: String? {
@@ -63,8 +67,16 @@ class ChooseIconComponent: UIButton {
         return UIIMageView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+    
+    init(father: UIViewController) {
+        self.father = father
+        super.init(frame: .zero)
+        
+        tapGesture.addTarget(self, action: #selector(setIcon))
+        tapGesture.isEnabled = false
+        
+        addGestureRecognizer(tapGesture)
         setUpUI()
         addAllConstraints()
         selectionFeedbackGenerator.prepare()
@@ -110,45 +122,11 @@ class ChooseIconComponent: UIButton {
         ])
     }
     
-    private func setIcon(){
+    @objc private func setIcon(){
 
-      let menuItems = UIMenu(title: "", options: .displayAsPalette, children: [
-            
-            UIAction(title: "", image: UIImage(systemName: "star.fill"), handler: { _ in
-                self.delegate?.menuWasPressed("star.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "", image: UIImage(systemName: "doc.text.fill"), handler: { _ in
-                self.delegate?.menuWasPressed("doc.text.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "", image: UIImage(systemName: "bubble.left.and.bubble.right.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("bubble.left.and.bubble.right.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "", image: UIImage(systemName: "trophy.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("trophy.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            UIAction(title: "", image: UIImage(systemName: "list.clipboard.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("list.clipboard.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),    
-            
-            UIAction(title: "", image: UIImage(systemName: "lightbulb.fill") , handler: { _ in
-                self.delegate?.menuWasPressed("lightbulb.fill")
-                self.selectionFeedbackGenerator.selectionChanged()
-            }),
-            
-            
-        ])
-        
-        self.menu = menuItems
-        self.showsMenuAsPrimaryAction = true
+        let modalToGetICon = PickIconModalViewController()
+        modalToGetICon.delegate = self.father as? any PickIconComponentDelegate
+        father!.present(modalToGetICon, animated: true)
     }
     
 }

@@ -45,15 +45,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         return stackView
     }()
     
-    let iconButton: ChooseIconComponent = {
-        let iconPicker = ChooseIconComponent()
-        iconPicker.horizontalPadding = 10
-        iconPicker.verticalPadding = 15
-        iconPicker.iconName = "pencil.tip"
-        iconPicker.isSelectable = true
-        iconPicker.translatesAutoresizingMaskIntoConstraints = false
-        return iconPicker
-    }()
+    var iconButton: ChooseIconComponent?
     
     let textFieldToGetTheName: TextFieldComponent = {
         let textField = TextFieldComponent()
@@ -115,6 +107,13 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        iconButton = ChooseIconComponent(father: self)
+        iconButton!.horizontalPadding = 10
+        iconButton!.verticalPadding = 15
+        iconButton!.iconName = "pencil.tip"
+        iconButton!.isSelectable = true
+        iconButton!.translatesAutoresizingMaskIntoConstraints = false
 
         setUpDelegates()
         setUpUI()
@@ -136,7 +135,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
     func setUpDelegates(){
         methodologyButton.delegate = self
         colorChooser.delegate = self
-        iconButton.delegate = self
+        iconButton!.delegate = self
     }
     
     func setUpUI(){
@@ -162,7 +161,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
         stackViewForTheContainer.addArrangedSubview(dateContainer!)
         stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
-        stackViewForIcon.addArrangedSubview(iconButton)
+        stackViewForIcon.addArrangedSubview(iconButton!)
         stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
         stackViewForTitleAndColor.addArrangedSubview(textFieldToGetTheName)
         stackViewForTitleAndColor.addArrangedSubview(colorChooser)
@@ -170,7 +169,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         
         stackViewForTheContainer.addArrangedSubview(createButton)
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
-        iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
+        iconButton!.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
         
         deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
         deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
@@ -204,8 +203,8 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
             stackViewForTheContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackViewForTheContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            iconButton.widthAnchor.constraint(equalToConstant: 93),
-            iconButton.heightAnchor.constraint(equalToConstant: 93),
+            iconButton!.widthAnchor.constraint(equalToConstant: 93),
+            iconButton!.heightAnchor.constraint(equalToConstant: 93),
             
             createButton.heightAnchor.constraint(equalToConstant: 55),
             
@@ -313,13 +312,21 @@ extension ProjectCreationView: ChooseMethodologyComponentDelegate {
 
 extension ProjectCreationView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
     func menuWasPressed(_ menuIcon: String) {
-        self.projectCreationViewModel?.selectedIcon(menuIcon)
-        iconButton.iconName = menuIcon
+
     }
     
     func updateColor() {
         let color = colorChooser.returnColorUIColor()
-        iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
+        iconButton!.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     }
 
+}
+
+extension ProjectCreationView: PickIconComponentDelegate{
+    func buttonWasPressed(_ menuIcon: String) {
+        self.projectCreationViewModel?.selectedIcon(menuIcon)
+        iconButton!.iconName = menuIcon
+    }
+    
+    
 }
