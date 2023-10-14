@@ -49,14 +49,6 @@ class MainCoordinator: Coordinator {
         switch type {
             
             // Handle the case when a button is tapped
-        case .goToProjectCreation:
-            let view: ProjectCreationView = ProjectCreationView()
-            let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
-            viewModel.coordinator = self
-            viewModel.projectCreationView = view
-            view.projectCreationViewModel = viewModel
-            
-            navigationController?.pushViewController(view, animated: true)
             
         case .goToProjectList:
             let projectListView: ProjectListView = ProjectListView()
@@ -81,6 +73,21 @@ class MainCoordinator: Coordinator {
         
     }
     
+    func goToProjectCreation(delegate: ProjectCreationViewDelegate){
+        let view: ProjectCreationView = ProjectCreationView()
+        let viewModel: ProjectCreationViewModel & Coordinating = ProjectCreationViewModel()
+        viewModel.coordinator = self
+        viewModel.projectCreationView = view
+        view.projectCreationViewModel = viewModel
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            navigationController?.pushViewController(view, animated: true)
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            view.delegate = delegate
+            navigationController?.present(view, animated: true)
+        }
+    }
+    
     func goToProjectEditionView(_ project: Project, isEditable: Bool){
         let view: ProjectEditionView = ProjectEditionView()
         let viewModel: ProjectEditionViewModel & Coordinating = ProjectEditionViewModel()
@@ -92,11 +99,12 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
   
-  func goToTaskEditionView(_ task: Task){
+    func goToTaskEditionView(_ task: Task, project: Project){
     let view = TaskEditionView()
     let viewModel: TaskEditionViewModel & Coordinating = TaskEditionViewModel()
     viewModel.coordinator = self
     viewModel.view = view
+        viewModel.project = project
     viewModel.task = task
     view.viewModel = viewModel
     navigationController?.pushViewController(view, animated: true)
@@ -122,11 +130,12 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate) {
+    func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate, project: Project) {
         let view: ModalGetInfoTaskView = ModalGetInfoTaskView()
         let viewModel: ModalGetInfoTaskViewModel & Coordinating = ModalGetInfoTaskViewModel()
         view.delegate = delegate
         view.viewModel = viewModel
+        viewModel.project = project
         viewModel.view = view
         viewModel.task = task
         viewModel.coordinator = self

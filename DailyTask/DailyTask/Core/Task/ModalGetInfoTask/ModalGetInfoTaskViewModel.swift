@@ -11,6 +11,7 @@ import UIKit
 class ModalGetInfoTaskViewModel: Coordinating {
     
     var done: Bool = false
+    var project: Project?
     var coordinator: Coordinator?
     var view: ModalGetInfoTaskView?
     var task: Task?
@@ -67,7 +68,7 @@ class ModalGetInfoTaskViewModel: Coordinating {
     }
   
   func goToEditView() {
-    coordinator?.goToTaskEditionView(task!)
+    coordinator?.goToTaskEditionView(task!, project: project!)
   }
   
   

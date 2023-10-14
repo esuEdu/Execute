@@ -11,6 +11,7 @@ class TaskEditionViewModel: Coordinating {
   
   var coordinator: Coordinator?
   var view: TaskEditionView?
+  var project: Project?
   private let projectManager = TaskManager()
   
   var name: String?

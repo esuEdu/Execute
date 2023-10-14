@@ -36,14 +36,7 @@ class ProjectEditionView: UIViewController {
     return stackView
   }()
   
-  let iconButton: ChooseIconComponent = {
-    let iconPicker = ChooseIconComponent()
-    iconPicker.horizontalPadding = 10
-    iconPicker.verticalPadding = 15
-    iconPicker.isSelectable = true
-    iconPicker.translatesAutoresizingMaskIntoConstraints = false
-    return iconPicker
-  }()
+    var iconButton: ChooseIconComponent?
   
   let textFieldToGetTheName: TextFieldComponent = {
     let textField = TextFieldComponent()
@@ -146,6 +139,12 @@ class ProjectEditionView: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+      iconButton = ChooseIconComponent(father: self)
+        iconButton!.horizontalPadding = 10
+        iconButton!.verticalPadding = 15
+        iconButton!.isSelectable = true
+        iconButton!.translatesAutoresizingMaskIntoConstraints = false
+      
     let bgColor = UIColor(red: viewModel!.project!.red, green: viewModel!.project!.green, blue: viewModel!.project!.blue, alpha: 1)
     
     colorChooser.deselectAllButtons()
@@ -165,15 +164,14 @@ class ProjectEditionView: UIViewController {
     deadLine.startDatePicker.setDate((viewModel?.project?.start) ?? Date.now, animated: true)
     deadLine.endDatePicker.setDate((viewModel?.project?.end) ?? Date.now, animated: true)
     descriptionTextField.descriptionBox.text = viewModel?.project?.descript
-    iconButton.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
-    iconButton.iconName = viewModel?.project?.icon
+    iconButton!.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
+    iconButton!.iconName = viewModel?.project?.icon
   }
   
   func verifyIfIsEditable(){
     if isEditable {
       pencilEditor1.isHidden = false
-      pencilName.isHidden = false
-      self.iconButton.isUserInteractionEnabled = true
+      self.iconButton!.isUserInteractionEnabled = true
       self.descriptionTextField.isUserInteractionEnabled = true
       self.deadLine.isUserInteractionEnabled = true
       self.methodologyButton.hideButton(false)
@@ -188,7 +186,7 @@ class ProjectEditionView: UIViewController {
     } else {
       pencilEditor1.isHidden = true
       pencilName.isHidden = true
-      self.iconButton.isUserInteractionEnabled = false
+      self.iconButton!.isUserInteractionEnabled = false
       self.descriptionTextField.isUserInteractionEnabled = false
       self.deadLine.isUserInteractionEnabled = false
       self.methodologyButton.hideButton(true)
@@ -208,7 +206,7 @@ class ProjectEditionView: UIViewController {
   func setUpDelegates(){
     methodologyButton.delegate = self
     colorChooser.delegate = self
-    iconButton.delegate = self
+    iconButton!.delegate = self
   }
   
   func setUpUI(){
@@ -231,7 +229,7 @@ class ProjectEditionView: UIViewController {
     stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
     stackViewForTheContainer.addArrangedSubview(dateContainer!)
     stackViewForTheContainer.addArrangedSubview(descriptionContainer!)
-    stackViewForIcon.addArrangedSubview(iconButton)
+    stackViewForIcon.addArrangedSubview(iconButton!)
     stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
     stackViewForTitleAndColor.addArrangedSubview(textFieldToGetTheName)
     stackViewForTitleAndColor.addSubview(pencilName)
@@ -243,7 +241,7 @@ class ProjectEditionView: UIViewController {
     updateButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
     deleteButton.addTarget(self, action: #selector(deleteProject), for: .touchUpInside)
     
-    iconButton.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
+    iconButton!.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
     
     deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
     deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
@@ -273,8 +271,8 @@ class ProjectEditionView: UIViewController {
       stackViewForTheContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       stackViewForTheContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
       
-      iconButton.widthAnchor.constraint(equalToConstant: 93),
-      iconButton.heightAnchor.constraint(equalToConstant: 93),
+      iconButton!.widthAnchor.constraint(equalToConstant: 93),
+      iconButton!.heightAnchor.constraint(equalToConstant: 93),
       
       pencilName.centerYAnchor.constraint(equalTo: textFieldToGetTheName.centerYAnchor),
       pencilName.trailingAnchor.constraint(equalTo: textFieldToGetTheName.trailingAnchor, constant: -12),
@@ -408,17 +406,24 @@ extension ProjectEditionView: ChooseMethodologyComponentDelegate {
 
 extension ProjectEditionView: ColorChooseComponentDelegate, ChooseIconComponentDelegate {
   func menuWasPressed(_ menuIcon: String) {
-    self.viewModel?.selectedIcon(menuIcon)
-    iconButton.iconName = menuIcon
   }
   
   func updateColor() {
     let color = colorChooser.returnColorUIColor()
     let CGColor = colorChooser.returnColorCGFloat()
-    iconButton.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
+    iconButton!.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     viewModel?.red = CGColor[0]
     viewModel?.green = CGColor[1]
     viewModel?.blue = CGColor[2]
   }
   
+}
+
+extension ProjectEditionView: PickIconComponentDelegate{
+    func buttonWasPressed(_ menuIcon: String) {
+        self.viewModel?.selectedIcon(menuIcon)
+        iconButton!.iconName = menuIcon
+    }
+    
+    
 }

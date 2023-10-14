@@ -30,15 +30,7 @@ class TaskEditionView: UIViewController {
   
   let deadLine = DeadlineComponent()
   
-  let icon: ChooseIconComponent = {
-    let icon = ChooseIconComponent()
-    icon.iconName = "pencil.tip"
-    icon.horizontalPadding = 10
-    icon.verticalPadding = 15
-    icon.isSelectable = true
-    icon.translatesAutoresizingMaskIntoConstraints = false
-    return icon
-  }()
+  var icon: ChooseIconComponent?
   
   let colorPicker: ColorChooseComponent = {
     let colorPicker = ColorChooseComponent()
@@ -158,6 +150,13 @@ class TaskEditionView: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+      
+      icon = ChooseIconComponent(father: self)
+      icon!.iconName = "pencil.tip"
+      icon!.horizontalPadding = 10
+      icon!.verticalPadding = 15
+      icon!.isSelectable = true
+      icon!.translatesAutoresizingMaskIntoConstraints = false
     
       view.backgroundColor = UIColor(.customBackground)
     title = String(localized: "EditTaskKey")
@@ -188,8 +187,8 @@ class TaskEditionView: UIViewController {
     }
     
     descriptionTextField.descriptionBox.text = viewModel?.task?.descript
-    icon.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
-    icon.iconName = viewModel?.task?.icon
+    icon!.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
+    icon!.iconName = viewModel?.task?.icon
     
   }
   
@@ -199,7 +198,7 @@ class TaskEditionView: UIViewController {
   
   func setUpDelegates(){
     colorPicker.delegate = self
-    icon.delegate = self
+    icon!.delegate = self
   }
   
   func setUpUI(){
@@ -229,7 +228,7 @@ class TaskEditionView: UIViewController {
     
     stackViewContainers.addArrangedSubview(deleteButton)
     
-    stackViewForIcon.addArrangedSubview(icon)
+    stackViewForIcon.addArrangedSubview(icon!)
     stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
     
     stackViewForTitleAndColor.addArrangedSubview(nameTextField)
@@ -239,11 +238,11 @@ class TaskEditionView: UIViewController {
   }
   
   func addActions() {
-    deadLine.startDatePicker.minimumDate = viewModel?.task?.start
-    deadLine.startDatePicker.maximumDate = viewModel?.task?.end
+    deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+    deadLine.startDatePicker.maximumDate = viewModel?.project?.end
     
-    deadLine.endDatePicker.minimumDate = viewModel?.task?.start
-    deadLine.endDatePicker.maximumDate = viewModel?.task?.end
+    deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+    deadLine.endDatePicker.maximumDate = viewModel?.project?.end
     
     deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
     deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
@@ -279,8 +278,8 @@ class TaskEditionView: UIViewController {
       stackViewContainers.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       stackViewContainers.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
       
-      icon.widthAnchor.constraint(equalToConstant: 93),
-      icon.heightAnchor.constraint(equalToConstant: 93),
+      icon!.widthAnchor.constraint(equalToConstant: 93),
+      icon!.heightAnchor.constraint(equalToConstant: 93),
       
       pencil.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor),
       pencil.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor, constant: -12),
@@ -365,15 +364,23 @@ extension TaskEditionView: ColorChooseComponentDelegate, ChooseIconComponentDele
   func updateColor() {
     let color = colorPicker.returnColorUIColor()
     let CGColor = colorPicker.returnColorCGFloat()
-    icon.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
+    icon!.changeColor(bgColor: color, tintColor: UIColor.selectTheBestColor(color: color, isBackground: true))
     viewModel?.red = CGColor[0]
     viewModel?.green = CGColor[1]
     viewModel?.blue = CGColor[2]
   }
   
   func menuWasPressed(_ menuIcon: String) {
-    self.viewModel?.selectedIcon(menuIcon)
-    icon.iconName = menuIcon
+    
   }
   
+}
+
+extension TaskEditionView: PickIconComponentDelegate{
+    func buttonWasPressed(_ menuIcon: String) {
+        self.viewModel?.selectedIcon(menuIcon)
+        icon!.iconName = menuIcon
+    }
+    
+    
 }

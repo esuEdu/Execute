@@ -13,9 +13,16 @@ class ScrollContainerComponent: UIScrollView {
         let sv = UIStackView()
         sv.axis = .vertical
         sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.spacing = 25
+        
         sv.isLayoutMarginsRelativeArrangement = true
-        sv.layoutMargins = UIEdgeInsets(top: 15, left: 25, bottom: 10, right: 25)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            sv.layoutMargins = UIEdgeInsets(top: 15, left: 25, bottom: 10, right: 25)
+            sv.spacing = 25
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            sv.layoutMargins = UIEdgeInsets(top: 40, left: 100, bottom: 35, right: 100)
+            sv.spacing = 45
+        }
+        
         return sv
     }()
     

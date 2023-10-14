@@ -29,14 +29,7 @@ class ModalGetInfoTaskView: UIViewController{
     
     var titleLabel: LabelComponent?
     
-    let icon: ChooseIconComponent = {
-        let icon = ChooseIconComponent()
-        icon.horizontalPadding = 10
-        icon.verticalPadding = 15
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.isBackgroung = false
-        return icon
-    }()
+    var icon: ChooseIconComponent?
     
     let generalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -132,6 +125,11 @@ class ModalGetInfoTaskView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(.customBackground)
+        icon = ChooseIconComponent(father: self)
+        icon!.horizontalPadding = 10
+        icon!.verticalPadding = 15
+        icon!.translatesAutoresizingMaskIntoConstraints = false
+        icon!.isBackgroung = false
         setUpModalConfiguration()
         verifyIfIsDone()
         setUpUI()
@@ -166,7 +164,7 @@ class ModalGetInfoTaskView: UIViewController{
         generalStackView.addArrangedSubview(stackViewForTheTop)
         generalStackView.addArrangedSubview(stackViewForButtons)
         
-        stackViewForTheTop.addArrangedSubview(icon)
+        stackViewForTheTop.addArrangedSubview(icon!)
         stackViewForTheTop.addArrangedSubview(stackViewForDateAndLabel)
         stackViewForDateAndLabel.addArrangedSubview(stackViewForLabel)
         stackViewForDateAndLabel.addArrangedSubview(titleLabel!)
@@ -182,8 +180,8 @@ class ModalGetInfoTaskView: UIViewController{
         
         labelHour.text = viewModel?.getHour()
         labelDate.text = viewModel?.getDate()
-        icon.changeColor(bgColor: UIColor.selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
-      icon.iconName = viewModel?.task?.icon
+        icon!.changeColor(bgColor: UIColor.selectTheBestColor(color: viewModel!.getUIColor(), isBackground: false), tintColor: viewModel!.getUIColor())
+      icon!.iconName = viewModel?.task?.icon
         
         buttonToFinish.addTarget(self, action: #selector(completeTask), for: .touchUpInside)
         buttonToFinish.addTarget(self, action: #selector(alphaButton), for: .touchDown)
@@ -212,10 +210,10 @@ class ModalGetInfoTaskView: UIViewController{
             generalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             generalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
-            icon.heightAnchor.constraint(equalToConstant: 75),
-            icon.widthAnchor.constraint(equalToConstant: 75),
+            icon!.heightAnchor.constraint(equalToConstant: 75),
+            icon!.widthAnchor.constraint(equalToConstant: 75),
             
-            titleLabel!.bottomAnchor.constraint(equalTo: icon.bottomAnchor),
+            titleLabel!.bottomAnchor.constraint(equalTo: icon!.bottomAnchor),
             
             stackViewForLabel.heightAnchor.constraint(equalTo: labelStartAt.heightAnchor),
             

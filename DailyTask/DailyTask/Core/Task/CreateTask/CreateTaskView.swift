@@ -28,15 +28,7 @@ class CreateTaskView: UIViewController {
     // Pickers
     let segmentedControl = SegmentedControl()
     let deadLine = DeadlineComponent()
-    let icon: ChooseIconComponent = {
-        let icon = ChooseIconComponent()
-        icon.iconName = "pencil.tip"
-        icon.horizontalPadding = 10
-        icon.verticalPadding = 15
-        icon.isSelectable = true
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        return icon
-    }()
+    var icon: ChooseIconComponent?
     
     let colorPicker: ColorChooseComponent = {
         let colorPicker = ColorChooseComponent()
@@ -149,7 +141,12 @@ class CreateTaskView: UIViewController {
         // View configuration
         title = String(localized: "CreateTaskTitleKey")
         view.backgroundColor = UIColor(.customBackground)
-        
+        icon = ChooseIconComponent(father: self)
+        icon!.iconName = "pencil.tip"
+        icon!.horizontalPadding = 10
+        icon!.verticalPadding = 15
+        icon!.isSelectable = true
+        icon!.translatesAutoresizingMaskIntoConstraints = false
       
       deadLine.startDatePicker.minimumDate = viewModel?.project?.start
       deadLine.startDatePicker.maximumDate = viewModel?.project?.end
@@ -165,7 +162,7 @@ class CreateTaskView: UIViewController {
         
         // Delegates
         nameTextField.delegate = self
-        icon.delegate = self
+        icon!.delegate = self
         colorPicker.delegate = self
         
         // Constraints activated
@@ -226,7 +223,7 @@ class CreateTaskView: UIViewController {
         stackViewContainers.addArrangedSubview(descriptionContainer!)
         stackViewContainers.addArrangedSubview(createButton)
         
-        stackViewForIcon.addArrangedSubview(icon)
+        stackViewForIcon.addArrangedSubview(icon!)
         stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
         
         stackViewForTitleAndColor.addArrangedSubview(nameTextField)
@@ -253,8 +250,8 @@ class CreateTaskView: UIViewController {
             stackViewContainers.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackViewContainers.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            icon.widthAnchor.constraint(equalToConstant: 93),
-            icon.heightAnchor.constraint(equalToConstant: 93),
+            icon!.widthAnchor.constraint(equalToConstant: 93),
+            icon!.heightAnchor.constraint(equalToConstant: 93),
             
             createButton.heightAnchor.constraint(equalToConstant: 55),
             
@@ -287,7 +284,7 @@ extension CreateTaskView: TextFieldComponentDelegate {
           subtask.append(compon.returnText())
         }
         
-        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : String(localized: "noNameKey"), startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : String(localized: "noDescKey"), red: red, green: green, blue: blue, subtasks: subtask, icon: icon.iconName!)
+        self.viewModel?.createTask(name: self.nameTextField.textFieldToGetTheName.text != "" ? self.nameTextField.textFieldToGetTheName.text! : String(localized: "noNameKey"), startDate: self.dateStart ?? Date.now, endDate: self.dateEnd ?? Date.now, priority: self.segmentedControl.priority ?? Priority.noPriority.rawValue, descript: self.descriptionTextField.getText() != "" ? self.descriptionTextField.getText() : String(localized: "noDescKey"), red: red, green: green, blue: blue, subtasks: subtask, icon: icon!.iconName!)
         
         viewModel?.removeLastView()    
       impactFeedbackGenerator.impactOccurred(intensity: 1)
@@ -359,10 +356,18 @@ extension CreateTaskView: ChooseIconComponentDelegate, ColorChooseComponentDeleg
     // Pickers cofigurations with delegate
     func updateColor() {
         let color = colorPicker.returnColorUIColor()
-        icon.changeColor(bgColor: UIColor.selectTheBestColor(color: color, isBackground: false), tintColor: color)
+        icon!.changeColor(bgColor: UIColor.selectTheBestColor(color: color, isBackground: false), tintColor: color)
     }
     
     func menuWasPressed(_ menuIcon: String) {
-        icon.iconName = menuIcon
+        
     }
+}
+
+extension CreateTaskView: PickIconComponentDelegate{
+    func buttonWasPressed(_ menuIcon: String) {
+        icon!.iconName = menuIcon
+    }
+    
+    
 }

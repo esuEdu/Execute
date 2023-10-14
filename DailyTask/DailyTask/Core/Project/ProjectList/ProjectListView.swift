@@ -148,7 +148,7 @@ class ProjectListView: UIViewController {
   // MARK: - Button functions
   @objc func createNewProject(){
     self.selectionFeedbackGenerator.selectionChanged()
-    projectListViewModel?.coordinator?.eventOccurred(with: .goToProjectCreation)
+      projectListViewModel?.coordinator?.goToProjectCreation(delegate: self)
   }
   
   @objc func dismissKeyboard(){
@@ -163,26 +163,40 @@ class ProjectListView: UIViewController {
 }
 
 extension ProjectListView: ContainerProjectsListDelegate{
-  func setUpAlert(project: Project) {
-    let alert = UIAlertController(title: "\(project.name!)", message: nil, preferredStyle: .actionSheet)
-    self.impactFeedbackGenerator.impactOccurred()
-    alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel, handler: nil))
-    
-    alert.addAction(UIAlertAction(title: String(localized: "Edit"), style: .default, handler: { action in
-      self.selectionFeedbackGenerator.selectionChanged()
-      self.projectListViewModel?.goToEditProject(project, isEditable: true)
-    }))
-    alert.addAction(UIAlertAction(title: String(localized: "details"), style: .default, handler: { action in
-      self.selectionFeedbackGenerator.selectionChanged()
-      self.projectListViewModel?.goToEditProject(project, isEditable: false)
-    }))
-    alert.addAction(UIAlertAction(title: String(localized: "Delete"), style: .destructive, handler: { action in
-      self.impactFeedback.impactOccurred(intensity: 1)
-      self.removeAtPosition(project: project)
-      self.projectListViewModel?.deleteAProject(project: project)
-    }))
-    alert.modalPresentationStyle = .overCurrentContext
-    self.present(alert, animated: true)
+
+    func setUpAlert(project: Project, gesture: CGPoint, delegate: ContainerProjectsList) {
+        
+        let alert = UIAlertController(title: "\(project.name!)", message: nil, preferredStyle: .actionSheet)
+        self.impactFeedbackGenerator.impactOccurred()
+        alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: String(localized: "Edit"), style: .default, handler: { action in
+            self.selectionFeedbackGenerator.selectionChanged()
+            self.projectListViewModel?.goToEditProject(project, isEditable: true)
+        }))
+        alert.addAction(UIAlertAction(title: String(localized: "details"), style: .default, handler: { action in
+            self.selectionFeedbackGenerator.selectionChanged()
+            self.projectListViewModel?.goToEditProject(project, isEditable: false)
+        }))
+        alert.addAction(UIAlertAction(title: String(localized: "Delete"), style: .destructive, handler: { action in
+            self.impactFeedback.impactOccurred(intensity: 1)
+            self.removeAtPosition(project: project)
+            self.projectListViewModel?.deleteAProject(project: project)
+        }))
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            alert.modalPresentationStyle = .overCurrentContext
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            alert.modalPresentationStyle = .popover
+            if let popoverPresentationController = alert.popoverPresentationController {
+                popoverPresentationController.sourceView = delegate
+                popoverPresentationController.sourceRect = CGRect(x: gesture.x, y: gesture.y, width: 0, height: 0)
+                popoverPresentationController.permittedArrowDirections = .any
+            }
+        }
+        
+        
+        present(alert, animated: true, completion: nil)
   }
   
   func goToTheTaskView(project: Project) {
@@ -214,4 +228,12 @@ extension ProjectListView: UISearchBarDelegate {
     searchBar.endEditing(true)
   }
   
+}
+
+extension ProjectListView: ProjectCreationViewDelegate{
+    func projectCreated() {
+        addElements()
+    }
+    
+    
 }
