@@ -77,7 +77,12 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         stackView.spacing = 25
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            stackView.layoutMargins = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
+            stackView.layoutMargins = UIEdgeInsets(top: 20, left: 16, bottom: 16, right: 16)
+        }
+        
         return stackView
     }()
     
