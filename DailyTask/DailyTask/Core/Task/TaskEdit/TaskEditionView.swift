@@ -77,6 +77,10 @@ class TaskEditionView: UIViewController {
   let nameTextField: TextFieldComponent = {
     let textField = TextFieldComponent()
     textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.textFieldToGetTheName.textColor = UIColor(.customDescriptionText)
+    if let currentFont = textField.textFieldToGetTheName.font {
+      textField.textFieldToGetTheName.font = UIFont(descriptor: currentFont.fontDescriptor.withSymbolicTraits(.traitBold)!, size: currentFont.pointSize)
+    }
     return textField
   }()
   
@@ -129,8 +133,18 @@ class TaskEditionView: UIViewController {
     let pencil = UIButton()
     pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
     pencil.isUserInteractionEnabled = false
+    pencil.translatesAutoresizingMaskIntoConstraints = false
     pencil.contentMode = .scaleAspectFit
-    pencil.tintColor = .black
+    pencil.tintColor = UIColor(.customPencilEditName)
+    return pencil
+  }()
+  
+  let pencilDesc: UIButton = {
+    let pencil = UIButton()
+    pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
+    pencil.isUserInteractionEnabled = false
+    pencil.contentMode = .scaleAspectFit
+    pencil.tintColor = .white
     return pencil
   }()
   
@@ -192,7 +206,7 @@ class TaskEditionView: UIViewController {
     priorityContainer?.translatesAutoresizingMaskIntoConstraints = false
     dateContainer = ContainerComponent(text: String(localized: "DeadLineKey"), acessibilityLabel: String(localized: "DeadLineKey"), components: [deadLine])
     dateContainer?.translatesAutoresizingMaskIntoConstraints = false
-    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"),button: pencil, components: [descriptionTextField])
+    descriptionContainer = ContainerComponent(text: String(localized: "DescriptionKey"), textColor: .white, acessibilityLabel: String(localized: "DescriptionKey"),button: pencilDesc, components: [descriptionTextField])
     descriptionContainer?.translatesAutoresizingMaskIntoConstraints = false
     
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
@@ -218,6 +232,7 @@ class TaskEditionView: UIViewController {
     stackViewForIcon.addArrangedSubview(stackViewForTitleAndColor)
     
     stackViewForTitleAndColor.addArrangedSubview(nameTextField)
+    stackViewForTitleAndColor.addSubview(pencil)
     stackViewForTitleAndColor.addArrangedSubview(colorPicker)
 
   }
@@ -265,6 +280,9 @@ class TaskEditionView: UIViewController {
       
       icon!.widthAnchor.constraint(equalToConstant: 93),
       icon!.heightAnchor.constraint(equalToConstant: 93),
+      
+      pencil.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor),
+      pencil.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor, constant: -12),
       
       updateButton.heightAnchor.constraint(equalToConstant: 55),
       

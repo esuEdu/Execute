@@ -57,22 +57,30 @@ enum CustomColor {
     case customDeadline
     
     case customContainerComponent
-    
+
     case customButtonMenu
-    
+  
     case progressBar
-    
+  
     case customIcon
-    
+  
     case progressLine
-    
+  
     case completeProgressLine
+  
     case customCloseButtom
+  
     case customAddIcon
+  
     case customCalendar
+  
     case customProgressBarBackground
     case iconModalBg
     case iconModal
+  
+    case customDescriptionText
+  
+    case customPencilEditName
 }
 
 extension UIColor {
@@ -140,6 +148,10 @@ extension UIColor {
             self.init(named: "IconModalBg")
         case .iconModal:
             self.init(named: "IconModal")
+        case .customDescriptionText:
+          self.init(named: "DescriptionText")
+        case .customPencilEditName:
+          self.init(named: "PencilEditName")
         }
     }
 }
