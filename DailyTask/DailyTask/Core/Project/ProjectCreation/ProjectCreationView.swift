@@ -216,7 +216,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
                 scrollView.topAnchor.constraint(equalTo: stackViewForCancleAndoDone.bottomAnchor),
                 
             ])
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
+        } else if UIDevice.current.userInterfaceIdiom == .phone {
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         }
         
