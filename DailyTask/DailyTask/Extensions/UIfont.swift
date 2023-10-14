@@ -25,4 +25,8 @@ extension UIFont {
     static var boldTitle1: UIFont {
         return UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title1).pointSize)
     }
+    
+    static var boldTitle2: UIFont {
+        return UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title2).pointSize)
+    }
 }
