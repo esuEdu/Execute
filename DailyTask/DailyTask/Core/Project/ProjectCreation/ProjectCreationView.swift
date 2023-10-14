@@ -27,6 +27,14 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
 
     // MARK: - OFICIAL
     
+    let stackViewForCancleAndoDone = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     let stackViewForTitleAndColor = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -69,7 +77,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         stackView.spacing = 25
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 40, bottom: 40, right: 40)
         return stackView
     }()
     
@@ -119,7 +127,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         setUpUI()
         addAllConstraints()
         
-        let contentHeight = stackViewForTheContainer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        let contentHeight = stackViewForTheContainer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + stackViewForTheContainer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height/15
         self.sheetDetents = Double(contentHeight)
 
         sheetPresentationController?.delegate = self
@@ -157,6 +165,7 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(stackViewForTheContainer)
+        
         stackViewForTheContainer.addArrangedSubview(stackViewForIcon)
         stackViewForTheContainer.addArrangedSubview(methodologyContainer!)
         stackViewForTheContainer.addArrangedSubview(dateContainer!)
@@ -166,7 +175,13 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
         stackViewForTitleAndColor.addArrangedSubview(textFieldToGetTheName)
         stackViewForTitleAndColor.addArrangedSubview(colorChooser)
         
-        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            view.addSubview(stackViewForCancleAndoDone)
+            stackViewForCancleAndoDone.addArrangedSubview(createLeftButtoniPad())
+            stackViewForCancleAndoDone.addArrangedSubview(createTheProject())
+            stackViewForCancleAndoDone.addArrangedSubview(createRightButtoniPad())
+        }
+            
         stackViewForTheContainer.addArrangedSubview(createButton)
         createButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
         iconButton!.changeColor(bgColor: .systemRed , tintColor: UIColor.selectTheBestColor(color: .systemRed, isBackground: true))
@@ -191,8 +206,21 @@ class ProjectCreationView: UIViewController, UISheetPresentationControllerDelega
     }
 
     func addAllConstraints(){
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            NSLayoutConstraint.activate([
+                stackViewForCancleAndoDone.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 17),
+                stackViewForCancleAndoDone.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
+                stackViewForCancleAndoDone.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                stackViewForCancleAndoDone.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                
+                scrollView.topAnchor.constraint(equalTo: stackViewForCancleAndoDone.bottomAnchor),
+                
+            ])
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -299,6 +327,43 @@ extension ProjectCreationView {
         }()
         
         return buttonToContinue
+    }
+    
+    func createRightButtoniPad() -> UIButton{
+        let buttonToContinue: UIButton = {
+            let button = UIButton()
+            button.setTitle(String(localized: "Done"), for: .normal)
+            button.setTitleColor(.systemBlue, for: .normal)
+            button.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+            return button
+        }()
+
+        return buttonToContinue
+    }
+
+    func createLeftButtoniPad() -> UIButton{
+        let buttonToContinue: UIButton = {
+            let button = UIButton()
+            button.setTitle(String(localized: "Cancel"), for: .normal)
+            button.setTitleColor(.systemRed, for: .normal)
+            button.addTarget(self, action: #selector(canceliPad), for: .touchUpInside)
+
+            return button
+        }()
+        
+        return buttonToContinue
+    }
+    
+    func createTheProject() -> UILabel{
+        let label = UILabel()
+        label.text = String(localized: "Create a new project")
+        label.textColor = .customLabel
+        label.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)
+        return label
+    }
+    
+    @objc func canceliPad(){
+        self.dismiss(animated: true)
     }
 
 }
