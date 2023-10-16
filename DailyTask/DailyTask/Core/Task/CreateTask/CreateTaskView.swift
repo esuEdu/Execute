@@ -148,12 +148,17 @@ class CreateTaskView: UIViewController {
         icon!.isSelectable = true
         icon!.translatesAutoresizingMaskIntoConstraints = false
       
-      deadLine.startDatePicker.minimumDate = viewModel?.project?.start
-      deadLine.startDatePicker.maximumDate = viewModel?.project?.end
+        deadLine.startDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.startDatePicker.maximumDate = viewModel?.project?.end
       
-      deadLine.endDatePicker.minimumDate = viewModel?.project?.start
-      deadLine.endDatePicker.maximumDate = viewModel?.project?.end
-      
+        deadLine.startDatePicker.setDate(viewModel?.date ?? Date.now, animated: true)
+        
+        
+        deadLine.endDatePicker.minimumDate = viewModel?.project?.start
+        deadLine.endDatePicker.maximumDate = viewModel?.project?.end
+        
+        deadLine.endDatePicker.setDate(viewModel?.date ?? Date.now, animated: true)
+        
         // Configurate the textfield
         nameTextField.textFieldToGetTheName.returnKeyType = .done
         nameTextField.textFieldToGetTheName.autocapitalizationType = .none

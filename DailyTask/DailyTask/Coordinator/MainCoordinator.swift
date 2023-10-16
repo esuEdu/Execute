@@ -33,6 +33,7 @@ import UIKit
 /// ```
 class MainCoordinator: Coordinator {
     
+    
     var tabBarController: UITabBarController?
     
     /// The navigation controller managed by the coordinator.
@@ -119,11 +120,12 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToTaskCreation(_ project: Project, _ step: steps?){
+    func goToTaskCreation(_ project: Project, _ step: steps?,_ date: Date?){
         let view: CreateTaskView = CreateTaskView()
         let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
         viewModel.project = project
         viewModel.step = step
+        viewModel.date = date
         view.viewModel = viewModel
         viewModel.viewCreate = view
         viewModel.coordinator = self
@@ -156,7 +158,7 @@ class MainCoordinator: Coordinator {
         // Set up the view controllers in the tab bar controller
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [projectView]
-
+        tabBarController.tabBar.isHidden = true
         // Store a reference to the tab bar controller for future reference
         self.tabBarController = tabBarController
 
