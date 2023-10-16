@@ -119,7 +119,7 @@ class MainCoordinator: Coordinator {
         navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToTaskCreation(_ project: Project, _ step: steps?){
+  func goToTaskCreation(_ project: Project, _ step: steps?, delegate: TaskCreationViewDelegate){
         let view: CreateTaskView = CreateTaskView()
         let viewModel: CreateTaskViewModel & Coordinating = CreateTaskViewModel()
         viewModel.project = project
@@ -127,7 +127,14 @@ class MainCoordinator: Coordinator {
         view.viewModel = viewModel
         viewModel.viewCreate = view
         viewModel.coordinator = self
-        navigationController?.pushViewController(view, animated: true)
+      
+      if UIDevice.current.userInterfaceIdiom == .phone {
+          navigationController?.pushViewController(view, animated: true)
+      } else if UIDevice.current.userInterfaceIdiom == .pad {
+          view.delegate = delegate
+          navigationController?.present(view, animated: true)
+      }
+      
     }
     
     func goToModalGetInfo(_ task: Task, _ delegate: ModalGetInfoTaskViewDelegate, project: Project) {

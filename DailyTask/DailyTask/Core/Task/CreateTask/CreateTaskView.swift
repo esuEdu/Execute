@@ -8,12 +8,24 @@
 import Foundation
 import UIKit
 
-class CreateTaskView: UIViewController {
+protocol TaskCreationViewDelegate: AnyObject{
+    func taskCreated()
+}
+
+class CreateTaskView: UIViewController, UISheetPresentationControllerDelegate {
     
     var viewModel: CreateTaskViewModel?
   
   let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
   let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
+  
+  override var sheetPresentationController: UISheetPresentationController? {
+      presentationController as? UISheetPresentationController
+  }
+  
+  private var sheetDetents: Double = 0
+  
+  weak var delegate: TaskCreationViewDelegate?
     
     // Containers
     var priorityContainer: ContainerComponent?
@@ -126,15 +138,29 @@ class CreateTaskView: UIViewController {
         super.viewDidLoad()
       
       impactFeedbackGenerator.prepare()
-    
+      
+  
         configurateComponents()
         setUpUI()
         setConstraints()
+      
+      let contentHeight = stackViewContainers.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + stackViewContainers.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height/15
+      self.sheetDetents = Double(contentHeight)
+
+      sheetPresentationController?.delegate = self
+      sheetPresentationController?.prefersGrabberVisible = true
+      sheetPresentationController?.preferredCornerRadius = 10
+      sheetPresentationController?.detents = [.custom(resolver: { context in
+          return self.sheetDetents
+      })]
+      
     }
     
     // Configuração para retirar o observador do teclado
     deinit{
-        NotificationCenter.default.removeObserver(self)
+      if UIDevice.current.userInterfaceIdiom == .phone {
+          NotificationCenter.default.removeObserver(self)
+      }
     }
     
     func configurateComponents(){
@@ -192,8 +218,10 @@ class CreateTaskView: UIViewController {
         
         
         // Configuração para retirar o observador do teclado
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      if UIDevice.current.userInterfaceIdiom == .phone {
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+      }
       
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
       tapGesture.cancelsTouchesInView = false
