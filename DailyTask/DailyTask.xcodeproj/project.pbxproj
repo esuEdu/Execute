@@ -686,7 +686,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = ZGAJA3YH9P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Execute;
@@ -703,7 +703,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Yasmin.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -724,7 +724,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SVGXRR5RRA;
+				DEVELOPMENT_TEAM = ZGAJA3YH9P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DailyTask/System/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Execute;
@@ -741,7 +741,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eduardo.DailyTask;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Yasmin.DailyTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
