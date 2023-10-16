@@ -58,6 +58,7 @@ class ModalGetInfoTaskView: UIViewController{
         let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textColor = .closeButtom
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -74,6 +75,7 @@ class ModalGetInfoTaskView: UIViewController{
         let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textColor = .closeButtom
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -156,7 +158,8 @@ class ModalGetInfoTaskView: UIViewController{
         titleLabel?.textLabel.numberOfLines = 2
         titleLabel?.layer.cornerRadius = 10
         titleLabel?.backgroundColor = UIColor(.customSecondaryBlue)
-        titleLabel?.textLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        titleLabel?.textLabel.textColor = .closeButtom
+        titleLabel?.textLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         titleLabel?.textLabel.lineBreakMode = .byWordWrapping
         titleLabel?.textLabel.textAlignment = .left
         
