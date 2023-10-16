@@ -33,6 +33,7 @@ class DateAndCalendarComponent: UIView {
         super.init(frame: .zero)
         let dateLabel = LabelComponent(text: date, accessibilityLabel: date,textColor: .white)
         dateLabel.textLabel.font = .boldTitle2
+        self.dateLabel = dateLabel
         mainStack.addArrangedSubview(dateLabel)
         mainStack.addArrangedSubview(button)
         addSubview(mainStack)
