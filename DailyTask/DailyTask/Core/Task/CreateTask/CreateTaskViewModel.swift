@@ -13,6 +13,7 @@ class CreateTaskViewModel: Coordinating  {
     var coordinator: Coordinator?
     var project: Project?
     var step: steps?
+    var date: Date?
     var viewCreate: CreateTaskView?
     
     private let taskManager = TaskManager()

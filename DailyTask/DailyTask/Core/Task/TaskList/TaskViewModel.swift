@@ -13,7 +13,7 @@ class TaskViewModel: Coordinating {
     var project: Project?
     var view: TaskView?
     
-  var step: steps = .Engage
+    var step: steps = .Engage
     
     let currentDate = Date()
 
@@ -41,7 +41,7 @@ class TaskViewModel: Coordinating {
     }
     
     func goToCreateTasks() {
-        coordinator?.goToTaskCreation(project!, step)
+        coordinator?.goToTaskCreation(project!, step, date)
     }
     
     func getActualTask(index: Int) -> Task{
