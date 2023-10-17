@@ -172,11 +172,11 @@ extension ProjectListView: ContainerProjectsListDelegate{
         
         alert.addAction(UIAlertAction(title: String(localized: "Edit"), style: .default, handler: { action in
             self.selectionFeedbackGenerator.selectionChanged()
-            self.projectListViewModel?.goToEditProject(project, isEditable: true)
+          self.projectListViewModel?.goToEditProject(project, isEditable: true, delegate: self)
         }))
         alert.addAction(UIAlertAction(title: String(localized: "details"), style: .default, handler: { action in
             self.selectionFeedbackGenerator.selectionChanged()
-            self.projectListViewModel?.goToEditProject(project, isEditable: false)
+          self.projectListViewModel?.goToEditProject(project, isEditable: false, delegate: self)
         }))
         alert.addAction(UIAlertAction(title: String(localized: "Delete"), style: .destructive, handler: { action in
             self.impactFeedback.impactOccurred(intensity: 1)
@@ -230,7 +230,11 @@ extension ProjectListView: UISearchBarDelegate {
   
 }
 
-extension ProjectListView: ProjectCreationViewDelegate{
+extension ProjectListView: ProjectCreationViewDelegate, ProjectEditionViewDelegate {
+  func projectEdit() {
+    addElements()
+  }
+  
     func projectCreated() {
         addElements()
     }

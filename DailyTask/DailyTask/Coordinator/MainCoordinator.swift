@@ -88,7 +88,7 @@ class MainCoordinator: Coordinator {
         }
     }
     
-    func goToProjectEditionView(_ project: Project, isEditable: Bool){
+  func goToProjectEditionView(_ project: Project, isEditable: Bool, delegate: ProjectEditionViewDelegate){
         let view: ProjectEditionView = ProjectEditionView()
         let viewModel: ProjectEditionViewModel & Coordinating = ProjectEditionViewModel()
         viewModel.coordinator = self
@@ -96,7 +96,14 @@ class MainCoordinator: Coordinator {
         viewModel.project = project
         view.isEditable = isEditable
         view.viewModel = viewModel
-        navigationController?.pushViewController(view, animated: true)
+      
+      if UIDevice.current.userInterfaceIdiom == .phone {
+          navigationController?.pushViewController(view, animated: true)
+      } else if UIDevice.current.userInterfaceIdiom == .pad {
+          view.delegate = delegate
+          navigationController?.present(view, animated: true)
+      }
+      
     }
   
     func goToTaskEditionView(_ task: Task, project: Project){

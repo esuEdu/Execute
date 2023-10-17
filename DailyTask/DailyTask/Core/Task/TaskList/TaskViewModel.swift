@@ -40,8 +40,8 @@ class TaskViewModel: Coordinating {
         fetchTasks(project: project!)
     }
     
-    func goToCreateTasks() {
-        coordinator?.goToTaskCreation(project!, step)
+  func goToCreateTasks(delegate: TaskCreationViewDelegate) {
+        coordinator?.goToTaskCreation(project!, step, delegate: delegate)
     }
     
     func getActualTask(index: Int) -> Task{

@@ -7,16 +7,36 @@
 
 import UIKit
 
-class ProjectEditionView: UIViewController {
+protocol ProjectEditionViewDelegate: AnyObject{
+    func projectEdit()
+}
+
+class ProjectEditionView: UIViewController, UISheetPresentationControllerDelegate {
   
   var isEditable: Bool = false
   
   var viewModel: ProjectEditionViewModel?
   
+  override var sheetPresentationController: UISheetPresentationController? {
+      presentationController as? UISheetPresentationController
+  }
+  
+  private var sheetDetents: Double = 0
+  
+  weak var delegate: ProjectEditionViewDelegate?
+  
   let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
   let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
   
   // MARK: - OFICIAL
+  
+  let stackViewForCancleAndoDone = {
+      let stackView = UIStackView()
+      stackView.axis = .horizontal
+      stackView.distribution = .equalSpacing
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      return stackView
+  }()
   
   let stackViewForTitleAndColor = {
     let stackView = UIStackView()
@@ -117,6 +137,34 @@ class ProjectEditionView: UIViewController {
   
   let barButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: ProjectEditionView.self, action: nil)
   
+  let editLeftButtoniPad: UIButton = {
+      let button = UIButton()
+      button.setTitle(String(localized: "Cancel"), for: .normal)
+      button.setTitleColor(.systemRed, for: .normal)
+
+      return button
+  }()
+  
+  let editRightButtoniPad: UIButton = {
+    let button = UIButton()
+    button.setTitle(String(localized: "Done"), for: .normal)
+    button.setTitleColor(.systemBlue, for: .normal)
+    return button
+  }()
+
+    let barButtonHamburguer: UIButton = {
+      let button = UIButton()
+      button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+      return button
+    }()
+  
+  let invisibleSquare: UIView = {
+    let square = UIView()
+    square.backgroundColor = UIColor(.customLabel)
+    square.translatesAutoresizingMaskIntoConstraints = false
+    return square
+  }()
+
   let pencilName: UIButton = {
     let pencil = UIButton()
     pencil.setImage(UIImage(systemName: "pencil"), for: .normal)
@@ -166,39 +214,99 @@ class ProjectEditionView: UIViewController {
     descriptionTextField.descriptionBox.text = viewModel?.project?.descript
     iconButton!.changeColor(bgColor: bgColor, tintColor: UIColor.selectTheBestColor(color: bgColor, isBackground: true))
     iconButton!.iconName = viewModel?.project?.icon
+    
+    
+    let contentHeight = stackViewForTheContainer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + stackViewForTheContainer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height/15
+    self.sheetDetents = Double(contentHeight)
+
+    sheetPresentationController?.delegate = self
+    sheetPresentationController?.prefersGrabberVisible = true
+    sheetPresentationController?.preferredCornerRadius = 10
+    sheetPresentationController?.detents = [.custom(resolver: { context in
+        return self.sheetDetents
+    })]
+    
   }
   
   func verifyIfIsEditable(){
     if isEditable {
-      pencilEditor1.isHidden = false
-      self.iconButton!.isUserInteractionEnabled = true
-      self.descriptionTextField.isUserInteractionEnabled = true
-      self.deadLine.isUserInteractionEnabled = true
-      self.methodologyButton.hideButton(false)
-      self.textFieldToGetTheName.isUserInteractionEnabled = true
-      self.colorChooser.isHidden = false
-      self.navigationItem.rightBarButtonItem = self.createRightButtom()
-      self.navigationItem.leftBarButtonItem = self.createLeftButtom()
-      self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = false
-      self.updateButton.isHidden = false
-      self.deleteButton.isHidden = false
+      
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        pencilEditor1.isHidden = false
+        self.iconButton!.isUserInteractionEnabled = true
+        self.descriptionTextField.isUserInteractionEnabled = true
+        self.deadLine.isUserInteractionEnabled = true
+        self.methodologyButton.hideButton(false)
+        self.textFieldToGetTheName.isUserInteractionEnabled = true
+        self.colorChooser.isHidden = false
+        self.navigationItem.rightBarButtonItem = self.createRightButtom()
+        self.navigationItem.leftBarButtonItem = self.createLeftButtom()
+        self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = false
+        self.updateButton.isHidden = false
+        self.deleteButton.isHidden = false
+        self.invisibleSquare.isHidden = true
+        self.barButtonHamburguer.isHidden = true
+      } else if UIDevice.current.userInterfaceIdiom == .pad {
+        pencilEditor1.isHidden = false
+        self.iconButton!.isUserInteractionEnabled = true
+        self.descriptionTextField.isUserInteractionEnabled = true
+        self.deadLine.isUserInteractionEnabled = true
+        self.methodologyButton.hideButton(false)
+        self.textFieldToGetTheName.isUserInteractionEnabled = true
+        self.colorChooser.isHidden = false
+        self.editLeftButtoniPad.isHidden = false
+        self.editRightButtoniPad.isHidden = false
+        self.barButtonHamburguer.isHidden = true
+        self.invisibleSquare.isHidden = true
+        self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = false
+        self.updateButton.isHidden = false
+        self.deleteButton.isHidden = false
+      }
+      
       isEditable.toggle()
     } else {
-      pencilEditor1.isHidden = true
-      pencilName.isHidden = true
-      self.iconButton!.isUserInteractionEnabled = false
-      self.descriptionTextField.isUserInteractionEnabled = false
-      self.deadLine.isUserInteractionEnabled = false
-      self.methodologyButton.hideButton(true)
-      self.textFieldToGetTheName.isUserInteractionEnabled = false
-      self.colorChooser.isHidden = true
-      self.barButton.menu = self.menu()
-      self.navigationItem.rightBarButtonItem = self.barButton
-      self.navigationItem.leftBarButtonItem = nil
-      self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = true
-      self.stackViewForTitleAndColor.layoutMargins = UIEdgeInsets(top: 19, left: 0, bottom: 19, right: 0)
-      self.updateButton.isHidden = true
-      self.deleteButton.isHidden = true
+      
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        pencilEditor1.isHidden = true
+        pencilName.isHidden = true
+        self.iconButton!.isUserInteractionEnabled = false
+        self.descriptionTextField.isUserInteractionEnabled = false
+        self.deadLine.isUserInteractionEnabled = false
+        self.methodologyButton.hideButton(true)
+        self.textFieldToGetTheName.isUserInteractionEnabled = false
+        self.colorChooser.isHidden = true
+        self.barButton.menu = self.menu()
+        self.navigationItem.rightBarButtonItem = self.barButton
+        self.barButtonHamburguer.isHidden = true
+        self.invisibleSquare.isHidden = true
+        self.navigationItem.leftBarButtonItem = nil
+        self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = true
+        self.stackViewForTitleAndColor.layoutMargins = UIEdgeInsets(top: 19, left: 0, bottom: 19, right: 0)
+        self.updateButton.isHidden = true
+        self.deleteButton.isHidden = true
+        
+      } else if UIDevice.current.userInterfaceIdiom == .pad {
+        pencilEditor1.isHidden = true
+        pencilName.isHidden = true
+        self.iconButton!.isUserInteractionEnabled = false
+        self.descriptionTextField.isUserInteractionEnabled = false
+        self.deadLine.isUserInteractionEnabled = false
+        self.methodologyButton.hideButton(true)
+        self.textFieldToGetTheName.isUserInteractionEnabled = false
+        self.colorChooser.isHidden = true
+        self.barButtonHamburguer.isHidden = false
+        self.barButtonHamburguer.menu = self.menu()
+        self.barButtonHamburguer.showsMenuAsPrimaryAction = true
+        self.invisibleSquare.isHidden = false
+        self.editLeftButtoniPad.isHidden = true
+        self.editRightButtoniPad.isHidden = true
+        self.stackViewForTitleAndColor.isLayoutMarginsRelativeArrangement = true
+        self.stackViewForTitleAndColor.layoutMargins = UIEdgeInsets(top: 19, left: 0, bottom: 19, right: 0)
+        self.updateButton.isHidden = true
+        self.deleteButton.isHidden = true
+        
+      }
+    
       isEditable.toggle()
     }
   }
@@ -235,9 +343,21 @@ class ProjectEditionView: UIViewController {
     stackViewForTitleAndColor.addSubview(pencilName)
     stackViewForTitleAndColor.addArrangedSubview(colorChooser)
     
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        view.addSubview(stackViewForCancleAndoDone)
+        stackViewForCancleAndoDone.addArrangedSubview(editLeftButtoniPad)
+        stackViewForCancleAndoDone.addArrangedSubview(invisibleSquare)
+        stackViewForCancleAndoDone.addArrangedSubview(editTheProject())
+        stackViewForCancleAndoDone.addArrangedSubview(editRightButtoniPad)
+        stackViewForCancleAndoDone.addArrangedSubview(barButtonHamburguer)
+    }
     
     stackViewForTheContainer.addArrangedSubview(updateButton)
     stackViewForTheContainer.addArrangedSubview(deleteButton)
+    
+    editRightButtoniPad.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
+    editLeftButtoniPad.addTarget(self, action: #selector(removeTheView), for: .touchUpInside)
+        
     updateButton.addTarget(self, action: #selector(defineProjectData), for: .touchUpInside)
     deleteButton.addTarget(self, action: #selector(deleteProject), for: .touchUpInside)
     
@@ -246,8 +366,10 @@ class ProjectEditionView: UIViewController {
     deadLine.startDatePicker.addTarget(self, action: #selector(getStartDate), for: .valueChanged)
     deadLine.endDatePicker.addTarget(self, action: #selector(getEndDate), for: .valueChanged)
     
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    if UIDevice.current.userInterfaceIdiom == .phone {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
     tapGesture.cancelsTouchesInView = false
@@ -255,12 +377,29 @@ class ProjectEditionView: UIViewController {
   }
   
   deinit{
-    NotificationCenter.default.removeObserver(self)
+      if UIDevice.current.userInterfaceIdiom == .phone {
+          NotificationCenter.default.removeObserver(self)
+      }
   }
   
   func addAllConstraints(){
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        NSLayoutConstraint.activate([
+            stackViewForCancleAndoDone.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 17),
+            stackViewForCancleAndoDone.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackViewForCancleAndoDone.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackViewForCancleAndoDone.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            scrollView.topAnchor.constraint(equalTo: stackViewForCancleAndoDone.bottomAnchor),
+            
+        ])
+    } else if UIDevice.current.userInterfaceIdiom == .phone {
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+    }
+    
     NSLayoutConstraint.activate([
-      scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -289,6 +428,7 @@ class ProjectEditionView: UIViewController {
       self.viewModel?.name = textFieldToGetTheName.getText() == "" ? self.viewModel?.name : textFieldToGetTheName.textFieldToGetTheName.text
       self.viewModel?.description = descriptionTextField.getText() == "" ? self.viewModel?.description : descriptionTextField.getText()
       viewModel?.editProject()
+      delegate?.projectEdit()
       verifyIfIsEditable()
     } else {
       let alert = UIAlertController(title: String(localized: "ErrorCreationTaskKey"), message: String(localized: "dateFinalBeforeBegin"), preferredStyle: .alert)
@@ -313,7 +453,13 @@ class ProjectEditionView: UIViewController {
     alert.addAction(UIAlertAction(title: String(localized: "yesKey"), style: .destructive, handler: { _ in
       self.impactFeedbackGenerator.impactOccurred(intensity: 1)
       self.viewModel?.removeProject()
-      self.viewModel?.removeTopView()
+      if UIDevice.current.userInterfaceIdiom == .pad {
+        self.delegate?.projectEdit()
+        self.dismiss(animated: true)
+      } else if UIDevice.current.userInterfaceIdiom == .phone{
+        self.viewModel?.removeTopView()
+      }
+      
     }))
     alert.addAction(UIAlertAction(title: String(localized: "noKey"), style: .cancel))
     self.present(alert, animated: true)
@@ -372,6 +518,18 @@ extension ProjectEditionView {
     return buttonToContinue
   }
   
+  func editTheProject() -> UILabel{
+      let label = UILabel()
+      label.text = String(localized: "Update the project")
+      label.textColor = .customLabel
+      label.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)
+      return label
+  }
+  
+  @objc func canceliPad(){
+      self.dismiss(animated: true)
+  }
+  
   func menu() -> UIMenu {
     let menuItems = UIMenu(title: "", options: .displayInline, children: [
       UIAction(title: String(localized: "Edit"), image: nil, handler: { _ in
@@ -384,7 +542,13 @@ extension ProjectEditionView {
         alert.addAction(UIAlertAction(title: String(localized: "yesKey"), style: .destructive, handler: { _ in
           self.impactFeedbackGenerator.impactOccurred(intensity: 1)
           self.viewModel?.removeProject()
-          self.viewModel?.removeTopView()
+          if UIDevice.current.userInterfaceIdiom == .phone {
+            self.viewModel?.removeTopView()
+          } else if UIDevice.current.userInterfaceIdiom == .pad {
+            self.delegate?.projectEdit()
+            self.dismiss(animated: true)
+          }
+          
         }))
         alert.addAction(UIAlertAction(title: String(localized: "noKey"), style: .cancel))
         self.present(alert, animated: true)

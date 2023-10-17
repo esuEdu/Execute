@@ -37,10 +37,6 @@ class ProjectCreationViewModel: Coordinating {
         coordinator?.eventOccurred(with: .goToProjectList)
     }
     
-    func goToTagCreation(){
-//        coordinator?.eventOccurred(with: )
-    }
-    
     func removeTopView(){
         coordinator?.eventOccurred(with: .removeTopView)
     }

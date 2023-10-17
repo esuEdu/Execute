@@ -203,7 +203,7 @@ class TaskView: UIViewController {
     }
     
     @objc func createTask() {
-        viewModel?.goToCreateTasks()
+        viewModel?.goToCreateTasks(delegate: self)
     }
     
 }
@@ -245,4 +245,14 @@ extension TaskView: ChooseStepComponentDelegate {
         self.reloadStack()
     }
     
+}
+
+
+extension TaskView: TaskCreationViewDelegate {
+  func taskCreated() {
+    getTasksAndSubtasks()
+    navigationController?.isNavigationBarHidden = false
+  }
+  
+  
 }
